@@ -5,77 +5,48 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.ldh.exam.demo.repository.RecipeRepository;
 import com.ldh.exam.demo.vo.Recipe;
 
 @Service
 public class RecipeService {
 
-	// 인스턴스 변수
-	public int recipeLastId;
-	public List<Recipe> recipes;
+	private RecipeRepository recipeRepository;
 
-	// Recipe 서비스 생성자
-	public RecipeService() {
-		recipeLastId = 0;
-		recipes = new ArrayList<>();
+	public RecipeService(RecipeRepository recipeRepository) {
+		this.recipeRepository = recipeRepository;
 
-		makeTestData();
-	}
-
-	private void makeTestData() {
-		for (int i = 1; i <= 10; i++) {
-			String title = "요리명" + i;
-			String body = "요리설명" + i;
-
-			writeRecipe(title, body);
-		}
+		recipeRepository.makeTestData();
 	}
 
 	// 특정 레시피 가져오기
 	public Recipe getRecipe(int id) {
 
-		for (Recipe recipe : recipes) {
-			if (recipe.getId() == id) {
-				return recipe;
-			}
-		}
-
-		return null;
+		return recipeRepository.getRecipe(id);
 	}
 
 	// 레시피 목록 가져오기
 	public List<Recipe> getRecipes() {
 
-		return recipes;
+		return recipeRepository.getRecipes();
 	}
 
 	// 레시피 등록하기
 	public Recipe writeRecipe(String title, String body) {
 
-		int id = recipeLastId + 1;
-		Recipe recipe = new Recipe(id, title, body);
-
-		recipes.add(recipe);
-		recipeLastId = id;
-
-		return recipe;
+		return recipeRepository.writeRecipe(title, body);
 	}
 
 	// 레시피 수정하기
 	public void modifyRecipe(int id, String title, String body) {
 
-		Recipe recipe = getRecipe(id);
-
-		recipe.setTitle(title);
-		recipe.setBody(body);
+		recipeRepository.modifyRecipe(id, title, body);
 	}
 
 	// 레시피 삭제하기
 	public void deleteRecipe(int id) {
 
-		Recipe recipe = getRecipe(id);
-
-		recipes.remove(id);
+		recipeRepository.deleteRecipe(id);
 	}
 
 }

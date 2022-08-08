@@ -23,9 +23,7 @@ public class UserRecipeController {
 	@ResponseBody
 	public List<Recipe> showList() {
 
-		List<Recipe> recipes = recipeService.getRecipes();
-
-		return recipes;
+		return recipeService.getRecipes();
 	}
 
 	// 레시피 상세보기 메서드
@@ -33,9 +31,7 @@ public class UserRecipeController {
 	@ResponseBody
 	public Recipe showDetail(int id) {
 
-		Recipe recipe = recipeService.getRecipe(id);
-
-		return recipe;
+		return recipeService.getRecipe(id);
 	}
 
 	// 레시피 등록하기 메서드
@@ -50,22 +46,34 @@ public class UserRecipeController {
 	// 레시피 수정하기 메서드
 	@RequestMapping("/user/recipe/doModify")
 	@ResponseBody
-	public Recipe doModify(int id, String title, String body) {
+	public String doModify(int id, String title, String body) {
 
 		Recipe recipe = recipeService.getRecipe(id);
 
+		if (recipe == null) {
+			return id + "번 레시피를 찾을 수 없습니다.";
+		}
+
+		// 수정처리
 		recipeService.modifyRecipe(id, title, body);
 
-		return recipe;
+		return id + "번 레시피를 수정했습니다.";
 	}
 
 	// 레시피 삭제하기 메서드
 	@RequestMapping("/user/recipe/doDelete")
 	@ResponseBody
-	public void doDelete(int id) {
+	public String doDelete(int id) {
 
 		Recipe recipe = recipeService.getRecipe(id);
 
+		if (recipe == null) {
+			return id + "번 레시피를 찾을 수 없습니다.";
+		}
+
+		// 삭제처리
 		recipeService.deleteRecipe(id);
+
+		return id + "번 레시피를 삭제했습니다.";
 	}
 }

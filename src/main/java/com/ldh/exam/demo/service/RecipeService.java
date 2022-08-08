@@ -1,6 +1,5 @@
 package com.ldh.exam.demo.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -15,8 +14,6 @@ public class RecipeService {
 
 	public RecipeService(RecipeRepository recipeRepository) {
 		this.recipeRepository = recipeRepository;
-
-		recipeRepository.makeTestData();
 	}
 
 	// 특정 레시피 가져오기

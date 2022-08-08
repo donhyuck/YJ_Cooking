@@ -1,74 +1,31 @@
 package com.ldh.exam.demo.repository;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.stereotype.Component;
+import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import com.ldh.exam.demo.vo.Recipe;
 
-@Component
-public class RecipeRepository {
+@Mapper
+public interface RecipeRepository {
 
-	private int recipeLastId;
-	private List<Recipe> recipes;
+	@Select("SELECT * FROM recipe WHERE id = #{id}")
+	public Recipe getRecipe(int id);
 
-	public RecipeRepository() {
-		recipeLastId = 0;
-		recipes = new ArrayList<>();
-	}
+	@Select("SELECT * FROM recipe ORDER BY id DESC")
+	public List<Recipe> getRecipes();
 
-	public void makeTestData() {
+	@Insert("INSERT INTO recipe SET regDate = NOW(), updateDate = NOW(), title = #{title}, `body` = #{body}")
+	public Recipe writeRecipe(String title, String body);
 
-		for (int i = 1; i <= 10; i++) {
-			String title = "제목" + i;
-			String body = "내용" + i;
+	@Update("UPDATE recipe SET updateDate = NOW(), title = #{title}, `body` = #{body} WHERE id = #{id}")
+	public void modifyRecipe(int id, String title, String body);
 
-			writeRecipe(title, body);
-		}
-	}
-
-	public Recipe getRecipe(int id) {
-
-		for (Recipe recipe : recipes) {
-			if (recipe.getId() == id) {
-				return recipe;
-			}
-		}
-
-		return null;
-	}
-
-	public List<Recipe> getRecipes() {
-
-		return recipes;
-	}
-
-	public Recipe writeRecipe(String title, String body) {
-
-		int id = recipeLastId + 1;
-		Recipe recipe = new Recipe(id, title, body);
-
-		recipes.add(recipe);
-		recipeLastId = id;
-
-		return recipe;
-	}
-
-	public void modifyRecipe(int id, String title, String body) {
-
-		Recipe recipe = getRecipe(id);
-
-		recipe.setTitle(title);
-		recipe.setBody(body);
-
-	}
-
-	public void deleteRecipe(int id) {
-
-		Recipe recipe = getRecipe(id);
-
-		recipes.remove(id);
-	}
+	@Delete("DELETE FROM recipe WHERE id = #{id}")
+	public void deleteRecipe(int id);
 
 }

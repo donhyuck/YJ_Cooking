@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ldh.exam.demo.repository.RecipeRepository">
+
+	<select id="getRecipe" resultType="Recipe">
+		SELECT *
+		FROM recipe
+		WHERE id =
+		#{id}
+	</select>
+
+	<select id="getRecipes" resultType="Recipe">
+		SELECT *
+		FROM recipe
+		ORDER BY
+		id DESC
+	</select>
+
+	<insert id="writeRecipe">
+		INSERT INTO recipe
+		SET regDate = NOW(),
+		updateDate =
+		NOW(),
+		title = #{title},
+		`body` = #{body}
+	</insert>
+
+	<update id="modifyRecipe">
+		UPDATE recipe
+		<set>
+			<if test="title != null and title !=''">
+				title = #{title},
+			</if>
+			<if test="body != null and body !=''">
+				`body` = #{body},
+			</if>
+			updateDate = NOW()
+		</set>
+		WHERE id = #{id}
+	</update>
+
+	<delete id="deleteRecipe">
+		DELETE
+		FROM recipe
+		WHERE id = #{id}
+	</delete>
+
+	<select id="getLastInsertId" resultType="int">
+		SELECT
+		LAST_INSERT_ID()
+	</select>
+
+</mapper> 

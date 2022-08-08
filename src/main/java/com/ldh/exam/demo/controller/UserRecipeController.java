@@ -39,8 +39,9 @@ public class UserRecipeController {
 	@ResponseBody
 	public Recipe doWrite(String title, String body) {
 
-		Recipe recipe = recipeService.writeRecipe(title, body);
-		return recipe;
+		int id = recipeService.writeRecipe(title, body);
+
+		return recipeService.getRecipe(id);
 	}
 
 	// 레시피 수정하기 메서드

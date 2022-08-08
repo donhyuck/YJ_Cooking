@@ -29,9 +29,11 @@ public class RecipeService {
 	}
 
 	// 레시피 등록하기
-	public Recipe writeRecipe(String title, String body) {
+	public int writeRecipe(String title, String body) {
 
-		return recipeRepository.writeRecipe(title, body);
+		recipeRepository.writeRecipe(title, body);
+
+		return recipeRepository.getLastInsertId();
 	}
 
 	// 레시피 수정하기

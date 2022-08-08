@@ -31,6 +31,24 @@ public class RecipeService {
 		}
 	}
 
+	// 특정 레시피 가져오기
+	public Recipe getRecipe(int id) {
+
+		for (Recipe recipe : recipes) {
+			if (recipe.getId() == id) {
+				return recipe;
+			}
+		}
+
+		return null;
+	}
+
+	// 레시피 목록 가져오기
+	public List<Recipe> getRecipes() {
+
+		return recipes;
+	}
+
 	// 레시피 등록하기
 	public Recipe writeRecipe(String title, String body) {
 

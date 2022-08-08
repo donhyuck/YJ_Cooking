@@ -23,7 +23,19 @@ public class UserRecipeController {
 	@ResponseBody
 	public List<Recipe> showList() {
 
-		return recipeService.recipes;
+		List<Recipe> recipes = recipeService.getRecipes();
+
+		return recipes;
+	}
+
+	// 레시피 상세보기 메서드
+	@RequestMapping("/user/recipe/detail")
+	@ResponseBody
+	public Recipe showDetail(int id) {
+
+		Recipe recipe = recipeService.getRecipe(id);
+
+		return recipe;
 	}
 
 	// 레시피 등록하기 메서드

@@ -7,12 +7,17 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Recipe {
+public class Member {
 
 	private int id;
 	private String regDate;
 	private String updateDate;
-	private String title;
-	private String body;
-
+	private String loginId;
+	private String loginPw;
+	private String authLevel;
+	private String nickname;
+	private String cellphoneNo;
+	private String email;
+	private boolean delStatus;
+	private String delDate;
 }

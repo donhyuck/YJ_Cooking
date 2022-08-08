@@ -46,4 +46,26 @@ public class UserRecipeController {
 		Recipe recipe = recipeService.writeRecipe(title, body);
 		return recipe;
 	}
+
+	// 레시피 수정하기 메서드
+	@RequestMapping("/user/recipe/doModify")
+	@ResponseBody
+	public Recipe doModify(int id, String title, String body) {
+
+		Recipe recipe = recipeService.getRecipe(id);
+
+		recipeService.modifyRecipe(id, title, body);
+
+		return recipe;
+	}
+
+	// 레시피 삭제하기 메서드
+	@RequestMapping("/user/recipe/doDelete")
+	@ResponseBody
+	public void doDelete(int id) {
+
+		Recipe recipe = recipeService.getRecipe(id);
+
+		recipeService.deleteRecipe(id);
+	}
 }

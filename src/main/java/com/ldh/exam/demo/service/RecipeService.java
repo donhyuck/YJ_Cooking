@@ -61,4 +61,21 @@ public class RecipeService {
 		return recipe;
 	}
 
+	// 레시피 수정하기
+	public void modifyRecipe(int id, String title, String body) {
+
+		Recipe recipe = getRecipe(id);
+
+		recipe.setTitle(title);
+		recipe.setBody(body);
+	}
+
+	// 레시피 삭제하기
+	public void deleteRecipe(int id) {
+
+		Recipe recipe = getRecipe(id);
+
+		recipes.remove(id);
+	}
+
 }

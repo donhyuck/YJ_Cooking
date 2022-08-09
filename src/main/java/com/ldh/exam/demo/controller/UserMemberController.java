@@ -46,6 +46,15 @@ public class UserMemberController {
 		// 회원 등록하기
 		int id = memberService.doJoin(loginId, loginPw, nickname, cellphoneNo, email);
 
+		// 아이디 또는 닉네임, 이메일 중복 확인
+		if (id == -1) {
+			return Ut.f("입력하신 아이디는 [ %s ] 이미 사용중입니다.", loginId);
+		}
+
+		if (id == -2) {
+			return Ut.f("입력하신 이름 [ %s ], 이메일 [ %s ] 은 이미 등록되었습니다.", nickname, email);
+		}
+
 		// 등록된 회원정보 가져오기
 		Member member = memberService.getMemberById(id);
 

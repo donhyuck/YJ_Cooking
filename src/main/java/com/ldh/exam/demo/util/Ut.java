@@ -24,4 +24,9 @@ public class Ut {
 
 		return str.trim().length() == 0;
 	}
+
+	public static Object f(String msg, Object... args) {
+		
+		return String.format(msg, args);
+	}
 }

@@ -21,7 +21,8 @@ public class UserMemberController {
 	// 회원 등록하기 메서드
 	@RequestMapping("/user/member/doJoin")
 	@ResponseBody
-	public ResultData doJoin(String loginId, String loginPw, String nickname, String cellphoneNo, String email) {
+	public ResultData<Member> doJoin(String loginId, String loginPw, String nickname, String cellphoneNo,
+			String email) {
 
 		// 입력 데이터 유효성 검사
 		if (Ut.empty(loginId)) {
@@ -45,16 +46,16 @@ public class UserMemberController {
 		}
 
 		// 회원 등록하기
-		ResultData joinMemberRd = memberService.doJoin(loginId, loginPw, nickname, cellphoneNo, email);
+		ResultData<Integer> joinMemberRd = memberService.doJoin(loginId, loginPw, nickname, cellphoneNo, email);
 
 		// 아이디 또는 닉네임, 이메일 중복 확인
 		if (joinMemberRd.isFail()) {
-			return ResultData.from(joinMemberRd.getResultCode(), joinMemberRd.getMsg());
+			return (ResultData) joinMemberRd;
 		}
 
 		// 등록된 회원정보 가져오기
 		Member member = memberService.getMemberById((int) joinMemberRd.getData1());
 
-		return ResultData.from(joinMemberRd.getResultCode(), joinMemberRd.getMsg(), member);
+		return ResultData.newData(joinMemberRd, member);
 	}
 }

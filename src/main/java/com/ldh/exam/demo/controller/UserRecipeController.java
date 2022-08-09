@@ -23,7 +23,7 @@ public class UserRecipeController {
 	// 레시피 목록보기 메서드
 	@RequestMapping("/user/recipe/list")
 	@ResponseBody
-	public ResultData showList() {
+	public ResultData<List<Recipe>> showList() {
 
 		List<Recipe> recipes = recipeService.getRecipes();
 
@@ -33,7 +33,7 @@ public class UserRecipeController {
 	// 레시피 상세보기 메서드
 	@RequestMapping("/user/recipe/detail")
 	@ResponseBody
-	public ResultData showDetail(int id) {
+	public ResultData<Recipe> showDetail(int id) {
 
 		// 레시피 찾기
 		Recipe recipe = recipeService.getRecipe(id);
@@ -48,7 +48,7 @@ public class UserRecipeController {
 	// 레시피 등록하기 메서드
 	@RequestMapping("/user/recipe/doWrite")
 	@ResponseBody
-	public ResultData doWrite(String title, String body) {
+	public ResultData<Recipe> doWrite(String title, String body) {
 
 		// 입력 데이터 유효성 검사
 		if (Ut.empty(title)) {
@@ -60,18 +60,18 @@ public class UserRecipeController {
 		}
 
 		// 레시피 등록하기
-		ResultData writeRecipeRd = recipeService.writeRecipe(title, body);
+		ResultData<Integer> writeRecipeRd = recipeService.writeRecipe(title, body);
 
 		int id = (int) writeRecipeRd.getData1();
 		Recipe recipe = recipeService.getRecipe(id);
 
-		return ResultData.from(writeRecipeRd.getResultCode(), writeRecipeRd.getMsg(), recipe);
+		return ResultData.newData(writeRecipeRd, recipe);
 	}
 
 	// 레시피 수정하기 메서드
 	@RequestMapping("/user/recipe/doModify")
 	@ResponseBody
-	public ResultData doModify(int id, String title, String body) {
+	public ResultData<Recipe> doModify(int id, String title, String body) {
 
 		// 입력 데이터 유효성 검사
 		if (Ut.empty(title)) {
@@ -90,9 +90,9 @@ public class UserRecipeController {
 		}
 
 		// 레시피 수정하기
-		ResultData modifyRecipeRd = recipeService.modifyRecipe(id, title, body);
+		recipeService.modifyRecipe(id, title, body);
 
-		return ResultData.from(modifyRecipeRd.getResultCode(), modifyRecipeRd.getMsg(), modifyRecipeRd.getData1());
+		return ResultData.from("S-1", Ut.f("%s번 레시피가 수정되었습니다.", id), recipe);
 	}
 
 	// 레시피 삭제하기 메서드
@@ -108,8 +108,8 @@ public class UserRecipeController {
 		}
 
 		// 삭제처리
-		ResultData deleteRecipeRd = recipeService.deleteRecipe(id);
+		recipeService.deleteRecipe(id);
 
-		return ResultData.from(deleteRecipeRd.getResultCode(), deleteRecipeRd.getMsg(), deleteRecipeRd.getData1());
+		return ResultData.from("S-1", Ut.f("%s번 레시피가 삭제되었습니다.", id));
 	}
 }

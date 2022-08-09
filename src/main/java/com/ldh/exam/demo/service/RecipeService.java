@@ -31,7 +31,7 @@ public class RecipeService {
 	}
 
 	// 레시피 등록하기
-	public ResultData writeRecipe(String title, String body) {
+	public ResultData<Integer> writeRecipe(String title, String body) {
 
 		recipeRepository.writeRecipe(title, body);
 
@@ -41,21 +41,15 @@ public class RecipeService {
 	}
 
 	// 레시피 수정하기
-	public ResultData modifyRecipe(int id, String title, String body) {
+	public void modifyRecipe(int id, String title, String body) {
 
 		recipeRepository.modifyRecipe(id, title, body);
-
-		Recipe recipe = recipeRepository.getRecipe(id);
-
-		return ResultData.from("S-1", Ut.f("%s번 레시피가 수정되었습니다.", id), recipe);
 	}
 
 	// 레시피 삭제하기
-	public ResultData deleteRecipe(int id) {
+	public void deleteRecipe(int id) {
 
 		recipeRepository.deleteRecipe(id);
-
-		return ResultData.from("S-1", Ut.f("%s번 레시피가 삭제되었습니다.", id));
 	}
 
 }

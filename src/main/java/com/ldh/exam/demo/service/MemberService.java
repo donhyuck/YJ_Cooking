@@ -17,7 +17,8 @@ public class MemberService {
 	}
 
 	// 회원 등록하기
-	public ResultData doJoin(String loginId, String loginPw, String nickname, String cellphoneNo, String email) {
+	public ResultData<Integer> doJoin(String loginId, String loginPw, String nickname, String cellphoneNo,
+			String email) {
 
 		Member oldMember;
 
@@ -32,7 +33,7 @@ public class MemberService {
 		oldMember = getMemberByNicknameAndEmail(nickname, email);
 
 		if (oldMember != null) {
-			return ResultData.from("F-2", Ut.f("입력하신 이름 [ %s ], 이메일 [ %s ] 은 이미 등록되었습니다.", nickname, email));
+			return ResultData.from("F-2", Ut.f("입력하신 닉네임 [ %s ], 이메일 [ %s ] 은 이미 등록되었습니다.", nickname, email));
 		}
 
 		// 중복사항이 없을 경우, 가입처리

@@ -103,7 +103,7 @@ public class UserMemberController {
 		return ResultData.from("S-1", Ut.f("%s님 환영합니다.", member.getNickname()));
 	}
 
-	// 회원 로그인 메서드
+	// 회원 로그아웃 메서드
 	@RequestMapping("/user/member/doLogout")
 	@ResponseBody
 	public ResultData<Member> doLogout(HttpSession httpSession) {

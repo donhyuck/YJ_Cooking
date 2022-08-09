@@ -78,3 +78,13 @@ cellphoneNo = '01096319631',
 email = 'tester02@test.com';
 
 SELECT * FROM `member`;
+
+# 레시피 테이블에 회원정보 추가
+ALTER TABLE recipe ADD COLUMN memberId INT(10) UNSIGNED NOT NULL AFTER updateDate;
+
+# 기존 레시피의 작성자를 2번으로 지정
+UPDATE recipe
+SET memberId = 2
+WHERE memberId = 0;
+
+SELECT * FROM recipe;

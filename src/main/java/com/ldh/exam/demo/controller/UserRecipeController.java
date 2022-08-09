@@ -110,20 +110,16 @@ public class UserRecipeController {
 			return ResultData.from("F-2", "내용(을)를 입력해주세요.");
 		}
 
-		// 레시피 찾기
-		Recipe recipe = recipeService.getRecipe(id);
+		// 레시피 찾기, 작성자 권한 체크
+		ResultData actorCanModifyRd = recipeService.actorCanModify(loginedMemberId, id);
 
-		if (recipe == null) {
-			return ResultData.from("F-A", Ut.f("%s번 레시피를 찾을 수 없습니다.", id));
-		}
-
-		// 작성자 권한 체크
-		if (recipe.getMemberId() != loginedMemberId) {
-			return ResultData.from("F-B", "해당 레시피에 대한 권한이 없습니다.");
+		if (actorCanModifyRd.isFail()) {
+			return actorCanModifyRd;
 		}
 
 		// 레시피 수정하기
 		recipeService.modifyRecipe(id, title, body);
+		Recipe recipe = recipeService.getRecipe(id);
 
 		return ResultData.from("S-1", Ut.f("%s번 레시피가 수정되었습니다.", id), recipe);
 	}
@@ -146,16 +142,11 @@ public class UserRecipeController {
 			return ResultData.from("F-Z", "로그인 후 이용해주세요.");
 		}
 
-		// 레시피 찾기
-		Recipe recipe = recipeService.getRecipe(id);
+		// 레시피 찾기, 작성자 권한 체크
+		ResultData actorCanDeleteRd = recipeService.actorCanDelete(loginedMemberId, id);
 
-		if (recipe == null) {
-			return ResultData.from("F-A", Ut.f("%s번 레시피를 찾을 수 없습니다.", id));
-		}
-
-		// 작성자 권한 체크
-		if (recipe.getMemberId() != loginedMemberId) {
-			return ResultData.from("F-B", "해당 레시피에 대한 권한이 없습니다.");
+		if (actorCanDeleteRd.isFail()) {
+			return actorCanDeleteRd;
 		}
 
 		// 삭제처리

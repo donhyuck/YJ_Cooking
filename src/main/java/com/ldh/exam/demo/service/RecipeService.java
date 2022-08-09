@@ -52,4 +52,38 @@ public class RecipeService {
 		recipeRepository.deleteRecipe(id);
 	}
 
+	public ResultData actorCanModify(int memberId, int id) {
+
+		// 레시피 찾기
+		Recipe recipe = getRecipe(id);
+
+		if (recipe == null) {
+			return ResultData.from("F-A", Ut.f("%s번 레시피를 찾을 수 없습니다.", id));
+		}
+
+		// 작성자 권한 체크
+		if (recipe.getMemberId() != memberId) {
+			return ResultData.from("F-B", "해당 레시피에 대한 권한이 없습니다.");
+		}
+
+		return ResultData.from("S-1", "수정가능합니다.");
+	}
+
+	public ResultData actorCanDelete(int memberId, int id) {
+
+		// 레시피 찾기
+		Recipe recipe = getRecipe(id);
+
+		if (recipe == null) {
+			return ResultData.from("F-A", Ut.f("%s번 레시피를 찾을 수 없습니다.", id));
+		}
+
+		// 작성자 권한 체크
+		if (recipe.getMemberId() != memberId) {
+			return ResultData.from("F-B", "해당 레시피에 대한 권한이 없습니다.");
+		}
+
+		return ResultData.from("S-1", "삭제가능합니다.");
+	}
+
 }

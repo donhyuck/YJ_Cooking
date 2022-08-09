@@ -19,10 +19,12 @@ public class UserMemberController {
 	// 회원 등록하기 메서드
 	@RequestMapping("/user/member/doJoin")
 	@ResponseBody
-	public String doJoin(String loginId, String loginPw, String nickname, String cellphoneNo, String email) {
+	public Member doJoin(String loginId, String loginPw, String nickname, String cellphoneNo, String email) {
 
-		memberService.doJoin(loginId, loginPw, nickname, cellphoneNo, email);
+		int id = memberService.doJoin(loginId, loginPw, nickname, cellphoneNo, email);
 
-		return nickname + "님 회원등록이 완료되었습니다.";
+		Member member = memberService.getMemberById(id);
+
+		return member;
 	}
 }

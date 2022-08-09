@@ -62,7 +62,7 @@ public class UserRecipeController {
 		}
 
 		if (isLogined == false) {
-			return ResultData.from("F-A", "로그인 후 이용해주세요.");
+			return ResultData.from("F-Z", "로그인 후 이용해주세요.");
 		}
 
 		// 입력 데이터 유효성 검사
@@ -86,15 +86,28 @@ public class UserRecipeController {
 	// 레시피 수정하기 메서드
 	@RequestMapping("/user/recipe/doModify")
 	@ResponseBody
-	public ResultData<Recipe> doModify(int id, String title, String body) {
+	public ResultData<Recipe> doModify(HttpSession httpSession, int id, String title, String body) {
+
+		// 로그인 확인, 세션접근
+		boolean isLogined = false;
+		int loginedMemberId = 0;
+
+		if (httpSession.getAttribute("loginedMemberId") != null) {
+			isLogined = true;
+			loginedMemberId = (int) httpSession.getAttribute("loginedMemberId");
+		}
+
+		if (isLogined == false) {
+			return ResultData.from("F-Z", "로그인 후 이용해주세요.");
+		}
 
 		// 입력 데이터 유효성 검사
 		if (Ut.empty(title)) {
-			return ResultData.from("F-2", "제목(을)를 입력해주세요.");
+			return ResultData.from("F-1", "제목(을)를 입력해주세요.");
 		}
 
 		if (Ut.empty(body)) {
-			return ResultData.from("F-3", "내용(을)를 입력해주세요.");
+			return ResultData.from("F-2", "내용(을)를 입력해주세요.");
 		}
 
 		// 레시피 찾기
@@ -102,6 +115,11 @@ public class UserRecipeController {
 
 		if (recipe == null) {
 			return ResultData.from("F-A", Ut.f("%s번 레시피를 찾을 수 없습니다.", id));
+		}
+
+		// 작성자 권한 체크
+		if (recipe.getMemberId() != loginedMemberId) {
+			return ResultData.from("F-B", "해당 레시피에 대한 권한이 없습니다.");
 		}
 
 		// 레시피 수정하기
@@ -113,13 +131,31 @@ public class UserRecipeController {
 	// 레시피 삭제하기 메서드
 	@RequestMapping("/user/recipe/doDelete")
 	@ResponseBody
-	public ResultData doDelete(int id) {
+	public ResultData doDelete(HttpSession httpSession, int id) {
+
+		// 로그인 확인, 세션접근
+		boolean isLogined = false;
+		int loginedMemberId = 0;
+
+		if (httpSession.getAttribute("loginedMemberId") != null) {
+			isLogined = true;
+			loginedMemberId = (int) httpSession.getAttribute("loginedMemberId");
+		}
+
+		if (isLogined == false) {
+			return ResultData.from("F-Z", "로그인 후 이용해주세요.");
+		}
 
 		// 레시피 찾기
 		Recipe recipe = recipeService.getRecipe(id);
 
 		if (recipe == null) {
 			return ResultData.from("F-A", Ut.f("%s번 레시피를 찾을 수 없습니다.", id));
+		}
+
+		// 작성자 권한 체크
+		if (recipe.getMemberId() != loginedMemberId) {
+			return ResultData.from("F-B", "해당 레시피에 대한 권한이 없습니다.");
 		}
 
 		// 삭제처리

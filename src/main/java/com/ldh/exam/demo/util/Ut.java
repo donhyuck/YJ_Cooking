@@ -21,12 +21,11 @@ public class Ut {
 		}
 
 		String str = (String) obj;
-
 		return str.trim().length() == 0;
 	}
 
-	public static Object f(String msg, Object... args) {
-		
+	public static String f(String msg, Object... args) {
+
 		return String.format(msg, args);
 	}
 }

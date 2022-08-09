@@ -13,7 +13,7 @@ public interface RecipeRepository {
 
 	public List<Recipe> getRecipes();
 
-	public void writeRecipe(String title, String body);
+	public void writeRecipe(int memberId, String title, String body);
 
 	public void modifyRecipe(int id, String title, String body);
 

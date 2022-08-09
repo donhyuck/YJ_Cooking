@@ -2,6 +2,8 @@ package com.ldh.exam.demo.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -48,7 +50,20 @@ public class UserRecipeController {
 	// 레시피 등록하기 메서드
 	@RequestMapping("/user/recipe/doWrite")
 	@ResponseBody
-	public ResultData<Recipe> doWrite(String title, String body) {
+	public ResultData<Recipe> doWrite(HttpSession httpSession, String title, String body) {
+
+		// 로그인 확인, 세션접근
+		boolean isLogined = false;
+		int loginedMemberId = 0;
+
+		if (httpSession.getAttribute("loginedMemberId") != null) {
+			isLogined = true;
+			loginedMemberId = (int) httpSession.getAttribute("loginedMemberId");
+		}
+
+		if (isLogined == false) {
+			return ResultData.from("F-A", "로그인 후 이용해주세요.");
+		}
 
 		// 입력 데이터 유효성 검사
 		if (Ut.empty(title)) {
@@ -60,7 +75,7 @@ public class UserRecipeController {
 		}
 
 		// 레시피 등록하기
-		ResultData<Integer> writeRecipeRd = recipeService.writeRecipe(title, body);
+		ResultData<Integer> writeRecipeRd = recipeService.writeRecipe(loginedMemberId, title, body);
 
 		int id = (int) writeRecipeRd.getData1();
 		Recipe recipe = recipeService.getRecipe(id);

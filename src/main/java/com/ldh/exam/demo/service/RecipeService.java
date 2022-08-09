@@ -31,9 +31,9 @@ public class RecipeService {
 	}
 
 	// 레시피 등록하기
-	public ResultData<Integer> writeRecipe(String title, String body) {
+	public ResultData<Integer> writeRecipe(int memberId, String title, String body) {
 
-		recipeRepository.writeRecipe(title, body);
+		recipeRepository.writeRecipe(memberId, title, body);
 
 		int id = recipeRepository.getLastInsertId();
 

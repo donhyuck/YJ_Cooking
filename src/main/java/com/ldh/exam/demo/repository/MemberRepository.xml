@@ -3,8 +3,17 @@
 
 <mapper namespace="com.ldh.exam.demo.repository.MemberRepository">
 
-	<insert id="joinMember">
-		<!-- 구현예정 -->
+	<insert id="doJoin">
+		INSERT INTO `member`
+		SET regDate = NOW(),
+		updateDate =
+		NOW(),
+		loginId = #{loginId},
+		loginPw = #{loginPw},
+		nickname =
+		#{nickname},
+		cellphoneNo = #{cellphoneNo},
+		email = #{email}
 	</insert>
 
 </mapper> 

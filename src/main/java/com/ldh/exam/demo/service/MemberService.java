@@ -14,10 +14,9 @@ public class MemberService {
 	}
 
 	// 회원 등록하기
-	public int joinMember() {
+	public void doJoin(String loginId, String loginPw, String nickname, String cellphoneNo, String email) {
 
-		memberRepository.joinMember();
+		memberRepository.doJoin(loginId, loginPw, nickname, cellphoneNo, email);
 
-		return 0;
 	}
 }

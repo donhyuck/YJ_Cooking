@@ -5,6 +5,6 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface MemberRepository {
 
-	public void joinMember();
+	public void doJoin(String loginId, String loginPw, String nickname, String cellphoneNo, String email);
 
 }

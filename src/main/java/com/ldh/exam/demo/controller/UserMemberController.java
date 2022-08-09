@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ldh.exam.demo.service.MemberService;
+import com.ldh.exam.demo.vo.Member;
 
 @Controller
 public class UserMemberController {
@@ -18,8 +19,10 @@ public class UserMemberController {
 	// 회원 등록하기 메서드
 	@RequestMapping("/user/member/doJoin")
 	@ResponseBody
-	public String doJoin() {
+	public String doJoin(String loginId, String loginPw, String nickname, String cellphoneNo, String email) {
 
-		return null;
+		memberService.doJoin(loginId, loginPw, nickname, cellphoneNo, email);
+
+		return nickname + "님 회원등록이 완료되었습니다.";
 	}
 }

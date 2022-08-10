@@ -58,7 +58,7 @@ public class UserMemberController {
 		// 등록된 회원정보 가져오기
 		Member member = memberService.getMemberById((int) joinMemberRd.getData1());
 
-		return ResultData.newData(joinMemberRd, member);
+		return ResultData.newData(joinMemberRd, "member", member);
 	}
 
 	// 회원 로그인 메서드

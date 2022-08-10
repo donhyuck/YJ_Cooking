@@ -37,7 +37,7 @@ public class RecipeService {
 
 		int id = recipeRepository.getLastInsertId();
 
-		return ResultData.from("S-1", Ut.f("%s번 레시피가 등록되었습니다.", id), id);
+		return ResultData.from("S-1", Ut.f("%s번 레시피가 등록되었습니다.", id), "id", id);
 	}
 
 	// 레시피 수정하기

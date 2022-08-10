@@ -29,7 +29,7 @@ public class UserRecipeController {
 
 		List<Recipe> recipes = recipeService.getRecipes();
 
-		return ResultData.from("S-1", "레시피 목록입니다.", recipes);
+		return ResultData.from("S-1", "레시피 목록입니다.", "recipes", recipes);
 	}
 
 	// 레시피 상세보기 메서드
@@ -44,7 +44,7 @@ public class UserRecipeController {
 			return ResultData.from("F-A", Ut.f("%s번 레시피를 찾을 수 없습니다.", id));
 		}
 
-		return ResultData.from("S-1", Ut.f("%s번 레시피입니다.", id), recipe);
+		return ResultData.from("S-1", Ut.f("%s번 레시피입니다.", id), "recipe", recipe);
 	}
 
 	// 레시피 등록하기 메서드
@@ -80,7 +80,7 @@ public class UserRecipeController {
 		int id = (int) writeRecipeRd.getData1();
 		Recipe recipe = recipeService.getRecipe(id);
 
-		return ResultData.newData(writeRecipeRd, recipe);
+		return ResultData.newData(writeRecipeRd, "recipe", recipe);
 	}
 
 	// 레시피 수정하기 메서드
@@ -121,7 +121,7 @@ public class UserRecipeController {
 		recipeService.modifyRecipe(id, title, body);
 		Recipe recipe = recipeService.getRecipe(id);
 
-		return ResultData.from("S-1", Ut.f("%s번 레시피가 수정되었습니다.", id), recipe);
+		return ResultData.from("S-1", Ut.f("%s번 레시피가 수정되었습니다.", id), "recipe", recipe);
 	}
 
 	// 레시피 삭제하기 메서드

@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -24,27 +25,28 @@ public class UserRecipeController {
 
 	// 레시피 목록보기 메서드
 	@RequestMapping("/user/recipe/list")
-	@ResponseBody
-	public ResultData<List<Recipe>> showList() {
+	public String showList(Model model) {
 
 		List<Recipe> recipes = recipeService.getRecipes();
+		model.addAttribute("recipes", recipes);
 
-		return ResultData.from("S-1", "레시피 목록입니다.", "recipes", recipes);
+		return "user/recipe/list";
 	}
 
 	// 레시피 상세보기 메서드
 	@RequestMapping("/user/recipe/detail")
-	@ResponseBody
-	public ResultData<Recipe> showDetail(int id) {
+	public String showDetail(Model model, int id) {
 
 		// 레시피 찾기
 		Recipe recipe = recipeService.getRecipe(id);
 
 		if (recipe == null) {
-			return ResultData.from("F-A", Ut.f("%s번 레시피를 찾을 수 없습니다.", id));
+			return Ut.f("%s번 레시피를 찾을 수 없습니다.", id);
 		}
 
-		return ResultData.from("S-1", Ut.f("%s번 레시피입니다.", id), "recipe", recipe);
+		model.addAttribute("recipe", recipe);
+
+		return "user/recipe/detail";
 	}
 
 	// 레시피 등록하기 메서드

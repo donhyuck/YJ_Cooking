@@ -3,18 +3,28 @@
 
 <mapper namespace="com.ldh.exam.demo.repository.RecipeRepository">
 
-	<select id="getRecipe" resultType="Recipe">
-		SELECT *
-		FROM recipe
-		WHERE id =
+	<select id="getForPrintRecipe" resultType="Recipe">
+		SELECT R.*,
+		M.nickname
+		AS extra__writerName
+		FROM recipe AS R
+		LEFT JOIN `member` AS M
+		ON
+		R.memberId = M.id
+		WHERE R.id =
 		#{id}
 	</select>
 
-	<select id="getRecipes" resultType="Recipe">
-		SELECT *
-		FROM recipe
+	<select id="getForPrintRecipes" resultType="Recipe">
+		SELECT R.*,
+		M.nickname
+		AS extra__writerName
+		FROM recipe AS R
+		LEFT JOIN `member` AS M
+		ON
+		R.memberId = M.id
 		ORDER BY
-		id DESC
+		R.id DESC
 	</select>
 
 	<insert id="writeRecipe">

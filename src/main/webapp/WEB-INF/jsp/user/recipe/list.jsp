@@ -19,7 +19,7 @@
 				<td>${ recipe.id }</td>
 				<td>${ recipe.regDate.substring(2,16) }</td>
 				<td>${ recipe.updateDate.substring(2,16) }</td>
-				<td>${ recipe.memberId }</td>
+				<td>${ recipe.extra__writerName  }</td>
 				<td>
 					<a href="../recipe/detail?id=${ recipe.id }">${ recipe.title }</a>
 				</td>

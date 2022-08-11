@@ -19,15 +19,15 @@ public class RecipeService {
 	}
 
 	// 특정 레시피 가져오기
-	public Recipe getRecipe(int id) {
+	public Recipe getForPrintRecipe(int id) {
 
-		return recipeRepository.getRecipe(id);
+		return recipeRepository.getForPrintRecipe(id);
 	}
 
 	// 레시피 목록 가져오기
-	public List<Recipe> getRecipes() {
+	public List<Recipe> getForPrintRecipes() {
 
-		return recipeRepository.getRecipes();
+		return recipeRepository.getForPrintRecipes();
 	}
 
 	// 레시피 등록하기
@@ -55,7 +55,7 @@ public class RecipeService {
 	public ResultData actorCanModify(int memberId, int id) {
 
 		// 레시피 찾기
-		Recipe recipe = getRecipe(id);
+		Recipe recipe = getForPrintRecipe(id);
 
 		if (recipe == null) {
 			return ResultData.from("F-A", Ut.f("%s번 레시피를 찾을 수 없습니다.", id));
@@ -72,7 +72,7 @@ public class RecipeService {
 	public ResultData actorCanDelete(int memberId, int id) {
 
 		// 레시피 찾기
-		Recipe recipe = getRecipe(id);
+		Recipe recipe = getForPrintRecipe(id);
 
 		if (recipe == null) {
 			return ResultData.from("F-A", Ut.f("%s번 레시피를 찾을 수 없습니다.", id));

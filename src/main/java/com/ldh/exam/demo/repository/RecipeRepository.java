@@ -9,9 +9,9 @@ import com.ldh.exam.demo.vo.Recipe;
 @Mapper
 public interface RecipeRepository {
 
-	public Recipe getRecipe(int id);
+	public Recipe getForPrintRecipe(int id);
 
-	public List<Recipe> getRecipes();
+	public List<Recipe> getForPrintRecipes();
 
 	public void writeRecipe(int memberId, String title, String body);
 

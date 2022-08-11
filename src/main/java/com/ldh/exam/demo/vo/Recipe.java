@@ -16,4 +16,5 @@ public class Recipe {
 	private String title;
 	private String body;
 
+	private String extra__writerName;
 }

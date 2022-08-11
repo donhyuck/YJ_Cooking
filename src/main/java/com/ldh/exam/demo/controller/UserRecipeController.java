@@ -27,7 +27,8 @@ public class UserRecipeController {
 	@RequestMapping("/user/recipe/list")
 	public String showList(Model model) {
 
-		List<Recipe> recipes = recipeService.getRecipes();
+		List<Recipe> recipes = recipeService.getForPrintRecipes();
+		
 		model.addAttribute("recipes", recipes);
 
 		return "user/recipe/list";
@@ -38,7 +39,7 @@ public class UserRecipeController {
 	public String showDetail(Model model, int id) {
 
 		// 레시피 찾기
-		Recipe recipe = recipeService.getRecipe(id);
+		Recipe recipe = recipeService.getForPrintRecipe(id);
 
 		if (recipe == null) {
 			return Ut.f("%s번 레시피를 찾을 수 없습니다.", id);
@@ -80,7 +81,7 @@ public class UserRecipeController {
 		ResultData<Integer> writeRecipeRd = recipeService.writeRecipe(loginedMemberId, title, body);
 
 		int id = (int) writeRecipeRd.getData1();
-		Recipe recipe = recipeService.getRecipe(id);
+		Recipe recipe = recipeService.getForPrintRecipe(id);
 
 		return ResultData.newData(writeRecipeRd, "recipe", recipe);
 	}
@@ -121,7 +122,7 @@ public class UserRecipeController {
 
 		// 레시피 수정하기
 		recipeService.modifyRecipe(id, title, body);
-		Recipe recipe = recipeService.getRecipe(id);
+		Recipe recipe = recipeService.getForPrintRecipe(id);
 
 		return ResultData.from("S-1", Ut.f("%s번 레시피가 수정되었습니다.", id), "recipe", recipe);
 	}

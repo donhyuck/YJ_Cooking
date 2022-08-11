@@ -11,7 +11,10 @@
 
 <!-- 테일윈드 불러오기 -->
 <!-- 노말라이즈, 라이브러리까지 한번에 해결 -->
-<script src="https://unpkg.com/tailwindcss-jit-cdn"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.7/tailwind.min.css" />
+
+<!-- 데이지 UI -->
+<link href="https://cdn.jsdelivr.net/npm/daisyui@2.19.0/dist/full.css" rel="stylesheet" type="text/css" />
 
 <!-- 폰트어썸 불러오기 -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
@@ -23,16 +26,27 @@
 </head>
 
 <body>
-	<h1>${ pageTitle }</h1>
+	<div class="header">
+		<div class="flex mx-auto h-28 w-10/12 border border-black items-center justify-center text-xl">
+			<a href="/" class="bg-green-400 rounded-md p-4">요리조리</a>
+			<!-- 검색박스 영역 시작 -->
+			<div class="search-box mx-10">
+				<form class="flex">
+					<input name="searchKeyword" value="${ param.searchKeyword }" class="input input-bordered w-80" type="text"
+						maxlength="20" placeholder="검색어" />
 
-	<header>
-		<a href="/">요리조리</a>
-		<ul>
-			<li>
-				<a href="/">홈</a>
-			</li>
-			<li>
-				<a href="/user/recipe/list">목록</a>
-			</li>
-		</ul>
-	</header>
+					<button type="submit" class="btn ml-1">검색</button>
+				</form>
+			</div>
+			<!-- 검색박스 영역 끝 -->
+			<div class="text-5xl text-green-500 mr-2">
+				<i class="fa-solid fa-circle-user"></i>
+			</div>
+			<div class="text-5xl text-green-500 mr-2">
+				<i class="fa-light fa-pen-circle"></i>
+			</div>
+		</div>
+	</div>
+
+
+	<main>

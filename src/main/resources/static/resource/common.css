@@ -8,3 +8,7 @@
 html> body {
     font-family: 'HallymGothic-Regular';
 }
+
+.fa,.fab,.fad,.fal,.far,.fas{
+	font-weight: 900;
+}

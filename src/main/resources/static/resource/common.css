@@ -1,14 +1,41 @@
 @font-face {
-    font-family: 'HallymGothic-Regular';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2204@1.0/HallymGothic-Regular.woff2') format('woff2');
-    font-weight: 400;
-    font-style: normal;
+	font-family: 'HallymGothic-Regular';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2204@1.0/HallymGothic-Regular.woff2')
+		format('woff2');
+	font-weight: 400;
+	font-style: normal;
 }
 
-html> body {
-    font-family: 'HallymGothic-Regular';
+html>body {
+	font-family: 'HallymGothic-Regular';
 }
 
-.fa,.fab,.fad,.fal,.far,.fas{
-	font-weight: 900;
+/* 커스텀 */
+body {
+	min-width: 1040px;
 }
+
+/* 상단 공통영역 스타일 시작 */
+.second-bar>.list-box>a {
+	width: 18rem;
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+.second-bar>.list-box>a.list:hover>div  {
+	color: rgb(161 98 7);
+	opacity: 0.8;
+}
+
+.second-bar>.list-box .list-title {
+	font-weight: 700;
+	color: rgb(0, 0, 0);
+}
+
+.second-bar>.list-box .list-info {
+	font-size: 0.8rem;
+	line-height: 1.25rem;
+}
+
+/* 상단 공통영역 스타일 끝 */

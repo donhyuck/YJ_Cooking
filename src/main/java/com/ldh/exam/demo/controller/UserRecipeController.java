@@ -23,15 +23,32 @@ public class UserRecipeController {
 		this.recipeService = recipeService;
 	}
 
-	// 레시피 목록보기 메서드
-	@RequestMapping("/user/recipe/list")
-	public String showList(Model model) {
+	// 레시피 추천 목록보기 메서드
+	@RequestMapping("/user/list/suggest")
+	public String showSuggestList() {
 
-		List<Recipe> recipes = recipeService.getForPrintRecipes();
-		
-		model.addAttribute("recipes", recipes);
+		return "user/list/suggest";
+	}
 
-		return "user/recipe/list";
+	// 레시피 분류 목록보기 메서드
+	@RequestMapping("/user/list/category")
+	public String showCategoryList() {
+
+		return "user/list/category";
+	}
+
+	// 레시피 랭킹 목록보기 메서드
+	@RequestMapping("/user/list/rank")
+	public String showRankList() {
+
+		return "user/list/rank";
+	}
+
+	// 레시피 노트 목록보기 메서드
+	@RequestMapping("/user/list/note")
+	public String showNoteList() {
+
+		return "user/list/note";
 	}
 
 	// 레시피 상세보기 메서드

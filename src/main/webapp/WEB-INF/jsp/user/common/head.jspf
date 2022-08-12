@@ -30,7 +30,7 @@
 </head>
 
 <body>
-	<div class="header min-w-fit">
+	<div class="header min-w-fit mb-5">
 		<section class="top-bar flex items-center justify-center mx-auto w-10/12 h-28 text-xl">
 			<!-- 로고박스 영역 시작 -->
 			<div class="logo-box flex items-center justify-center rounded-2xl w-28 h-16">
@@ -40,6 +40,7 @@
 				</a>
 			</div>
 			<!-- 로고박스 영역 끝 -->
+
 			<!-- 검색박스 영역 시작 -->
 			<div class="search-box ml-20 mr-16">
 				<form class="flex">
@@ -52,6 +53,7 @@
 				<div class="text-sm mt-2 ml-2">감자 | 고구마 | 닭가슴살</div>
 			</div>
 			<!-- 검색박스 영역 끝 -->
+
 			<!-- 사용자박스 영역 시작 -->
 			<div class="user-box flex text-5xl space-x-6">
 				<a href="/" type="button" class="text-green-500">
@@ -68,26 +70,25 @@
 		</section>
 
 		<section class="second-bar bg-green-400 opacity-80 w-full h-16">
-			<div class="list-box flex items-center justify-center text-lg h-full text-center">
-				<a href="/" class="list">
-					<div class="list-title">추천 레시피</div>
-					<div class="list-info">오늘 뭐 먹지?</div>
+			<div class="menu-box flex items-center justify-center text-lg h-full text-center">
+				<a href="/" class="menu">
+					<div class="menu-title">추천 레시피</div>
+					<div class="menu-info">오늘 뭐 먹지?</div>
 				</a>
-				<a href="/" class="list">
-					<div class="list-title">레시피 모아보기</div>
-					<div class="list-info">맛있는 한 끼를 찾아서</div>
+				<a href="/" class="menu">
+					<div class="menu-title">레시피 모아보기</div>
+					<div class="menu-info">맛있는 한 끼를 찾아서</div>
 				</a>
-				<a href="/" class="list">
-					<div class="list-title">랭킹보기</div>
-					<div class="list-info">명예의 전당</div>
+				<a href="/" class="menu">
+					<div class="menu-title">랭킹보기</div>
+					<div class="menu-info">명예의 전당</div>
 				</a>
-				<a href="/" class="list">
-					<div class="list-title">레시피 노트</div>
-					<div class="list-info">나만의 요리사전</div>
+				<a href="/" class="menu">
+					<div class="menu-title">레시피 노트</div>
+					<div class="menu-info">나만의 요리사전</div>
 				</a>
 			</div>
 		</section>
 	</div>
-
-
+	
 	<main>

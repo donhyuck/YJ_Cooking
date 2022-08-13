@@ -124,4 +124,11 @@ public class UserMemberController {
 
 		return ResultData.from("S-B", "로그아웃되었습니다.");
 	}
+
+	// My홈 보기 메서드
+	@RequestMapping("/user/member/myPage")
+	public String showMyPage() {
+
+		return "user/member/myPage";
+	}
 }

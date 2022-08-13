@@ -56,7 +56,7 @@
 
 			<!-- 사용자박스 영역 시작 -->
 			<div class="user-box flex text-5xl space-x-6">
-				<a href="/" type="button" class="text-green-500">
+				<a href="/user/member/myPage" type="button" class="text-green-500">
 					<i class="fa-solid fa-circle-user"></i>
 				</a>
 				<a href="/" type="button" class="text-red-500">

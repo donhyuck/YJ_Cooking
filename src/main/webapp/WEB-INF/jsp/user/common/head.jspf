@@ -62,14 +62,18 @@
 				<a href="/" type="button" class="text-red-500">
 					<i class="fa-solid fa-square-pen"></i>
 				</a>
-				<!-- 로그인 -->
-				<a href="/" type="button" class="text-yellow-500">
-					<i class="fa-solid fa-arrow-right-to-bracket"></i>
-				</a>
-				<!-- 로그아웃 -->
-				<a href="/" type="button" class="text-yellow-500">
-					<i class="fa-solid fa-arrow-right-from-bracket"></i>
-				</a>
+				<c:if test="${ true }">
+					<!-- 로그인 -->
+					<a href="/" type="button" class="text-yellow-500">
+						<i class="fa-solid fa-arrow-right-to-bracket"></i>
+					</a>
+				</c:if>
+				<c:if test="${ false }">
+					<!-- 로그아웃 -->
+					<a href="/" type="button" class="text-yellow-500">
+						<i class="fa-solid fa-arrow-right-from-bracket"></i>
+					</a>
+				</c:if>
 			</div>
 			<!-- 사용자박스 영역 끝 -->
 		</section>

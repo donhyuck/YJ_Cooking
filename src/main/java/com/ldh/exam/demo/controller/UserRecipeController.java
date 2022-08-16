@@ -1,7 +1,5 @@
 package com.ldh.exam.demo.controller;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -71,20 +69,20 @@ public class UserRecipeController {
 	// 레시피 등록하기 메서드
 	@RequestMapping("/user/recipe/doWrite")
 	@ResponseBody
-	public ResultData<Recipe> doWrite(HttpSession httpSession, String title, String body) {
+	public String doWrite(String title, String body) {
 
 		// 로그인 확인
 		if (rq.isLogined() == false) {
-			return ResultData.from("F-Z", "로그인 후 이용해주세요.");
+			return Ut.jsHistoryBack("로그인 후 이용해주세요.");
 		}
 
 		// 입력 데이터 유효성 검사
 		if (Ut.empty(title)) {
-			return ResultData.from("F-1", "제목(을)를 입력해주세요.");
+			return Ut.jsHistoryBack("제목(을)를 입력해주세요.");
 		}
 
 		if (Ut.empty(body)) {
-			return ResultData.from("F-2", "내용(을)를 입력해주세요.");
+			return Ut.jsHistoryBack("내용(을)를 입력해주세요.");
 		}
 
 		// 레시피 등록하기
@@ -93,62 +91,61 @@ public class UserRecipeController {
 		int id = (int) writeRecipeRd.getData1();
 		Recipe recipe = recipeService.getForPrintRecipe(id);
 
-		return ResultData.newData(writeRecipeRd, "recipe", recipe);
+		return Ut.jsReplace(Ut.f("%s번 레시피가 등록되었습니다.", id), Ut.f("../recipe/detail?id=%d", id));
 	}
 
 	// 레시피 수정하기 메서드
 	@RequestMapping("/user/recipe/doModify")
 	@ResponseBody
-	public ResultData<Recipe> doModify(HttpSession httpSession, int id, String title, String body) {
+	public String doModify(int id, String title, String body) {
 
 		// 로그인 확인
 		if (rq.isLogined() == false) {
-			return ResultData.from("F-Z", "로그인 후 이용해주세요.");
+			return Ut.jsHistoryBack("로그인 후 이용해주세요.");
 		}
 
 		// 입력 데이터 유효성 검사
 		if (Ut.empty(title)) {
-			return ResultData.from("F-1", "제목(을)를 입력해주세요.");
+			return Ut.jsHistoryBack("제목(을)를 입력해주세요.");
 		}
 
 		if (Ut.empty(body)) {
-			return ResultData.from("F-2", "내용(을)를 입력해주세요.");
+			return Ut.jsHistoryBack("내용(을)를 입력해주세요.");
 		}
 
 		// 레시피 찾기, 작성자 권한 체크
 		ResultData actorCanModifyRd = recipeService.actorCanModify(rq.getLoginedMemberId(), id);
 
 		if (actorCanModifyRd.isFail()) {
-			return actorCanModifyRd;
+			return Ut.jsHistoryBack(actorCanModifyRd.getMsg());
 		}
 
 		// 레시피 수정하기
 		recipeService.modifyRecipe(id, title, body);
-		Recipe recipe = recipeService.getForPrintRecipe(id);
 
-		return ResultData.from("S-1", Ut.f("%s번 레시피가 수정되었습니다.", id), "recipe", recipe);
+		return Ut.jsReplace(Ut.f("%s번 레시피가 수정되었습니다.", id), Ut.f("../recipe/detail?id=%d", id));
 	}
 
 	// 레시피 삭제하기 메서드
 	@RequestMapping("/user/recipe/doDelete")
 	@ResponseBody
-	public ResultData doDelete(HttpSession httpSession, int id) {
+	public String doDelete(int id) {
 
 		// 로그인 확인
 		if (rq.isLogined() == false) {
-			return ResultData.from("F-Z", "로그인 후 이용해주세요.");
+			return Ut.jsHistoryBack("로그인 후 이용해주세요.");
 		}
 
 		// 레시피 찾기, 작성자 권한 체크
 		ResultData actorCanDeleteRd = recipeService.actorCanDelete(rq.getLoginedMemberId(), id);
 
 		if (actorCanDeleteRd.isFail()) {
-			return actorCanDeleteRd;
+			return Ut.jsHistoryBack(actorCanDeleteRd.getMsg());
 		}
 
 		// 삭제처리
 		recipeService.deleteRecipe(id);
 
-		return ResultData.from("S-1", Ut.f("%s번 레시피가 삭제되었습니다.", id));
+		return Ut.jsReplace(Ut.f("%s번 레시피가 삭제되었습니다.", id), "/");
 	}
 }

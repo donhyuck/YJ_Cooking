@@ -99,9 +99,6 @@ public class UserMemberController {
 			return ResultData.from("F-C", "잘못된 비밀번호입니다.");
 		}
 
-		// 등록된 회원으로 로그인 하기
-		httpSession.setAttribute("loginedMemberId", member.getId());
-
 		return ResultData.from("S-1", Ut.f("%s님 환영합니다.", member.getNickname()));
 	}
 

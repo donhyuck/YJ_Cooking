@@ -29,28 +29,27 @@ public class UserMemberController {
 	// 회원 등록하기 메서드
 	@RequestMapping("/user/member/doJoin")
 	@ResponseBody
-	public ResultData<Member> doJoin(String loginId, String loginPw, String nickname, String cellphoneNo,
-			String email) {
+	public String doJoin(String loginId, String loginPw, String nickname, String cellphoneNo, String email) {
 
 		// 입력 데이터 유효성 검사
 		if (Ut.empty(loginId)) {
-			return ResultData.from("F-1", "아이디(을)를 입력해주세요.");
+			return Ut.jsHistoryBack("아이디(을)를 입력해주세요.");
 		}
 
 		if (Ut.empty(loginPw)) {
-			return ResultData.from("F-2", "비밀번호(을)를 입력해주세요.");
+			return Ut.jsHistoryBack("비밀번호(을)를 입력해주세요.");
 		}
 
 		if (Ut.empty(nickname)) {
-			return ResultData.from("F-3", "닉네임(을)를 입력해주세요.");
+			return Ut.jsHistoryBack("닉네임(을)를 입력해주세요.");
 		}
 
 		if (Ut.empty(cellphoneNo)) {
-			return ResultData.from("F-4", "연락처(을)를 입력해주세요.");
+			return Ut.jsHistoryBack("연락처(을)를 입력해주세요.");
 		}
 
 		if (Ut.empty(email)) {
-			return ResultData.from("F-5", "이메일(을)를 입력해주세요.");
+			return Ut.jsHistoryBack("이메일(을)를 입력해주세요.");
 		}
 
 		// 회원 등록하기
@@ -58,13 +57,13 @@ public class UserMemberController {
 
 		// 아이디 또는 닉네임, 이메일 중복 확인
 		if (joinMemberRd.isFail()) {
-			return (ResultData) joinMemberRd;
+			return Ut.jsHistoryBack(joinMemberRd.getMsg());
 		}
 
 		// 등록된 회원정보 가져오기
 		Member member = memberService.getMemberById((int) joinMemberRd.getData1());
 
-		return ResultData.newData(joinMemberRd, "member", member);
+		return Ut.jsReplace(Ut.f("%s 님의 회원등록이 완료되었습니다.", member.getNickname()), "/");
 	}
 
 	// 회원 로그인 메서드

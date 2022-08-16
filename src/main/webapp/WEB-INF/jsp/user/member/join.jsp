@@ -89,9 +89,9 @@
 				<div class="member-msgType text-green-400 mt-1 ml-4">사용가능합니다.</div>
 			</div>
 
-			<div class="btns mt-3">
-				<button type="button" class="btn" onclick="history.back();">뒤로가기</button>
-				<button type="submit" class="btn">회원가입</button>
+			<div class="btns mt-2">
+				<button type="button" class="btn btn-outilne" onclick="history.back();">뒤로가기</button>
+				<button type="submit" class="btn btn-primary btn-outline">회원가입</button>
 			</div>
 		</form>
 

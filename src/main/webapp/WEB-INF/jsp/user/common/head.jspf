@@ -57,7 +57,10 @@
 			<!-- 사용자박스 영역 시작 -->
 			<div class="user-box flex text-5xl space-x-6">
 				<a href="/user/member/myPage" type="button" class="text-green-500">
-					<i class="fa-solid fa-circle-user"></i>
+					<i class="fa-solid fa-user-circle"></i>
+				</a>
+				<a href="/user/member/join" type="button" class="text-green-500">
+					<i class="fa-solid fa-id-card-clip"></i>
 				</a>
 				<a href="/" type="button" class="text-red-500">
 					<i class="fa-solid fa-square-pen"></i>

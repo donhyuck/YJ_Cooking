@@ -20,6 +20,12 @@ public class UserMemberController {
 		this.memberService = memberService;
 	}
 
+	// 회원등록 페이지 보기 메서드
+	@RequestMapping("/user/member/join")
+	public String join() {
+		return "user/member/join";
+	}
+
 	// 회원 등록하기 메서드
 	@RequestMapping("/user/member/doJoin")
 	@ResponseBody

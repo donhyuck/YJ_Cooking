@@ -1,5 +1,7 @@
 package com.ldh.exam.demo.vo;
 
+import java.io.IOException;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -9,6 +11,7 @@ import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Component;
 
 import com.ldh.exam.demo.service.MemberService;
+import com.ldh.exam.demo.util.Ut;
 
 import lombok.Getter;
 
@@ -46,6 +49,36 @@ public class Rq {
 		this.loginedMemberId = loginedMemberId;
 		this.loginedMember = loginedMember;
 
-		this.req.setAttribute("rq", this);
+		this.req = req;
+		this.resp = resp;
+	}
+
+	public void printHistoryBackJs(String msg) {
+
+		resp.setContentType("text/html; charset=UTF-8");
+
+		println("<script>");
+
+		if (!Ut.empty(msg)) {
+			println("alert('" + msg + "');");
+		}
+
+		println("history.back();");
+
+		println("</script>");
+
+	}
+
+	public void print(String str) {
+
+		try {
+			resp.getWriter().append(str);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	private void println(String str) {
+		print(str + "\n");
 	}
 }

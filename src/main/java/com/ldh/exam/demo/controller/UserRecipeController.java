@@ -71,11 +71,6 @@ public class UserRecipeController {
 	@ResponseBody
 	public String doWrite(String title, String body) {
 
-		// 로그인 확인
-		if (rq.isLogined() == false) {
-			return Ut.jsHistoryBack("로그인 후 이용해주세요.");
-		}
-
 		// 입력 데이터 유효성 검사
 		if (Ut.empty(title)) {
 			return Ut.jsHistoryBack("제목(을)를 입력해주세요.");
@@ -98,11 +93,6 @@ public class UserRecipeController {
 	@RequestMapping("/user/recipe/doModify")
 	@ResponseBody
 	public String doModify(int id, String title, String body) {
-
-		// 로그인 확인
-		if (rq.isLogined() == false) {
-			return Ut.jsHistoryBack("로그인 후 이용해주세요.");
-		}
 
 		// 입력 데이터 유효성 검사
 		if (Ut.empty(title)) {
@@ -130,11 +120,6 @@ public class UserRecipeController {
 	@RequestMapping("/user/recipe/doDelete")
 	@ResponseBody
 	public String doDelete(int id) {
-
-		// 로그인 확인
-		if (rq.isLogined() == false) {
-			return Ut.jsHistoryBack("로그인 후 이용해주세요.");
-		}
 
 		// 레시피 찾기, 작성자 권한 체크
 		ResultData actorCanDeleteRd = recipeService.actorCanDelete(rq.getLoginedMemberId(), id);

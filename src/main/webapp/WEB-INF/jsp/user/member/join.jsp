@@ -54,7 +54,7 @@
 			form.email.focus();
 			return;
 		}
-		
+
 		submitJoinFormDone = true;
 		form.submit();
 	}

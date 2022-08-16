@@ -1,7 +1,5 @@
 package com.ldh.exam.demo.controller;
 
-import java.util.List;
-
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -13,14 +11,17 @@ import com.ldh.exam.demo.service.RecipeService;
 import com.ldh.exam.demo.util.Ut;
 import com.ldh.exam.demo.vo.Recipe;
 import com.ldh.exam.demo.vo.ResultData;
+import com.ldh.exam.demo.vo.Rq;
 
 @Controller
 public class UserRecipeController {
 
 	private RecipeService recipeService;
+	private Rq rq;
 
-	public UserRecipeController(RecipeService recipeService) {
+	public UserRecipeController(RecipeService recipeService, Rq rq) {
 		this.recipeService = recipeService;
+		this.rq = rq;
 	}
 
 	// 레시피 추천 목록보기 메서드
@@ -72,16 +73,8 @@ public class UserRecipeController {
 	@ResponseBody
 	public ResultData<Recipe> doWrite(HttpSession httpSession, String title, String body) {
 
-		// 로그인 확인, 세션접근
-		boolean isLogined = false;
-		int loginedMemberId = 0;
-
-		if (httpSession.getAttribute("loginedMemberId") != null) {
-			isLogined = true;
-			loginedMemberId = (int) httpSession.getAttribute("loginedMemberId");
-		}
-
-		if (isLogined == false) {
+		// 로그인 확인
+		if (rq.isLogined() == false) {
 			return ResultData.from("F-Z", "로그인 후 이용해주세요.");
 		}
 
@@ -95,7 +88,7 @@ public class UserRecipeController {
 		}
 
 		// 레시피 등록하기
-		ResultData<Integer> writeRecipeRd = recipeService.writeRecipe(loginedMemberId, title, body);
+		ResultData<Integer> writeRecipeRd = recipeService.writeRecipe(rq.getLoginedMemberId(), title, body);
 
 		int id = (int) writeRecipeRd.getData1();
 		Recipe recipe = recipeService.getForPrintRecipe(id);
@@ -108,16 +101,8 @@ public class UserRecipeController {
 	@ResponseBody
 	public ResultData<Recipe> doModify(HttpSession httpSession, int id, String title, String body) {
 
-		// 로그인 확인, 세션접근
-		boolean isLogined = false;
-		int loginedMemberId = 0;
-
-		if (httpSession.getAttribute("loginedMemberId") != null) {
-			isLogined = true;
-			loginedMemberId = (int) httpSession.getAttribute("loginedMemberId");
-		}
-
-		if (isLogined == false) {
+		// 로그인 확인
+		if (rq.isLogined() == false) {
 			return ResultData.from("F-Z", "로그인 후 이용해주세요.");
 		}
 
@@ -131,7 +116,7 @@ public class UserRecipeController {
 		}
 
 		// 레시피 찾기, 작성자 권한 체크
-		ResultData actorCanModifyRd = recipeService.actorCanModify(loginedMemberId, id);
+		ResultData actorCanModifyRd = recipeService.actorCanModify(rq.getLoginedMemberId(), id);
 
 		if (actorCanModifyRd.isFail()) {
 			return actorCanModifyRd;
@@ -149,21 +134,13 @@ public class UserRecipeController {
 	@ResponseBody
 	public ResultData doDelete(HttpSession httpSession, int id) {
 
-		// 로그인 확인, 세션접근
-		boolean isLogined = false;
-		int loginedMemberId = 0;
-
-		if (httpSession.getAttribute("loginedMemberId") != null) {
-			isLogined = true;
-			loginedMemberId = (int) httpSession.getAttribute("loginedMemberId");
-		}
-
-		if (isLogined == false) {
+		// 로그인 확인
+		if (rq.isLogined() == false) {
 			return ResultData.from("F-Z", "로그인 후 이용해주세요.");
 		}
 
 		// 레시피 찾기, 작성자 권한 체크
-		ResultData actorCanDeleteRd = recipeService.actorCanDelete(loginedMemberId, id);
+		ResultData actorCanDeleteRd = recipeService.actorCanDelete(rq.getLoginedMemberId(), id);
 
 		if (actorCanDeleteRd.isFail()) {
 			return actorCanDeleteRd;

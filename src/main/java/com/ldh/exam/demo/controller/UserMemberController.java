@@ -10,19 +10,22 @@ import com.ldh.exam.demo.service.MemberService;
 import com.ldh.exam.demo.util.Ut;
 import com.ldh.exam.demo.vo.Member;
 import com.ldh.exam.demo.vo.ResultData;
+import com.ldh.exam.demo.vo.Rq;
 
 @Controller
 public class UserMemberController {
 
 	private MemberService memberService;
+	private Rq rq;
 
-	public UserMemberController(MemberService memberService) {
+	public UserMemberController(MemberService memberService, Rq rq) {
 		this.memberService = memberService;
+		this.rq = rq;
 	}
 
 	// 회원등록 페이지 보기 메서드
 	@RequestMapping("/user/member/join")
-	public String join() {
+	public String showJoin() {
 		return "user/member/join";
 	}
 
@@ -71,15 +74,9 @@ public class UserMemberController {
 	@ResponseBody
 	public ResultData<Member> doLogin(HttpSession httpSession, String loginId, String loginPw) {
 
-		// 로그인 확인, 세션접근
-		boolean isLogined = false;
-
-		if (httpSession.getAttribute("loginedMemberId") != null) {
-			isLogined = true;
-		}
-
-		if (isLogined == true) {
-			return ResultData.from("F-A", "이미 로그인 중입니다.");
+		// 로그인 확인
+		if (rq.isLogined() == false) {
+			return ResultData.from("F-Z", "로그인 후 이용해주세요.");
 		}
 
 		// 입력 데이터 유효성 검사
@@ -113,14 +110,8 @@ public class UserMemberController {
 	@ResponseBody
 	public ResultData<Member> doLogout(HttpSession httpSession) {
 
-		// 로그아웃 확인, 세션접근
-		boolean isLogined = false;
-
-		if (httpSession.getAttribute("loginedMemberId") != null) {
-			isLogined = true;
-		}
-
-		if (isLogined == false) {
+		// 로그아웃 확인
+		if (rq.isLogined() == false) {
 			return ResultData.from("S-A", "이미 로그아웃 중입니다.");
 		}
 

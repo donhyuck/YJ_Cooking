@@ -64,6 +64,7 @@
 	<div class="member-box w-2/5 mx-auto">
 		<form class="flex flex-col space-y-4 items-center" method="POST" action="../member/doJoin"
 			onsubmit="submitJoinForm(this); return false;">
+			<div class="text-3xl font-bold mb-2">회원가입</div>
 			<div>
 				<input name="loginId" type="text" class="member-inputType" placeholder=" 아이디" />
 				<div class="member-msgType text-green-400 mt-1 ml-4">사용가능합니다.</div>

@@ -69,6 +69,13 @@ public class UserMemberController {
 		return Ut.jsReplace(Ut.f("%s 님의 회원등록이 완료되었습니다.", member.getNickname()), "/");
 	}
 
+	// 회원 로그인 보기 메서드
+	@RequestMapping("/user/member/login")
+	public String showLogin() {
+
+		return "user/member/login";
+	}
+
 	// 회원 로그인 메서드
 	@RequestMapping("/user/member/doLogin")
 	@ResponseBody

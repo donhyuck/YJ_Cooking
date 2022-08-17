@@ -72,50 +72,50 @@ public class UserMemberController {
 	// 회원 로그인 메서드
 	@RequestMapping("/user/member/doLogin")
 	@ResponseBody
-	public ResultData<Member> doLogin(HttpSession httpSession, String loginId, String loginPw) {
+	public String doLogin(String loginId, String loginPw) {
 
 		// 로그인 확인
-		if (rq.isLogined() == false) {
-			return ResultData.from("F-Z", "로그인 후 이용해주세요.");
+		if (rq.isLogined() == true) {
+			return Ut.jsHistoryBack("이미 로그인 중입니다.");
 		}
 
 		// 입력 데이터 유효성 검사
 		if (Ut.empty(loginId)) {
-			return ResultData.from("F-1", "아이디(을)를 입력해주세요.");
+			return Ut.jsHistoryBack("아이디(을)를 입력해주세요.");
 		}
 
 		if (Ut.empty(loginPw)) {
-			return ResultData.from("F-2", "비밀번호(을)를 입력해주세요.");
+			return Ut.jsHistoryBack("비밀번호(을)를 입력해주세요.");
 		}
 
 		// 회원정보 가져오기
 		Member member = memberService.getMemberByLoginId(loginId);
 
 		if (member == null) {
-			return ResultData.from("F-B", "등록되지 않은 회원입니다.");
+			return Ut.jsHistoryBack("등록되지 않은 회원입니다.");
 		}
 
 		if (member.getLoginPw().equals(loginPw) == false) {
-			return ResultData.from("F-C", "잘못된 비밀번호입니다.");
+			return Ut.jsHistoryBack("잘못된 비밀번호입니다.");
 		}
 
-		return ResultData.from("S-1", Ut.f("%s님 환영합니다.", member.getNickname()));
+		return Ut.jsHistoryBack(Ut.f("%s님 환영합니다.", member.getNickname()));
 	}
 
 	// 회원 로그아웃 메서드
 	@RequestMapping("/user/member/doLogout")
 	@ResponseBody
-	public ResultData<Member> doLogout(HttpSession httpSession) {
+	public String doLogout(HttpSession httpSession) {
 
-		// 로그아웃 확인
+		// 로그아웃 확인}
 		if (rq.isLogined() == false) {
-			return ResultData.from("S-A", "이미 로그아웃 중입니다.");
+			return Ut.jsHistoryBack("이미 로그아웃 중입니다.");
 		}
 
 		// 로그아웃 하기
 		httpSession.removeAttribute("loginedMemberId");
 
-		return ResultData.from("S-B", "로그아웃되었습니다.");
+		return Ut.jsHistoryBack("로그아웃되었습니다.");
 	}
 
 	// My홈 보기 메서드

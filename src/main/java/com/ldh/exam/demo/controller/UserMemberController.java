@@ -99,14 +99,16 @@ public class UserMemberController {
 		Member member = memberService.getMemberByLoginId(loginId);
 
 		if (member == null) {
-			return Ut.jsHistoryBack("등록되지 않은 회원입니다.");
+			return Ut.jsReplace("등록되지 않은 회원입니다.", "/user/member/login");
 		}
 
 		if (member.getLoginPw().equals(loginPw) == false) {
-			return Ut.jsHistoryBack("잘못된 비밀번호입니다.");
+			return Ut.jsReplace("잘못된 비밀번호입니다.", "/user/member/login");
 		}
 
-		return Ut.jsHistoryBack(Ut.f("%s님 환영합니다.", member.getNickname()));
+		rq.login(member);
+
+		return Ut.jsReplace(Ut.f("%s님 환영합니다.", member.getNickname()), "/");
 	}
 
 	// 회원 로그아웃 메서드
@@ -114,15 +116,15 @@ public class UserMemberController {
 	@ResponseBody
 	public String doLogout(HttpSession httpSession) {
 
-		// 로그아웃 확인}
+		// 로그아웃 확인
 		if (rq.isLogined() == false) {
 			return Ut.jsHistoryBack("이미 로그아웃 중입니다.");
 		}
 
 		// 로그아웃 하기
-		httpSession.removeAttribute("loginedMemberId");
+		rq.logout();
 
-		return Ut.jsHistoryBack("로그아웃되었습니다.");
+		return Ut.jsReplace("로그아웃되었습니다.", "/");
 	}
 
 	// My홈 보기 메서드

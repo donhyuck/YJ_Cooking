@@ -66,6 +66,13 @@ public class UserRecipeController {
 		return "user/recipe/detail";
 	}
 
+	// 레시피 등록 페이지 메서드
+	@RequestMapping("/user/recipe/write")
+	public String showWrite() {
+
+		return "user/recipe/write";
+	}
+
 	// 레시피 등록하기 메서드
 	@RequestMapping("/user/recipe/doWrite")
 	@ResponseBody

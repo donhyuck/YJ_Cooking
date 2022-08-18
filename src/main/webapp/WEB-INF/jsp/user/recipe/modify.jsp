@@ -5,28 +5,37 @@
 
 <form class="" action="../recipe/doModify" method="POST">
 	<input type="hidden" name="id" value="${ recipe.id }" />
-	<table border="1">
-		<thead>
-			<tr>
-				<th>번호</th>
-				<th>등록날짜</th>
-				<th>수정날짜</th>
-				<th>작성자</th>
-				<th>제목</th>
-				<th>내용</th>
-			</tr>
-		</thead>
+	<table>
+		<colgroup>
+			<col width="200" />
+		</colgroup>
 		<tbody>
 			<tr>
+				<th>번호</th>
 				<td>${ recipe.id }</td>
+			</tr>
+			<tr>
+				<th>등록날짜</th>
 				<td>${ recipe.forPrintRegDate_Type2 }</td>
+			</tr>
+			<tr>
+				<th>수정날짜</th>
 				<td>${ recipe.forPrintUpdateDate_Type2 }</td>
+			</tr>
+			<tr>
+				<th>작성자</th>
 				<td>${ recipe.extra__writerName  }</td>
+			</tr>
+			<tr>
+				<th>요리제목</th>
 				<td>
 					<input type="text" name="title" value="${ recipe.title }" class="w-96 border" placeholder="수정할 제목을 입력하세요." />
 				</td>
+			</tr>
+			<tr>
+				<th>내용</th>
 				<td>
-					<textarea name="body" class="w-full textarea textarea-bordered" rows="10">${ recipe.body }</textarea>
+					<textarea name="body" class="w-full textarea textarea-bordered" rows="10" placeholder="요리설명을 수정하세요.">${ recipe.body }</textarea>
 				</td>
 			</tr>
 		</tbody>

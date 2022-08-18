@@ -41,13 +41,11 @@ public class RecipeService {
 	}
 
 	// 레시피 등록하기
-	public ResultData<Integer> writeRecipe(int memberId, String title, String body) {
+	public int writeRecipe(int memberId, String title, String body) {
 
 		recipeRepository.writeRecipe(memberId, title, body);
 
-		int id = recipeRepository.getLastInsertId();
-
-		return ResultData.from("S-1", Ut.f("%s번 레시피가 등록되었습니다.", id), "id", id);
+		return recipeRepository.getLastInsertId();
 	}
 
 	// 레시피 수정하기

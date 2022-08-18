@@ -66,7 +66,7 @@ public class RecipeService {
 			return ResultData.from("F-B", "해당 레시피에 대한 권한이 없습니다.");
 		}
 
-		return ResultData.from("S-1", "수정가능합니다.");
+		return ResultData.from("S-1", "수정가능합니다.", "recipe", recipe);
 	}
 
 	public ResultData actorCanDelete(int memberId, int id) {

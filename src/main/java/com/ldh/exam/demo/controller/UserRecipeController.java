@@ -22,35 +22,35 @@ public class UserRecipeController {
 		this.rq = rq;
 	}
 
-	// 레시피 추천 목록보기 메서드
+	// 레시피 추천목록 페이지 메서드
 	@RequestMapping("/user/list/suggest")
 	public String showSuggestList() {
 
 		return "user/list/suggest";
 	}
 
-	// 레시피 분류 목록보기 메서드
+	// 레시피 분류목록 페이지 메서드
 	@RequestMapping("/user/list/category")
 	public String showCategoryList() {
 
 		return "user/list/category";
 	}
 
-	// 레시피 랭킹 목록보기 메서드
+	// 레시피 랭킹목록 페이지 메서드
 	@RequestMapping("/user/list/rank")
 	public String showRankList() {
 
 		return "user/list/rank";
 	}
 
-	// 레시피 노트 목록보기 메서드
+	// 레시피 노트목록 페이지 메서드
 	@RequestMapping("/user/list/note")
 	public String showNoteList() {
 
 		return "user/list/note";
 	}
 
-	// 레시피 상세보기 메서드
+	// 레시피 상세페이지 페이지 메서드
 	@RequestMapping("/user/recipe/detail")
 	public String showDetail(Model model, int id) {
 
@@ -58,7 +58,7 @@ public class UserRecipeController {
 		Recipe recipe = recipeService.getForPrintRecipe(id);
 
 		if (recipe == null) {
-			return Ut.f("%s번 레시피를 찾을 수 없습니다.", id);
+			return rq.historyBackOnView(Ut.f("%s번 레시피를 찾을 수 없습니다.", id));
 		}
 
 		model.addAttribute("recipe", recipe);
@@ -85,6 +85,22 @@ public class UserRecipeController {
 		int id = writeRecipeRd.getData1();
 
 		return Ut.jsReplace(Ut.f("%s번 레시피가 등록되었습니다.", id), Ut.f("../recipe/detail?id=%d", id));
+	}
+
+	// 레시피 수정 페이지 메서드
+	@RequestMapping("/user/recipe/modify")
+	public String showModify(Model model, int id) {
+
+		// 레시피 찾기, 작성자 권한 체크
+		ResultData actorCanModifyRd = recipeService.actorCanModify(rq.getLoginedMemberId(), id);
+
+		if (actorCanModifyRd.isFail()) {
+			return rq.historyBackOnView(actorCanModifyRd.getMsg());
+		}
+
+		model.addAttribute("recipe", actorCanModifyRd.getData1());
+
+		return "user/recipe/modify";
 	}
 
 	// 레시피 수정하기 메서드

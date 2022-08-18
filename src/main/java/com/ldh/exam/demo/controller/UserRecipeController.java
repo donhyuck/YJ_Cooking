@@ -80,11 +80,11 @@ public class UserRecipeController {
 
 		// 입력 데이터 유효성 검사
 		if (Ut.empty(title)) {
-			return Ut.jsHistoryBack("제목(을)를 입력해주세요.");
+			return rq.jsHistoryBack("제목(을)를 입력해주세요.");
 		}
 
 		if (Ut.empty(body)) {
-			return Ut.jsHistoryBack("내용(을)를 입력해주세요.");
+			return rq.jsHistoryBack("내용(을)를 입력해주세요.");
 		}
 
 		// 레시피 등록하기
@@ -95,7 +95,7 @@ public class UserRecipeController {
 			replaceUri = Ut.f("../recipe/detail?id=%d", id);
 		}
 
-		return Ut.jsReplace(Ut.f("%s번 레시피가 등록되었습니다.", id), replaceUri);
+		return rq.jsReplace(Ut.f("%s번 레시피가 등록되었습니다.", id), replaceUri);
 	}
 
 	// 레시피 수정 페이지 메서드
@@ -121,24 +121,24 @@ public class UserRecipeController {
 
 		// 입력 데이터 유효성 검사
 		if (Ut.empty(title)) {
-			return Ut.jsHistoryBack("제목(을)를 입력해주세요.");
+			return rq.jsHistoryBack("제목(을)를 입력해주세요.");
 		}
 
 		if (Ut.empty(body)) {
-			return Ut.jsHistoryBack("내용(을)를 입력해주세요.");
+			return rq.jsHistoryBack("내용(을)를 입력해주세요.");
 		}
 
 		// 레시피 찾기, 작성자 권한 체크
 		ResultData actorCanModifyRd = recipeService.actorCanModify(rq.getLoginedMemberId(), id);
 
 		if (actorCanModifyRd.isFail()) {
-			return Ut.jsHistoryBack(actorCanModifyRd.getMsg());
+			return rq.jsHistoryBack(actorCanModifyRd.getMsg());
 		}
 
 		// 레시피 수정하기
 		recipeService.modifyRecipe(id, title, body);
 
-		return Ut.jsReplace(Ut.f("%s번 레시피가 수정되었습니다.", id), Ut.f("../recipe/detail?id=%d", id));
+		return rq.jsReplace(Ut.f("%s번 레시피가 수정되었습니다.", id), Ut.f("../recipe/detail?id=%d", id));
 	}
 
 	// 레시피 삭제하기 메서드
@@ -150,12 +150,12 @@ public class UserRecipeController {
 		ResultData actorCanDeleteRd = recipeService.actorCanDelete(rq.getLoginedMemberId(), id);
 
 		if (actorCanDeleteRd.isFail()) {
-			return Ut.jsHistoryBack(actorCanDeleteRd.getMsg());
+			return rq.jsHistoryBack(actorCanDeleteRd.getMsg());
 		}
 
 		// 삭제처리
 		recipeService.deleteRecipe(id);
 
-		return Ut.jsReplace(Ut.f("%s번 레시피가 삭제되었습니다.", id), "/");
+		return rq.jsReplace(Ut.f("%s번 레시피가 삭제되었습니다.", id), "/");
 	}
 }

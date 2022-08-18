@@ -55,7 +55,7 @@ public class UserRecipeController {
 	public String showDetail(Model model, int id) {
 
 		// 레시피 찾기
-		Recipe recipe = recipeService.getForPrintRecipe(id);
+		Recipe recipe = recipeService.getForPrintRecipe(rq.getLoginedMemberId(), id);
 
 		if (recipe == null) {
 			return rq.historyBackOnView(Ut.f("%s번 레시피를 찾을 수 없습니다.", id));

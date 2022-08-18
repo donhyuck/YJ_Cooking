@@ -29,10 +29,10 @@
 <!-- 레시피 조작 영역 시작 -->
 <div class="btns mt-3">
 	<button type="button" class="btn btn-outline" onclick="history.back();">뒤로가기</button>
-	<c:if test="${ true }">
+	<c:if test="${ recipe.extra__actorCanModify }">
 		<a class="btn btn-primary" href="../recipe/modify?id=${recipe.id}">수정</a>
 	</c:if>
-	<c:if test="${ true }">
+	<c:if test="${ recipe.extra__actorCanDelete }">
 		<a class="btn btn-secondary" href="../recipe/doDelete?id=${ recipe.id }"
 			onclick="if ( confirm('정말 삭제하시겠습니까?') == false) return false;">삭제</a>
 	</c:if>

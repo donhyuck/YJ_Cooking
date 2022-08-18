@@ -19,15 +19,25 @@ public class RecipeService {
 	}
 
 	// 특정 레시피 가져오기
-	public Recipe getForPrintRecipe(int id) {
+	public Recipe getForPrintRecipe(int memberId, int id) {
 
-		return recipeRepository.getForPrintRecipe(id);
+		Recipe recipe = recipeRepository.getForPrintRecipe(id);
+
+		updateForPrintData(memberId, recipe);
+
+		return recipe;
 	}
 
 	// 레시피 목록 가져오기
-	public List<Recipe> getForPrintRecipes() {
+	public List<Recipe> getForPrintRecipes(int memberId) {
 
-		return recipeRepository.getForPrintRecipes();
+		List<Recipe> recipes = recipeRepository.getForPrintRecipes();
+
+		for (Recipe recipe : recipes) {
+			updateForPrintData(memberId, recipe);
+		}
+
+		return recipes;
 	}
 
 	// 레시피 등록하기
@@ -52,10 +62,30 @@ public class RecipeService {
 		recipeRepository.deleteRecipe(id);
 	}
 
+	// 레시피 확인
+	private Recipe getRecipeById(int id) {
+
+		return recipeRepository.getRecipeById(id);
+	}
+
+	// 수정, 삭제 권한여부 업데이트
+	private void updateForPrintData(int memberId, Recipe recipe) {
+
+		if (recipe == null) {
+			return;
+		}
+
+		ResultData actorCanModifyRd = actorCanModify(memberId, recipe.getId());
+		recipe.setExtra__actorCanModify(actorCanModifyRd.isSuccess());
+
+		ResultData actorCanDeleteRd = actorCanDelete(memberId, recipe.getId());
+		recipe.setExtra__actorCanDelete(actorCanDeleteRd.isSuccess());
+	}
+
 	public ResultData actorCanModify(int memberId, int id) {
 
 		// 레시피 찾기
-		Recipe recipe = getForPrintRecipe(id);
+		Recipe recipe = getRecipeById(id);
 
 		if (recipe == null) {
 			return ResultData.from("F-A", Ut.f("%s번 레시피를 찾을 수 없습니다.", id));
@@ -72,7 +102,7 @@ public class RecipeService {
 	public ResultData actorCanDelete(int memberId, int id) {
 
 		// 레시피 찾기
-		Recipe recipe = getForPrintRecipe(id);
+		Recipe recipe = getRecipeById(id);
 
 		if (recipe == null) {
 			return ResultData.from("F-A", Ut.f("%s번 레시피를 찾을 수 없습니다.", id));

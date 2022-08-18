@@ -62,4 +62,10 @@
 		LAST_INSERT_ID()
 	</select>
 
+	<select id="getRecipeById" resultType="Recipe">
+		SELECT R.*
+		FROM recipe AS R
+		WHERE R.id = #{id}
+	</select>
+
 </mapper> 

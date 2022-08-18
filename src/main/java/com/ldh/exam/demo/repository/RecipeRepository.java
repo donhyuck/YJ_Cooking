@@ -21,4 +21,6 @@ public interface RecipeRepository {
 
 	public int getLastInsertId();
 
+	public Recipe getRecipeById(int id);
+
 }

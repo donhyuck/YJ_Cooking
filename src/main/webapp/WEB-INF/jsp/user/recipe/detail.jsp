@@ -17,8 +17,8 @@
 	<tbody>
 		<tr>
 			<td>${ recipe.id }</td>
-			<td>${ recipe.regDate }</td>
-			<td>${ recipe.updateDate }</td>
+			<td>${ recipe.forPrintRegDate_Type2 }</td>
+			<td>${ recipe.forPrintUpdateDate_Type2 }</td>
 			<td>${ recipe.extra__writerName  }</td>
 			<td>${ recipe.title }</td>
 			<td>${ recipe.body }</td>

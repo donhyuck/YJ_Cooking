@@ -19,8 +19,8 @@
 		<tbody>
 			<tr>
 				<td>${ recipe.id }</td>
-				<td>${ recipe.regDate }</td>
-				<td>${ recipe.updateDate }</td>
+				<td>${ recipe.forPrintRegDate_Type2 }</td>
+				<td>${ recipe.forPrintUpdateDate_Type2 }</td>
 				<td>${ recipe.extra__writerName  }</td>
 				<td>
 					<input type="text" name="title" value="${ recipe.title }" class="w-96 border" placeholder="수정할 제목을 입력하세요." />

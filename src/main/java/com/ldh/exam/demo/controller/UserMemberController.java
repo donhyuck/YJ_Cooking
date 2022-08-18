@@ -63,10 +63,7 @@ public class UserMemberController {
 			return Ut.jsHistoryBack(joinMemberRd.getMsg());
 		}
 
-		// 등록된 회원정보 가져오기
-		Member member = memberService.getMemberById((int) joinMemberRd.getData1());
-
-		return Ut.jsReplace(Ut.f("%s 님의 회원등록이 완료되었습니다.", member.getNickname()), "/");
+		return Ut.jsReplace(Ut.f("%s 님의 회원등록이 완료되었습니다.", nickname), "/");
 	}
 
 	// 회원 로그인 보기 메서드
@@ -106,6 +103,7 @@ public class UserMemberController {
 			return Ut.jsReplace("잘못된 비밀번호입니다.", "/user/member/login");
 		}
 
+		// 로그인 하기
 		rq.login(member);
 
 		return Ut.jsReplace(Ut.f("%s님 환영합니다.", member.getNickname()), "/");
@@ -114,7 +112,7 @@ public class UserMemberController {
 	// 회원 로그아웃 메서드
 	@RequestMapping("/user/member/doLogout")
 	@ResponseBody
-	public String doLogout(HttpSession httpSession) {
+	public String doLogout() {
 
 		// 로그아웃 확인
 		if (rq.isLogined() == false) {

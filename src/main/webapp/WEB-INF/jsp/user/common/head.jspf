@@ -56,23 +56,35 @@
 
 			<!-- 사용자박스 영역 시작 -->
 			<div class="user-box flex text-5xl space-x-6">
-				<a href="/user/member/myPage" type="button" class="text-green-500">
-					<i class="fa-solid fa-user-circle"></i>
-				</a>
-				<a href="/user/member/join" type="button" class="text-green-500">
-					<i class="fa-solid fa-id-card-clip"></i>
-				</a>
-				<a href="/" type="button" class="text-red-500">
+
+				<!-- 마이 페이지 -->
+				<c:if test="${ rq.isLogined() == true }">
+					<a href="/user/member/myPage" type="button" class="text-green-500">
+						<i class="fa-solid fa-user-circle"></i>
+					</a>
+				</c:if>
+
+				<!-- 회원가입 -->
+				<c:if test="${ rq.isLogined() == false }">
+					<a href="/user/member/join" type="button" class="text-green-500">
+						<i class="fa-solid fa-id-card-clip"></i>
+					</a>
+				</c:if>
+
+				<!-- 레시피 등록 -->
+				<a href="/user/recipe/write" type="button" class="text-red-500">
 					<i class="fa-solid fa-square-pen"></i>
 				</a>
+
+				<!-- 로그인 -->
 				<c:if test="${ rq.isLogined() == false }">
-					<!-- 로그인 -->
 					<a href="/user/member/login" type="button" class="text-yellow-500">
 						<i class="fa-solid fa-arrow-right-to-bracket"></i>
 					</a>
 				</c:if>
+
+				<!-- 로그아웃 -->
 				<c:if test="${ rq.isLogined() == true }">
-					<!-- 로그아웃 -->
 					<a href="/user/member/doLogout" type="button" class="text-yellow-500">
 						<i class="fa-solid fa-arrow-right-from-bracket"></i>
 					</a>

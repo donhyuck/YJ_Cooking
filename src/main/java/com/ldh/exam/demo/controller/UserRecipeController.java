@@ -82,9 +82,7 @@ public class UserRecipeController {
 
 		// 레시피 등록하기
 		ResultData<Integer> writeRecipeRd = recipeService.writeRecipe(rq.getLoginedMemberId(), title, body);
-
-		int id = (int) writeRecipeRd.getData1();
-		Recipe recipe = recipeService.getForPrintRecipe(id);
+		int id = writeRecipeRd.getData1();
 
 		return Ut.jsReplace(Ut.f("%s번 레시피가 등록되었습니다.", id), Ut.f("../recipe/detail?id=%d", id));
 	}

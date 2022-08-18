@@ -21,8 +21,10 @@
 								<div class="font-bold text-center mt-2">${ i }</div>
 							</div>
 							<div class="p-1">
-								<img class="w-full rounded-md" src="https://tse4.mm.bing.net/th?id=OIP.kwt4oKZDd-goVuBezaVQRQHaE7&pid=Api&P=0"
-									alt="" />
+								<a href="/user/recipe/detail?id=1">
+									<img class="w-full rounded-md" src="https://tse4.mm.bing.net/th?id=OIP.kwt4oKZDd-goVuBezaVQRQHaE7&pid=Api&P=0"
+										alt="" />
+								</a>
 								<div class="ml-3 mt-2">
 									<div class="text-xl">이건 감자볶음</div>
 									<div class="text-lg">홍길동</div>
@@ -57,8 +59,10 @@
 								<div class="font-bold text-center mt-2">${ i }</div>
 							</div>
 							<div class="p-1">
-								<img class="w-full rounded-md" src="https://tse4.mm.bing.net/th?id=OIP.kwt4oKZDd-goVuBezaVQRQHaE7&pid=Api&P=0"
-									alt="" />
+								<a href="/user/recipe/detail?id=1">
+									<img class="w-full rounded-md" src="https://tse4.mm.bing.net/th?id=OIP.kwt4oKZDd-goVuBezaVQRQHaE7&pid=Api&P=0"
+										alt="" />
+								</a>
 								<div class="ml-3 mt-2">
 									<div class="text-xl">이건 감자볶음</div>
 									<div class="text-lg">홍길동</div>

@@ -13,8 +13,10 @@
 			<div class="flex">
 				<c:forEach begin="1" end="4">
 					<div class="mx-3">
-						<img class="w-full rounded-md" src="https://tse4.mm.bing.net/th?id=OIP.kwt4oKZDd-goVuBezaVQRQHaE7&pid=Api&P=0"
-							alt="" />
+						<a href="/user/recipe/detail?id=1">
+							<img class="w-full rounded-md" src="https://tse4.mm.bing.net/th?id=OIP.kwt4oKZDd-goVuBezaVQRQHaE7&pid=Api&P=0"
+								alt="" />
+						</a>
 						<div class="ml-3 mt-2">
 							<div class="text-lg">이건 감자볶음</div>
 							<div>홍길동</div>
@@ -34,8 +36,10 @@
 			<div class="flex">
 				<c:forEach begin="1" end="4">
 					<div class="mx-3">
-						<img class="w-full rounded-md" src="https://tse4.mm.bing.net/th?id=OIP.kwt4oKZDd-goVuBezaVQRQHaE7&pid=Api&P=0"
-							alt="" />
+						<a href="/user/recipe/detail?id=1">
+							<img class="w-full rounded-md" src="https://tse4.mm.bing.net/th?id=OIP.kwt4oKZDd-goVuBezaVQRQHaE7&pid=Api&P=0"
+								alt="" />
+						</a>
 						<div class="ml-3 mt-2">
 							<div class="text-lg">이건 감자볶음</div>
 							<div>홍길동</div>

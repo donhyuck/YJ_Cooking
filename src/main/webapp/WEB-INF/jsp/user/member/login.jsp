@@ -37,11 +37,11 @@
 			onsubmit="submitLoginForm(this); return false;">
 			<div class="text-3xl font-bold mb-2">로그인</div>
 			<div>
-				<input name="loginId" type="text" class="member-inputType" placeholder=" 아이디" />
+				<input name="loginId" type="text" class="input input-bordered w-96 max-w-xs member-inputType" placeholder=" 아이디" />
 				<div class="member-msgType text-green-400 mt-1 ml-4">사용가능합니다.</div>
 			</div>
 			<div>
-				<input name="loginPw" type="password" class="member-inputType" placeholder=" 비밀번호" />
+				<input name="loginPw" type="password" class="input input-bordered w-96 max-w-xs member-inputType" placeholder=" 비밀번호" />
 				<div class="member-msgType text-green-400 mt-1 ml-4">사용가능합니다.</div>
 			</div>
 

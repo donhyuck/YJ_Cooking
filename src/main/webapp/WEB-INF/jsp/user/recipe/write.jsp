@@ -16,13 +16,13 @@
 			<tr>
 				<th>요리제목</th>
 				<td>
-					<input type="text" name="title" class="w-96 border" placeholder="제목을 입력하세요." />
+					<input type="text" name="title" class="input input-bordered w-96 border p-2" placeholder="제목을 입력하세요." />
 				</td>
 			</tr>
 			<tr>
 				<th>내용</th>
 				<td>
-					<textarea name="body" class="w-full textarea textarea-bordered" rows="10" placeholder="요리 설명을 입력하세요."></textarea>
+					<textarea name="body" class="textarea textarea-bordered w-full" rows="10" placeholder="요리 설명을 입력하세요."></textarea>
 				</td>
 			</tr>
 		</tbody>

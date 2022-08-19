@@ -43,11 +43,7 @@ body {
 /* 회원가입 입력 스타일 시작 */
 /* pl-4 w-96 h-14 border-2 border-gray-300 text-xl */
 .member-box .member-inputType {
-	padding-left: 1rem; /* 16px */
-	width: 24rem; /* 384px */
 	height: 3.5rem; /* 64px */
-	border-width: 2px;
-	border-color: rgb(209, 213, 219);
 	font-size: 1.1rem; /* 17px */
 	line-height: 1.75rem; /* 28px */
 }

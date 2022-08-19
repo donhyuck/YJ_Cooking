@@ -66,27 +66,27 @@
 			onsubmit="submitJoinForm(this); return false;">
 			<div class="text-3xl font-bold mb-2">회원가입</div>
 			<div>
-				<input name="loginId" type="text" class="member-inputType" placeholder=" 아이디" />
+				<input name="loginId" type="text" class="input input-bordered w-96 member-inputType" placeholder="아이디" />
 				<div class="member-msgType text-green-400 mt-1 ml-4">사용가능합니다.</div>
 			</div>
 			<div>
-				<input name="loginPw" type="password" class="member-inputType" placeholder=" 비밀번호" />
+				<input name="loginPw" type="password" class="input input-bordered w-96 member-inputType" placeholder="비밀번호" />
 				<div class="member-msgType text-green-400 mt-1 ml-4">사용가능합니다.</div>
 			</div>
 			<div>
-				<input name="loginPwConfirm" type="password" class="member-inputType" placeholder=" 비밀번호 확인" />
+				<input name="loginPwConfirm" type="password" class="input input-bordered w-96 member-inputType" placeholder="비밀번호 확인" />
 				<div class="member-msgType text-green-400 mt-1 ml-4">사용가능합니다.</div>
 			</div>
 			<div>
-				<input name="nickname" type="text" class="member-inputType" placeholder=" 닉네임" />
+				<input name="nickname" type="text" class="input input-bordered w-96 member-inputType" placeholder="닉네임" />
 				<div class="member-msgType text-green-400 mt-1 ml-4">사용가능합니다.</div>
 			</div>
 			<div>
-				<input name="cellphoneNo" type="text" class="member-inputType" placeholder=" 연락처 예) 하이픈(-) 제외" />
+				<input name="cellphoneNo" type="text" class="input input-bordered w-96 member-inputType" placeholder="연락처 예) 하이픈(-) 제외" />
 				<div class="member-msgType text-green-400 mt-1 ml-4">사용가능합니다.</div>
 			</div>
 			<div>
-				<input name="email" type="email" class="member-inputType" placeholder=" 이메일" />
+				<input name="email" type="email" class="input input-bordered w-96 member-inputType" placeholder="이메일" />
 				<div class="member-msgType text-green-400 mt-1 ml-4">사용가능합니다.</div>
 			</div>
 

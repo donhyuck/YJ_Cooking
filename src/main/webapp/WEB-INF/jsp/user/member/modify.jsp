@@ -3,6 +3,7 @@
 <c:set var="pageTitle" value="회원정보 수정" />
 <%@include file="../common/head.jspf"%>
 
+<!-- 입력데이터 검사 스크립트 시작 -->
 <script>
 	let MemberModify_submitFormDone = false;
 
@@ -12,30 +13,22 @@
 			return;
 		}
 
-		form.loginId.value = form.loginId.value.trim();
-		if (form.loginId.value.length == 0) {
-			alert('로그인아이디를 입력해주세요.');
-			form.loginId.focus();
-			return;
+		// 비밀번호 변경을 위해 입력한 경우
+		form.loginPw.value = form.loginPw.value.trim();
+		if (form.loginPw.value.length > 0) {
+			form.loginPwConfirm.value = form.loginPwConfirm.value.trim();
+			if (form.loginPwConfirm.value.length == 0) {
+				alert('비밀번호확인을 입력해주세요.');
+				form.loginPwConfirm.focus();
+				return;
+			}
+			if (form.loginPw.value != form.loginPwConfirm.value) {
+				alert('비밀번호확인이 일치하지 않습니다.');
+				form.loginPwConfirm.focus();
+				return;
+			}
 		}
 
-		form.loginPw.value = form.loginPw.value.trim();
-		if (form.loginPw.value.length == 0) {
-			alert('비밀번호를 입력해주세요.');
-			form.loginPw.focus();
-			return;
-		}
-		form.loginPwConfirm.value = form.loginPwConfirm.value.trim();
-		if (form.loginPwConfirm.value.length == 0) {
-			alert('비밀번호확인을 입력해주세요.');
-			form.loginPwConfirm.focus();
-			return;
-		}
-		if (form.loginPw.value != form.loginPwConfirm.value) {
-			alert('비밀번호확인이 일치하지 않습니다.');
-			form.loginPwConfirm.focus();
-			return;
-		}
 		form.nickname.value = form.nickname.value.trim();
 		if (form.nickname.value.length == 0) {
 			alert('닉네임을 입력해주세요.');
@@ -59,6 +52,7 @@
 		form.submit();
 	}
 </script>
+<!-- 입력데이터 검사 스크립트 끝 -->
 
 <div class="mt-6">
 	<div class="member-box w-2/5 mx-auto">
@@ -75,12 +69,12 @@
 				</div>
 			</div>
 			<div>
-				<div class="text-gray-400 p-2">현재 비밀번호</div>
+				<div class="text-gray-400 p-2">신규 비밀번호</div>
 				<input name="loginPw" type="password" class="input input-bordered w-96 member-inputType" placeholder="비밀번호" />
 				<div class="member-msgType text-green-400 mt-1 ml-4">사용가능합니다.</div>
 			</div>
 			<div>
-				<div class="text-gray-400 p-2">신규 비밀번호</div>
+				<div class="text-gray-400 p-2">비밀번호 확인</div>
 				<input name="loginPwConfirm" type="password" class="input input-bordered w-96 member-inputType"
 					placeholder="비밀번호 확인" />
 				<div class="member-msgType text-green-400 mt-1 ml-4">사용가능합니다.</div>

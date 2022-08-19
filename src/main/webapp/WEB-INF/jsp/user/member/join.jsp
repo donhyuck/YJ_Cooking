@@ -3,6 +3,7 @@
 <c:set var="pageTitle" value="회원가입" />
 <%@include file="../common/head.jspf"%>
 
+<!-- 입력데이터 검사 스크립트 시작 -->
 <script>
 	let MemberJoin_submitFormDone = false;
 
@@ -59,6 +60,7 @@
 		form.submit();
 	}
 </script>
+<!-- 입력데이터 검사 스크립트 끝 -->
 
 <div class="mt-6">
 	<div class="member-box w-2/5 mx-auto">

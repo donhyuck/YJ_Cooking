@@ -3,11 +3,12 @@
 <c:set var="pageTitle" value="회원가입" />
 <%@include file="../common/head.jspf"%>
 
+<!-- 입력데이터 검사 스크립트 시작 -->
 <script>
-	let submitLoginFormDone = false;
+	let MemberLogin_submitFormDone = false;
 
-	function submitLoginForm(form) {
-		if (submitLoginFormDone) {
+	function MemberLogin_submitForm(form) {
+		if (MemberLogin_submitFormDone) {
 			alert('처리중입니다.');
 			return;
 		}
@@ -26,22 +27,24 @@
 			return;
 		}
 
-		submitLoginFormDone = true;
+		MemberLogin_submitFormDone = true;
 		form.submit();
 	}
 </script>
+<!-- 입력데이터 검사 스크립트 끝 -->
 
 <div class="mt-6">
 	<div class="member-box w-2/5 mx-auto">
 		<form class="flex flex-col space-y-4 items-center" method="POST" action="../member/doLogin"
-			onsubmit="submitLoginForm(this); return false;">
+			onsubmit="MemberLogin_submitForm(this); return false;">
 			<div class="text-3xl font-bold mb-2">로그인</div>
 			<div>
 				<input name="loginId" type="text" class="input input-bordered w-96 max-w-xs member-inputType" placeholder=" 아이디" />
 				<div class="member-msgType text-green-400 mt-1 ml-4">사용가능합니다.</div>
 			</div>
 			<div>
-				<input name="loginPw" type="password" class="input input-bordered w-96 max-w-xs member-inputType" placeholder=" 비밀번호" />
+				<input name="loginPw" type="password" class="input input-bordered w-96 max-w-xs member-inputType"
+					placeholder=" 비밀번호" />
 				<div class="member-msgType text-green-400 mt-1 ml-4">사용가능합니다.</div>
 			</div>
 

@@ -169,7 +169,7 @@ public class UserMemberController {
 
 		// 입력 데이터 유효성 검사
 		if (Ut.empty(loginPw)) {
-			return rq.jsHistoryBack("비밀번호(을)를 입력해주세요.");
+			loginPw = null;
 		}
 
 		if (Ut.empty(nickname)) {

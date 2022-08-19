@@ -10,6 +10,8 @@ public interface MemberRepository {
 
 	public void doJoin(String loginId, String loginPw, String nickname, String cellphoneNo, String email);
 
+	public void doModify(int id, String loginPw, String nickname, String cellphoneNo, String email);
+
 	@Select("SELECT LAST_INSERT_ID()")
 	public int getLastInsertId();
 

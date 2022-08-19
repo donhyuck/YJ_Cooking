@@ -44,16 +44,25 @@ public class MemberService {
 		return ResultData.from("S-1", "회원가입이 완료되었습니다.", "id", id);
 	}
 
+	// 회원정보 수정하기
+	public void doModify(int id, String loginPw, String nickname, String cellphoneNo, String email) {
+
+		memberRepository.doModify(id, loginPw, nickname, cellphoneNo, email);
+	}
+
+	// 등록번호로 회원 가져오기
 	public Member getMemberById(int id) {
 
 		return memberRepository.getMemberById(id);
 	}
 
+	// 아이디로 회원 가져오기
 	public Member getMemberByLoginId(String loginId) {
 
 		return memberRepository.getMemberByLoginId(loginId);
 	}
 
+	// 닉네임,이메일로 회원 가져오기
 	public Member getMemberByNicknameAndEmail(String nickname, String email) {
 
 		return memberRepository.getMemberByNicknameAndEmail(nickname, email);

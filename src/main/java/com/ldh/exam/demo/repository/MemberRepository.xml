@@ -16,6 +16,18 @@
 		email = #{email}
 	</insert>
 
+	<update id="doModify">
+		UPDATE `member`
+		SET updateDate = NOW(),
+		loginPw =
+		#{loginPw},
+		nickname = #{nickname},
+		cellphoneNo = #{cellphoneNo},
+		email =
+		#{email}
+		WHERE id = #{id}
+	</update>
+
 	<select id="getMemberById" resultType="Member">
 		SELECT *
 		FROM `member` AS M

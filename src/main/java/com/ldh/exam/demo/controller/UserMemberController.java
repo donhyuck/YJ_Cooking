@@ -161,4 +161,35 @@ public class UserMemberController {
 
 		return "user/member/modify";
 	}
+
+	// 회원 등록하기 메서드
+	@RequestMapping("/user/member/doModify")
+	@ResponseBody
+	public String doModify(String loginPw, String nickname, String cellphoneNo, String email) {
+
+		// 입력 데이터 유효성 검사
+		if (Ut.empty(loginPw)) {
+			return rq.jsHistoryBack("비밀번호(을)를 입력해주세요.");
+		}
+
+		if (Ut.empty(nickname)) {
+			return rq.jsHistoryBack("닉네임(을)를 입력해주세요.");
+		}
+
+		if (Ut.empty(cellphoneNo)) {
+			return rq.jsHistoryBack("연락처(을)를 입력해주세요.");
+		}
+
+		if (Ut.empty(email)) {
+			return rq.jsHistoryBack("이메일(을)를 입력해주세요.");
+		}
+
+		// 회원 수정하기
+		memberService.doModify(rq.getLoginedMemberId(), loginPw, nickname, cellphoneNo, email);
+
+		// 로그아웃
+		rq.logout();
+
+		return rq.jsReplace(Ut.f("%s 님의 회원정보가 수정되었습니다. 다시 로그인해주세요.", nickname), "/user/member/login");
+	}
 }

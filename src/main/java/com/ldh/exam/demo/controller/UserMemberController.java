@@ -1,7 +1,5 @@
 package com.ldh.exam.demo.controller;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -137,5 +135,23 @@ public class UserMemberController {
 	public String showCheckPW() {
 
 		return "user/member/checkPassword";
+	}
+
+	// 비밀번호 확인 메서드
+	@RequestMapping("/user/member/doCheckPassword")
+	@ResponseBody
+	public String doCheckPassword(String loginPw, String replaceUri) {
+
+		// 입력데이터 유효성 검사
+		if (Ut.empty(loginPw)) {
+			return rq.jsHistoryBack("비밀번호(을)를 입력해주세요.");
+		}
+
+		// 비밀번호 확인하기
+		if (rq.getLoginedMember().getLoginPw().equals(loginPw) == false) {
+			return rq.jsHistoryBack("잘못된 비밀번호 입니다.");
+		}
+
+		return rq.jsReplace("", replaceUri);
 	}
 }

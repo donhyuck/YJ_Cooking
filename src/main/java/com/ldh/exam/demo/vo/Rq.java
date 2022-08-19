@@ -42,10 +42,14 @@ public class Rq {
 
 		boolean isLogined = false;
 		int loginedMemberId = 0;
+		Member loginedMember = null;
 
 		if (session.getAttribute("loginedMemberId") != null) {
 			isLogined = true;
 			loginedMemberId = (int) session.getAttribute("loginedMemberId");
+		}
+
+		if (loginedMemberId != 0) {
 			loginedMember = memberService.getMemberById(loginedMemberId);
 		}
 
@@ -132,7 +136,7 @@ public class Rq {
 
 	public String getLoginUri() {
 
-		return "../member/login?afterLoginUri=" + getAfterLoginUri();
+		return "/user/member/login?afterLoginUri=" + getAfterLoginUri();
 	}
 
 	public String getAfterLoginUri() {

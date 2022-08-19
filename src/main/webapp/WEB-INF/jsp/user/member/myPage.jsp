@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page import="com.ldh.exam.demo.util.Ut"%>
 <c:set var="pageTitle" value="My홈" />
 <%@include file="../common/head.jspf"%>
 
@@ -39,7 +40,8 @@
 					</div>
 					<div class="flex space-x-4 absolute bottom-8">
 						<a href="/user/member/changePhoto" class="btn btn-outline">프로필 사진 변경</a>
-						<a href="/user/member/modify" class="btn btn-outline btn-primary">회원정보 수정</a>
+						<a href="/user/member/checkPassword?replaceUri=${ Ut.getUriEncoded('../member/modify') }"
+							class="btn btn-outline btn-primary">회원정보 수정</a>
 						<a href="/user/member/doLeave" class="btn btn-outline btn-secondary"
 							onclick="if (confirm('회원 탈퇴를 하시겠습니까?') == false) return false;">회원탈퇴</a>
 					</div>

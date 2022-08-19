@@ -66,7 +66,7 @@ public class UserMemberController {
 		return rq.jsReplace(Ut.f("%s 님의 회원등록이 완료되었습니다.", nickname), "/");
 	}
 
-	// 회원 로그인 보기 메서드
+	// 회원 로그인 페이지 메서드
 	@RequestMapping("/user/member/login")
 	public String showLogin() {
 
@@ -125,10 +125,17 @@ public class UserMemberController {
 		return rq.jsReplace("로그아웃되었습니다.", "/");
 	}
 
-	// My홈 보기 메서드
+	// My홈 페이지 메서드
 	@RequestMapping("/user/member/myPage")
 	public String showMyPage() {
 
 		return "user/member/myPage";
+	}
+
+	// 비밀번호 확인 페이지 메서드
+	@RequestMapping("/user/member/checkPassword")
+	public String showCheckPW() {
+
+		return "user/member/checkPassword";
 	}
 }

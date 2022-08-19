@@ -154,4 +154,11 @@ public class UserMemberController {
 
 		return rq.jsReplace("", replaceUri);
 	}
+
+	// 회원정보 수정 페이지 메서드
+	@RequestMapping("/user/member/modify")
+	public String showModify() {
+
+		return "user/member/modify";
+	}
 }

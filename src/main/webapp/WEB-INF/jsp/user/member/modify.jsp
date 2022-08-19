@@ -1,13 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<c:set var="pageTitle" value="회원가입" />
+<c:set var="pageTitle" value="회원정보 수정" />
 <%@include file="../common/head.jspf"%>
 
 <script>
-	let MemberJoin_submitFormDone = false;
+	let MemberModify_submitFormDone = false;
 
-	function MemberJoin_submitForm(form) {
-		if (MemberJoin_submitFormDone) {
+	function MemberModify_submitForm(form) {
+		if (MemberModify_submitFormDone) {
 			alert('처리중입니다.');
 			return;
 		}
@@ -55,46 +55,58 @@
 			return;
 		}
 
-		MemberJoin_submitFormDone = true;
+		MemberModify_submitFormDone = true;
 		form.submit();
 	}
 </script>
 
 <div class="mt-6">
 	<div class="member-box w-2/5 mx-auto">
-		<form class="flex flex-col space-y-4 items-center" method="POST" action="../member/doJoin"
-			onsubmit="MemberJoin_submitForm(this); return false;">
-			<div class="text-3xl font-bold mb-2">회원가입</div>
+		<form class="flex flex-col space-y-4 items-center" method="POST" action="../member/doModify"
+			onsubmit="MemberModify_submitForm(this); return false;">
+			<!-- 로그인한 회원의 정보 -->
+			<c:set var="member" value="${ rq.loginedMember }" />
+
+			<div class="text-3xl font-bold mb-2">회원정보 수정</div>
 			<div>
-				<input name="loginId" type="text" class="input input-bordered w-96 member-inputType" placeholder="아이디" />
-				<div class="member-msgType text-green-400 mt-1 ml-4">사용가능합니다.</div>
+				<div class="text-gray-400 p-2">아이디</div>
+				<div class="border border-gray-700 rounded-lg w-96 member-inputType flex items-center">
+					<div class="ml-3">${ member.loginId }</div>
+				</div>
 			</div>
 			<div>
+				<div class="text-gray-400 p-2">현재 비밀번호</div>
 				<input name="loginPw" type="password" class="input input-bordered w-96 member-inputType" placeholder="비밀번호" />
 				<div class="member-msgType text-green-400 mt-1 ml-4">사용가능합니다.</div>
 			</div>
 			<div>
+				<div class="text-gray-400 p-2">신규 비밀번호</div>
 				<input name="loginPwConfirm" type="password" class="input input-bordered w-96 member-inputType"
 					placeholder="비밀번호 확인" />
 				<div class="member-msgType text-green-400 mt-1 ml-4">사용가능합니다.</div>
 			</div>
 			<div>
-				<input name="nickname" type="text" class="input input-bordered w-96 member-inputType" placeholder="닉네임" />
+				<div class="text-gray-400 p-2">닉네임</div>
+				<input name="nickname" type="text" value="${ member.nickname }" class="input input-bordered w-96 member-inputType"
+					placeholder="닉네임" />
 				<div class="member-msgType text-green-400 mt-1 ml-4">사용가능합니다.</div>
 			</div>
 			<div>
-				<input name="cellphoneNo" type="text" class="input input-bordered w-96 member-inputType"
-					placeholder="연락처 예) 하이픈(-) 제외" />
+				<div class="text-gray-400 p-2">연락처</div>
+				<input name="cellphoneNo" type="text" value="${ member.cellphoneNo }"
+					class="input input-bordered w-96 member-inputType" placeholder="연락처 예) 하이픈(-) 제외" />
 				<div class="member-msgType text-green-400 mt-1 ml-4">사용가능합니다.</div>
 			</div>
 			<div>
-				<input name="email" type="email" class="input input-bordered w-96 member-inputType" placeholder="이메일" />
+				<div class="text-gray-400 p-2">이메일</div>
+				<input name="email" type="email" value="${ member.email }" class="input input-bordered w-96 member-inputType"
+					placeholder="이메일" />
 				<div class="member-msgType text-green-400 mt-1 ml-4">사용가능합니다.</div>
 			</div>
 
 			<div class="btns mt-2">
 				<button type="button" class="btn btn-outilne" onclick="history.back();">뒤로가기</button>
-				<button type="submit" class="btn btn-primary btn-outline">회원가입</button>
+				<button type="submit" class="btn btn-primary btn-outline">정보수정</button>
 			</div>
 		</form>
 

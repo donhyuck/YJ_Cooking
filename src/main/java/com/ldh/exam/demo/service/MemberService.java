@@ -11,9 +11,11 @@ import com.ldh.exam.demo.vo.ResultData;
 public class MemberService {
 
 	private MemberRepository memberRepository;
+	private AttrService attrService;
 
-	public MemberService(MemberRepository memberRepository) {
+	public MemberService(MemberRepository memberRepository, AttrService attrService) {
 		this.memberRepository = memberRepository;
+		this.attrService = attrService;
 	}
 
 	// 회원 등록하기
@@ -66,5 +68,16 @@ public class MemberService {
 	public Member getMemberByNicknameAndEmail(String nickname, String email) {
 
 		return memberRepository.getMemberByNicknameAndEmail(nickname, email);
+	}
+
+	// 인증코드 가져오기
+	public String genAuthKey(int memberId) {
+
+		String authKey = Ut.getTempPassword(10);
+
+		// 생성된 배열을 인증코드로 설정
+		attrService.setValue("member", memberId, "extra", "memberModifyAuthKey", authKey, Ut.getDateStrLater(60 * 5));
+
+		return authKey;
 	}
 }

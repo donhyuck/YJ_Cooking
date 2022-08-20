@@ -152,6 +152,13 @@ public class UserMemberController {
 			return rq.jsHistoryBack("잘못된 비밀번호 입니다.");
 		}
 
+		// 비밀번호 확인에 대한 인증코드 발급
+		if (replaceUri.equals("../member/modify")) {
+			String authKeyForModify = memberService.genAuthKey(rq.getLoginedMemberId());
+
+			replaceUri += "?memberModifyAuthKey=" + authKeyForModify;
+		}
+
 		return rq.jsReplace("", replaceUri);
 	}
 
@@ -162,7 +169,7 @@ public class UserMemberController {
 		return "user/member/modify";
 	}
 
-	// 회원 등록하기 메서드
+	// 회원 수정하기 메서드
 	@RequestMapping("/user/member/doModify")
 	@ResponseBody
 	public String doModify(String loginPw, String nickname, String cellphoneNo, String email) {

@@ -14,7 +14,7 @@
 				<a href="#" class="text-3xl mb-20">
 					<i class="fa-solid fa-angle-left"></i>
 				</a>
-				<div class="flex grid grid-cols-3 gap-3">
+				<div class="flex grid grid-cols-3 gap-6">
 					<!-- 최다 조회수, 하트를 받은 레시피 -->
 					<c:forEach var="recipe" items="${ recipes }">
 						<div class="relative">

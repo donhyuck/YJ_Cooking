@@ -9,7 +9,7 @@
 			<div class="mb-2">
 				<div class="text-xl mb-1">내가 등록한 레시피</div>
 			</div>
-			<div class="flex grid grid-cols-3 gap-3">
+			<div class="flex grid grid-cols-3 gap-10">
 				<!-- 작성자가 본인인 레시피 -->
 				<c:forEach var="recipe" items="${ recipes }">
 					<div>
@@ -33,7 +33,7 @@
 			<div class="mb-2">
 				<div class="text-xl mb-1">스크랩한 레시피</div>
 			</div>
-			<div class="flex grid grid-cols-3 gap-3">
+			<div class="flex grid grid-cols-3 gap-10">
 				<!-- 내가 스크랩한 레시피 -->
 				<c:forEach var="recipe" items="${ recipes }">
 					<div>

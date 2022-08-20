@@ -10,7 +10,7 @@
 				<div class="text-xl mb-1">오늘 뭐 먹지?</div>
 				<div class="text-lg">끼니 고민 덜어드려요</div>
 			</div>
-			<div class="flex grid grid-cols-4 gap-3">
+			<div class="flex grid grid-cols-3 gap-10">
 				<!-- 일일추천레시피 -->
 				<c:forEach var="recipe" items="${ recipes }">
 					<div>
@@ -34,7 +34,7 @@
 			<div class="mb-2">
 				<div class="text-xl mb-1">최근 등록된 레시피</div>
 			</div>
-			<div class="flex grid grid-cols-4 gap-3">
+			<div class="flex grid grid-cols-3 gap-10">
 				<!-- 최근 레시피 -->
 				<c:forEach var="recipe" items="${ recipes }">
 					<div>

@@ -7,8 +7,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.ldh.exam.demo.service.MemberService;
 import com.ldh.exam.demo.service.RecipeService;
 import com.ldh.exam.demo.util.Ut;
+import com.ldh.exam.demo.vo.Member;
 import com.ldh.exam.demo.vo.Recipe;
 import com.ldh.exam.demo.vo.ResultData;
 import com.ldh.exam.demo.vo.Rq;
@@ -17,10 +19,12 @@ import com.ldh.exam.demo.vo.Rq;
 public class UserRecipeController {
 
 	private RecipeService recipeService;
+	private MemberService memberService;
 	private Rq rq;
 
-	public UserRecipeController(RecipeService recipeService, Rq rq) {
+	public UserRecipeController(RecipeService recipeService, MemberService memberService, Rq rq) {
 		this.recipeService = recipeService;
+		this.memberService = memberService;
 		this.rq = rq;
 	}
 
@@ -72,7 +76,12 @@ public class UserRecipeController {
 			return rq.historyBackOnView(Ut.f("%s번 레시피를 찾을 수 없습니다.", id));
 		}
 
+		// 등록한 회원 닉넴임 가져오기
+		Member actor = memberService.getMemberById(recipe.getMemberId());
+		String actorNickname = actor.getNickname();
+
 		model.addAttribute("recipe", recipe);
+		model.addAttribute("actorNickname", actorNickname);
 
 		return "user/recipe/detail";
 	}

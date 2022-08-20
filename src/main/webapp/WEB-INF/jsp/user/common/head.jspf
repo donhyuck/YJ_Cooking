@@ -36,7 +36,7 @@
 			<div class="logo-box flex items-center justify-center rounded-2xl w-28 h-16">
 				<a href="/" class="text-center">
 					<div class="font-bold text-green-500">요리조리</div>
-					<div class="text-sm text-gray-400">다함께! 즐겁게!</div>
+					<div class="text-sm text-gray-400">즐겁게! 맛있게!</div>
 				</a>
 			</div>
 			<!-- 로고박스 영역 끝 -->

@@ -1,5 +1,7 @@
 package com.ldh.exam.demo.controller;
 
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,7 +26,10 @@ public class UserRecipeController {
 
 	// 레시피 추천목록 페이지 메서드
 	@RequestMapping("/user/list/suggest")
-	public String showSuggestList() {
+	public String showSuggestList(Model model) {
+
+		List<Recipe> recipes = recipeService.getForPrintRecipes(rq.getLoginedMemberId());
+		model.addAttribute("recipes", recipes);
 
 		return "user/list/suggest";
 	}
@@ -38,14 +43,20 @@ public class UserRecipeController {
 
 	// 레시피 랭킹목록 페이지 메서드
 	@RequestMapping("/user/list/rank")
-	public String showRankList() {
+	public String showRankList(Model model) {
+
+		List<Recipe> recipes = recipeService.getForPrintRecipes(rq.getLoginedMemberId());
+		model.addAttribute("recipes", recipes);
 
 		return "user/list/rank";
 	}
 
 	// 레시피 노트목록 페이지 메서드
 	@RequestMapping("/user/list/note")
-	public String showNoteList() {
+	public String showNoteList(Model model) {
+
+		List<Recipe> recipes = recipeService.getForPrintRecipes(rq.getLoginedMemberId());
+		model.addAttribute("recipes", recipes);
 
 		return "user/list/note";
 	}

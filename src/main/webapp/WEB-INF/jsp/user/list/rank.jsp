@@ -14,20 +14,21 @@
 				<a href="#" class="text-3xl mb-20">
 					<i class="fa-solid fa-angle-left"></i>
 				</a>
-				<div class="flex">
-					<c:forEach begin="1" end="3" var="i">
-						<div class="mx-3 relative">
+				<div class="flex grid grid-cols-3 gap-3">
+					<!-- 최다 조회수, 하트를 받은 레시피 -->
+					<c:forEach var="recipe" items="${ recipes }">
+						<div class="relative">
 							<div class="rank-number absolute top-0 w-10 h-10 bg-white border border-2 border-gray-400 rounded-lg">
-								<div class="font-bold text-center mt-2">${ i }</div>
+								<div class="font-bold text-center mt-2">${ recipe.id }</div>
 							</div>
 							<div class="p-1">
-								<a href="/user/recipe/detail?id=1">
+								<a href="/user/recipe/detail?id=${ recipe.id }">
 									<img class="w-full rounded-md" src="https://tse4.mm.bing.net/th?id=OIP.kwt4oKZDd-goVuBezaVQRQHaE7&pid=Api&P=0"
 										alt="" />
 								</a>
 								<div class="ml-3 mt-2">
-									<div class="text-xl">이건 감자볶음</div>
-									<div class="text-lg">홍길동</div>
+									<div class="text-xl">${ recipe.title }</div>
+									<div class="text-lg">${ recipe.extra__writerName }</div>
 									<span class="text-lg">
 										<i class="fa-solid fa-heart text-red-500"></i>
 										(12) 조회수 85
@@ -52,20 +53,21 @@
 				<a href="#" class="text-3xl mb-20">
 					<i class="fa-solid fa-angle-left"></i>
 				</a>
-				<div class="flex">
-					<c:forEach begin="1" end="3" var="i">
-						<div class="mx-3 relative">
+				<div class="flex grid grid-cols-3 gap-3">
+					<!-- 최다 스크랩된 레시피 -->
+					<c:forEach var="recipe" items="${ recipes }">
+						<div class="relative">
 							<div class="rank-number absolute top-0 w-10 h-10 bg-white border border-2 border-gray-400 rounded-lg">
-								<div class="font-bold text-center mt-2">${ i }</div>
+								<div class="font-bold text-center mt-2">${ recipe.id }</div>
 							</div>
 							<div class="p-1">
-								<a href="/user/recipe/detail?id=1">
+								<a href="/user/recipe/detail?id=${ recipe.id }">
 									<img class="w-full rounded-md" src="https://tse4.mm.bing.net/th?id=OIP.kwt4oKZDd-goVuBezaVQRQHaE7&pid=Api&P=0"
 										alt="" />
 								</a>
 								<div class="ml-3 mt-2">
-									<div class="text-xl">이건 감자볶음</div>
-									<div class="text-lg">홍길동</div>
+									<div class="text-xl">${ recipe.title }</div>
+									<div class="text-lg">${ recipe.extra__writerName }</div>
 									<span class="text-lg">
 										<i class="fa-solid fa-heart text-red-500"></i>
 										(12) 조회수 85

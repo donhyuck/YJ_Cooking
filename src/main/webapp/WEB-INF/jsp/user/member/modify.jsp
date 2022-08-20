@@ -60,6 +60,8 @@
 			onsubmit="MemberModify_submitForm(this); return false;">
 			<!-- 로그인한 회원의 정보 -->
 			<c:set var="member" value="${ rq.loginedMember }" />
+			<!-- 비밀번호 확인 인증코드 -->
+			<input type="hidden" name="memberModifyAuthKey" value="${ param.memberModifyAuthKey }">
 
 			<div class="text-3xl font-bold mb-2">회원정보 수정</div>
 			<div>

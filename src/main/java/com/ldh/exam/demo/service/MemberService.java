@@ -70,7 +70,7 @@ public class MemberService {
 		return memberRepository.getMemberByNicknameAndEmail(nickname, email);
 	}
 
-	// 인증코드 가져오기
+	// 인증코드 발급하기
 	public String genAuthKey(int memberId) {
 
 		String authKey = Ut.getTempPassword(10);
@@ -79,5 +79,18 @@ public class MemberService {
 		attrService.setValue("member", memberId, "extra", "memberModifyAuthKey", authKey, Ut.getDateStrLater(60 * 5));
 
 		return authKey;
+	}
+
+	// 인증코드 확인하기
+	public ResultData checkAuthKey(int memberId, String authKey) {
+
+		// 설정된 인증코드와 url접근과 비교
+		String saved = attrService.getValue("member", memberId, "extra", "memberModifyAuthKey");
+
+		if (saved.equals(authKey) == false) {
+			return ResultData.from("F-1", "일치하지 않거나 만료되었습니다.");
+		}
+
+		return ResultData.from("S-1", "정상적인 코드입니다.");
 	}
 }

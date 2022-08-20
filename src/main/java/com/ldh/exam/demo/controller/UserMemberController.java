@@ -164,7 +164,20 @@ public class UserMemberController {
 
 	// 회원정보 수정 페이지 메서드
 	@RequestMapping("/user/member/modify")
-	public String showModify() {
+	public String showModify(String memberModifyAuthKey) {
+
+		// 인증코드가 없으면 재접근 요청
+		if (Ut.empty(memberModifyAuthKey)) {
+			return rq.historyBackOnView("비밀번호 확인이 안되었습니다. 다시 시도해주세요.");
+		}
+
+		// 인증코드 확인
+		ResultData checkMemberModifyAuthKeyRd = memberService.checkAuthKey(rq.getLoginedMemberId(),
+				memberModifyAuthKey);
+
+		if (checkMemberModifyAuthKeyRd.isFail()) {
+			return rq.historyBackOnView(checkMemberModifyAuthKeyRd.getMsg());
+		}
 
 		return "user/member/modify";
 	}
@@ -172,7 +185,21 @@ public class UserMemberController {
 	// 회원 수정하기 메서드
 	@RequestMapping("/user/member/doModify")
 	@ResponseBody
-	public String doModify(String loginPw, String nickname, String cellphoneNo, String email) {
+	public String doModify(String memberModifyAuthKey, String loginPw, String nickname, String cellphoneNo,
+			String email) {
+
+		// 인증코드가 없으면 재접근 요청
+		if (Ut.empty(memberModifyAuthKey)) {
+			return rq.jsHistoryBack("비밀번호 확인이 안되었습니다. 다시 시도해주세요.");
+		}
+
+		// 인증코드 확인
+		ResultData checkMemberModifyAuthKeyRd = memberService.checkAuthKey(rq.getLoginedMemberId(),
+				memberModifyAuthKey);
+
+		if (checkMemberModifyAuthKeyRd.isFail()) {
+			return rq.jsHistoryBack(checkMemberModifyAuthKeyRd.getMsg());
+		}
 
 		// 입력 데이터 유효성 검사
 		if (Ut.empty(loginPw)) {

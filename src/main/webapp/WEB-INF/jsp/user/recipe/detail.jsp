@@ -146,8 +146,84 @@
 		</section>
 		<!-- 조리순서 영역 시작 -->
 
-		<!-- 댓글 -->
-		<section class="bg-white rounded-md p-12 flex">댓글</section>
+		<!-- 댓글 영역 시작-->
+		<section class="bg-white rounded-md p-12 mb-5">
+			<div class="text-3xl font-bold mb-8">요리후기/댓글</div>
+
+			<!-- 댓글 목록 영역 시작 -->
+			<div class="flex flex-col border-t">
+				<c:forEach var="i" begin="1" end="7" step="1">
+					<div class="flex border-b p-3 pt-5">
+						<div class="w-44">
+							<!-- 댓글 프로필 -->
+							<div class="actor-photo w-24 mx-auto mb-2">
+								<c:if test="${ i == 1 || i == 3 }">
+									<img class="w-full rounded-full" src="https://cdn.pixabay.com/photo/2017/06/16/13/35/chef-2409158_960_720.png"
+										alt="" />
+								</c:if>
+								<!-- 대표사진 미등록 회원 -->
+								<c:if test="${  i != 1 && i != 3 }">
+									<img class="w-full rounded-full border border-gray-400"
+										src="https://t4.ftcdn.net/jpg/00/65/77/27/240_F_65772719_A1UV5kLi5nCEWI0BNLLiFaBPEkUbv5Fv.jpg" alt="" />
+								</c:if>
+							</div>
+
+							<!-- 댓글 수정, 삭제 영역 시작 -->
+							<div class="btns flex items-center space-x-3 justify-center h-12">
+								<c:if test="${ i == 1 || i == 6 }">
+									<a href="../reply/modify?id=${ reply.id }" class="btn btn-primary btn-outline btn-sm">
+										<i class="fas fa-edit"></i>
+										<div class="ml-1">수정</div>
+									</a>
+								</c:if>
+								<c:if test="${ i == 1 || i == 6 }">
+									<a href="../reply/doDelete?id=${ reply.id }&replaceUri=${rq.encodedCurrentUri}"
+										class="btn btn-secondary btn-outline btn-sm" onclick="if( confirm('정말 삭제하시겠습니까?') == false ) return false;">
+										<i class="fas fa-trash"></i>
+										<div class="ml-1">삭제</div>
+									</a>
+								</c:if>
+							</div>
+							<!-- 댓글 수정, 삭제 영역 영역 끝 -->
+						</div>
+
+						<div class="ml-8 mr-5 w-full">
+							<!-- 작성자, 등록(수정)일 -->
+							<div class="flex items-center mb-2 text-gray-400 text-sm">
+								<div class="text-xl font-bold text-black mr-3">${ actorNickname }</div>
+								<div>
+									<!-- test="${ reply.regDate == reply.updateDate } -->
+									<c:if test="${ i == 1 || i == 6 }">
+										<span>2022-01-01 12:00 &nbsp;(등록)</span>
+									</c:if>
+									<!-- test="${ reply.regDate == reply.updateDate } -->
+									<c:if test="${  i != 1 && i != 6 }">
+										<span>2022-01-08 12:10 &nbsp;(수정)</span>
+									</c:if>
+								</div>
+							</div>
+
+							<!-- 댓글 내용 -->
+							<div class="ml-2">맛있어요. 12345123451234512345123451234512345123451234512345123451234512345123451234512345</div>
+						</div>
+
+						<!-- 요리후기 사진 -->
+						<div class="w-80 m-auto">
+							<!-- test="${ reply.regDate == reply.updateDate } -->
+							<c:if test="${ i == 2 || i == 5 }">
+								<img class="rounded-md" src="https://tse4.mm.bing.net/th?id=OIP.kwt4oKZDd-goVuBezaVQRQHaE7&pid=Api&P=0" alt="" />
+							</c:if>
+						</div>
+					</div>
+				</c:forEach>
+			</div>
+			<!-- 댓글 목록 영역 끝 -->
+
+			<!-- 댓글 작성 영역 시작 -->
+			<div>댓글 작성</div>
+			<!-- 댓글 작성 영역 끝 -->
+		</section>
+		<!-- 댓글 영역 끝 -->
 	</div>
 </div>
 

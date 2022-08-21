@@ -5,17 +5,18 @@
 
 <div class="bg-gray-200 py-4">
 	<div class="detail-box w-10/12 mx-auto">
-		<section class="bg-white rounded-md p-12 flex mb-5">
 
-			<!-- 대표사진, 제목, 설명 -->
+		<!-- 레시피 기본정보 영역 시작 -->
+		<section class="bg-white rounded-md p-12 flex mb-5">
+			<!-- 대표사진-->
 			<div class="main-photo w-3/6">
 				<img class="w-full rounded-md" src="https://tse4.mm.bing.net/th?id=OIP.kwt4oKZDd-goVuBezaVQRQHaE7&pid=Api&P=0"
 					alt="" />
 				<div class="text-right mt-2 mr-4 text-black">조회수 111</div>
 			</div>
 
-			<!-- 레시피 기본정보 -->
 			<div class="flex flex-col w-2/5 h-80 m-auto">
+				<!-- 제목, 내용 -->
 				<div class="text-3xl">${ recipe.title }</div>
 				<div class="text-xl text-gray-400 mt-5">${ recipe.body }</div>
 				<!-- 인원, 소요시간, 난이도 -->
@@ -35,10 +36,11 @@
 				</div>
 			</div>
 		</section>
+		<!-- 레시피 기본정보 영역 끝 -->
 
 		<!-- 회원 프로필, 리액션 영역 시작 -->
 		<section class="bg-white rounded-md p-12 flex mb-5">
-		
+
 			<!-- 등록한 회원정보 -->
 			<div class="actor-photo w-60 mr-12">
 				<img class="w-full rounded-full" src="https://cdn.pixabay.com/photo/2017/06/16/13/35/chef-2409158_960_720.png"
@@ -70,7 +72,7 @@
 
 				<div class="under-area flex items-center justify-around mt-12">
 					<!-- 팁 / 주의사항 -->
-					<div class="text-lg w-4/6 p-4 border border-gray-200 rounded-md shadow-xl">
+					<div class="text-lg w-2/3 p-4 border border-gray-200 rounded-lg shadow-xl">
 						<div class="bg-white mb-2 font-bold text-red-600">
 							<i class="fa-solid fa-lightbulb"></i>
 							<span class="ml-1">팁 / 주의사항</span>
@@ -95,10 +97,33 @@
 				</div>
 			</div>
 		</section>
-		<!-- 등록한 회원정보, 스크랩, 하트 영역 끝 -->
+		<!-- 회원 프로필, 리액션 영역 끝 -->
 
-		<!-- 재료, 양념 -->
-		<section class="bg-white rounded-md p-12 flex">재료, 양념</section>
+		<!-- 재료, 양념 영역 시작 -->
+		<section class="bg-white rounded-md p-12 mb-5">
+			<div class="text-3xl font-bold mb-8">재료 준비</div>
+			<div class="flex justify-between space-x-5 text-2xl px-5">
+				<div class="w-1/2">
+					<div class="font-bold mb-5">[ 재료 ]</div>
+					<c:forEach begin="1" end="8" step="1">
+						<div class="grid grid-cols-2 mb-2 ml-4 px-3 border-b-2 border-dashed border-gray-300">
+							<div class="">버섯</div>
+							<div class="text-center">1개</div>
+						</div>
+					</c:forEach>
+				</div>
+				<div class="w-1/2">
+					<div class="font-bold mb-5">[ 양념 ]</div>
+					<c:forEach begin="1" end="5" step="1">
+						<div class="grid grid-cols-2 mb-2 ml-4 px-3 border-b-2 border-dashed border-gray-300">
+							<div class="">간장</div>
+							<div class="text-center">1숟가락</div>
+						</div>
+					</c:forEach>
+				</div>
+			</div>
+		</section>
+		<!-- 재료, 양념 영역 끝 -->
 
 		<!-- 조리순서 -->
 		<section class="bg-white rounded-md p-12 flex">조리순서</section>

@@ -125,8 +125,26 @@
 		</section>
 		<!-- 재료, 양념 영역 끝 -->
 
-		<!-- 조리순서 -->
-		<section class="bg-white rounded-md p-12 flex">조리순서</section>
+		<!-- 조리순서 영역 시작 -->
+		<section class="bg-white rounded-md p-12 mb-5">
+			<div class="text-3xl font-bold mb-8">조리순서</div>
+			<div class="w-full flex flex-col space-y-8 px-5">
+				<c:forEach var="i" begin="1" end="4" step="1">
+					<div class="flex">
+						<div class="w-1/2 mr-5">
+							<img class="rounded-md" src="https://tse4.mm.bing.net/th?id=OIP.kwt4oKZDd-goVuBezaVQRQHaE7&pid=Api&P=0" alt="" />
+						</div>
+						<div class="w-5/6 p-5 flex">
+							<div class="w-10 h-10 bg-green-500 rounded-full">
+								<div class="font-bold text-center text-white pt-2">${ i }</div>
+							</div>
+							<div class="text-2xl text-gray-600 ml-5 mt-1 w-5/6">양파를 썬다. 일정하게 1cm간격이 되도록 썬다.</div>
+						</div>
+					</div>
+				</c:forEach>
+			</div>
+		</section>
+		<!-- 조리순서 영역 시작 -->
 
 		<!-- 댓글 -->
 		<section class="bg-white rounded-md p-12 flex">댓글</section>

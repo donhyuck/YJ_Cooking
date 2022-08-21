@@ -148,7 +148,10 @@
 
 		<!-- 댓글 영역 시작-->
 		<section class="bg-white rounded-md p-12 mb-5">
-			<div class="text-3xl font-bold mb-8">요리후기/댓글</div>
+			<div class="text-3xl font-bold mb-8">
+				<span>요리후기/댓글</span>
+				<span class="text-green-500 text-xl ml-3">11건</span>
+			</div>
 
 			<!-- 댓글 목록 영역 시작 -->
 			<div class="flex flex-col border-t">
@@ -220,7 +223,35 @@
 			<!-- 댓글 목록 영역 끝 -->
 
 			<!-- 댓글 작성 영역 시작 -->
-			<div>댓글 작성</div>
+			<div class="mt-10">
+				<div class="border-b border-gray-300 pl-3 pb-2 mb-3 font-bold text-xl text-yellow-500">
+					<span>후기등록</span>
+				</div>
+				<div class="text-lg text-gray-500 tracking-wide mb-2 ml-3">
+					<div>
+						<span>${ actorNickname }님</span>
+						에게 궁금한점들을남겨주세요.
+					</div>
+					<c:if test="${ rq.loginedMember == null }">
+						<a href="/user/member/login" class="link link-primary">로그인</a> 후 댓글을 남길 수 있습니다.
+					</c:if>
+				</div>
+				<c:if test="${ rq.loginedMember != null }">
+					<form class="flex items-center" method="POST" action="../reply/doWrite">
+						<!-- 요리후기 사진 등록 -->
+						<a href="#"
+							class="flex justify-center items-center w-36 h-36 rounded-xl bg-gray-200 hover:bg-gray-300 mr-4 text-4xl">
+							<i class="fa-solid fa-plus"></i>
+						</a>
+						<div class="border border-gray-300 rounded-xl p-2 w-10/12">
+							<textarea name="body" rows="5" class="w-full" placeholder="요리후기를 사진과 함께 작성해보세요."></textarea>
+						</div>
+						<button type="submit" class="w-36 h-36 hover:bg-gray-100 border-double border-4 border-gray-300 rounded-xl ml-3">
+							<div class="text-xl">등록</div>
+						</button>
+					</form>
+				</c:if>
+			</div>
 			<!-- 댓글 작성 영역 끝 -->
 		</section>
 		<!-- 댓글 영역 끝 -->

@@ -11,7 +11,8 @@
 
 <script>
 	function RecipeDetail__increaseHitCount() {
-		<!-- 이미 읽은 레시피는 조회수 증가 요청이 없도록
+		<!-- 이미 읽은 레시피는 조회수 증가 요청이 없도록 -->
+		/*
 		const localStorageKey = 'recipe__' + params.id + '__viewDone';
 
 		if (localStorage.getItem(localStorageKey)) {
@@ -19,8 +20,8 @@
 		}
 
 		localStorage.setItem(localStorageKey, true);
-		 -->
-
+		*/
+		
 		<!-- 조회수 증가 메서드 작동 -->
 		$.get('../recipe/doIncreaseHitCount', {
 			id : params.id,
@@ -115,7 +116,12 @@
 							<i class="fa-solid fa-lightbulb"></i>
 							<span class="ml-1">팁 / 주의사항</span>
 						</div>
-						<div class="ml-4">뜨거우니 조심해서 담으세요 설탕은 처음에!</div>
+						<c:if test="${ recipe.tip != null }">
+							<div class="ml-4">${ recipe.tip }</div>
+						</c:if>
+						<c:if test="${ recipe.tip == null }">
+							<div class="ml-4 text-gray-400">오늘도 맛있게! 잘 챙겨드세요.</div>
+						</c:if>
 					</div>
 
 					<!-- 레시피 조작 영역 시작 -->

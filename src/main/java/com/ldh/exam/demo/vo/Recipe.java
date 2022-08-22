@@ -15,6 +15,9 @@ public class Recipe {
 	private int memberId;
 	private String title;
 	private String body;
+	private int amount;
+	private int time;
+	private int level;
 
 	private String extra__writerName;
 	private boolean extra__actorCanModify;
@@ -34,5 +37,39 @@ public class Recipe {
 
 	public String getForPrintUpdateDate_Type2() {
 		return updateDate.substring(2, 16);
+	}
+
+	public String getForPrintTime() {
+
+		if (time > 60) {
+			if (time % 60 == 0) {
+				return (time / 60) + "시간 ";
+			}
+			return (time / 60) + "시간 " + (time % 60) + "분";
+		}
+
+		return time + "분";
+	}
+
+	public String getForPrintLevel() {
+
+		String levelStr = "";
+
+		switch (level) {
+		case 1:
+			levelStr = "누구나";
+			break;
+		case 2:
+			levelStr = "초급";
+			break;
+		case 3:
+			levelStr = "중급";
+			break;
+		case 4:
+			levelStr = "고급";
+			break;
+		}
+
+		return levelStr;
 	}
 }

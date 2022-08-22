@@ -115,3 +115,29 @@ ALTER TABLE `attr` ADD COLUMN `expireDate` DATETIME NULL AFTER `value`;
 
 DESC attr;
 SELECT * FROM attr;
+
+# 레시피 테이블에 요리정보(인원, 소요시간, 난이도) 추가
+ALTER TABLE recipe ADD COLUMN amount INT(10) UNSIGNED NOT NULL DEFAULT 1;
+ALTER TABLE recipe ADD COLUMN `time` INT(10) UNSIGNED NOT NULL DEFAULT 5;
+ALTER TABLE recipe ADD COLUMN `level` INT(10) UNSIGNED NOT NULL DEFAULT 1 COMMENT '(1=누구나, 2=초급, 3=중급, 4=고급)';
+
+# 기존 데이터에 요리정보 넣기
+UPDATE recipe
+SET `amount` = 3,
+`time` = 15,
+`level` = '1'
+WHERE id = 1;
+
+UPDATE recipe
+SET `amount` = 4,
+`time` = 120,
+`level` = '4'
+WHERE id = 2;
+
+UPDATE recipe
+SET `amount` = 2,
+`time` = 20,
+`level` = '3'
+WHERE id = 3;
+
+SELECT * FROM recipe;

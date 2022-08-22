@@ -20,18 +20,18 @@
 				<div class="text-3xl">${ recipe.title }</div>
 				<div class="text-xl text-gray-400 mt-5">${ recipe.body }</div>
 				<!-- 인원, 소요시간, 난이도 -->
-				<div class="info-box flex justify-center items-end space-x-10 mt-auto mb-3 text-2xl">
+				<div class="info-box flex justify-center items-end space-x-5 mt-auto mb-3 text-2xl">
 					<div>
 						<i class="fa-solid fa-user-check"></i>
-						<span class="ml-1">2인분</span>
+						<span class="ml-1">${ recipe.amount }인분</span>
 					</div>
 					<div>
 						<i class="fa-solid fa-clock"></i>
-						<span class="ml-1">10분</span>
+						<span class="ml-1">${ recipe.forPrintTime } 이내</span>
 					</div>
 					<div>
 						<i class="fa-solid fa-star"></i>
-						<span class="ml-1">누구나</span>
+						<span class="ml-1">${ recipe.forPrintLevel }</span>
 					</div>
 				</div>
 			</div>
@@ -64,7 +64,7 @@
 						<div class="text-lg font-bold mt-2">좋아요</div>
 					</a>
 					<!-- 댓글 -->
-					<a href="#" class="text-gray-500">
+					<a href="#" class="text-green-500">
 						<i class="fa-solid fa-comment-dots"></i>
 						<div class="text-lg font-bold mt-2">댓글보기</div>
 					</a>

@@ -164,14 +164,14 @@ CREATE TABLE reactionPoint (
 );
 
 # 리액션포인트 테스트 데이터
-## 1번 회원이 1번 recipe 싫어요
+## 1번 회원이 1번 recipe 좋아요
 INSERT INTO reactionPoint
 SET regDate = NOW(),
 updateDate = NOW(),
 memberId = 1,
 relTypeCode = 'recipe',
 relId = 1,
-`point` = -1;
+`point` = 1;
 
 ## 1번 회원이 2번 recipe 좋아요
 INSERT INTO reactionPoint
@@ -182,22 +182,22 @@ relTypeCode = 'recipe',
 relId = 2,
 `point` = 1;
 
-## 2번 회원이 1번 recipe 싫어요
+## 2번 회원이 1번 recipe 좋아요
 INSERT INTO reactionPoint
 SET regDate = NOW(),
 updateDate = NOW(),
 memberId = 2,
 relTypeCode = 'recipe',
 relId = 1,
-`point` = -1;
+`point` = 1;
 
-## 2번 회원이 2번 recipe 좋아요
+## 2번 회원이 3번 recipe 좋아요
 INSERT INTO reactionPoint
 SET regDate = NOW(),
 updateDate = NOW(),
 memberId = 2,
 relTypeCode = 'recipe',
-relId = 2,
+relId = 3,
 `point` = 1;
 
 ## 3번 회원이 1번 recipe 좋아요

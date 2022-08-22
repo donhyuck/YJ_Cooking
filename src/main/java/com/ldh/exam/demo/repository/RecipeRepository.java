@@ -5,7 +5,6 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.ldh.exam.demo.vo.Recipe;
-import com.ldh.exam.demo.vo.ResultData;
 
 @Mapper
 public interface RecipeRepository {
@@ -27,4 +26,6 @@ public interface RecipeRepository {
 	public int increaseHitCount(int id);
 
 	public int getRecipeHitCount(int id);
+
+	public int actorCanMakeReaction(int memberId, int id);
 }

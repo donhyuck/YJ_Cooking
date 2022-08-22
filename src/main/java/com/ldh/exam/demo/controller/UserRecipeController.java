@@ -71,11 +71,15 @@ public class UserRecipeController {
 
 		Recipe recipe = recipeService.getForPrintRecipe(rq.getLoginedMemberId(), id);
 
+		// 좋아요 가능여부
+		boolean actorCanMakeRP = recipeService.actorCanMakeReaction(rq.getLoginedMemberId(), id);
+
 		// 등록한 회원 닉넴임 가져오기
 		Member actor = memberService.getMemberById(recipe.getMemberId());
 		String actorNickname = actor.getNickname();
 
 		model.addAttribute("recipe", recipe);
+		model.addAttribute("actorCanMakeRP", actorCanMakeRP);
 		model.addAttribute("actorNickname", actorNickname);
 
 		return "user/recipe/detail";

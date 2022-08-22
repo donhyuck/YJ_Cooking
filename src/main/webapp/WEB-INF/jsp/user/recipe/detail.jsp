@@ -93,17 +93,24 @@
 			<div class="rection-box p-3 w-full flex flex-col">
 				<div class="upper-area flex items-center justify-around text-4xl text-center">
 					<!-- 스크랩 -->
-					<a href="#" class="text-yellow-400">
-						<i class="fa-solid fa-paperclip"></i>
+					<a href="#" class="text-yellow-400 hover:text-yellow-700">
+						<i class="fa-solid fa-file"></i>
 						<div class="text-lg font-bold mt-2">스크랩 111</div>
+						<!-- <i class="fa-solid fa-file-circle-check"></i> -->
 					</a>
 					<!-- 하트 -->
-					<a href="#" class="text-red-400">
-						<i class="fa-solid fa-heart"></i>
-						<div class="text-lg font-bold mt-2">좋아요 ${ recipe.extra__goodRP }</div>
+					<a href="#" class="text-red-400 hover:text-red-700">
+						<c:if test="${ actorCanMakeRP == true }">
+							<i class="fa-solid fa-heart"></i>
+							<div class="text-lg font-bold mt-2">좋아요 ${ recipe.extra__goodRP }</div>
+						</c:if>
+						<c:if test="${ actorCanMakeRP == false }">
+							<i class="fa-solid fa-heart-circle-check"></i>
+							<div class="text-lg font-bold mt-2">좋아요 ${ recipe.extra__goodRP }</div>
+						</c:if>
 					</a>
 					<!-- 댓글 -->
-					<a href="#" class="text-green-500">
+					<a href="#" class="text-green-500 hover:text-green-700">
 						<i class="fa-solid fa-comment-dots"></i>
 						<div class="text-lg font-bold mt-2">댓글보기 333</div>
 					</a>

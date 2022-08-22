@@ -1,7 +1,9 @@
 package com.ldh.exam.demo.vo;
 
 import lombok.Getter;
+import lombok.ToString;
 
+@ToString
 public class ResultData<DT> {
 
 	// 처리결과 성공 S-xx, 실패 F-xx
@@ -13,6 +15,8 @@ public class ResultData<DT> {
 	private String data1Name;
 	@Getter
 	private DT data1;
+	@Getter
+	private Object data2;
 
 	public static ResultData from(String resultCode, String msg) {
 
@@ -41,5 +45,10 @@ public class ResultData<DT> {
 	public static <DT> ResultData<DT> newData(ResultData Rd, String data1Name, DT newData) {
 
 		return from(Rd.getResultCode(), Rd.getMsg(), data1Name, newData);
+	}
+
+	public void setData2(String dataName, Object data) {
+		dataName = dataName;
+		data = data;
 	}
 }

@@ -10,18 +10,19 @@
 </script>
 
 <script>
-	function ArticleDetail__increaseHitCount() {
+	function RecipeDetail__increaseHitCount() {
 		$.get('../recipe/doIncreaseHitCount', {
-			id : params.id
+			id : params.id,
+			ajaxMode : 'Y'
 		}, function(data) {
 			$('.recipe-detail__hitCount').empty().html(data.data1);
 		}, 'json');
 	}
 	$(function() {
 		// 실전코드
-		// ArticleDetail__increaseHitCount();
+		// RecipeDetail__increaseHitCount();
 		// 임시코드
-		setTimeout(ArticleDetail__increaseHitCount, 300);
+		setTimeout(RecipeDetail__increaseHitCount, 300);
 	})
 </script>
 <!-- 게시글 조회수 스크립트 끝 -->

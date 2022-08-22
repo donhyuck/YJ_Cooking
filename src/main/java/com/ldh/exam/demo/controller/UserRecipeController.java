@@ -185,6 +185,11 @@ public class UserRecipeController {
 			return increaseHitCountRd;
 		}
 
-		return ResultData.newData(increaseHitCountRd, "hitCount", recipeService.getRecipeHitCount(id));
+		ResultData<Integer> newDataRd = ResultData.newData(increaseHitCountRd, "hitCount",
+				recipeService.getRecipeHitCount(id));
+
+		newDataRd.setData2("id", id);
+
+		return newDataRd;
 	}
 }

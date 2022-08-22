@@ -95,17 +95,17 @@
 					<!-- 스크랩 -->
 					<a href="#" class="text-yellow-400">
 						<i class="fa-solid fa-paperclip"></i>
-						<div class="text-lg font-bold mt-2">스크랩</div>
+						<div class="text-lg font-bold mt-2">스크랩 111</div>
 					</a>
 					<!-- 하트 -->
 					<a href="#" class="text-red-400">
 						<i class="fa-solid fa-heart"></i>
-						<div class="text-lg font-bold mt-2">좋아요</div>
+						<div class="text-lg font-bold mt-2">좋아요 ${ recipe.extra__goodRP }</div>
 					</a>
 					<!-- 댓글 -->
 					<a href="#" class="text-green-500">
 						<i class="fa-solid fa-comment-dots"></i>
-						<div class="text-lg font-bold mt-2">댓글보기</div>
+						<div class="text-lg font-bold mt-2">댓글보기 333</div>
 					</a>
 				</div>
 

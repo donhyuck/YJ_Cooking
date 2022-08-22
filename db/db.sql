@@ -210,3 +210,33 @@ relId = 1,
 `point` = 1;
 
 SELECT * FROM reactionPoint;
+
+## 레시피 목록 가져오는 쿼리에 관련 리액션 포인트도 같이 가져오게 하기
+SELECT R.*,
+IFNULL(SUM(IF(RP.point > 0, RP.point, 0)), 0) AS extra__goodRP
+FROM (
+    SELECT R.*,
+    M.nickname AS extra__writerName
+    FROM recipe AS R
+    LEFT JOIN
+    `member` AS M
+    ON R.memberId = M.id
+    WHERE 1
+) AS R
+LEFT JOIN reactionPoint AS RP
+ON RP.relTypeCode = 'recipe'
+AND R.id = RP.relId
+GROUP BY R.id
+ORDER BY R.id DESC;
+
+## 댓글 상세정보 가져오는 쿼리에 관련 리액션 포인트도 같이 가져오게 하기
+SELECT R.*,
+M.nickname AS extra__writerName,
+IFNULL(SUM(IF(RP.point > 0, RP.point, 0)), 0) AS extra__goodRP
+FROM recipe AS R
+LEFT JOIN `member` AS M
+ON R.memberId = M.id
+LEFT JOIN reactionPoint AS RP
+ON RP.relTypeCode = 'recipe'
+AND R.id = RP.relId
+WHERE R.id = 1;

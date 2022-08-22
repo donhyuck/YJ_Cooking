@@ -6,25 +6,41 @@
 	<select id="getForPrintRecipe" resultType="Recipe">
 		SELECT R.*,
 		M.nickname
-		AS extra__writerName
+		AS extra__writerName,
+		IFNULL(SUM(IF(RP.point &gt; 0, RP.point, 0)), 0)
+		AS extra__goodRP
 		FROM recipe AS R
 		LEFT JOIN `member` AS M
-		ON
-		R.memberId = M.id
-		WHERE R.id =
-		#{id}
+		ON R.memberId =
+		M.id
+		LEFT JOIN reactionPoint AS RP
+		ON RP.relTypeCode = 'recipe'
+		AND R.id
+		= RP.relId
+		WHERE R.id = #{id}
 	</select>
 
 	<select id="getForPrintRecipes" resultType="Recipe">
 		SELECT R.*,
-		M.nickname
-		AS extra__writerName
+		IFNULL(SUM(IF(RP.point &gt; 0, RP.point, 0)), 0) AS extra__goodRP
+		FROM
+		(
+		SELECT R.*,
+		M.nickname AS extra__writerName
 		FROM recipe AS R
-		LEFT JOIN `member` AS M
-		ON
-		R.memberId = M.id
-		ORDER BY
-		R.id DESC
+		LEFT JOIN
+		`member` AS M
+		ON R.memberId = M.id
+		WHERE 1
+		) AS R
+		LEFT JOIN reactionPoint
+		AS RP
+		ON RP.relTypeCode = 'recipe'
+		AND
+		R.id = RP.relId
+		GROUP BY R.id
+		ORDER
+		BY R.id DESC
 	</select>
 
 	<insert id="writeRecipe">
@@ -77,7 +93,8 @@
 
 	<select id="getRecipeHitCount" resultType="int">
 		SELECT hitCount
-		FROM recipe
+		FROM
+		recipe
 		WHERE id = #{id}
 	</select>
 

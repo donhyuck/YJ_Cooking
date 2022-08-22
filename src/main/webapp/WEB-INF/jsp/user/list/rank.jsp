@@ -29,10 +29,14 @@
 								<div class="ml-3 mt-2">
 									<div class="text-xl">${ recipe.title }</div>
 									<div class="text-lg">${ recipe.extra__writerName }</div>
-									<span class="text-lg">
-										<i class="fa-solid fa-heart text-red-500"></i>
-										(12) 조회수 ${ recipe.hitCount }
-									</span>
+									<!-- 좋아요 , 조회수 -->
+									<div class="text-lg">
+										<span class="text-red-500 mr-1">
+											<i class="fa-solid fa-heart"></i>
+											${ recipe.extra__goodRP }
+										</span>
+										<span class="text-gray-500">조회수 ${ recipe.hitCount }</span>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -68,10 +72,14 @@
 								<div class="ml-3 mt-2">
 									<div class="text-xl">${ recipe.title }</div>
 									<div class="text-lg">${ recipe.extra__writerName }</div>
-									<span class="text-lg">
-										<i class="fa-solid fa-heart text-red-500"></i>
-										(12) 조회수 ${ recipe.hitCount }
-									</span>
+									<!-- 좋아요 , 조회수 -->
+									<div class="text-lg">
+										<span class="text-red-500 mr-1">
+											<i class="fa-solid fa-heart"></i>
+											${ recipe.extra__goodRP }
+										</span>
+										<span class="text-gray-500">조회수 ${ recipe.hitCount }</span>
+									</div>
 								</div>
 							</div>
 						</div>

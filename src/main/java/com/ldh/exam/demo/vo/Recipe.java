@@ -24,6 +24,7 @@ public class Recipe {
 	private String extra__writerName;
 	private boolean extra__actorCanModify;
 	private boolean extra__actorCanDelete;
+	private int extra__goodRP;
 
 	public String getForPrintRegDate_Type1() {
 		return regDate.substring(2, 16).replace(" ", "</br>");

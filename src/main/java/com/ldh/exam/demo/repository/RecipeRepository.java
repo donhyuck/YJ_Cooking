@@ -26,6 +26,4 @@ public interface RecipeRepository {
 	public int increaseHitCount(int id);
 
 	public int getRecipeHitCount(int id);
-
-	public int actorCanMakeReaction(int memberId, int id);
 }

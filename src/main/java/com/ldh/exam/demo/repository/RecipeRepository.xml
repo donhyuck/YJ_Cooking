@@ -79,16 +79,5 @@
 		recipe
 		WHERE id = #{id}
 	</select>
-
-	<select id="actorCanMakeReaction" resultType="int">
-		SELECT
-		IFNULL(SUM(RP.point), 0) AS sum
-		FROM reactionPoint AS RP
-		WHERE
-		RP.relTypeCode = 'recipe'
-		AND RP.relId = #{id}
-		AND RP.memberId =
-		#{memberId}
-	</select>
-
+	
 </mapper> 

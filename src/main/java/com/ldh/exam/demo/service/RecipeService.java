@@ -132,11 +132,4 @@ public class RecipeService {
 
 		return recipeRepository.getRecipeHitCount(id);
 	}
-
-	// 좋아요가 없으면 리액션 가능
-	public boolean actorCanMakeReaction(int memberId, int id) {
-
-		return recipeRepository.actorCanMakeReaction(memberId, id) == 0;
-	}
-
 }

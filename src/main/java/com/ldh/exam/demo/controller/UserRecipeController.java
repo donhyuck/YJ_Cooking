@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ldh.exam.demo.service.MemberService;
+import com.ldh.exam.demo.service.ReactionService;
 import com.ldh.exam.demo.service.RecipeService;
 import com.ldh.exam.demo.util.Ut;
 import com.ldh.exam.demo.vo.Member;
@@ -20,11 +21,14 @@ public class UserRecipeController {
 
 	private RecipeService recipeService;
 	private MemberService memberService;
+	private ReactionService reactionService;
 	private Rq rq;
 
-	public UserRecipeController(RecipeService recipeService, MemberService memberService, Rq rq) {
+	public UserRecipeController(RecipeService recipeService, MemberService memberService,
+			ReactionService reactionService, Rq rq) {
 		this.recipeService = recipeService;
 		this.memberService = memberService;
+		this.reactionService = reactionService;
 		this.rq = rq;
 	}
 
@@ -72,7 +76,7 @@ public class UserRecipeController {
 		Recipe recipe = recipeService.getForPrintRecipe(rq.getLoginedMemberId(), id);
 
 		// 좋아요 가능여부
-		boolean actorCanMakeRP = recipeService.actorCanMakeReaction(rq.getLoginedMemberId(), id);
+		boolean actorCanMakeRP = reactionService.actorCanMakeReaction(rq.getLoginedMemberId(), id, "recipe");
 
 		// 등록한 회원 닉넴임 가져오기
 		Member actor = memberService.getMemberById(recipe.getMemberId());

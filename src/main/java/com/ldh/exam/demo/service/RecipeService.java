@@ -128,4 +128,9 @@ public class RecipeService {
 		return ResultData.from("S-1", "조회수가 1만큼 증가했습니다.");
 	}
 
+	public int getRecipeHitCount(int id) {
+
+		return recipeRepository.getRecipeHitCount(id);
+	}
+
 }

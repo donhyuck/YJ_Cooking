@@ -75,4 +75,10 @@
 		#{id}
 	</update>
 
+	<select id="getRecipeHitCount" resultType="int">
+		SELECT hitCount
+		FROM recipe
+		WHERE id = #{id}
+	</select>
+
 </mapper> 

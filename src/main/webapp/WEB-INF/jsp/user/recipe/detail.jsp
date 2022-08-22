@@ -3,6 +3,29 @@
 <c:set var="pageTitle" value="레시피 상세페이지" />
 <%@include file="../common/head.jspf"%>
 
+<!-- 게시글 조회수 스크립트 시작 -->
+<script>
+	const params = {};
+	params.id = parseInt('${param.id}');
+</script>
+
+<script>
+	function ArticleDetail__increaseHitCount() {
+		$.get('../recipe/doIncreaseHitCount', {
+			id : params.id
+		}, function(data) {
+			$('.recipe-detail__hitCount').empty().html(data.data1);
+		}, 'json');
+	}
+	$(function() {
+		// 실전코드
+		// ArticleDetail__increaseHitCount();
+		// 임시코드
+		setTimeout(ArticleDetail__increaseHitCount, 300);
+	})
+</script>
+<!-- 게시글 조회수 스크립트 끝 -->
+
 <div class="bg-gray-200 py-4">
 	<div class="detail-box w-10/12 mx-auto">
 
@@ -12,7 +35,10 @@
 			<div class="main-photo w-3/6">
 				<img class="w-full rounded-md" src="https://tse4.mm.bing.net/th?id=OIP.kwt4oKZDd-goVuBezaVQRQHaE7&pid=Api&P=0"
 					alt="" />
-				<div class="text-right text-lg mt-2 mr-4 text-gray-400">조회수 ${ recipe.hitCount }</div>
+				<div class="text-right text-gray-400 text-lg mt-2 mr-4">
+					조회수
+					<span class="recipe-detail__hitCount">${ recipe.hitCount }</span>
+				</div>
 			</div>
 
 			<div class="flex flex-col w-2/5 h-80 m-auto">

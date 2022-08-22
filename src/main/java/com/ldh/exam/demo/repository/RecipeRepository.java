@@ -25,4 +25,6 @@ public interface RecipeRepository {
 	public Recipe getRecipeById(int id);
 
 	public int increaseHitCount(int id);
+
+	public int getRecipeHitCount(int id);
 }

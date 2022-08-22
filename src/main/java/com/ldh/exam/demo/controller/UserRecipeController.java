@@ -69,13 +69,6 @@ public class UserRecipeController {
 	@RequestMapping("/user/recipe/detail")
 	public String showDetail(Model model, int id) {
 
-		// 레시피 찾기, 조회수 증가
-		ResultData increaseHitCountRd = recipeService.increaseHitCount(id);
-
-		if (increaseHitCountRd.isFail()) {
-			return rq.historyBackOnView(increaseHitCountRd.getMsg());
-		}
-
 		Recipe recipe = recipeService.getForPrintRecipe(rq.getLoginedMemberId(), id);
 
 		// 등록한 회원 닉넴임 가져오기
@@ -179,5 +172,19 @@ public class UserRecipeController {
 		recipeService.deleteRecipe(id);
 
 		return rq.jsReplace(Ut.f("%s번 레시피가 삭제되었습니다.", id), "/");
+	}
+
+	// 레시피 찾기, 조회수 증가
+	@RequestMapping("/user/recipe/doIncreaseHitCount")
+	@ResponseBody
+	public ResultData<Integer> doIncreaseHitCount(int id) {
+
+		ResultData<Integer> increaseHitCountRd = recipeService.increaseHitCount(id);
+
+		if (increaseHitCountRd.isFail()) {
+			return increaseHitCountRd;
+		}
+
+		return ResultData.newData(increaseHitCountRd, "hitCount", recipeService.getRecipeHitCount(id));
 	}
 }

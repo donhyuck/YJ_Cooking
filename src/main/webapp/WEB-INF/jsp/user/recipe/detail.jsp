@@ -99,16 +99,18 @@
 						<!-- <i class="fa-solid fa-file-circle-check"></i> -->
 					</a>
 					<!-- 하트 -->
-					<a href="#" class="text-red-400 hover:text-red-700">
-						<c:if test="${ actorCanMakeRP == true }">
-							<i class="fa-solid fa-heart"></i>
-							<div class="text-lg font-bold mt-2">좋아요 ${ recipe.goodRP }</div>
+					<div class="text-red-400 hover:text-red-700">
+						<c:if test="${ actorCanMakeRP }">
+							<a href="/user/reaction/doMakeLike?relTypeCode=recipe&relId=${ param.id }">
+								<i class="fa-solid fa-heart"></i>
+								<div class="text-lg font-bold mt-2">좋아요 ${ recipe.goodRP }</div>
+							</a>
 						</c:if>
-						<c:if test="${ actorCanMakeRP == false }">
+						<a href="#">
 							<i class="fa-solid fa-heart-circle-check"></i>
 							<div class="text-lg font-bold mt-2">좋아요 ${ recipe.goodRP }</div>
-						</c:if>
-					</a>
+						</a>
+					</div>
 					<!-- 댓글 -->
 					<a href="#" class="text-green-500 hover:text-green-700">
 						<i class="fa-solid fa-comment-dots"></i>

@@ -102,11 +102,11 @@
 					<a href="#" class="text-red-400 hover:text-red-700">
 						<c:if test="${ actorCanMakeRP == true }">
 							<i class="fa-solid fa-heart"></i>
-							<div class="text-lg font-bold mt-2">좋아요 ${ recipe.extra__goodRP }</div>
+							<div class="text-lg font-bold mt-2">좋아요 ${ recipe.goodRP }</div>
 						</c:if>
 						<c:if test="${ actorCanMakeRP == false }">
 							<i class="fa-solid fa-heart-circle-check"></i>
-							<div class="text-lg font-bold mt-2">좋아요 ${ recipe.extra__goodRP }</div>
+							<div class="text-lg font-bold mt-2">좋아요 ${ recipe.goodRP }</div>
 						</c:if>
 					</a>
 					<!-- 댓글 -->

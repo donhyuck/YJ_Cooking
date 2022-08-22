@@ -19,12 +19,12 @@ public class Recipe {
 	private int time;
 	private int level;
 	private int hitCount;
+	private int goodRP;
 	private String tip;
 
 	private String extra__writerName;
 	private boolean extra__actorCanModify;
 	private boolean extra__actorCanDelete;
-	private int extra__goodRP;
 
 	public String getForPrintRegDate_Type1() {
 		return regDate.substring(2, 16).replace(" ", "</br>");

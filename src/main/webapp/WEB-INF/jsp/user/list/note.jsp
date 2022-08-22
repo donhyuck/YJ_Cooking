@@ -24,7 +24,7 @@
 							<div class="text-sm">
 								<span class="text-red-500 mr-1">
 									<i class="fa-solid fa-heart"></i>
-									${ recipe.extra__goodRP }
+									${ recipe.goodRP }
 								</span>
 								<span class="text-gray-500">조회수 ${ recipe.hitCount }</span>
 							</div>
@@ -52,7 +52,7 @@
 							<div class="text-sm">
 								<span class="text-red-500 mr-1">
 									<i class="fa-solid fa-heart"></i>
-									${ recipe.extra__goodRP }
+									${ recipe.goodRP }
 								</span>
 								<span class="text-gray-500">조회수 ${ recipe.hitCount }</span>
 							</div>

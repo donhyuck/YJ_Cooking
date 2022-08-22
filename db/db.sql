@@ -240,3 +240,20 @@ LEFT JOIN reactionPoint AS RP
 ON RP.relTypeCode = 'recipe'
 AND R.id = RP.relId
 WHERE R.id = 1;
+
+# 레시피 테이블 goodRP 컬럼을 추가
+ALTER TABLE recipe ADD COLUMN goodRP INT(10) UNSIGNED NOT NULL DEFAULT 0 AFTER hitCount;
+
+UPDATE recipe AS R
+INNER JOIN (
+	SELECT RP.relId,
+	SUM(IF(RP.point > 0, RP.point, 0)) AS goodRP
+	FROM reactionPoint AS RP
+	WHERE relTypeCode = 'recipe'
+	GROUP BY RP.relTypeCode, RP.relId
+) AS RP_SUM
+ON R.id = RP_SUM.relId
+SET R.goodRP = RP_SUM.goodRP;
+
+SELECT * FROM recipe;
+SELECT * FROM reactionPoint;

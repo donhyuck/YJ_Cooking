@@ -18,6 +18,7 @@ public class Recipe {
 	private int amount;
 	private int time;
 	private int level;
+	private int hitCount;
 
 	private String extra__writerName;
 	private boolean extra__actorCanModify;

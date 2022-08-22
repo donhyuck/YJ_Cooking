@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.ldh.exam.demo.vo.Recipe;
+import com.ldh.exam.demo.vo.ResultData;
 
 @Mapper
 public interface RecipeRepository {
@@ -23,4 +24,5 @@ public interface RecipeRepository {
 
 	public Recipe getRecipeById(int id);
 
+	public int increaseHitCount(int id);
 }

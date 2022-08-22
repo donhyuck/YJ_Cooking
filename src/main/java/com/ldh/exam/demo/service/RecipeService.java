@@ -114,4 +114,18 @@ public class RecipeService {
 		return ResultData.from("S-1", "삭제가능합니다.");
 	}
 
+	// 레시피가 있을 경우 조회수 증가
+	public ResultData increaseHitCount(int id) {
+
+		Recipe recipe = recipeRepository.getRecipeById(id);
+
+		if (recipe == null) {
+			return ResultData.from("F-A", Ut.f("%s번 레시피를 찾을 수 없습니다.", id));
+		}
+
+		recipeRepository.increaseHitCount(id);
+
+		return ResultData.from("S-1", "조회수가 1만큼 증가했습니다.");
+	}
+
 }

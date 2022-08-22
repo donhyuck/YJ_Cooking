@@ -141,3 +141,6 @@ SET `amount` = 2,
 WHERE id = 3;
 
 SELECT * FROM recipe;
+
+# 레시피 테이블에 조회수 추가
+ALTER TABLE recipe ADD COLUMN hitCount INT(10) UNSIGNED NOT NULL DEFAULT 0;

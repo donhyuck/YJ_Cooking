@@ -23,7 +23,7 @@
 							<div>${ recipe.extra__writerName }</div>
 							<span class="text-sm">
 								<i class="fa-solid fa-heart text-red-500"></i>
-								(12) 조회수 85
+								(12) 조회수 ${ recipe.hitCount }
 							</span>
 						</div>
 					</div>
@@ -47,7 +47,7 @@
 							<div>${ recipe.extra__writerName }</div>
 							<span class="text-sm">
 								<i class="fa-solid fa-heart text-red-500"></i>
-								(12) 조회수 85
+								(12) 조회수 ${ recipe.hitCount }
 							</span>
 						</div>
 					</div>

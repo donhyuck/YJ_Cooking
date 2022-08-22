@@ -12,7 +12,7 @@
 			<div class="main-photo w-3/6">
 				<img class="w-full rounded-md" src="https://tse4.mm.bing.net/th?id=OIP.kwt4oKZDd-goVuBezaVQRQHaE7&pid=Api&P=0"
 					alt="" />
-				<div class="text-right mt-2 mr-4 text-black">조회수 111</div>
+				<div class="text-right text-lg mt-2 mr-4 text-gray-400">조회수 ${ recipe.hitCount }</div>
 			</div>
 
 			<div class="flex flex-col w-2/5 h-80 m-auto">
@@ -73,7 +73,7 @@
 				<div class="under-area flex items-center justify-around mt-12">
 					<!-- 팁 / 주의사항 -->
 					<div class="text-lg w-2/3 p-4 border border-gray-200 rounded-lg shadow-xl">
-						<div class="bg-white mb-2 font-bold text-red-600">
+						<div class="mb-2 font-bold text-red-600">
 							<i class="fa-solid fa-lightbulb"></i>
 							<span class="ml-1">팁 / 주의사항</span>
 						</div>

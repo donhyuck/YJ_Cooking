@@ -68,4 +68,11 @@
 		WHERE R.id = #{id}
 	</select>
 
+	<update id="increaseHitCount">
+		UPDATE recipe
+		SET hitCount = hitCount + 1
+		WHERE id =
+		#{id}
+	</update>
+
 </mapper> 

@@ -147,3 +147,66 @@ ALTER TABLE recipe ADD COLUMN hitCount INT(10) UNSIGNED NOT NULL DEFAULT 0;
 
 # 레시피 테이블에 팁/주의사항 추가
 ALTER TABLE recipe ADD COLUMN tip TEXT;
+
+UPDATE recipe
+SET tip = '핏물 뺄 시간이 부족하다면 끓는 물에 5분 정도 넣었다 빼시돼요.'
+WHERE id = 2;
+
+# 리액션포인트 테이블 생성
+CREATE TABLE reactionPoint (
+    id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    regDate DATETIME NOT NULL,
+    updateDate DATETIME NOT NULL,
+    memberId INT(10) UNSIGNED NOT NULL,
+    relTypeCode CHAR(30) NOT NULL COMMENT '관련데이터타입코드',
+    relId INT(10) UNSIGNED NOT NULL COMMENT '관련데이터번호',
+    `point` SMALLINT(2) NOT NULL
+);
+
+# 리액션포인트 테스트 데이터
+## 1번 회원이 1번 recipe 싫어요
+INSERT INTO reactionPoint
+SET regDate = NOW(),
+updateDate = NOW(),
+memberId = 1,
+relTypeCode = 'recipe',
+relId = 1,
+`point` = -1;
+
+## 1번 회원이 2번 recipe 좋아요
+INSERT INTO reactionPoint
+SET regDate = NOW(),
+updateDate = NOW(),
+memberId = 1,
+relTypeCode = 'recipe',
+relId = 2,
+`point` = 1;
+
+## 2번 회원이 1번 recipe 싫어요
+INSERT INTO reactionPoint
+SET regDate = NOW(),
+updateDate = NOW(),
+memberId = 2,
+relTypeCode = 'recipe',
+relId = 1,
+`point` = -1;
+
+## 2번 회원이 2번 recipe 좋아요
+INSERT INTO reactionPoint
+SET regDate = NOW(),
+updateDate = NOW(),
+memberId = 2,
+relTypeCode = 'recipe',
+relId = 2,
+`point` = 1;
+
+## 3번 회원이 1번 recipe 좋아요
+INSERT INTO reactionPoint
+SET regDate = NOW(),
+updateDate = NOW(),
+memberId = 3,
+relTypeCode = 'recipe',
+relId = 1,
+`point` = 1;
+
+SELECT * FROM reactionPoint;

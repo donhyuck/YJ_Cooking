@@ -11,6 +11,17 @@
 
 <script>
 	function RecipeDetail__increaseHitCount() {
+		<!-- 이미 읽은 레시피는 조회수 증가 요청이 없도록
+		const localStorageKey = 'recipe__' + params.id + '__viewDone';
+
+		if (localStorage.getItem(localStorageKey)) {
+			return;
+		}
+
+		localStorage.setItem(localStorageKey, true);
+		 -->
+
+		<!-- 조회수 증가 메서드 작동 -->
 		$.get('../recipe/doIncreaseHitCount', {
 			id : params.id,
 			ajaxMode : 'Y'

@@ -20,6 +20,7 @@ public class Recipe {
 	private int level;
 	private int hitCount;
 	private int goodRP;
+	private int scrap;
 	private String tip;
 
 	private String extra__writerName;

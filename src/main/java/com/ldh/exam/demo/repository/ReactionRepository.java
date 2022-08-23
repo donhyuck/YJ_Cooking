@@ -10,4 +10,6 @@ public interface ReactionRepository {
 	public void doMakeLike(int memberId, int relId, String relTypeCode);
 
 	public void doCancelLike(int memberId, int relId, String relTypeCode);
+
+	public int getScrapSumByRelId(int memberId, int relId, String relTypeCode);
 }

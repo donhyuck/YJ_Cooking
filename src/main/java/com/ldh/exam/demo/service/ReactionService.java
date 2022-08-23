@@ -75,4 +75,20 @@ public class ReactionService {
 		return ResultData.from("S-1", Ut.f("%d번 %s [좋아요] 취소", relId, forPrintCodeName));
 	}
 
+	// 스크랩이 없으면 리액션 가능
+	public ResultData actorCanScrap(int memberId, int relId, String relTypeCode) {
+
+		if (memberId == 0) {
+			return ResultData.from("F-A", "로그인 후 이용해주세요.");
+		}
+
+		int sumScrapPoint = reactionRepository.getScrapSumByRelId(memberId, relId, relTypeCode);
+
+		if (sumScrapPoint != 0) {
+			return ResultData.from("F-1", "이미 스크랩했습니다.", "sumScrapPoint", sumScrapPoint);
+		}
+
+		return ResultData.from("S-1", "스크랩이 가능합니다.", "sumScrapPoint", sumScrapPoint);
+	}
+
 }

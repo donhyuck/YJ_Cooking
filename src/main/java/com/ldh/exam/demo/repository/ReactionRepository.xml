@@ -34,4 +34,15 @@
 		#{relTypeCode}
 		AND relId = #{relId}
 	</delete>
+
+	<select id="getScrapSumByRelId" resultType="int">
+		SELECT
+		IFNULL(SUM(SP.point), 0) AS sum
+		FROM scrapPoint AS SP
+		WHERE
+		SP.relTypeCode = #{relTypeCode}
+		AND SP.relId = #{relId}
+		AND SP.memberId
+		= #{memberId}
+	</select>
 </mapper> 

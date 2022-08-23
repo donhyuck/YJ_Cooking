@@ -93,11 +93,20 @@
 			<div class="rection-box p-3 w-full flex flex-col">
 				<div class="upper-area flex items-center justify-around text-4xl text-center">
 					<!-- 스크랩 -->
-					<a href="#" class="text-yellow-400 hover:text-yellow-700">
-						<i class="fa-solid fa-file"></i>
-						<div class="text-lg font-bold mt-2">스크랩 111</div>
-						<!-- <i class="fa-solid fa-file-circle-check"></i> -->
-					</a>
+					<div class="text-yellow-400 hover:text-yellow-700">
+						<c:if test="${ actorCanMakeScrap || rq.loginedMemberId == 0 }">
+							<a href="/user/reaction/doMakeScrap?relTypeCode=recipe&relId=${ param.id }&replaceUri=${rq.encodedCurrentUri}">
+								<i class="fa-solid fa-file"></i>
+								<div class="text-lg font-bold mt-2">스크랩 ${ recipe.scrap }</div>
+							</a>
+						</c:if>
+						<c:if test="${ actorCanCancelScrap }">
+							<a href="/user/reaction/doCancelScrap?relTypeCode=recipe&relId=${ param.id }&replaceUri=${rq.encodedCurrentUri}">
+								<i class="fa-solid fa-file-circle-check"></i>
+								<div class="text-lg font-bold mt-2">스크랩 ${ recipe.scrap }</div>
+							</a>
+						</c:if>
+					</div>
 					<!-- 하트 -->
 					<div class="text-red-400 hover:text-red-700">
 						<c:if test="${ actorCanMakeRP || rq.loginedMemberId == 0 }">

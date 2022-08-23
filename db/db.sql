@@ -309,5 +309,16 @@ relId = 3,
 # 레시피 테이블 scrap 컬럼을 추가
 ALTER TABLE recipe ADD COLUMN scrap INT(10) UNSIGNED NOT NULL DEFAULT 0 AFTER goodRP;
 
+UPDATE recipe AS R
+INNER JOIN (
+	SELECT SP.relId,
+	SUM(IF(SP.point > 0, SP.point, 0)) AS scrap
+	FROM scrapPoint AS SP
+	WHERE relTypeCode = 'recipe'
+	GROUP BY SP.relTypeCode, SP.relId
+) AS SP_SUM
+ON R.id = SP_SUM.relId
+SET R.scrap = SP_SUM.scrap;
+
 SELECT * FROM recipe;
 SELECT * FROM scrapPoint;

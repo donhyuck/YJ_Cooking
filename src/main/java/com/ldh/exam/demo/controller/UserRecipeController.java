@@ -83,12 +83,21 @@ public class UserRecipeController {
 			model.addAttribute("actorCanCancelRP", true);
 		}
 
+		// 스크랩 가능여부
+		ResultData actorCanScrapRd = reactionService.actorCanScrap(rq.getLoginedMemberId(), id, "recipe");
+
+		// 이미 스크랩한 경우(F-1) 스크랩 취소가능
+		if (actorCanScrapRd.getResultCode().equals("F-1")) {
+			model.addAttribute("actorCanCancelScrap", true);
+		}
+
 		// 등록한 회원 닉네임 가져오기
 		Member actor = memberService.getMemberById(recipe.getMemberId());
 		String actorNickname = actor.getNickname();
 
 		model.addAttribute("recipe", recipe);
 		model.addAttribute("actorCanMakeRP", actorCanReactionRd.isSuccess());
+		model.addAttribute("actorCanMakeScrap", actorCanScrapRd.isSuccess());
 		model.addAttribute("actorNickname", actorNickname);
 
 		return "user/recipe/detail";

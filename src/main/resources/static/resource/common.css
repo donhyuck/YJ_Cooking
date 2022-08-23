@@ -16,30 +16,6 @@ body {
 	min-width: 1040px;
 }
 
-/* 상단 공통영역 스타일 시작 */
-.second-bar>.menu-box>.menu {
-	width: 18rem;
-	margin-left: 10px;
-	margin-right: 10px;
-}
-
-.second-bar>.menu-box>.menu:hover>div {
-	color: rgb(161, 98, 7);
-	opacity: 0.8;
-}
-
-.second-bar>.menu-box .menu-title {
-	font-weight: 700;
-	color: rgb(255, 255, 255);
-}
-
-.second-bar>.menu-box .menu-info {
-	font-size: 0.8rem;
-	line-height: 1.25rem;
-}
-
-/* 상단 공통영역 스타일 끝 */
-
 /* 회원가입 입력 스타일 시작 */
 /* pl-4 w-96 h-14 border-2 border-gray-300 text-xl */
 .member-box .member-inputType {

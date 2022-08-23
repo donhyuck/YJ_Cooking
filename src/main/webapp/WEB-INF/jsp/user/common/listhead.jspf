@@ -95,28 +95,6 @@
 			<!-- 사용자박스 영역 끝 -->
 		</section>
 
-		<!-- 레시피 목록 박스 영역 시작 -->
-		<section class="second-bar bg-green-400 opacity-80 w-full h-16">
-			<div class="menu-box flex items-center justify-around h-full text-center text-lg font-bold px-40">
-				<a href="/user/list/suggest" class="">
-					<div class="text-white hover:text-yellow-300">추천 레시피</div>
-					<div class="text-xs font-normal text-black">오늘 뭐 먹지?</div>
-				</a>
-				<a href="/user/list/category" class="">
-					<div class="text-white hover:text-yellow-300">레시피 모아보기</div>
-					<div class="text-xs font-normal text-black">맛있는 한 끼를 찾아서</div>
-				</a>
-				<a href="/user/list/rank" class="">
-					<div class="text-white hover:text-yellow-300">랭킹보기</div>
-					<div class="text-xs font-normal text-black">명예의 전당</div>
-				</a>
-				<a href="/user/list/note" class="">
-					<div class="text-white hover:text-yellow-300">레시피 노트</div>
-					<div class="text-xs font-normal text-black">나만의 요리사전</div>
-				</a>
-			</div>
-		</section>
-		<!-- 레시피 목록 박스 영역 끝 -->
 	</div>
 
 	<main>

@@ -15,7 +15,7 @@
 				<div class="w-80">
 					<img class="w-full rounded-lg" src="https://cdn.pixabay.com/photo/2017/06/16/13/35/chef-2409158_960_720.png" alt="" />
 				</div>
-				<div class="p-5 w-3/5 relative text-lg">
+				<div class="p-5 w-3/5 relative text-xl">
 					<div class="grid grid-cols-3 gap-7 absolute top-8 w-full">
 						<div>
 							<div class="badge badge-lg badge-outline mb-2">최초 가입일</div>
@@ -34,8 +34,8 @@
 							<div>${ member.forPrintCellphoneNo }</div>
 						</div>
 						<div>
-							<div class="badge badge-lg badge-outline mb-2 -ml-2">닉네임</div>
-							<div>${ member.nickname }</div>
+							<div class="badge badge-lg badge-outline mb-2">닉네임</div>
+							<div class="ml-4">${ member.nickname }</div>
 						</div>
 					</div>
 					<div class="flex space-x-4 absolute bottom-8">
@@ -50,7 +50,7 @@
 		</section>
 		<section class="myAction-list bg-white rounded-md p-4 mt-4">
 			<div class="mb-2">
-				<div class="text-xl mb-1">내가 좋아요 한 레시피</div>
+				<div class="text-xl mb-1">내가 쓴 댓글</div>
 			</div>
 			<div class="flex">
 				<c:forEach begin="1" end="4">

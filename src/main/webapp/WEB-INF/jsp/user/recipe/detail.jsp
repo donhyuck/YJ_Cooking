@@ -100,7 +100,7 @@
 					</a>
 					<!-- 하트 -->
 					<div class="text-red-400 hover:text-red-700">
-						<c:if test="${ actorCanMakeRP }">
+						<c:if test="${ actorCanMakeRP || rq.loginedMemberId == 0 }">
 							<a href="/user/reaction/doMakeLike?relTypeCode=recipe&relId=${ param.id }&replaceUri=${ rq.encodedCurrentUri }">
 								<i class="fa-solid fa-heart"></i>
 								<div class="text-lg font-bold mt-2">좋아요 ${ recipe.goodRP }</div>

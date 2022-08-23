@@ -34,4 +34,6 @@ public interface RecipeRepository {
 	public void increaseScrapPoint(int id);
 
 	public void decreaseScrapPoint(int id);
+
+	public List<Recipe> getScrapRecipes(int memberId);
 }

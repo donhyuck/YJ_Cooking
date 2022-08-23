@@ -63,6 +63,7 @@ public class UserRecipeController {
 	@RequestMapping("/user/list/note")
 	public String showNoteList(Model model) {
 
+		// 스크랩한 레시피 목록
 		List<Recipe> recipes = recipeService.getForPrintRecipes(rq.getLoginedMemberId());
 		model.addAttribute("recipes", recipes);
 

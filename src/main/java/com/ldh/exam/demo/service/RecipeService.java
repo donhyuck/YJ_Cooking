@@ -191,4 +191,21 @@ public class RecipeService {
 		return ResultData.from("S-1", Ut.f("%d번 레시피 [스크랩]이 1만큼 감소했습니다.", id));
 
 	}
+
+	// 스크랩한 레시피
+	public List<Recipe> getScrapRecipes(int memberId) {
+
+		if (memberId == 0) {
+			return null;
+		}
+
+		List<Recipe> recipes = recipeRepository.getScrapRecipes(memberId);
+
+		for (Recipe recipe : recipes) {
+			updateForPrintData(memberId, recipe);
+		}
+
+		return recipes;
+
+	}
 }

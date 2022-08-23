@@ -25,6 +25,16 @@
 		BY R.id DESC
 	</select>
 
+	<select id="getScrapRecipes" resultType="Recipe">
+		SELECT R.*,
+		M.nickname AS extra__writerName
+		FROM recipe AS R
+		LEFT JOIN `member` AS M
+		ON R.memberId = M.id
+		ORDER
+		BY R.id DESC
+	</select>
+
 	<insert id="writeRecipe">
 		INSERT INTO recipe
 		SET regDate = NOW(),

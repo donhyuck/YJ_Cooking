@@ -128,8 +128,23 @@ public class RecipeService {
 		return ResultData.from("S-1", "조회수가 1만큼 증가했습니다.");
 	}
 
+	// 조회수 가져오기
 	public int getRecipeHitCount(int id) {
 
 		return recipeRepository.getRecipeHitCount(id);
+	}
+
+	// 레시피가 있을 경우 좋아요 수 증가
+	public ResultData increaseGoodRP(int id) {
+
+		Recipe recipe = recipeRepository.getRecipeById(id);
+
+		if (recipe == null) {
+			return ResultData.from("F-A", Ut.f("%s번 레시피를 찾을 수 없습니다.", id));
+		}
+
+		recipeRepository.increaseGoodRP(id);
+
+		return ResultData.from("S-1", Ut.f("%d번 레시피 좋아요가 1만큼 증가했습니다.", id));
 	}
 }

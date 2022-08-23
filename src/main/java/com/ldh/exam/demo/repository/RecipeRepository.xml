@@ -79,5 +79,12 @@
 		recipe
 		WHERE id = #{id}
 	</select>
-	
+
+	<update id="increaseGoodRP">
+		UPDATE recipe
+		SET goodRP = goodRP + 1
+		WHERE id =
+		#{id}
+	</update>
+
 </mapper> 

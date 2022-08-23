@@ -3,14 +3,17 @@ package com.ldh.exam.demo.service;
 import org.springframework.stereotype.Service;
 
 import com.ldh.exam.demo.repository.ReactionRepository;
+import com.ldh.exam.demo.util.Ut;
 import com.ldh.exam.demo.vo.ResultData;
 
 @Service
 public class ReactionService {
 
+	private RecipeService recipeService;
 	private ReactionRepository reactionRepository;
 
-	public ReactionService(ReactionRepository reactionRepository) {
+	public ReactionService(RecipeService recipeService, ReactionRepository reactionRepository) {
+		this.recipeService = recipeService;
 		this.reactionRepository = reactionRepository;
 	}
 
@@ -33,7 +36,17 @@ public class ReactionService {
 	// 좋아요 처리
 	public void doMakeLike(int memberId, int relId, String relTypeCode) {
 
+		if (memberId == 0) {
+			return;
+		}
+
 		reactionRepository.doMakeLike(memberId, relId, relTypeCode);
+
+		// 해당 레시피의 좋아요 갱신
+		switch (relTypeCode) {
+		case "recipe":
+			recipeService.increaseGoodRP(relId);
+		}
 	}
 
 }

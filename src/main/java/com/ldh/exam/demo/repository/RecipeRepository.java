@@ -13,6 +13,8 @@ public interface RecipeRepository {
 
 	public List<Recipe> getForPrintRecipes();
 
+	public List<Recipe> getScrapRecipes(int memberId);
+
 	public void writeRecipe(int memberId, String title, String body);
 
 	public void modifyRecipe(int id, String title, String body);
@@ -34,6 +36,4 @@ public interface RecipeRepository {
 	public void increaseScrapPoint(int id);
 
 	public void decreaseScrapPoint(int id);
-
-	public List<Recipe> getScrapRecipes(int memberId);
 }

@@ -60,22 +60,22 @@
 			</div>
 			<div class="flex grid grid-cols-3 gap-10">
 				<!-- 내가 스크랩한 레시피 -->
-				<c:forEach var="recipe" items="${ recipes }">
+				<c:forEach var="scrapRecipe" items="${ scrapRecipes }">
 					<div>
-						<a href="/user/recipe/detail?id=${ recipe.id }">
+						<a href="/user/recipe/detail?id=${ scrapRecipe.id }">
 							<img class="w-full rounded-md" src="https://tse4.mm.bing.net/th?id=OIP.kwt4oKZDd-goVuBezaVQRQHaE7&pid=Api&P=0"
 								alt="" />
 						</a>
 						<div class="ml-3 mt-2">
-							<div class="text-lg">${ recipe.title }</div>
-							<div>${ recipe.extra__writerName }</div>
+							<div class="text-lg">${ scrapRecipe.title }</div>
+							<div>${ scrapRecipe.extra__writerName }</div>
 							<!-- 좋아요 , 조회수 -->
 							<div class="text-sm">
 								<span class="text-red-500 mr-1">
 									<i class="fa-solid fa-heart"></i>
-									${ recipe.goodRP }
+									${ scrapRecipe.goodRP }
 								</span>
-								<span class="text-gray-500">조회수 ${ recipe.hitCount }</span>
+								<span class="text-gray-500">조회수 ${ scrapRecipe.hitCount }</span>
 							</div>
 						</div>
 					</div>

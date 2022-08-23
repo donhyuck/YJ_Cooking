@@ -77,6 +77,24 @@ nickname = '춘향',
 cellphoneNo = '01096319631',
 email = 'tester02@test.com';
 
+INSERT INTO `member`
+SET regDate = NOW(),
+updateDate = NOW(),
+loginId = 'test3',
+loginPw = 'test3',
+nickname = '임꺽정',
+cellphoneNo = '01034343434',
+email = 'tester03@test.com';
+
+INSERT INTO `member`
+SET regDate = NOW(),
+updateDate = NOW(),
+loginId = 'test4',
+loginPw = 'test4',
+nickname = '홍길동',
+cellphoneNo = '01089895656',
+email = 'tester04@test.com';
+
 SELECT * FROM `member`;
 
 # 레시피 테이블에 회원정보 추가
@@ -321,4 +339,21 @@ ON R.id = SP_SUM.relId
 SET R.scrap = SP_SUM.scrap;
 
 SELECT * FROM recipe;
+SELECT * FROM `member`;
 SELECT * FROM scrapPoint;
+
+## 내가 스크랩한 레시피 목록 가져오기
+SELECT R.*
+FROM (
+    SELECT R.*,
+    M.nickname AS extra__writerName
+    FROM recipe AS R
+    LEFT JOIN
+    `member` AS M
+    ON R.memberId = M.id
+) AS R
+LEFT JOIN scrapPoint AS SP
+ON R.id = SP.relId
+WHERE SP.memberId = 2
+GROUP BY R.id
+ORDER BY R.id DESC;

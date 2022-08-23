@@ -78,7 +78,7 @@ public class UserRecipeController {
 		// 좋아요 가능여부
 		ResultData actorCanReactionRd = reactionService.actorCanReaction(rq.getLoginedMemberId(), id, "recipe");
 
-		// 등록한 회원 닉넴임 가져오기
+		// 등록한 회원 닉네임 가져오기
 		Member actor = memberService.getMemberById(recipe.getMemberId());
 		String actorNickname = actor.getNickname();
 

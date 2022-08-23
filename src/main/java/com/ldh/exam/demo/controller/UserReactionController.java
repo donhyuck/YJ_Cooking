@@ -32,8 +32,8 @@ public class UserReactionController {
 		}
 
 		// 좋아요 처리
-		reactionService.doMakeLike(rq.getLoginedMemberId(), relId, relTypeCode);
+		ResultData doMakeLikeRd = reactionService.doMakeLike(rq.getLoginedMemberId(), relId, relTypeCode);
 
-		return rq.jsReplace("좋아요", replaceUri);
+		return rq.jsReplace(doMakeLikeRd.getMsg(), replaceUri);
 	}
 }

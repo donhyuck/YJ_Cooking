@@ -34,19 +34,24 @@ public class ReactionService {
 	}
 
 	// 좋아요 처리
-	public void doMakeLike(int memberId, int relId, String relTypeCode) {
+	public ResultData doMakeLike(int memberId, int relId, String relTypeCode) {
 
 		if (memberId == 0) {
-			return;
+			return ResultData.from("F-A", "로그인 후 이용해주세요.");
 		}
 
 		reactionRepository.doMakeLike(memberId, relId, relTypeCode);
 
 		// 해당 레시피의 좋아요 갱신
+		String forPrintCodeName = "";
+
 		switch (relTypeCode) {
 		case "recipe":
 			recipeService.increaseGoodRP(relId);
+			forPrintCodeName = "레시피";
 		}
+
+		return ResultData.from("S-1", Ut.f("%d번 %s [좋아요] 처리", relId, forPrintCodeName));
 	}
 
 }

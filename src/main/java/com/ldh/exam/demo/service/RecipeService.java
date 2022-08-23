@@ -145,6 +145,6 @@ public class RecipeService {
 
 		recipeRepository.increaseGoodRP(id);
 
-		return ResultData.from("S-1", Ut.f("%d번 레시피 좋아요가 1만큼 증가했습니다.", id));
+		return ResultData.from("S-1", Ut.f("%d번 레시피 [좋아요]가 1만큼 증가했습니다.", id));
 	}
 }

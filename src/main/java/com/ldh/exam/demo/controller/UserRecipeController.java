@@ -78,6 +78,11 @@ public class UserRecipeController {
 		// 좋아요 가능여부
 		ResultData actorCanReactionRd = reactionService.actorCanReaction(rq.getLoginedMemberId(), id, "recipe");
 
+		// 이미 리액션한 경우(F-1) 리액션 취소가능
+		if (actorCanReactionRd.getResultCode().equals("F-1")) {
+			model.addAttribute("actorCanCancelRP", true);
+		}
+
 		// 등록한 회원 닉네임 가져오기
 		Member actor = memberService.getMemberById(recipe.getMemberId());
 		String actorNickname = actor.getNickname();

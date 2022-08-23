@@ -54,4 +54,25 @@ public class ReactionService {
 		return ResultData.from("S-1", Ut.f("%d번 %s [좋아요] 처리", relId, forPrintCodeName));
 	}
 
+	// 좋아요 취소
+	public ResultData doCancelLike(int memberId, int relId, String relTypeCode) {
+
+		if (memberId == 0) {
+			return ResultData.from("F-A", "로그인 후 이용해주세요.");
+		}
+
+		reactionRepository.doCancelLike(memberId, relId, relTypeCode);
+
+		// 해당 레시피의 좋아요 갱신
+		String forPrintCodeName = "";
+
+		switch (relTypeCode) {
+		case "recipe":
+			recipeService.decreaseGoodRP(relId);
+			forPrintCodeName = "레시피";
+		}
+
+		return ResultData.from("S-1", Ut.f("%d번 %s [좋아요] 취소", relId, forPrintCodeName));
+	}
+
 }

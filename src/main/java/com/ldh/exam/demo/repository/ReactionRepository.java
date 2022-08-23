@@ -8,4 +8,6 @@ public interface ReactionRepository {
 	public int getReactionSumByRelId(int memberId, int relId, String relTypeCode);
 
 	public void doMakeLike(int memberId, int relId, String relTypeCode);
+
+	public void doCancelLike(int memberId, int relId, String relTypeCode);
 }

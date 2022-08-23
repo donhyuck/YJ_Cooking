@@ -28,4 +28,6 @@ public interface RecipeRepository {
 	public int getRecipeHitCount(int id);
 
 	public void increaseGoodRP(int id);
+
+	public void decreaseGoodRP(int id);
 }

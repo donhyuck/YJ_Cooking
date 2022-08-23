@@ -106,10 +106,12 @@
 								<div class="text-lg font-bold mt-2">좋아요 ${ recipe.goodRP }</div>
 							</a>
 						</c:if>
-						<a href="#">
-							<i class="fa-solid fa-heart-circle-check"></i>
-							<div class="text-lg font-bold mt-2">좋아요 ${ recipe.goodRP }</div>
-						</a>
+						<c:if test="${ actorCanCancelRP }">
+							<a href="/user/reaction/doCancelLike?relTypeCode=recipe&relId=${ param.id }&replaceUri=${ rq.encodedCurrentUri }">
+								<i class="fa-solid fa-heart-circle-check"></i>
+								<div class="text-lg font-bold mt-2">좋아요 ${ recipe.goodRP }</div>
+							</a>
+						</c:if>
 					</div>
 					<!-- 댓글 -->
 					<a href="#" class="text-green-500 hover:text-green-700">

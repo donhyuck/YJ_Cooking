@@ -87,4 +87,11 @@
 		#{id}
 	</update>
 
+	<update id="decreaseGoodRP">
+		UPDATE recipe
+		SET goodRP = goodRP - 1
+		WHERE id =
+		#{id}
+	</update>
+
 </mapper> 

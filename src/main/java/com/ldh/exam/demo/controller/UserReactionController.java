@@ -22,7 +22,7 @@ public class UserReactionController {
 	// 좋아요 메서드
 	@RequestMapping("/user/reaction/doMakeLike")
 	@ResponseBody
-	public String doMakeLike(String relTypeCode, int relId) {
+	public String doMakeLike(String relTypeCode, int relId, String replaceUri) {
 
 		ResultData isActorCanReactionRd = reactionService.actorCanReaction(rq.getLoginedMemberId(), relId, relTypeCode);
 
@@ -30,6 +30,6 @@ public class UserReactionController {
 			return rq.jsHistoryBack(isActorCanReactionRd.getMsg());
 		}
 
-		return rq.jsReplace("좋아요", "/");
+		return rq.jsReplace("좋아요", replaceUri);
 	}
 }

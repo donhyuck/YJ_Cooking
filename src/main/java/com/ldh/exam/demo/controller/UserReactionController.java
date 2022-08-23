@@ -24,11 +24,15 @@ public class UserReactionController {
 	@ResponseBody
 	public String doMakeLike(String relTypeCode, int relId, String replaceUri) {
 
+		// 사용자가 리액션 가능여부 확인
 		ResultData isActorCanReactionRd = reactionService.actorCanReaction(rq.getLoginedMemberId(), relId, relTypeCode);
 
 		if (isActorCanReactionRd.isFail()) {
 			return rq.jsHistoryBack(isActorCanReactionRd.getMsg());
 		}
+
+		// 좋아요 처리
+		reactionService.doMakeLike(rq.getLoginedMemberId(), relId, relTypeCode);
 
 		return rq.jsReplace("좋아요", replaceUri);
 	}

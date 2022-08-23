@@ -15,4 +15,15 @@
 		= #{memberId}
 	</select>
 
+	<insert id="doMakeLike">
+		INSERT INTO reactionPoint
+		SET regDate = NOW(),
+		updateDate = NOW(),
+		memberId = #{memberId},
+		relTypeCode =
+		#{relTypeCode},
+		relId = #{relId},
+		`point` = 1
+	</insert>
+
 </mapper> 

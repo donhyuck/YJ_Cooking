@@ -30,4 +30,10 @@ public class ReactionService {
 		return ResultData.from("S-1", "리액션이 가능합니다.", "sumReactionPoint", sumReactionPoint);
 	}
 
+	// 좋아요 처리
+	public void doMakeLike(int memberId, int relId, String relTypeCode) {
+
+		reactionRepository.doMakeLike(memberId, relId, relTypeCode);
+	}
+
 }

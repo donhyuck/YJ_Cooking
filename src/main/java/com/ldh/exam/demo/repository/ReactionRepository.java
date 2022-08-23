@@ -12,4 +12,8 @@ public interface ReactionRepository {
 	public void doCancelLike(int memberId, int relId, String relTypeCode);
 
 	public int getScrapSumByRelId(int memberId, int relId, String relTypeCode);
+
+	public void doMakeScrap(int memberId, int relId, String relTypeCode);
+
+	public void doCancelScrap(int memberId, int relId, String relTypeCode);
 }

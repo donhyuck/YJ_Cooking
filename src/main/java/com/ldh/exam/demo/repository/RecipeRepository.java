@@ -30,4 +30,8 @@ public interface RecipeRepository {
 	public void increaseGoodRP(int id);
 
 	public void decreaseGoodRP(int id);
+
+	public void increaseScrapPoint(int id);
+
+	public void decreaseScrapPoint(int id);
 }

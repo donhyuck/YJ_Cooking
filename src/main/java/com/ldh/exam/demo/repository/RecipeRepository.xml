@@ -94,4 +94,18 @@
 		#{id}
 	</update>
 
+	<update id="increaseScrapPoint">
+		UPDATE recipe
+		SET scrap = scrap + 1
+		WHERE id =
+		#{id}
+	</update>
+
+	<update id="decreaseScrapPoint">
+		UPDATE recipe
+		SET scrap = scrap - 1
+		WHERE id =
+		#{id}
+	</update>
+
 </mapper> 

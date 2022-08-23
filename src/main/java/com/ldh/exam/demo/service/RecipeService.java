@@ -161,4 +161,34 @@ public class RecipeService {
 
 		return ResultData.from("S-1", Ut.f("%d번 레시피 [좋아요]가 1만큼 감소했습니다.", id));
 	}
+
+	// 레시피가 있을 경우 스크랩 수 증가
+	public ResultData increaseScrapPoint(int id) {
+
+		Recipe recipe = recipeRepository.getRecipeById(id);
+
+		if (recipe == null) {
+			return ResultData.from("F-A", Ut.f("%s번 레시피를 찾을 수 없습니다.", id));
+		}
+
+		recipeRepository.increaseScrapPoint(id);
+
+		return ResultData.from("S-1", Ut.f("%d번 레시피 [스크랩]이 1만큼 증가했습니다.", id));
+
+	}
+
+	// 레시피가 있을 경우 좋아요 수 감소
+	public ResultData decreaseScrapPoint(int id) {
+
+		Recipe recipe = recipeRepository.getRecipeById(id);
+
+		if (recipe == null) {
+			return ResultData.from("F-A", Ut.f("%s번 레시피를 찾을 수 없습니다.", id));
+		}
+
+		recipeRepository.decreaseScrapPoint(id);
+
+		return ResultData.from("S-1", Ut.f("%d번 레시피 [스크랩]이 1만큼 감소했습니다.", id));
+
+	}
 }

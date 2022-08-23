@@ -91,4 +91,46 @@ public class ReactionService {
 		return ResultData.from("S-1", "스크랩이 가능합니다.", "sumScrapPoint", sumScrapPoint);
 	}
 
+	// 스크랩 처리
+	public ResultData doMakeScrap(int memberId, int relId, String relTypeCode) {
+
+		if (memberId == 0) {
+			return ResultData.from("F-A", "로그인 후 이용해주세요.");
+		}
+
+		reactionRepository.doMakeScrap(memberId, relId, relTypeCode);
+
+		// 해당 레시피의 스크랩 수 갱신
+		String forPrintCodeName = "";
+
+		switch (relTypeCode) {
+		case "recipe":
+			recipeService.increaseScrapPoint(relId);
+			forPrintCodeName = "레시피";
+		}
+
+		return ResultData.from("S-1", Ut.f("%d번 %s [스크랩] 처리", relId, forPrintCodeName));
+	}
+
+	// 스크랩 취소
+	public ResultData doCancelScrap(int memberId, int relId, String relTypeCode) {
+
+		if (memberId == 0) {
+			return ResultData.from("F-A", "로그인 후 이용해주세요.");
+		}
+
+		reactionRepository.doCancelScrap(memberId, relId, relTypeCode);
+
+		// 해당 레시피의 스크랩 갱신
+		String forPrintCodeName = "";
+
+		switch (relTypeCode) {
+		case "recipe":
+			recipeService.decreaseScrapPoint(relId);
+			forPrintCodeName = "레시피";
+		}
+
+		return ResultData.from("S-1", Ut.f("%d번 %s [스크랩] 취소", relId, forPrintCodeName));
+	}
+
 }

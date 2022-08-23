@@ -54,4 +54,40 @@ public class UserReactionController {
 
 		return rq.jsReplace(doCancelLikeRd.getMsg(), replaceUri);
 	}
+
+	// 스크랩 처리 메서드
+	@RequestMapping("/user/reaction/doMakeScrap")
+	@ResponseBody
+	public String doMakeScrap(String relTypeCode, int relId, String replaceUri) {
+
+		// 사용자가 스크랩 가능여부 확인
+		ResultData isActorCanScrapRd = reactionService.actorCanScrap(rq.getLoginedMemberId(), relId, relTypeCode);
+
+		if (isActorCanScrapRd.isFail()) {
+			return rq.jsHistoryBack(isActorCanScrapRd.getMsg());
+		}
+
+		// 스크랩 처리
+		ResultData doMakeScrapRd = reactionService.doMakeScrap(rq.getLoginedMemberId(), relId, relTypeCode);
+
+		return rq.jsReplace(doMakeScrapRd.getMsg(), replaceUri);
+	}
+
+	// 스크랩 취소 메서드
+	@RequestMapping("/user/reaction/doCancelScrap")
+	@ResponseBody
+	public String doCancelScrap(String relTypeCode, int relId, String replaceUri) {
+
+		// 사용자가 스크랩 가능여부 확인
+		ResultData isActorCanScrapRd = reactionService.actorCanScrap(rq.getLoginedMemberId(), relId, relTypeCode);
+
+		if (isActorCanScrapRd.isSuccess()) {
+			return rq.jsHistoryBack("이미 취소되었습니다.");
+		}
+
+		// 스크랩 취소
+		ResultData doCancelScrapRd = reactionService.doCancelScrap(rq.getLoginedMemberId(), relId, relTypeCode);
+
+		return rq.jsReplace(doCancelScrapRd.getMsg(), replaceUri);
+	}
 }

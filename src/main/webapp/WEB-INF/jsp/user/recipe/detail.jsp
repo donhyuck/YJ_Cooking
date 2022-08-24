@@ -39,6 +39,27 @@
 </script>
 <!-- 게시글 조회수 스크립트 끝 -->
 
+<!-- 댓글 작성시 유효성 검사 스크립트 시작 -->
+<script>
+	let ReplyWrite__submitFormDone = false;
+	
+	function ReplyWrite__submitForm(form) {
+		if (ReplyWrite__submitFormDone) {
+			return;
+		}
+		
+		form.body.value = form.body.value.trim();
+		if (form.body.value.length < 3) {
+			alert('최소 3글자 이상 입력해주세요.');
+			form.body.focus();
+			return;
+		}
+		ReplyWrite__submitFormDone = true;
+		form.submit();
+	}
+</script>
+<!-- 댓글 작성시 유효성 검사 스크립트 끝 -->
+
 <div class="bg-gray-200 py-4">
 	<div class="detail-box w-10/12 mx-auto">
 
@@ -296,12 +317,15 @@
 						<span>${ actorNickname }님</span>
 						에게 궁금한점들을남겨주세요.
 					</div>
-					<c:if test="${ rq.loginedMember == null }">
+					<c:if test="${ rq.logined == false }">
 						<a href="${ rq.loginUri }" class="link link-primary">로그인</a> 후 댓글을 남길 수 있습니다.
 					</c:if>
 				</div>
-				<c:if test="${ rq.loginedMember != null }">
-					<form class="flex items-center" method="POST" action="../reply/doWrite">
+				<c:if test="${ rq.logined == true }">
+					<form class="flex items-center" method="POST" action="../reply/doWrite"
+						onsubmit="ReplyWrite__submitForm(this); return false;">
+						<input type="hidden" name="relTypeCode" value="recipe">
+						<input type="hidden" name="relId" value="${ recipe.id }">
 						<!-- 요리후기 사진 등록 -->
 						<a href="#"
 							class="flex justify-center items-center w-36 h-36 rounded-xl bg-gray-200 hover:bg-gray-300 mr-4 text-4xl">

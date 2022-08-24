@@ -5,7 +5,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.ldh.exam.demo.service.MailService;
 import com.ldh.exam.demo.service.MemberService;
 import com.ldh.exam.demo.util.Ut;
 import com.ldh.exam.demo.vo.Member;
@@ -16,12 +15,10 @@ import com.ldh.exam.demo.vo.Rq;
 public class UserMemberController {
 
 	private MemberService memberService;
-	private MailService mailService;
 	private Rq rq;
 
-	public UserMemberController(MemberService memberService, MailService mailService, Rq rq) {
+	public UserMemberController(MemberService memberService, Rq rq) {
 		this.memberService = memberService;
-		this.mailService = mailService;
 		this.rq = rq;
 	}
 
@@ -308,9 +305,8 @@ public class UserMemberController {
 			return rq.jsReplace("등록되지 않은 회원이거나 잘못된 이메일입니다.", rq.getFindLoginPwUri());
 		}
 
-		// ResultData notifyTempLoginPwByEmailRs = memberService.notifyTempLoginPwByEmail(member);
+		ResultData notifyTempLoginPwByEmailRs = memberService.notifyTempLoginPwByEmail(member);
 
-		// return rq.jsReplace(notifyTempLoginPwByEmailRs.getMsg(), afterFindLoginPwUri);
-		return null;
+		return rq.jsReplace(notifyTempLoginPwByEmailRs.getMsg(), afterFindLoginPwUri);
 	}
 }

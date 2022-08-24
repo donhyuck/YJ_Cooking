@@ -158,7 +158,7 @@ public class Rq {
 
 		String requestUri = req.getRequestURI();
 
-		// 로그인 후 다시 돌아가는 반복되지 않도록
+		// 로그인 후 다시 돌아가는 url 반복되지 않도록
 		switch (requestUri) {
 		case "/user/member/login":
 		case "/user/member/join":
@@ -174,7 +174,7 @@ public class Rq {
 
 		String requestUri = req.getRequestURI();
 
-		// 로그아웃 후 다시 돌아가는 반복되지 않도록
+		// 로그아웃 후 다시 돌아가는 url 반복되지 않도록
 		switch (requestUri) {
 		case "/user/member/doLogout":
 			return "";
@@ -184,19 +184,41 @@ public class Rq {
 	}
 
 	public String getFindLoginIdUri() {
-		return "../member/findLoginId?afterFindLoginIdUri=" + getAfterFindLoginIdUri();
+		return "/user/member/findLoginId?afterFindLoginIdUri=" + getAfterFindLoginIdUri();
 	}
 
 	public String getFindLoginPwUri() {
-		return "../member/findLoginPw?afterFindLoginPwUri=" + getAfterFindLoginPwUri();
+		return "/user/member/findLoginPw?afterFindLoginPwUri=" + getAfterFindLoginPwUri();
 	}
 
 	public String getAfterFindLoginIdUri() {
+
+		String requestUri = req.getRequestURI();
+
+		// 아이디 찾기 후 다시 돌아가는 url 반복되지 않도록
+		switch (requestUri) {
+		case "/user/member/login":
+		case "/user/member/join":
+		case "/user/member/findLoginId":
+		case "/user/member/findLoginPw":
+			return Ut.getUriEncoded(Ut.getStrAttr(paramMap, "afterFindLoginIdUri", ""));
+		}
 
 		return getEncodedCurrentUri();
 	}
 
 	public String getAfterFindLoginPwUri() {
+
+		String requestUri = req.getRequestURI();
+
+		// 비밀번호 찾기 후 다시 돌아가는 url 반복되지 않도록
+		switch (requestUri) {
+		case "/user/member/login":
+		case "/user/member/join":
+		case "/user/member/findLoginId":
+		case "/user/member/findLoginPw":
+			return Ut.getUriEncoded(Ut.getStrAttr(paramMap, "afterFindLoginPwUri", ""));
+		}
 
 		return getEncodedCurrentUri();
 	}

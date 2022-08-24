@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ldh.exam.demo.service.ReactionService;
+import com.ldh.exam.demo.util.Ut;
 import com.ldh.exam.demo.vo.ResultData;
 import com.ldh.exam.demo.vo.Rq;
 
@@ -34,6 +35,9 @@ public class UserReactionController {
 		// 좋아요 처리
 		ResultData doMakeLikeRd = reactionService.doMakeLike(rq.getLoginedMemberId(), relId, relTypeCode);
 
+		// 기존 레시피 페이지로 이동
+		replaceUri = Ut.f("/user/recipe/detail?id=%d", relId);
+
 		return rq.jsReplace(doMakeLikeRd.getMsg(), replaceUri);
 	}
 
@@ -51,6 +55,9 @@ public class UserReactionController {
 
 		// 좋아요 취소
 		ResultData doCancelLikeRd = reactionService.doCancelLike(rq.getLoginedMemberId(), relId, relTypeCode);
+
+		// 기존 레시피 페이지로 이동
+		replaceUri = Ut.f("/user/recipe/detail?id=%d", relId);
 
 		return rq.jsReplace(doCancelLikeRd.getMsg(), replaceUri);
 	}
@@ -70,6 +77,9 @@ public class UserReactionController {
 		// 스크랩 처리
 		ResultData doMakeScrapRd = reactionService.doMakeScrap(rq.getLoginedMemberId(), relId, relTypeCode);
 
+		// 기존 레시피 페이지로 이동
+		replaceUri = Ut.f("/user/recipe/detail?id=%d", relId);
+
 		return rq.jsReplace(doMakeScrapRd.getMsg(), replaceUri);
 	}
 
@@ -87,6 +97,9 @@ public class UserReactionController {
 
 		// 스크랩 취소
 		ResultData doCancelScrapRd = reactionService.doCancelScrap(rq.getLoginedMemberId(), relId, relTypeCode);
+
+		// 기존 레시피 페이지로 이동
+		replaceUri = Ut.f("/user/recipe/detail?id=%d", relId);
 
 		return rq.jsReplace(doCancelScrapRd.getMsg(), replaceUri);
 	}

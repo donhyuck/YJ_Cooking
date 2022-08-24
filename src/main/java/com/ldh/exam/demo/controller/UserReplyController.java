@@ -93,6 +93,9 @@ public class UserReplyController {
 		// 수정 후 기존 레시피 페이지로 이동
 		afterModifyUri = Ut.f("/user/recipe/detail?id=%d", relId);
 
+		// 수정후 댓글 번호를 URI에 포함
+		afterModifyUri = Ut.getNewUri(afterModifyUri, "focusReplyId", id + "");
+
 		return rq.jsReplace(Ut.f("%s번 댓글이 수정되었습니다.", id), afterModifyUri);
 	}
 

@@ -20,13 +20,6 @@
 			return;
 		}
 
-		form.nickname.value = form.nickname.value.trim();
-		if (form.nickname.value.length == 0) {
-			alert('닉네임을 입력해주세요.');
-			form.nickname.focus();
-			return;
-		}
-
 		form.email.value = form.email.value.trim();
 		if (form.email.value.length == 0) {
 			alert('이메일을 입력해주세요.');
@@ -51,15 +44,10 @@
 			<div class="text-3xl font-bold mb-2">비밀번호 찾기</div>
 			<div class="text-lg text-gray-500">회원가입시 입력한 닉네임, 이메일과 아이디를 입력해주세요.</div>
 
-			<!-- 아이디, 닉네임, 이메일 입력 -->
+			<!-- 아이디, 이메일 입력 -->
 			<div>
 				<div class="text-gray-400 p-2">아이디</div>
 				<input name="loginId" type="text" class="input input-bordered w-96 max-w-xs member-inputType" placeholder=" 아이디" />
-				<div class="member-msgType text-green-400 mt-1 ml-4">사용가능합니다.</div>
-			</div>
-			<div>
-				<div class="text-gray-400 p-2">닉네임</div>
-				<input name="nickname" type="text" class="input input-bordered w-96 max-w-xs member-inputType" placeholder=" 닉네임" />
 				<div class="member-msgType text-green-400 mt-1 ml-4">사용가능합니다.</div>
 			</div>
 			<div>

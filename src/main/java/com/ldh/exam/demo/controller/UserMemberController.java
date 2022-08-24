@@ -275,4 +275,42 @@ public class UserMemberController {
 
 		return "user/member/findLoginPw";
 	}
+
+	// 비밀번호 찾기 메서드
+	@RequestMapping("/user/member/doFindLoginPw")
+	@ResponseBody
+	public String doFindLoginPw(String loginId, String nickname, String email,
+			@RequestParam(defaultValue = "/") String afterFindLoginPwUri) {
+
+		// 로그인 확인
+		if (rq.isLogined() == true) {
+			return rq.jsHistoryBack("이미 로그인 중입니다.");
+		}
+
+		// 입력 데이터 유효성 검사
+		if (Ut.empty(loginId)) {
+			return rq.jsHistoryBack("아이디(을)를 입력해주세요.");
+		}
+
+		if (Ut.empty(email)) {
+			return rq.jsHistoryBack("이메일(을)를 입력해주세요.");
+		}
+
+		// 아이디로 회원정보 가져오기
+		Member member = memberService.getMemberByLoginId(loginId);
+
+		// 찾기 실패시 uri가 중복되지 않도록 replace
+		if (member == null) {
+			return rq.jsReplace("등록되지 않은 회원이거나 잘못된 아이디입니다.", rq.getFindLoginPwUri());
+		}
+
+		if (member.getEmail().equals(email) == false) {
+			return rq.jsReplace("등록되지 않은 회원이거나 잘못된 이메일입니다.", rq.getFindLoginPwUri());
+		}
+
+		// ResultData notifyTempLoginPwByEmailRs = memberService.notifyTempLoginPwByEmail(member);
+
+		// return rq.jsReplace(notifyTempLoginPwByEmailRs.getMsg(), afterFindLoginPwUri);
+		return null;
+	}
 }

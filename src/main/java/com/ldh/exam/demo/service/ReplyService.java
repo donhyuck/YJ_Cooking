@@ -50,9 +50,9 @@ public class ReplyService {
 	}
 
 	// 댓글 수정하기
-	public void modifyReply(int id, String title, String body) {
+	public void modifyReply(int id, String body) {
 
-		// 구현중
+		replyRepository.modifyReply(id, body);
 	}
 
 	// 댓글 삭제하기

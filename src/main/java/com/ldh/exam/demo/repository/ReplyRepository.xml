@@ -51,6 +51,14 @@
 		LAST_INSERT_ID()
 	</select>
 
+	<update id="modifyReply">
+		UPDATE reply AS RE
+		SET RE.updateDate = NOW(),
+		RE.body =
+		#{body}
+		WHERE RE.id = #{id}
+	</update>
+
 	<delete id="deleteReply">
 		DELETE FROM reply
 		WHERE id = #{id}

@@ -45,16 +45,6 @@ public class UserReplyController {
 		// 댓글 등록하기
 		int id = replyService.writeReply(rq.getLoginedMemberId(), relTypeCode, relId, body);
 
-		// 댓글 등록 후 기존 레시피 페이지로 이동
-		if (Ut.empty(replaceUri)) {
-
-			switch (relTypeCode) {
-			case "recipe":
-				replaceUri = Ut.f("../recipe/detail?id=%d", relId);
-				break;
-			}
-		}
-
 		return rq.jsReplace(Ut.f("%s번 댓글이 등록되었습니다.", id), replaceUri);
 	}
 
@@ -62,7 +52,7 @@ public class UserReplyController {
 	@RequestMapping("/user/reply/modify")
 	public String showModify(Model model, int id) {
 
-		// 레시피 찾기, 작성자 권한 체크
+		// 댓글 찾기, 작성자 권한 체크
 		ResultData actorCanModifyRd = replyService.actorCanModify(rq.getLoginedMemberId(), id);
 
 		if (actorCanModifyRd.isFail()) {
@@ -80,10 +70,27 @@ public class UserReplyController {
 	// 댓글 수정하기 메서드
 	@RequestMapping("/user/reply/doModify")
 	@ResponseBody
-	public String doModify(int id, String title, String body) {
+	public String doModify(int id, String body, int relId, @RequestParam(defaultValue = "/") String afterModifyUri) {
 
-		// 구현중
-		return null;
+		// 댓글 찾기, 작성자 권한 체크
+		ResultData actorCanModifyRd = replyService.actorCanModify(rq.getLoginedMemberId(), id);
+
+		if (actorCanModifyRd.isFail()) {
+			return rq.historyBackOnView(actorCanModifyRd.getMsg());
+		}
+
+		// 입력 데이터 유효성 검사
+		if (Ut.empty(body)) {
+			return rq.jsHistoryBack("댓글 내용(을)를 입력해주세요.");
+		}
+
+		// 댓글 수정하기
+		replyService.modifyReply(id, body);
+
+		// 수정 후 기존 레시피 페이지로 이동
+		afterModifyUri = Ut.f("/user/recipe/detail?id=%d", relId);
+
+		return rq.jsReplace(Ut.f("%s번 댓글이 수정되었습니다.", id), afterModifyUri);
 	}
 
 	// 댓글 삭제하기 메서드

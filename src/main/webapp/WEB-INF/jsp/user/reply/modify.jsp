@@ -3,8 +3,28 @@
 <c:set var="pageTitle" value="댓글 수정페이지" />
 <%@include file="../common/head.jspf"%>
 
-<form class="" action="../reply/doModify" method="POST">
-	<input type="hidden" name="id" value="${ recipe.id }" />
+<!-- 댓글 수정시 유효성 검사 스크립트 시작 -->
+<script>
+	let ReplyModify__submitFormDone = false;
+	function ReplyModify__submitForm(form) {
+		if (ReplyModify__submitFormDone) {
+			return;
+		}
+		// 좌우 공백 제거
+		if (form.body.value.length < 3) {
+			alert('최소 3글자 이상 입력해주세요.');
+			form.body.focus();
+			return;
+		}
+		ReplyModify__submitFormDone = true;
+		form.submit();
+	}
+</script>
+<!-- 댓글 수정시 유효성 검사 스크립트 끝 -->
+
+<form class="" action="../reply/doModify" method="POST" onsubmit="ReplyModify__submitForm(this); return false;">
+	<input type="hidden" name="id" value="${ reply.id }" />
+	<input type="hidden" name="relId" value="${ reply.relId }" />
 	<table>
 		<colgroup>
 			<col width="200" />

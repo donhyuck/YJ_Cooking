@@ -60,14 +60,14 @@
 			<div class="user-box flex text-5xl space-x-6">
 
 				<!-- 마이 페이지 -->
-				<c:if test="${ rq.isLogined() == true }">
+				<c:if test="${ rq.logined == true }">
 					<a href="/user/member/myPage" type="button" class="text-green-500">
 						<i class="fa-solid fa-user-circle"></i>
 					</a>
 				</c:if>
 
 				<!-- 회원가입 -->
-				<c:if test="${ rq.isLogined() == false }">
+				<c:if test="${ rq.logined == false }">
 					<a href="/user/member/join" type="button" class="text-green-500">
 						<i class="fa-solid fa-id-card-clip"></i>
 					</a>
@@ -79,14 +79,14 @@
 				</a>
 
 				<!-- 로그인 -->
-				<c:if test="${ rq.isLogined() == false }">
+				<c:if test="${ rq.logined == false }">
 					<a href="${ rq.loginUri }" type="button" class="text-yellow-500">
 						<i class="fa-solid fa-arrow-right-to-bracket"></i>
 					</a>
 				</c:if>
 
 				<!-- 로그아웃 -->
-				<c:if test="${ rq.isLogined() == true }">
+				<c:if test="${ rq.logined == true }">
 					<a href="/user/member/doLogout" type="button" class="text-yellow-500">
 						<i class="fa-solid fa-arrow-right-from-bracket"></i>
 					</a>

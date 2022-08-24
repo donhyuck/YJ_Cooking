@@ -139,10 +139,16 @@ public class Rq {
 		return "/user/member/login?afterLoginUri=" + getAfterLoginUri();
 	}
 
+	private String getLogoutUri() {
+
+		return "/user/member/dologout?afterLogoutUri=" + getAfterLogoutUri();
+	}
+
 	public String getAfterLoginUri() {
 
 		String requestUri = req.getRequestURI();
 
+		// 로그인 후 다시 돌아가는 반복되지 않도록
 		switch (requestUri) {
 		case "/user/member/login":
 		case "/user/member/join":
@@ -154,19 +160,15 @@ public class Rq {
 		return getEncodedCurrentUri();
 	}
 
-	public String getLogoutUri() {
+	public String getAfterLogoutUri() {
 
 		String requestUri = req.getRequestURI();
 
+		// 로그아웃 후 다시 돌아가는 반복되지 않도록
 		switch (requestUri) {
 		case "/user/member/logout":
 			return "";
 		}
-
-		return "../member/doLogout?afterLogoutUri=" + getAfterLogoutUri();
-	}
-
-	private String getAfterLogoutUri() {
 
 		return getEncodedCurrentUri();
 	}

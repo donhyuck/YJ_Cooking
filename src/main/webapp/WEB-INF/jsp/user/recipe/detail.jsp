@@ -297,7 +297,7 @@
 						에게 궁금한점들을남겨주세요.
 					</div>
 					<c:if test="${ rq.loginedMember == null }">
-						<a href="/user/member/login" class="link link-primary">로그인</a> 후 댓글을 남길 수 있습니다.
+						<a href="${ rq.loginUri }" class="link link-primary">로그인</a> 후 댓글을 남길 수 있습니다.
 					</c:if>
 				</div>
 				<c:if test="${ rq.loginedMember != null }">

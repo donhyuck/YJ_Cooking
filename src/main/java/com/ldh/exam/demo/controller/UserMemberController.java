@@ -111,7 +111,7 @@ public class UserMemberController {
 	// 회원 로그아웃 메서드
 	@RequestMapping("/user/member/doLogout")
 	@ResponseBody
-	public String doLogout() {
+	public String doLogout(@RequestParam(defaultValue = "/") String afterLogoutUri) {
 
 		// 로그아웃 확인
 		if (rq.isLogined() == false) {
@@ -121,7 +121,7 @@ public class UserMemberController {
 		// 로그아웃 하기
 		rq.logout();
 
-		return rq.jsReplace("로그아웃되었습니다.", "/");
+		return rq.jsReplace("로그아웃되었습니다.", afterLogoutUri);
 	}
 
 	// My홈 페이지 메서드

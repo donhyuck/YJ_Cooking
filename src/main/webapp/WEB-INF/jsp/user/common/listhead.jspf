@@ -87,7 +87,7 @@
 
 				<!-- 로그아웃 -->
 				<c:if test="${ rq.logined == true }">
-					<a href="/user/member/doLogout" type="button" class="text-yellow-500">
+					<a href="${ rq.logoutUri }" type="button" class="text-yellow-500">
 						<i class="fa-solid fa-arrow-right-from-bracket"></i>
 					</a>
 				</c:if>

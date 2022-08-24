@@ -139,9 +139,9 @@ public class Rq {
 		return "/user/member/login?afterLoginUri=" + getAfterLoginUri();
 	}
 
-	private String getLogoutUri() {
+	public String getLogoutUri() {
 
-		return "/user/member/dologout?afterLogoutUri=" + getAfterLogoutUri();
+		return "/user/member/doLogout?afterLogoutUri=" + getAfterLogoutUri();
 	}
 
 	public String getAfterLoginUri() {
@@ -166,7 +166,7 @@ public class Rq {
 
 		// 로그아웃 후 다시 돌아가는 반복되지 않도록
 		switch (requestUri) {
-		case "/user/member/logout":
+		case "/user/member/doLogout":
 			return "";
 		}
 

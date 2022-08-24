@@ -22,7 +22,8 @@ public class NeedLogoutInterceptor implements HandlerInterceptor {
 
 		// 로그아웃 확인후 요청처리
 		if (rq.isLogined() == true) {
-			rq.printHistoryBackJs("로그아웃 후 이용해주세요.");
+			String afterLogoutUri = rq.getAfterLogoutUri();
+			rq.printReplaceJs("로그아웃 후 이용해주세요.", "/user/member/doLogout?afterLogoutUri=" + afterLogoutUri);
 			return false;
 		}
 

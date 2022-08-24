@@ -24,10 +24,11 @@ public class ReplyService {
 	}
 
 	// 레시피 등록하기
-	public int writeRecipe(int memberId, String title, String body) {
+	public int writeReply(int memberId, String relTypeCode, String relId, String body) {
 
-		// 구현중
-		return 0;
+		replyRepository.writeReply(memberId, relTypeCode, relId, body);
+
+		return replyRepository.getLastInsertId();
 	}
 
 	// 레시피 수정하기

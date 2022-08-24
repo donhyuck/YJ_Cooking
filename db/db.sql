@@ -371,7 +371,7 @@ CREATE TABLE reply (
 
 # 댓글 테스트 데이터 생성
 INSERT INTO reply
-SET regdate = NOW(),
+SET regDate = NOW(),
 updateDate = NOW(),
 memberId = 1,
 relTypeCode = 'recipe',
@@ -379,7 +379,7 @@ relId = 1,
 `body` = '간단한게 먹기 좋아요 맛있어요!';
 
 INSERT INTO reply
-SET regdate = NOW(),
+SET regDate = NOW(),
 updateDate = NOW(),
 memberId = 1,
 relTypeCode = 'recipe',
@@ -387,7 +387,7 @@ relId = 2,
 `body` = '오늘 저녁에 함 해봐야겠어요.';
 
 INSERT INTO reply
-SET regdate = NOW(),
+SET regDate = NOW(),
 updateDate = NOW(),
 memberId = 4,
 relTypeCode = 'recipe',
@@ -395,7 +395,7 @@ relId = 3,
 `body` = '특별한 날 기분낼 때 좋네요~';
 
 INSERT INTO reply
-SET regdate = NOW(),
+SET regDate = NOW(),
 updateDate = NOW(),
 memberId = 5,
 relTypeCode = 'recipe',

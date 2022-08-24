@@ -27,7 +27,23 @@ public class UserReplyController {
 	public String doWrite(String relTypeCode, String relId, String body,
 			@RequestParam(defaultValue = "/") String replaceUri) {
 
-		// 구현중
+		// 입력 데이터 유효성 검사
+		if (Ut.empty(relTypeCode)) {
+			return rq.jsHistoryBack("타입코드(을)를 입력해주세요.");
+		}
+
+		if (Ut.empty(relId)) {
+			return rq.jsHistoryBack("타입번호(을)를 입력해주세요.");
+		}
+
+		if (Ut.empty(body)) {
+			return rq.jsHistoryBack("내용(을)를 입력해주세요.");
+		}
+
+		// 댓글 등록하기
+		int id = replyService.writeReply(rq.getLoginedMemberId(), relTypeCode, relId, body);
+
+		// 댓글 등록 후 기존 레시피 페이지로 이동
 		if (Ut.empty(replaceUri)) {
 
 			switch (relTypeCode) {
@@ -37,7 +53,7 @@ public class UserReplyController {
 			}
 		}
 
-		return null;
+		return rq.jsReplace(Ut.f("%s번 댓글이 등록되었습니다.", id), replaceUri);
 	}
 
 	// 댓글 수정 페이지 메서드

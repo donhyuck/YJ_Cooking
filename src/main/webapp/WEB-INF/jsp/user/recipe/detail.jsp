@@ -324,8 +324,11 @@
 				<c:if test="${ rq.logined == true }">
 					<form class="flex items-center" method="POST" action="../reply/doWrite"
 						onsubmit="ReplyWrite__submitForm(this); return false;">
+						<!-- 현재 페이지 정보 -->
 						<input type="hidden" name="relTypeCode" value="recipe">
 						<input type="hidden" name="relId" value="${ recipe.id }">
+						<input type="hidden" name="replaceUri" value="${ rq.currentUri }">
+
 						<!-- 요리후기 사진 등록 -->
 						<a href="#"
 							class="flex justify-center items-center w-36 h-36 rounded-xl bg-gray-200 hover:bg-gray-300 mr-4 text-4xl">

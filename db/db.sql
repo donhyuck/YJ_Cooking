@@ -357,3 +357,49 @@ ON R.id = SP.relId
 WHERE SP.memberId = 2
 GROUP BY R.id
 ORDER BY R.id DESC;
+
+# 댓글 테이블 생성
+CREATE TABLE reply (
+    id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    regDate DATETIME NOT NULL,
+    updateDate DATETIME NOT NULL,
+    memberId INT(10) UNSIGNED NOT NULL,
+    relTypeCode CHAR(30) NOT NULL COMMENT '관련데이터타입코드',
+    relId INT(10) UNSIGNED NOT NULL COMMENT '관련데이터번호',
+    `body` TEXT NOT NULL
+);
+
+# 댓글 테스트 데이터 생성
+INSERT INTO reply
+SET regdate = NOW(),
+updateDate = NOW(),
+memberId = 1,
+relTypeCode = 'recipe',
+relId = 1,
+`body` = '간단한게 먹기 좋아요 맛있어요!';
+
+INSERT INTO reply
+SET regdate = NOW(),
+updateDate = NOW(),
+memberId = 1,
+relTypeCode = 'recipe',
+relId = 2,
+`body` = '오늘 저녁에 함 해봐야겠어요.';
+
+INSERT INTO reply
+SET regdate = NOW(),
+updateDate = NOW(),
+memberId = 4,
+relTypeCode = 'recipe',
+relId = 3,
+`body` = '특별한 날 기분낼 때 좋네요~';
+
+INSERT INTO reply
+SET regdate = NOW(),
+updateDate = NOW(),
+memberId = 5,
+relTypeCode = 'recipe',
+relId = 3,
+`body` = '불세기는 어느정도인가요?';
+
+SELECT * FROM reply;

@@ -93,8 +93,19 @@
 </script>
 <!-- 댓글 작성후 스크롤 이동 스크립트 끝 -->
 
+<!-- 댓글보기 클릭시 댓글목록으로 이동 스크립트 시작 -->
+<script>
+	jQuery(document).ready(function ($) {
+	  $(".scroll").click(function (event) {
+	    event.preventDefault();
+	    $("html,body").animate({ scrollTop: $(this.hash).offset().top }, 400);
+	  });
+	});
+</script>
+<!-- 댓글보기 클릭시 댓글목록으로 이동 스크립트 끝 -->
+
 <div class="bg-gray-200 py-4">
-	<div class="detail-box w-10/12 mx-auto">
+	<div class="detail-box w-10/12 mx-auto" id="topTarget">
 
 		<!-- 레시피 기본정보 영역 시작 -->
 		<section class="bg-white rounded-md p-12 flex mb-5">
@@ -177,9 +188,9 @@
 						</c:if>
 					</div>
 					<!-- 댓글 -->
-					<a href="#" class="text-green-500 hover:text-green-700">
+					<a href="#replyTarget" class="scroll text-green-500 hover:text-green-700">
 						<i class="fa-solid fa-comment-dots"></i>
-						<div class="text-lg font-bold mt-2">댓글보기 333</div>
+						<div class="text-lg font-bold mt-2">댓글보기 ${replies.size()}</div>
 					</a>
 				</div>
 
@@ -265,7 +276,7 @@
 		<!-- 조리순서 영역 시작 -->
 
 		<!-- 댓글 영역 시작-->
-		<section class="bg-white rounded-md p-12 mb-5">
+		<section class="bg-white rounded-md p-12 mb-5 relative" id="replyTarget">
 			<div class="text-3xl font-bold mb-8">
 				<span>요리후기/댓글</span>
 				<span class="text-green-500 text-xl ml-3">${ replies.size() }</span>
@@ -337,6 +348,14 @@
 				</c:forEach>
 			</div>
 			<!-- 댓글 목록 영역 끝 -->
+			
+			<!-- TOP 버튼 -->
+			<div class="absolute -right-20 bottom-64 text-4xl text-center hover:text-yellow-400">
+				<a href="#topTarget" class="scroll">
+					<i class="fa-solid fa-circle-arrow-up"></i>
+					<div class="text-xl font-black">TOP</div>
+				</a>
+			</div>
 
 			<!-- 댓글 작성 영역 시작 -->
 			<div class="mt-10">

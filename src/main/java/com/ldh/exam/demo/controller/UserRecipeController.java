@@ -10,9 +10,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.ldh.exam.demo.service.MemberService;
 import com.ldh.exam.demo.service.ReactionService;
 import com.ldh.exam.demo.service.RecipeService;
+import com.ldh.exam.demo.service.ReplyService;
 import com.ldh.exam.demo.util.Ut;
 import com.ldh.exam.demo.vo.Member;
 import com.ldh.exam.demo.vo.Recipe;
+import com.ldh.exam.demo.vo.Reply;
 import com.ldh.exam.demo.vo.ResultData;
 import com.ldh.exam.demo.vo.Rq;
 
@@ -21,13 +23,15 @@ public class UserRecipeController {
 
 	private RecipeService recipeService;
 	private MemberService memberService;
+	private ReplyService replyService;
 	private ReactionService reactionService;
 	private Rq rq;
 
-	public UserRecipeController(RecipeService recipeService, MemberService memberService,
+	public UserRecipeController(RecipeService recipeService, MemberService memberService, ReplyService replyService,
 			ReactionService reactionService, Rq rq) {
 		this.recipeService = recipeService;
 		this.memberService = memberService;
+		this.replyService = replyService;
 		this.reactionService = reactionService;
 		this.rq = rq;
 	}
@@ -73,7 +77,7 @@ public class UserRecipeController {
 		return "user/list/note";
 	}
 
-	// 레시피 상세페이지 페이지 메서드
+	// 레시피 상세페이지 메서드
 	@RequestMapping("/user/recipe/detail")
 	public String showDetail(Model model, int id) {
 
@@ -99,10 +103,14 @@ public class UserRecipeController {
 		Member actor = memberService.getMemberById(recipe.getMemberId());
 		String actorNickname = actor.getNickname();
 
+		// 해당 레시피 페이지의 댓글 목록 가져오기
+		List<Reply> replies = replyService.getForPrintReplies("recipe", id);
+
 		model.addAttribute("recipe", recipe);
 		model.addAttribute("actorCanMakeRP", actorCanReactionRd.isSuccess());
 		model.addAttribute("actorCanMakeScrap", actorCanScrapRd.isSuccess());
 		model.addAttribute("actorNickname", actorNickname);
+		model.addAttribute("replies", replies);
 
 		return "user/recipe/detail";
 	}

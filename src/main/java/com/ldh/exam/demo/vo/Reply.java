@@ -17,4 +17,5 @@ public class Reply {
 	private int relId;
 	private String body;
 
+	private String extra__writerName;
 }

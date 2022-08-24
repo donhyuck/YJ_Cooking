@@ -9,6 +9,18 @@
 		WHERE RE.id = #{id}
 	</select>
 
+	<select id="getForPrintReplies" resultType="reply">
+		SELECT RE.*,
+		M.nickname AS extra__writerName
+		FROM reply AS RE
+		LEFT JOIN `member` AS M
+		ON RE.memberId = M.id
+		WHERE RE.relTypeCode = #{relTypeCode}
+		AND RE.relId
+		= #{relId}
+		ORDER BY RE.id DESC
+	</select>
+
 	<insert id="writeReply">
 		INSERT INTO reply
 		SET regDate = NOW(),

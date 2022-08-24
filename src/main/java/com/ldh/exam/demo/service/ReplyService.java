@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.ldh.exam.demo.repository.ReplyRepository;
-import com.ldh.exam.demo.vo.Recipe;
+import com.ldh.exam.demo.vo.Reply;
 
 @Service
 public class ReplyService {
@@ -17,10 +17,9 @@ public class ReplyService {
 	}
 
 	// 댓글 목록 가져오기
-	public List<Recipe> getForPrintRecipes(int memberId) {
+	public List<Reply> getForPrintReplies(String relTypeCode, int relId) {
 
-		// 구현중
-		return null;
+		return replyRepository.getForPrintReplies(relTypeCode, relId);
 	}
 
 	// 레시피 등록하기

@@ -235,12 +235,12 @@
 		<section class="bg-white rounded-md p-12 mb-5">
 			<div class="text-3xl font-bold mb-8">
 				<span>요리후기/댓글</span>
-				<span class="text-green-500 text-xl ml-3">11건</span>
+				<span class="text-green-500 text-xl ml-3">${ replies.size() }</span>
 			</div>
 
 			<!-- 댓글 목록 영역 시작 -->
 			<div class="flex flex-col border-t">
-				<c:forEach var="i" begin="1" end="7" step="1">
+				<c:forEach var="reply" items="${ replies }">
 					<div class="flex border-b p-3 pt-5">
 						<div class="w-44">
 							<!-- 댓글 프로필 -->
@@ -278,21 +278,19 @@
 						<div class="ml-8 mr-5 w-full">
 							<!-- 작성자, 등록(수정)일 -->
 							<div class="flex items-center mb-2 text-gray-400 text-sm">
-								<div class="text-xl font-bold text-black mr-3">${ actorNickname }</div>
+								<div class="text-xl font-bold text-black mr-3">${ reply.extra__writerName }</div>
 								<div>
-									<!-- test="${ reply.regDate == reply.updateDate } -->
-									<c:if test="${ i == 1 || i == 6 }">
-										<span>2022-01-01 12:00 &nbsp;(등록)</span>
+									<c:if test="${ reply.regDate == reply.updateDate }">
+										<span>${ reply.regDate } &nbsp;(등록)</span>
 									</c:if>
-									<!-- test="${ reply.regDate == reply.updateDate } -->
-									<c:if test="${  i != 1 && i != 6 }">
-										<span>2022-01-08 12:10 &nbsp;(수정)</span>
+									<c:if test="${ reply.regDate != reply.updateDate }">
+										<span>${ reply.updateDate } &nbsp;(수정)</span>
 									</c:if>
 								</div>
 							</div>
 
 							<!-- 댓글 내용 -->
-							<div class="ml-2">맛있어요. 12345123451234512345123451234512345123451234512345123451234512345123451234512345</div>
+							<div class="ml-2">${ reply.body }</div>
 						</div>
 
 						<!-- 요리후기 사진 -->

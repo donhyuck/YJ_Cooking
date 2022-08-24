@@ -12,7 +12,6 @@ import com.ldh.exam.demo.service.ReactionService;
 import com.ldh.exam.demo.service.RecipeService;
 import com.ldh.exam.demo.service.ReplyService;
 import com.ldh.exam.demo.util.Ut;
-import com.ldh.exam.demo.vo.Member;
 import com.ldh.exam.demo.vo.Recipe;
 import com.ldh.exam.demo.vo.Reply;
 import com.ldh.exam.demo.vo.ResultData;
@@ -99,18 +98,13 @@ public class UserRecipeController {
 			model.addAttribute("actorCanCancelScrap", true);
 		}
 
-		// 등록한 회원 닉네임 가져오기
-		Member actor = memberService.getMemberById(recipe.getMemberId());
-		String actorNickname = actor.getNickname();
-
 		// 해당 레시피 페이지의 댓글 목록 가져오기
-		List<Reply> replies = replyService.getForPrintReplies("recipe", id);
+		List<Reply> replies = replyService.getForPrintReplies(rq.getLoginedMemberId(), "recipe", id);
 
 		model.addAttribute("recipe", recipe);
+		model.addAttribute("replies", replies);
 		model.addAttribute("actorCanMakeRP", actorCanReactionRd.isSuccess());
 		model.addAttribute("actorCanMakeScrap", actorCanScrapRd.isSuccess());
-		model.addAttribute("actorNickname", actorNickname);
-		model.addAttribute("replies", replies);
 
 		return "user/recipe/detail";
 	}

@@ -3,13 +3,13 @@
 
 <mapper namespace="com.ldh.exam.demo.repository.ReplyRepository">
 
-	<select id="getRecipeById" resultType="Recipe">
-		SELECT R.*
+	<select id="getReplyById" resultType="Reply">
+		SELECT RE.*
 		FROM reply AS RE
 		WHERE RE.id = #{id}
 	</select>
 
-	<select id="getForPrintReplies" resultType="reply">
+	<select id="getForPrintReplies" resultType="Reply">
 		SELECT RE.*,
 		M.nickname AS extra__writerName
 		FROM reply AS RE

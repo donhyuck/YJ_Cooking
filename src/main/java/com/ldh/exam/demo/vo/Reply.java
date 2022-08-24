@@ -18,6 +18,9 @@ public class Reply {
 	private String body;
 
 	private String extra__writerName;
+	private boolean extra__actorCanModify;
+	private boolean extra__actorCanDelete;
+
 
 	public String getForPrintRegDate_Type1() {
 		return regDate.replace(" ", "</br>");

@@ -106,7 +106,7 @@
 				<img class="w-full rounded-full" src="https://cdn.pixabay.com/photo/2017/06/16/13/35/chef-2409158_960_720.png"
 					alt="" />
 				<div class="text-center text-xl mx-auto mt-2">
-					<span class="py-3 px-5">${ actorNickname }</span>
+					<span class="py-3 px-5">${ recipe.extra__writerName }</span>
 				</div>
 			</div>
 
@@ -258,13 +258,13 @@
 
 							<!-- 댓글 수정, 삭제 영역 시작 -->
 							<div class="btns flex items-center space-x-3 justify-center h-12">
-								<c:if test="${ i == 1 || i == 6 }">
+								<c:if test="${ reply.extra__actorCanModify }">
 									<a href="../reply/modify?id=${ reply.id }" class="btn btn-primary btn-outline btn-sm">
 										<i class="fas fa-edit"></i>
 										<div class="ml-1">수정</div>
 									</a>
 								</c:if>
-								<c:if test="${ i == 1 || i == 6 }">
+								<c:if test="${ reply.extra__actorCanDelete }">
 									<a href="../reply/doDelete?id=${ reply.id }&replaceUri=${rq.encodedCurrentUri}"
 										class="btn btn-secondary btn-outline btn-sm" onclick="if( confirm('정말 삭제하시겠습니까?') == false ) return false;">
 										<i class="fas fa-trash"></i>
@@ -312,7 +312,7 @@
 				</div>
 				<div class="text-lg text-gray-500 tracking-wide mb-2 ml-3">
 					<div>
-						<span>${ actorNickname }님</span>
+						<span>${ recipe.extra__writerName }님</span>
 						에게 궁금한점들을남겨주세요.
 					</div>
 					<c:if test="${ rq.logined == false }">

@@ -15,4 +15,6 @@ public interface ReplyRepository {
 
 	public int getLastInsertId();
 
+	public Reply getReplyById(int id);
+
 }

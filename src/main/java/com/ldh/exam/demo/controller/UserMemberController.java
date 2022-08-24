@@ -105,7 +105,17 @@ public class UserMemberController {
 		// 로그인 하기
 		rq.login(member);
 
-		return rq.jsReplace(Ut.f("%s님 환영합니다.", member.getNickname()), afterLoginUri);
+		String msg = Ut.f("%s님 환영합니다.", member.getNickname());
+
+		// 임시 비밀번호 사용시 비밀번호 변경 권유
+		boolean isUsingTempPassword = memberService.isUsingTempPassword(member.getId());
+
+		if (isUsingTempPassword) {
+			msg = "임시 비밀번호를 변경해주세요.";
+			afterLoginUri = "/user/member/myPage";
+		}
+
+		return rq.jsReplace(msg, afterLoginUri);
 	}
 
 	// 회원 로그아웃 메서드

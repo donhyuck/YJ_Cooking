@@ -55,12 +55,16 @@ public class MemberService {
 	}
 
 	// 회원정보 수정하기
-	public void doModify(int id, String loginPw, String nickname, String cellphoneNo, String email) {
+	public void doModify(int memberId, String loginPw, String nickname, String cellphoneNo, String email) {
 
 		// 비밀번호 암호화
 		loginPw = Ut.sha256(loginPw);
 
-		memberRepository.doModify(id, loginPw, nickname, cellphoneNo, email);
+		memberRepository.doModify(memberId, loginPw, nickname, cellphoneNo, email);
+
+		if (loginPw != null) {
+			attrService.remove("member", memberId, "extra", "useTempPassword");
+		}
 	}
 
 	// 등록번호로 회원 가져오기
@@ -124,7 +128,16 @@ public class MemberService {
 	}
 
 	// 임시 패스워드를 회원정보에 적용
-	private void setTempPassword(Member actor, String tempPassword) {
-		memberRepository.doModify(actor.getId(), Ut.sha256(tempPassword), null, null, null);
+	private void setTempPassword(Member member, String tempPassword) {
+
+		attrService.setValue("member", member.getId(), "extra", "useTempPassword", "1", null);
+
+		memberRepository.doModify(member.getId(), Ut.sha256(tempPassword), null, null, null);
+	}
+
+	// 임시 비밀번호사용중인지 확인
+	public boolean isUsingTempPassword(int memberId) {
+
+		return attrService.getValue("member", memberId, "extra", "useTempPassword").equals("1");
 	}
 }

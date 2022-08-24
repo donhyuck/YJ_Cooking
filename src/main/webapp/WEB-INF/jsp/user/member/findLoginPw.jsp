@@ -38,7 +38,7 @@
 		<form class="flex flex-col space-y-4 items-center" method="POST" action="../member/doFindLoginPw"
 			onsubmit="MemberFindLoginPw_submitForm(this); return false;">
 			<!-- 비밀번호를 찾은 후 이동할 경로 -->
-			<input type="hidden" name="afterFindLoginIdUri" value="${ param.afterFindLoginIdUri }">
+			<input type="hidden" name="afterFindLoginPwUri" value="${ param.afterFindLoginPwUri }">
 
 			<!-- 안내영역 -->
 			<div class="text-3xl font-bold mb-2">비밀번호 찾기</div>

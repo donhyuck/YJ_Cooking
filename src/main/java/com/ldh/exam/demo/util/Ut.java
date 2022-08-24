@@ -75,6 +75,38 @@ public class Ut {
 				""", msg, uri);
 	}
 
+	public static String jsReplaceForConfirm(String goal, String msg, String uri) {
+
+		if (msg == null) {
+			msg = "";
+		}
+
+		if (uri == null) {
+			uri = "";
+		}
+
+		return Ut.f("""
+				<script>
+				const goal = '%s 하시겠습니까?'.trim();
+				const msg = '%s'.trim();
+
+				if ( msg.length > 0 ) {
+					alert(msg);
+				}
+
+				var returnValue = confirm(goal);
+
+				if (returnValue == true) {
+					location.replace('%s');
+				}
+
+				else {
+					history.back();
+				}
+				</script>
+				""", goal, msg, uri);
+	}
+
 	public static String getUriEncoded(String str) {
 
 		try {

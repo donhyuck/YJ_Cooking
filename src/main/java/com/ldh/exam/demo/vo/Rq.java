@@ -133,6 +133,12 @@ public class Rq {
 		resp.setContentType("text/html; charset=UTF-8");
 		print(Ut.jsReplace(msg, uri));
 	}
+	
+	public void printReplaceJsForConfirm(String goal, String msg, String uri) {
+
+		resp.setContentType("text/html; charset=UTF-8");
+		print(Ut.jsReplaceForConfirm(goal, msg, uri));
+	}
 
 	public String getLoginUri() {
 

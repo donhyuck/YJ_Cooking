@@ -265,4 +265,11 @@ public class UserMemberController {
 
 		return rq.jsReplace(Ut.f("등록된 아이디 [%s] 입니다. 로그인 페이지로 이동합니다.", member.getLoginId()), "/user/member/login");
 	}
+
+	// 비밀번호 찾기 페이지 메서드
+	@RequestMapping("/user/member/findLoginPw")
+	public String showFindLoginPw() {
+
+		return "user/member/findLoginPw";
+	}
 }

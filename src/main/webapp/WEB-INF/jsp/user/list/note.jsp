@@ -30,57 +30,74 @@
 			<div class="mb-2">
 				<div class="text-xl mb-1">내가 등록한 레시피</div>
 			</div>
-			<div class="flex grid grid-cols-3 gap-10">
-				<!-- 작성자가 본인인 레시피 -->
-				<c:forEach var="recipe" items="${ recipes }">
-					<div>
-						<a href="/user/recipe/detail?id=${ recipe.id }"">
-							<img class="w-full rounded-md" src="https://tse4.mm.bing.net/th?id=OIP.kwt4oKZDd-goVuBezaVQRQHaE7&pid=Api&P=0"
-								alt="" />
-						</a>
-						<div class="ml-3 mt-2">
-							<div class="text-lg">${ recipe.title }</div>
-							<div>${ recipe.extra__writerName }</div>
-							<!-- 좋아요 , 조회수 -->
-							<div class="text-sm">
-								<span class="text-red-500 mr-1">
-									<i class="fa-solid fa-heart"></i>
-									${ recipe.goodRP }
-								</span>
-								<span class="text-gray-500">조회수 ${ recipe.hitCount }</span>
+			<c:if test="${ rq.loginedMember == null }">
+				<div class="ml-2">
+					<a href="/user/member/login" class="link link-primary">로그인</a>
+					후 확인해보세요.
+				</div>
+			</c:if>
+			<c:if test="${ rq.loginedMember != null }">
+				<div class="flex grid grid-cols-3 gap-10">
+					<!-- 작성자가 본인인 레시피 -->
+					<c:forEach var="recipe" items="${ recipes }">
+						<div>
+							<a href="/user/recipe/detail?id=${ recipe.id }"">
+								<img class="w-full rounded-md" src="https://tse4.mm.bing.net/th?id=OIP.kwt4oKZDd-goVuBezaVQRQHaE7&pid=Api&P=0"
+									alt="" />
+							</a>
+							<div class="ml-3 mt-2">
+								<div class="text-lg">${ recipe.title }</div>
+								<div>${ recipe.extra__writerName }</div>
+								<!-- 좋아요 , 조회수 -->
+								<div class="text-sm">
+									<span class="text-red-500 mr-1">
+										<i class="fa-solid fa-heart"></i>
+										${ recipe.goodRP }
+									</span>
+									<span class="text-gray-500">조회수 ${ recipe.hitCount }</span>
+								</div>
 							</div>
 						</div>
-					</div>
-				</c:forEach>
-			</div>
+					</c:forEach>
+				</div>
+			</c:if>
+
 		</section>
 		<section class="scrap-list bg-white rounded-md p-4 mt-4">
 			<div class="mb-2">
 				<div class="text-xl mb-1">스크랩한 레시피</div>
 			</div>
-			<div class="flex grid grid-cols-3 gap-10">
-				<!-- 내가 스크랩한 레시피 -->
-				<c:forEach var="scrapRecipe" items="${ scrapRecipes }">
-					<div>
-						<a href="/user/recipe/detail?id=${ scrapRecipe.id }">
-							<img class="w-full rounded-md" src="https://tse4.mm.bing.net/th?id=OIP.kwt4oKZDd-goVuBezaVQRQHaE7&pid=Api&P=0"
-								alt="" />
-						</a>
-						<div class="ml-3 mt-2">
-							<div class="text-lg">${ scrapRecipe.title }</div>
-							<div>${ scrapRecipe.extra__writerName }</div>
-							<!-- 좋아요 , 조회수 -->
-							<div class="text-sm">
-								<span class="text-red-500 mr-1">
-									<i class="fa-solid fa-heart"></i>
-									${ scrapRecipe.goodRP }
-								</span>
-								<span class="text-gray-500">조회수 ${ scrapRecipe.hitCount }</span>
+			<c:if test="${ rq.loginedMember == null }">
+				<div class="ml-2">
+					<a href="/user/member/login" class="link link-primary">로그인</a>
+					후 확인해보세요.
+				</div>
+			</c:if>
+			<c:if test="${ rq.loginedMember != null }">
+				<div class="flex grid grid-cols-3 gap-10">
+					<!-- 내가 스크랩한 레시피 -->
+					<c:forEach var="scrapRecipe" items="${ scrapRecipes }">
+						<div>
+							<a href="/user/recipe/detail?id=${ scrapRecipe.id }">
+								<img class="w-full rounded-md" src="https://tse4.mm.bing.net/th?id=OIP.kwt4oKZDd-goVuBezaVQRQHaE7&pid=Api&P=0"
+									alt="" />
+							</a>
+							<div class="ml-3 mt-2">
+								<div class="text-lg">${ scrapRecipe.title }</div>
+								<div>${ scrapRecipe.extra__writerName }</div>
+								<!-- 좋아요 , 조회수 -->
+								<div class="text-sm">
+									<span class="text-red-500 mr-1">
+										<i class="fa-solid fa-heart"></i>
+										${ scrapRecipe.goodRP }
+									</span>
+									<span class="text-gray-500">조회수 ${ scrapRecipe.hitCount }</span>
+								</div>
 							</div>
 						</div>
-					</div>
-				</c:forEach>
-			</div>
+					</c:forEach>
+				</div>
+			</c:if>
 		</section>
 	</div>
 </div>

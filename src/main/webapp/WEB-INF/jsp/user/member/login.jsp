@@ -37,6 +37,7 @@
 	<div class="member-box w-2/5 mx-auto">
 		<form class="flex flex-col space-y-4 items-center" method="POST" action="../member/doLogin"
 			onsubmit="MemberLogin_submitForm(this); return false;">
+			<input type="hidden" name="afterLoginUri" value="${ param.afterLoginUri }">
 			<div class="text-3xl font-bold mb-2">로그인</div>
 			<div>
 				<input name="loginId" type="text" class="input input-bordered w-96 max-w-xs member-inputType" placeholder=" 아이디" />

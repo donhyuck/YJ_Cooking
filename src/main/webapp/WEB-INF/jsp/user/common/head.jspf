@@ -80,7 +80,7 @@
 
 				<!-- 로그인 -->
 				<c:if test="${ rq.isLogined() == false }">
-					<a href="/user/member/login" type="button" class="text-yellow-500">
+					<a href="${ rq.loginUri }" type="button" class="text-yellow-500">
 						<i class="fa-solid fa-arrow-right-to-bracket"></i>
 					</a>
 				</c:if>

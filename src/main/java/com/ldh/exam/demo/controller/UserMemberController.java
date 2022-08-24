@@ -2,6 +2,7 @@ package com.ldh.exam.demo.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ldh.exam.demo.service.MemberService;
@@ -74,7 +75,7 @@ public class UserMemberController {
 	// 회원 로그인 메서드
 	@RequestMapping("/user/member/doLogin")
 	@ResponseBody
-	public String doLogin(String loginId, String loginPw) {
+	public String doLogin(String loginId, String loginPw, @RequestParam(defaultValue = "/") String afterLoginUri) {
 
 		// 로그인 확인
 		if (rq.isLogined() == true) {
@@ -104,7 +105,7 @@ public class UserMemberController {
 		// 로그인 하기
 		rq.login(member);
 
-		return rq.jsReplace(Ut.f("%s님 환영합니다.", member.getNickname()), "/");
+		return rq.jsReplace(Ut.f("%s님 환영합니다.", member.getNickname()), afterLoginUri);
 	}
 
 	// 회원 로그아웃 메서드

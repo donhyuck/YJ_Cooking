@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.ldh.exam.demo.service.MailService;
 import com.ldh.exam.demo.service.MemberService;
 import com.ldh.exam.demo.util.Ut;
 import com.ldh.exam.demo.vo.Member;
@@ -15,10 +16,12 @@ import com.ldh.exam.demo.vo.Rq;
 public class UserMemberController {
 
 	private MemberService memberService;
+	private MailService mailService;
 	private Rq rq;
 
-	public UserMemberController(MemberService memberService, Rq rq) {
+	public UserMemberController(MemberService memberService, MailService mailService, Rq rq) {
 		this.memberService = memberService;
+		this.mailService = mailService;
 		this.rq = rq;
 	}
 

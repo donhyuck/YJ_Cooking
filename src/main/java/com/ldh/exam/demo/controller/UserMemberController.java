@@ -227,4 +227,41 @@ public class UserMemberController {
 
 		return rq.jsReplace(Ut.f("%s 님의 회원정보가 수정되었습니다. 다시 로그인해주세요.", nickname), "/user/member/login");
 	}
+
+	// 아이디 찾기 페이지 메서드
+	@RequestMapping("/user/member/findLoginId")
+	public String showFindLoginId() {
+
+		return "user/member/findLoginId";
+	}
+
+	// 회원 로그인 메서드
+	@RequestMapping("/user/member/doFindLoginId")
+	@ResponseBody
+	public String doFindLoginId(String nickname, String email,
+			@RequestParam(defaultValue = "/") String afterFindLoginIdUri) {
+
+		// 로그인 확인
+		if (rq.isLogined() == true) {
+			return rq.jsHistoryBack("이미 로그인 중입니다.");
+		}
+
+		// 입력 데이터 유효성 검사
+		if (Ut.empty(nickname)) {
+			return rq.jsHistoryBack("닉네임(을)를 입력해주세요.");
+		}
+
+		if (Ut.empty(email)) {
+			return rq.jsHistoryBack("이메일(을)를 입력해주세요.");
+		}
+
+		// 닉네임과 이메일로 회원정보 가져오기
+		Member member = memberService.getMemberByNicknameAndEmail(nickname, email);
+
+		if (member == null) {
+			return rq.jsReplace("등록되지 않은 회원이거나 잘못된 정보입니다.", rq.getFindLoginIdUri());
+		}
+
+		return rq.jsReplace(Ut.f("등록된 아이디 [%s] 입니다. 로그인 페이지로 이동합니다.", member.getLoginId()), "/user/member/login");
+	}
 }

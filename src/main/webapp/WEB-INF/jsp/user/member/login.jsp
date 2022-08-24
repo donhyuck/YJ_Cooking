@@ -49,9 +49,18 @@
 				<div class="member-msgType text-green-400 mt-1 ml-4">사용가능합니다.</div>
 			</div>
 
-			<div class="btns mt-2">
-				<button type="button" class="btn btn-outilne" onclick="history.back();">뒤로가기</button>
-				<button type="submit" class="btn btn-primary btn-outline">로그인</button>
+			<div class="flex flex-col pt-5 text-center">
+				<div class="flex justify-center space-x-7">
+					<button type="button" class="btn btn-outilne" onclick="history.back();">뒤로가기</button>
+					<button type="submit" class="btn btn-primary btn-outline">로그인</button>
+				</div>
+				<div class="pl-8">
+					<div class="text-red-400 mt-8">* 아이디/비밀번호가 기억안나시나요? *</div>
+					<div class="flex justify-center space-x-1">
+						<a href="${rq.findLoginIdUri}" type="submit" class="btn btn-sm btn-link">아이디 찾기</a>
+						<a href="${rq.findLoginPwUri}" type="submit" class="btn btn-sm btn-link">비밀번호 찾기</a>
+					</div>
+				</div>
 			</div>
 		</form>
 

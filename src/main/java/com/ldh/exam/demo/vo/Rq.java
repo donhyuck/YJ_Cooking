@@ -140,6 +140,10 @@ public class Rq {
 		print(Ut.jsReplaceForConfirm(goal, msg, uri));
 	}
 
+	public String getParamJsonStr() {
+		return Ut.toJsonStr(paramMap);
+	}
+
 	public String getLoginUri() {
 
 		return "/user/member/login?afterLoginUri=" + getAfterLoginUri();
@@ -179,7 +183,21 @@ public class Rq {
 		return getEncodedCurrentUri();
 	}
 
-	public String getParamJsonStr() {
-		return Ut.toJsonStr(paramMap);
+	public String getFindLoginIdUri() {
+		return "../member/findLoginId?afterFindLoginIdUri=" + getAfterFindLoginIdUri();
+	}
+
+	public String getFindLoginPwUri() {
+		return "../member/findLoginPw?afterFindLoginPwUri=" + getAfterFindLoginPwUri();
+	}
+
+	public String getAfterFindLoginIdUri() {
+
+		return getEncodedCurrentUri();
+	}
+
+	public String getAfterFindLoginPwUri() {
+
+		return getEncodedCurrentUri();
 	}
 }

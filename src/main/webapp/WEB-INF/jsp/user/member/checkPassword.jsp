@@ -26,12 +26,17 @@
 					class="input input-bordered w-96 max-w-xs member-inputType" placeholder="현재 비밀번호" />
 			</div>
 
-			<div class="btns mt-3 text-center">
-				<button type="button" class="btn btn-outilne mr-3" onclick="history.back();">뒤로가기</button>
-				<button type="submit" class="btn btn-primary btn-outline">확인</button>
-				<div>
-					<div class="mb-1 mt-3">* 비밀번호가 기억안나시나요? *</div>
-					<a href="/user/member/findLoginPw" class="btn btn-sm btn-warning">비밀번호 찾기</a>
+			<div class="flex flex-col pt-5 text-center">
+				<div class="flex justify-center space-x-7">
+					<button type="button" class="btn btn-outilne" onclick="history.back();">뒤로가기</button>
+					<button type="submit" class="btn btn-primary btn-outline">확인</button>
+				</div>
+				<div class="pl-8">
+					<div class="text-red-400 mt-8">* 아이디/비밀번호가 기억안나시나요? *</div>
+					<div class="flex justify-center space-x-1">
+						<a href="${rq.findLoginIdUri}" type="submit" class="btn btn-sm btn-link">아이디 찾기</a>
+						<a href="${rq.findLoginPwUri}" type="submit" class="btn btn-sm btn-link">비밀번호 찾기</a>
+					</div>
 				</div>
 			</div>
 		</form>

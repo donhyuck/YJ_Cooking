@@ -49,6 +49,9 @@ public class MemberService {
 	// 회원정보 수정하기
 	public void doModify(int id, String loginPw, String nickname, String cellphoneNo, String email) {
 
+		// 비밀번호 암호화
+		loginPw = Ut.sha256(loginPw);
+
 		memberRepository.doModify(id, loginPw, nickname, cellphoneNo, email);
 	}
 

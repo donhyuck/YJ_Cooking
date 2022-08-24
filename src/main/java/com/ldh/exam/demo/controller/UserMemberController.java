@@ -98,7 +98,7 @@ public class UserMemberController {
 			return rq.jsReplace("등록되지 않은 회원입니다.", "/user/member/login");
 		}
 
-		if (member.getLoginPw().equals(loginPw) == false) {
+		if (member.getLoginPw().equals(Ut.sha256(loginPw)) == false) {
 			return rq.jsReplace("잘못된 비밀번호입니다.", "/user/member/login");
 		}
 
@@ -149,7 +149,7 @@ public class UserMemberController {
 		}
 
 		// 비밀번호 확인하기
-		if (rq.getLoginedMember().getLoginPw().equals(loginPw) == false) {
+		if (rq.getLoginedMember().getLoginPw().equals(Ut.sha256(loginPw)) == false) {
 			return rq.jsHistoryBack("잘못된 비밀번호 입니다.");
 		}
 
@@ -235,7 +235,7 @@ public class UserMemberController {
 		return "user/member/findLoginId";
 	}
 
-	// 회원 로그인 메서드
+	// 아이디 찾기 메서드
 	@RequestMapping("/user/member/doFindLoginId")
 	@ResponseBody
 	public String doFindLoginId(String nickname, String email,
@@ -258,6 +258,7 @@ public class UserMemberController {
 		// 닉네임과 이메일로 회원정보 가져오기
 		Member member = memberService.getMemberByNicknameAndEmail(nickname, email);
 
+		// 찾기 실패시 uri가 중복되지 않도록 replace
 		if (member == null) {
 			return rq.jsReplace("등록되지 않은 회원이거나 잘못된 정보입니다.", rq.getFindLoginIdUri());
 		}

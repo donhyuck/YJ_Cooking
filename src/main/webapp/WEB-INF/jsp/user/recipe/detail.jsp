@@ -241,7 +241,7 @@
 			<!-- 댓글 목록 영역 시작 -->
 			<div class="flex flex-col border-t">
 				<c:forEach var="reply" items="${ replies }">
-					<div class="flex border-b p-3 pt-5">
+					<div class="flex border-b p-3 pt-5" data-id="${ reply.id }">
 						<div class="w-44">
 							<!-- 댓글 프로필 -->
 							<div class="actor-photo w-24 mx-auto mb-2">

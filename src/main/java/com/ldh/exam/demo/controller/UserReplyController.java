@@ -45,6 +45,9 @@ public class UserReplyController {
 		// 댓글 등록하기
 		int id = replyService.writeReply(rq.getLoginedMemberId(), relTypeCode, relId, body);
 
+		// 등록한 댓글 번호를 URI에 포함
+		replaceUri = Ut.getNewUri(replaceUri, "focusReplyId", id + "");
+
 		return rq.jsReplace(Ut.f("%s번 댓글이 등록되었습니다.", id), replaceUri);
 	}
 

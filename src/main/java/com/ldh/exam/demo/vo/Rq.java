@@ -178,4 +178,8 @@ public class Rq {
 
 		return getEncodedCurrentUri();
 	}
+
+	public String getParamJsonStr() {
+		return Ut.toJsonStr(paramMap);
+	}
 }

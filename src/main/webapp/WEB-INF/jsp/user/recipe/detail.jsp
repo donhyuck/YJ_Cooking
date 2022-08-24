@@ -60,6 +60,31 @@
 </script>
 <!-- 댓글 작성시 유효성 검사 스크립트 끝 -->
 
+<!-- 댓글 작성후 스크롤 이동 스크립트 시작 -->
+<script>
+	if (param.focusReplyId) {
+		alert(param.focusReplyId);
+	}
+
+	function ReplyList__goToReply(id) {
+		setTimeout(function() {
+			const $target = $('.reply-list [data-id="' + id + '"]');
+			const targetOffset = $target.offset();
+			$(window).scrollTop(targetOffset.top - 50);
+			$target.addClass('focus');
+			
+			setTimeout(function() {
+				$target.removeClass('focus');
+			}, 1000);
+		}, 1000);
+	}
+	
+	if (param.focusReplyId) {
+		ReplyList__goToReply(param.focusReplyId);
+	}
+</script>
+<!-- 댓글 작성후 스크롤 이동 스크립트 끝 -->
+
 <div class="bg-gray-200 py-4">
 	<div class="detail-box w-10/12 mx-auto">
 
@@ -239,7 +264,7 @@
 			</div>
 
 			<!-- 댓글 목록 영역 시작 -->
-			<div class="flex flex-col border-t">
+			<div class="reply-list flex flex-col border-t">
 				<c:forEach var="reply" items="${ replies }">
 					<div class="flex border-b p-3 pt-5" data-id="${ reply.id }">
 						<div class="w-44">

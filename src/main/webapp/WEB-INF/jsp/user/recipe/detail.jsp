@@ -61,11 +61,19 @@
 <!-- 댓글 작성시 유효성 검사 스크립트 끝 -->
 
 <!-- 댓글 작성후 스크롤 이동 스크립트 시작 -->
-<script>
-	if (param.focusReplyId) {
-		alert(param.focusReplyId);
-	}
+<!-- 포커스 효과 적용 -->
+<style>
+.reply-list [data-id] {
+	transition: background-color 1s;
+}
 
+.reply-list [data-id].focus {
+	background-color: #efefef;
+	transition: background-color 0s;
+}
+</style>
+
+<script>
 	function ReplyList__goToReply(id) {
 		setTimeout(function() {
 			const $target = $('.reply-list [data-id="' + id + '"]');

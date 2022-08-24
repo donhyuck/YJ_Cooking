@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ldh.exam.demo.service.ReplyService;
 import com.ldh.exam.demo.util.Ut;
+import com.ldh.exam.demo.vo.ResultData;
 import com.ldh.exam.demo.vo.Rq;
 
 @Controller
@@ -76,9 +77,18 @@ public class UserReplyController {
 	// 댓글 삭제하기 메서드
 	@RequestMapping("/user/reply/doDelete")
 	@ResponseBody
-	public String doDelete(int id) {
+	public String doDelete(int id, @RequestParam(defaultValue = "/") String replaceUri) {
 
-		// 구현중
-		return null;
+		// 댓글 찾기, 작성자 권한 체크
+		ResultData actorCanDeleteRd = replyService.actorCanDelete(rq.getLoginedMemberId(), id);
+
+		if (actorCanDeleteRd.isFail()) {
+			return rq.jsHistoryBack(actorCanDeleteRd.getMsg());
+		}
+
+		// 삭제처리
+		replyService.deleteReply(id);
+
+		return rq.jsReplace(Ut.f("%s번 댓글이 삭제되었습니다.", id), replaceUri);
 	}
 }

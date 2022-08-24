@@ -38,4 +38,9 @@
 		LAST_INSERT_ID()
 	</select>
 
+	<delete id="deleteReply">
+		DELETE FROM reply
+		WHERE id = #{id}
+	</delete>
+
 </mapper> 

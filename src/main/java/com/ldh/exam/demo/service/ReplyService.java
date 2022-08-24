@@ -30,7 +30,7 @@ public class ReplyService {
 		return replies;
 	}
 
-	// 레시피 등록하기
+	// 댓글 등록하기
 	public int writeReply(int memberId, String relTypeCode, String relId, String body) {
 
 		replyRepository.writeReply(memberId, relTypeCode, relId, body);
@@ -38,16 +38,16 @@ public class ReplyService {
 		return replyRepository.getLastInsertId();
 	}
 
-	// 레시피 수정하기
-	public void modifyRecipe(int id, String title, String body) {
+	// 댓글 수정하기
+	public void modifyReply(int id, String title, String body) {
 
 		// 구현중
 	}
 
-	// 레시피 삭제하기
-	public void deleteRecipe(int id) {
+	// 댓글 삭제하기
+	public void deleteReply(int id) {
 
-		// 구현중
+		replyRepository.deleteReply(id);
 	}
 
 	// 수정, 삭제 권한여부 업데이트
@@ -66,16 +66,16 @@ public class ReplyService {
 
 	public ResultData actorCanModify(int memberId, int id) {
 
-		// 레시피 찾기
+		// 댓글 찾기
 		Reply reply = getReplyById(id);
 
 		if (reply == null) {
-			return ResultData.from("F-A", Ut.f("%s번 레시피를 찾을 수 없습니다.", id));
+			return ResultData.from("F-A", Ut.f("%s번 댓글을 찾을 수 없습니다.", id));
 		}
 
 		// 작성자 권한 체크
 		if (reply.getMemberId() != memberId) {
-			return ResultData.from("F-B", "해당 레시피에 대한 권한이 없습니다.");
+			return ResultData.from("F-B", "해당 댓글에 대한 권한이 없습니다.");
 		}
 
 		return ResultData.from("S-1", "수정가능합니다.", "reply", reply);
@@ -83,22 +83,22 @@ public class ReplyService {
 
 	public ResultData actorCanDelete(int memberId, int id) {
 
-		// 레시피 찾기
+		// 댓글 찾기
 		Reply reply = getReplyById(id);
 
 		if (reply == null) {
-			return ResultData.from("F-A", Ut.f("%s번 레시피를 찾을 수 없습니다.", id));
+			return ResultData.from("F-A", Ut.f("%s번 댓글을 찾을 수 없습니다.", id));
 		}
 
 		// 작성자 권한 체크
 		if (reply.getMemberId() != memberId) {
-			return ResultData.from("F-B", "해당 레시피에 대한 권한이 없습니다.");
+			return ResultData.from("F-B", "해당 댓글에 대한 권한이 없습니다.");
 		}
 
 		return ResultData.from("S-1", "삭제가능합니다.");
 	}
 
-	// 레시피 확인
+	// 댓글 확인
 	private Reply getReplyById(int id) {
 
 		return replyRepository.getReplyById(id);

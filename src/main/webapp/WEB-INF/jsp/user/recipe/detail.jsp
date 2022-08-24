@@ -281,16 +281,16 @@
 								<div class="text-xl font-bold text-black mr-3">${ reply.extra__writerName }</div>
 								<div>
 									<c:if test="${ reply.regDate == reply.updateDate }">
-										<span>${ reply.regDate } &nbsp;(등록)</span>
+										<span>${ reply.forPrintRegDate_Type3 } &nbsp;(등록)</span>
 									</c:if>
 									<c:if test="${ reply.regDate != reply.updateDate }">
-										<span>${ reply.updateDate } &nbsp;(수정)</span>
+										<span>${ reply.forPrintUpdateDate_Type3 } &nbsp;(수정)</span>
 									</c:if>
 								</div>
 							</div>
 
 							<!-- 댓글 내용 -->
-							<div class="ml-2">${ reply.body }</div>
+							<div class="ml-2">${ reply.forPrintBody }</div>
 						</div>
 
 						<!-- 요리후기 사진 -->

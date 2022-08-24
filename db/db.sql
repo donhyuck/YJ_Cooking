@@ -403,3 +403,6 @@ relId = 3,
 `body` = '불세기는 어느정도인가요?';
 
 SELECT * FROM reply;
+
+# 댓글 테이블에 인덱스 걸기
+ALTER TABLE `reply` ADD INDEX (`relTypeCode`, `relId`);

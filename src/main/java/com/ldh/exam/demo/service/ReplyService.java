@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.ldh.exam.demo.repository.ReplyRepository;
 import com.ldh.exam.demo.util.Ut;
+import com.ldh.exam.demo.vo.Recipe;
 import com.ldh.exam.demo.vo.Reply;
 import com.ldh.exam.demo.vo.ResultData;
 
@@ -16,6 +17,16 @@ public class ReplyService {
 
 	public ReplyService(ReplyRepository replyRepository) {
 		this.replyRepository = replyRepository;
+	}
+
+	// 특정 댓글 가져오기
+	public Reply getForPrintReply(int memberId, String relTypeCode, int id) {
+
+		Reply reply = replyRepository.getForPrintReply(relTypeCode, id);
+
+		updateForPrintData(memberId, reply);
+
+		return reply;
 	}
 
 	// 댓글 목록 가져오기

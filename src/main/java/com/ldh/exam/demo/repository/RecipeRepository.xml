@@ -3,6 +3,12 @@
 
 <mapper namespace="com.ldh.exam.demo.repository.RecipeRepository">
 
+	<select id="getRecipeById" resultType="Recipe">
+		SELECT R.*
+		FROM recipe AS R
+		WHERE R.id = #{id}
+	</select>
+
 	<select id="getForPrintRecipe" resultType="Recipe">
 		SELECT R.*,
 		M.nickname
@@ -28,15 +34,18 @@
 	<select id="getScrapRecipes" resultType="Recipe">
 		SELECT R.*
 		FROM (
-		SELECT R.*,
+		SELECT
+		R.*,
 		M.nickname AS extra__writerName
 		FROM recipe AS R
 		LEFT JOIN
-		`member` AS M
+		`member`
+		AS M
 		ON R.memberId = M.id
 		) AS R
 		LEFT JOIN scrapPoint AS SP
-		ON R.id = SP.relId
+		ON R.id =
+		SP.relId
 		WHERE SP.memberId = #{memberId}
 		GROUP BY R.id
 		ORDER BY R.id DESC
@@ -75,12 +84,6 @@
 	<select id="getLastInsertId" resultType="int">
 		SELECT
 		LAST_INSERT_ID()
-	</select>
-
-	<select id="getRecipeById" resultType="Recipe">
-		SELECT R.*
-		FROM recipe AS R
-		WHERE R.id = #{id}
 	</select>
 
 	<update id="increaseHitCount">

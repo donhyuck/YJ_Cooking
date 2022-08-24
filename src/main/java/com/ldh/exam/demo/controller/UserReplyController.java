@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ldh.exam.demo.service.ReplyService;
 import com.ldh.exam.demo.util.Ut;
+import com.ldh.exam.demo.vo.Reply;
 import com.ldh.exam.demo.vo.ResultData;
 import com.ldh.exam.demo.vo.Rq;
 
@@ -61,8 +62,19 @@ public class UserReplyController {
 	@RequestMapping("/user/reply/modify")
 	public String showModify(Model model, int id) {
 
-		// 구현중
-		return null;
+		// 레시피 찾기, 작성자 권한 체크
+		ResultData actorCanModifyRd = replyService.actorCanModify(rq.getLoginedMemberId(), id);
+
+		if (actorCanModifyRd.isFail()) {
+			return rq.historyBackOnView(actorCanModifyRd.getMsg());
+		}
+
+		// 해당 댓글을 수정 페이지로 넘기기
+		Reply reply = replyService.getForPrintReply(rq.getLoginedMemberId(), "recipe", id);
+
+		model.addAttribute("reply", reply);
+
+		return "/user/reply/modify";
 	}
 
 	// 댓글 수정하기 메서드

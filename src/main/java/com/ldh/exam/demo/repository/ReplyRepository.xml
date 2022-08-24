@@ -9,6 +9,19 @@
 		WHERE RE.id = #{id}
 	</select>
 
+	<select id="getForPrintReply" resultType="Reply">
+		SELECT RE.*,
+		M.nickname
+		AS extra__writerName
+		FROM reply AS RE
+		LEFT JOIN `member` AS M
+		ON
+		RE.memberId = M.id
+		WHERE RE.relTypeCode = #{relTypeCode}
+		AND RE.id =
+		#{id}
+	</select>
+
 	<select id="getForPrintReplies" resultType="Reply">
 		SELECT RE.*,
 		M.nickname AS extra__writerName

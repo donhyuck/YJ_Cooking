@@ -152,7 +152,10 @@ public class UserRecipeController {
 			return rq.historyBackOnView(actorCanModifyRd.getMsg());
 		}
 
-		model.addAttribute("recipe", actorCanModifyRd.getData1());
+		// 해당 레시피를 수정 페이지로 넘기기
+		Recipe recipe = recipeService.getForPrintRecipe(rq.getLoginedMemberId(), id);
+
+		model.addAttribute("recipe", recipe);
 
 		return "user/recipe/modify";
 	}

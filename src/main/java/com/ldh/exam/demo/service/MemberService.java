@@ -46,6 +46,9 @@ public class MemberService {
 			return ResultData.from("F-2", Ut.f("입력하신 닉네임 [ %s ], 이메일 [ %s ] 은 이미 등록되었습니다.", nickname, email));
 		}
 
+		// 비밀번호 암호화
+		loginPw = Ut.sha256(loginPw);
+
 		// 중복사항이 없을 경우, 가입처리
 		memberRepository.doJoin(loginId, loginPw, nickname, cellphoneNo, email);
 
@@ -55,16 +58,15 @@ public class MemberService {
 	}
 
 	// 회원정보 수정하기
-	public void doModify(int memberId, String loginPw, String nickname, String cellphoneNo, String email) {
+	public void doModify(int id, String loginPw, String nickname, String cellphoneNo, String email) {
 
 		// 비밀번호 암호화
-		loginPw = Ut.sha256(loginPw);
-
-		memberRepository.doModify(memberId, loginPw, nickname, cellphoneNo, email);
-
 		if (loginPw != null) {
-			attrService.remove("member", memberId, "extra", "useTempPassword");
+			loginPw = Ut.sha256(loginPw);
+			attrService.remove("member", id, "extra", "useTempPassword");
 		}
+
+		memberRepository.doModify(id, loginPw, nickname, cellphoneNo, email);
 	}
 
 	// 등록번호로 회원 가져오기

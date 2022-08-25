@@ -315,6 +315,7 @@ public class UserMemberController {
 			return rq.jsReplace("등록되지 않은 회원이거나 잘못된 이메일입니다.", rq.getFindLoginPwUri());
 		}
 
+		// 임시 비밀번호를 이메일로 발송
 		ResultData notifyTempLoginPwByEmailRs = memberService.notifyTempLoginPwByEmail(member);
 
 		return rq.jsReplace(notifyTempLoginPwByEmailRs.getMsg(), afterFindLoginPwUri);

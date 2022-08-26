@@ -13,6 +13,7 @@ public class Recipe {
 	private String regDate;
 	private String updateDate;
 	private int memberId;
+	private int guideId;
 	private String title;
 	private String body;
 	private int amount;

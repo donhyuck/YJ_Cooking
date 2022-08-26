@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.ldh.exam.demo.service.BoardService;
 import com.ldh.exam.demo.service.MemberService;
 import com.ldh.exam.demo.service.ReactionService;
 import com.ldh.exam.demo.service.RecipeService;
@@ -21,14 +22,16 @@ import com.ldh.exam.demo.vo.Rq;
 public class UserRecipeController {
 
 	private RecipeService recipeService;
+	private BoardService boardService;
 	private MemberService memberService;
 	private ReplyService replyService;
 	private ReactionService reactionService;
 	private Rq rq;
 
-	public UserRecipeController(RecipeService recipeService, MemberService memberService, ReplyService replyService,
-			ReactionService reactionService, Rq rq) {
+	public UserRecipeController(RecipeService recipeService, BoardService boardService, MemberService memberService,
+			ReplyService replyService, ReactionService reactionService, Rq rq) {
 		this.recipeService = recipeService;
+		this.boardService = boardService;
 		this.memberService = memberService;
 		this.replyService = replyService;
 		this.reactionService = reactionService;

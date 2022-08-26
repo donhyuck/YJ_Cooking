@@ -8,9 +8,12 @@ CREATE TABLE recipe (
     id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
     regDate DATETIME NOT NULL,
     updateDate DATETIME NOT NULL,
-    title CHAR(100),
+    title CHAR(100) NOT NULL,
     `body` TEXT NOT NULL
 );
+
+SHOW TABLES;
+SELECT * FROM recipe;
 
 # 레시피 테스트 데이터 생성
 INSERT INTO recipe
@@ -57,7 +60,7 @@ loginPw = 'admin',
 authLevel = 7,
 nickname = '관리자',
 cellphoneNo = '01012341234',
-email = 'admin01@test.com';
+email = 'admin@gmail.com';
 
 INSERT INTO `member`
 SET regDate = NOW(),
@@ -66,7 +69,7 @@ loginId = 'test1',
 loginPw = 'test1',
 nickname = '몽룡',
 cellphoneNo = '01078907890',
-email = 'tester01@test.com';
+email = 'test1@gmail.com';
 
 INSERT INTO `member`
 SET regDate = NOW(),
@@ -75,7 +78,7 @@ loginId = 'test2',
 loginPw = 'test2',
 nickname = '춘향',
 cellphoneNo = '01096319631',
-email = 'tester02@test.com';
+email = 'test2@gmail.com';
 
 INSERT INTO `member`
 SET regDate = NOW(),
@@ -84,7 +87,7 @@ loginId = 'test3',
 loginPw = 'test3',
 nickname = '임꺽정',
 cellphoneNo = '01034343434',
-email = 'tester03@test.com';
+email = 'test3@gmail.com';
 
 INSERT INTO `member`
 SET regDate = NOW(),
@@ -93,7 +96,7 @@ loginId = 'test4',
 loginPw = 'test4',
 nickname = '홍길동',
 cellphoneNo = '01089895656',
-email = 'tester04@test.com';
+email = 'test4@gmail.com';
 
 SELECT * FROM `member`;
 
@@ -104,6 +107,10 @@ ALTER TABLE recipe ADD COLUMN memberId INT(10) UNSIGNED NOT NULL AFTER updateDat
 UPDATE recipe
 SET memberId = 2
 WHERE memberId = 0;
+
+UPDATE recipe
+SET memberId = 3
+WHERE id = 3;
 
 SELECT * FROM recipe;
 
@@ -410,6 +417,454 @@ ALTER TABLE `reply` ADD INDEX (`relTypeCode`, `relId`);
 # 로그인비밀번호 컬럼의 길이를 100으로 늘림
 ALTER TABLE `member` MODIFY COLUMN loginPw VARCHAR(100) NOT NULL;
 
-# 기존 회원의 비밀번호를 함호화 해서 저장
+# 기존 회원의 비밀번호를 암호화 해서 저장
 UPDATE `member`
 SET loginPw = SHA2(loginPw, 256);
+
+# board 테이블 생성
+CREATE TABLE board (
+    id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    regDate DATETIME NOT NULL,
+    updateDate DATETIME NOT NULL,
+    `code` CHAR(50) NOT NULL UNIQUE COMMENT 'sort,method,content,free...',
+    `boardName` CHAR(50) NOT NULL UNIQUE COMMENT '종류,방법,재료,자유...',
+    delStatus TINYINT(1) UNSIGNED NOT NULL DEFAULT 0 COMMENT '삭제여부(0=삭제전,1=삭제)'
+);
+
+# board 데이터 생성
+INSERT INTO board
+SET regDate=NOW(),
+updateDate=NOW(),
+`code`='sort',
+`boardName`='종류';
+
+INSERT INTO board
+SET regDate=NOW(),
+updateDate=NOW(),
+`code`='method',
+`boardName`='방법';
+
+INSERT INTO board
+SET regDate=NOW(),
+updateDate=NOW(),
+`code`='content',
+`boardName`='재료';
+
+INSERT INTO board
+SET regDate=NOW(),
+updateDate=NOW(),
+`code`='free',
+`boardName`='자유';
+
+SELECT * FROM board;
+
+# category 테이블 생성
+CREATE TABLE category (
+    id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    regDate DATETIME NOT NULL,
+    updateDate DATETIME NOT NULL,
+    boardId INT(10) UNSIGNED NOT NULL,
+    relId INT(10) UNSIGNED NOT NULL,
+    `name` CHAR(50) NOT NULL UNIQUE,
+    delStatus TINYINT(1) UNSIGNED NOT NULL DEFAULT 0 COMMENT '삭제여부(0=삭제전,1=삭제)'
+);
+
+# category 데이터 생성
+INSERT INTO category
+SET regDate=NOW(),
+updateDate=NOW(),
+boardId = 1,
+relId = 1,
+`name`='밑반찬';
+
+INSERT INTO category
+SET regDate=NOW(),
+updateDate=NOW(),
+boardId = 1,
+relId = 2,
+`name`='메인반찬';
+
+INSERT INTO category
+SET regDate=NOW(),
+updateDate=NOW(),
+boardId = 1,
+relId = 3,
+`name`='국/탕/찌게';
+
+INSERT INTO category
+SET regDate=NOW(),
+updateDate=NOW(),
+boardId = 1,
+relId = 4,
+`name`='밥/죽';
+
+INSERT INTO category
+SET regDate=NOW(),
+updateDate=NOW(),
+boardId = 1,
+relId = 5,
+`name`='면/국수';
+
+INSERT INTO category
+SET regDate=NOW(),
+updateDate=NOW(),
+boardId = 1,
+relId = 6,
+`name`='장류';
+
+INSERT INTO category
+SET regDate=NOW(),
+updateDate=NOW(),
+boardId = 1,
+relId = 7,
+`name`='소스/양념';
+
+INSERT INTO category
+SET regDate=NOW(),
+updateDate=NOW(),
+boardId = 1,
+relId = 8,
+`name`='한식';
+
+INSERT INTO category
+SET regDate=NOW(),
+updateDate=NOW(),
+boardId = 1,
+relId = 9,
+`name`='중식';
+
+INSERT INTO category
+SET regDate=NOW(),
+updateDate=NOW(),
+boardId = 1,
+relId = 10,
+`name`='양식';
+
+INSERT INTO category
+SET regDate=NOW(),
+updateDate=NOW(),
+boardId = 1,
+relId = 11,
+`name`='동남아식';
+
+INSERT INTO category
+SET regDate=NOW(),
+updateDate=NOW(),
+boardId = 1,
+relId = 12,
+`name`='베이커리';
+
+INSERT INTO category
+SET regDate=NOW(),
+updateDate=NOW(),
+boardId = 1,
+relId = 13,
+`name`='음료/차';
+
+INSERT INTO category
+SET regDate=NOW(),
+updateDate=NOW(),
+boardId = 2,
+relId = 1,
+`name`='볶기';
+
+INSERT INTO category
+SET regDate=NOW(),
+updateDate=NOW(),
+boardId = 2,
+relId = 2,
+`name`='굽기';
+
+INSERT INTO category
+SET regDate=NOW(),
+updateDate=NOW(),
+boardId = 2,
+relId = 3,
+`name`='끓이기';
+
+INSERT INTO category
+SET regDate=NOW(),
+updateDate=NOW(),
+boardId = 2,
+relId = 4,
+`name`='찜';
+
+INSERT INTO category
+SET regDate=NOW(),
+updateDate=NOW(),
+boardId = 2,
+relId = 5,
+`name`='조림';
+
+INSERT INTO category
+SET regDate=NOW(),
+updateDate=NOW(),
+boardId = 2,
+relId = 6,
+`name`='튀김';
+
+INSERT INTO category
+SET regDate=NOW(),
+updateDate=NOW(),
+boardId = 2,
+relId = 7,
+`name`='삶기';
+
+INSERT INTO category
+SET regDate=NOW(),
+updateDate=NOW(),
+boardId = 2,
+relId = 8,
+`name`='데치기';
+
+INSERT INTO category
+SET regDate=NOW(),
+updateDate=NOW(),
+boardId = 2,
+relId = 9,
+`name`='무치기';
+
+INSERT INTO category
+SET regDate=NOW(),
+updateDate=NOW(),
+boardId = 2,
+relId = 10,
+`name`='전/부침';
+
+INSERT INTO category
+SET regDate=NOW(),
+updateDate=NOW(),
+boardId = 3,
+relId = 1,
+`name`='소고기';
+
+INSERT INTO category
+SET regDate=NOW(),
+updateDate=NOW(),
+boardId = 3,
+relId = 2,
+`name`='돼지고기';
+
+INSERT INTO category
+SET regDate=NOW(),
+updateDate=NOW(),
+boardId = 3,
+relId = 3,
+`name`='닭고기';
+
+INSERT INTO category
+SET regDate=NOW(),
+updateDate=NOW(),
+boardId = 3,
+relId = 4,
+`name`='생선류';
+
+INSERT INTO category
+SET regDate=NOW(),
+updateDate=NOW(),
+boardId = 3,
+relId = 5,
+`name`='갑각류';
+
+INSERT INTO category
+SET regDate=NOW(),
+updateDate=NOW(),
+boardId = 3,
+relId = 6,
+`name`='해조류';
+
+INSERT INTO category
+SET regDate=NOW(),
+updateDate=NOW(),
+boardId = 3,
+relId = 7,
+`name`='건어물류';
+
+INSERT INTO category
+SET regDate=NOW(),
+updateDate=NOW(),
+boardId = 3,
+relId = 8,
+`name`='과일류';
+
+INSERT INTO category
+SET regDate=NOW(),
+updateDate=NOW(),
+boardId = 3,
+relId = 9,
+`name`='채소류';
+
+INSERT INTO category
+SET regDate=NOW(),
+updateDate=NOW(),
+boardId = 3,
+relId = 10,
+`name`='버섯류';
+
+INSERT INTO category
+SET regDate=NOW(),
+updateDate=NOW(),
+boardId = 3,
+relId = 11,
+`name`='견과류/곡류';
+
+INSERT INTO category
+SET regDate=NOW(),
+updateDate=NOW(),
+boardId = 3,
+relId = 12,
+`name`='쌀/밀';
+
+INSERT INTO category
+SET regDate=NOW(),
+updateDate=NOW(),
+boardId = 3,
+relId = 13,
+`name`='달걀/유제품';
+
+INSERT INTO category
+SET regDate=NOW(),
+updateDate=NOW(),
+boardId = 3,
+relId = 14,
+`name`='구황작물';
+
+INSERT INTO category
+SET regDate=NOW(),
+updateDate=NOW(),
+boardId = 3,
+relId = 15,
+`name`='가공식품';
+
+INSERT INTO category
+SET regDate=NOW(),
+updateDate=NOW(),
+boardId = 4,
+relId = 1,
+`name`='술안주';
+
+INSERT INTO category
+SET regDate=NOW(),
+updateDate=NOW(),
+boardId = 4,
+relId = 2,
+`name`='해장';
+
+INSERT INTO category
+SET regDate=NOW(),
+updateDate=NOW(),
+boardId = 4,
+relId = 3,
+`name`='야식';
+
+INSERT INTO category
+SET regDate=NOW(),
+updateDate=NOW(),
+boardId = 4,
+relId = 4,
+`name`='다이어트';
+
+INSERT INTO category
+SET regDate=NOW(),
+updateDate=NOW(),
+boardId = 4,
+relId = 5,
+`name`='간편식';
+
+INSERT INTO category
+SET regDate=NOW(),
+updateDate=NOW(),
+boardId = 4,
+relId = 6,
+`name`='영양식';
+
+INSERT INTO category
+SET regDate=NOW(),
+updateDate=NOW(),
+boardId = 4,
+relId = 7,
+`name`='도시락';
+
+INSERT INTO category
+SET regDate=NOW(),
+updateDate=NOW(),
+boardId = 4,
+relId = 8,
+`name`='기념일';
+
+INSERT INTO category
+SET regDate=NOW(),
+updateDate=NOW(),
+boardId = 4,
+relId = 9,
+`name`='집들이';
+
+INSERT INTO category
+SET regDate=NOW(),
+updateDate=NOW(),
+boardId = 4,
+relId = 10,
+`name`='기타';
+
+## 카테고리의 상위분류 이름과 함께 보기
+SELECT C.*, B.boardName
+FROM category AS C
+LEFT JOIN board AS B
+ON C.boardId = B.id;
+
+# guide 테이블 생성
+CREATE TABLE guide (
+    id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    regDate DATETIME NOT NULL,
+    updateDate DATETIME NOT NULL,
+    recipeId INT(10) NOT NULL UNIQUE,
+    sortId INT(10) UNSIGNED NOT NULL,
+    methodId INT(10) UNSIGNED NOT NULL,
+    contentId INT(10) UNSIGNED NOT NULL,
+    freeId INT(10) UNSIGNED NOT NULL,
+    delStatus TINYINT(1) UNSIGNED NOT NULL DEFAULT 0 COMMENT '삭제여부(0=삭제전,1=삭제)'
+);
+
+## 레시피 테이블에 guide 추가
+ALTER TABLE recipe ADD COLUMN guideId INT(10) UNSIGNED NOT NULL AFTER memberId;
+
+## 기존 레시피데이터에 guide 속성부여
+INSERT INTO guide
+SET regDate = NOW(),
+updateDate = NOW(),
+recipeId = 1,
+sortId = 1,
+methodId = 1,
+contentId = 13,
+freeId = 5;
+ 
+INSERT INTO guide
+SET regDate = NOW(),
+updateDate = NOW(),
+recipeId = 2,
+sortId = 8,
+methodId = 4,
+contentId = 1,
+freeId = 6;
+
+INSERT INTO guide
+SET regDate = NOW(),
+updateDate = NOW(),
+recipeId = 3,
+sortId = 5,
+methodId = 1,
+contentId = 12,
+freeId = 5;
+
+UPDATE recipe
+SET guideId = recipe.id
+WHERE guideId = 0;
+
+SELECT * FROM board;
+SELECT * FROM category;
+SELECT * FROM guide;
+SELECT * FROM recipe;
+
+SELECT COUNT(*)
+FROM category
+GROUP BY boardId;

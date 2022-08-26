@@ -295,13 +295,27 @@ SET regDate=NOW(),
 updateDate=NOW(),
 boardId = 3,
 relId = 12,
-`name`='달걀/유제품';
+`name`='쌀/밀';
 
 INSERT INTO category
 SET regDate=NOW(),
 updateDate=NOW(),
 boardId = 3,
 relId = 13,
+`name`='달걀/유제품';
+
+INSERT INTO category
+SET regDate=NOW(),
+updateDate=NOW(),
+boardId = 3,
+relId = 14,
+`name`='구황작물';
+
+INSERT INTO category
+SET regDate=NOW(),
+updateDate=NOW(),
+boardId = 3,
+relId = 15,
 `name`='가공식품';
 
 INSERT INTO category
@@ -344,7 +358,7 @@ SET regDate=NOW(),
 updateDate=NOW(),
 boardId = 4,
 relId = 6,
-`name`='영약식';
+`name`='영양식';
 
 INSERT INTO category
 SET regDate=NOW(),
@@ -358,6 +372,20 @@ SET regDate=NOW(),
 updateDate=NOW(),
 boardId = 4,
 relId = 8,
+`name`='기념일';
+
+INSERT INTO category
+SET regDate=NOW(),
+updateDate=NOW(),
+boardId = 4,
+relId = 9,
+`name`='집들이';
+
+INSERT INTO category
+SET regDate=NOW(),
+updateDate=NOW(),
+boardId = 4,
+relId = 10,
 `name`='기타';
 
 ## 카테고리의 상위분류 이름과 함께 보기
@@ -371,7 +399,7 @@ CREATE TABLE guide (
     id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
     regDate DATETIME NOT NULL,
     updateDate DATETIME NOT NULL,
-    recipeId INT(10) UNSIGNED NOT NULL UNIQUE,
+    recipeId INT(10) NOT NULL UNIQUE,
     sortId INT(10) UNSIGNED NOT NULL,
     methodId INT(10) UNSIGNED NOT NULL,
     contentId INT(10) UNSIGNED NOT NULL,
@@ -384,8 +412,33 @@ INSERT INTO guide
 (
     regDate, updateDate, recipeId, sortId, methodId, contentId, freeId
 )
-SELECT NOW(), NOW(), FLOOR(RAND() * 50)+1, FLOOR(RAND() * 10)+1, FLOOR(RAND() * 10)+1, FLOOR(RAND() * 13)+1, FLOOR(RAND() * 8)+1;
+SELECT NOW(), NOW(), FLOOR(RAND() * 1000)+1, FLOOR(RAND() * 13)+1, FLOOR(RAND() * 10)+1, FLOOR(RAND() * 13)+1, FLOOR(RAND() * 8)+1;
+
+# 1개 검색할 때
+# boardId = 1, relId = 7
+# boardId = 2, relId = 2
+# boardId = 3, relId = 5
+# boardId = 4, relId = 3
+# category boardId relId
+# guide    recipeId sortId methodId contentId freeId
+
+SELECT G.*, C.name
+FROM category AS C
+LEFT JOIN guide AS G
+ON G.sortId
+AND G.methodId
+AND G.contentId
+AND G.freeId
+WHERE G.sortId = 5
+AND G.methodId = 6
+AND G.contentId = 11
+AND G.freeId = 5;
 
 SELECT * FROM board;
 SELECT * FROM category;
 SELECT * FROM guide;
+SELECT COUNT(*) FROM guide;
+
+SELECT COUNT(*)
+FROM category
+GROUP BY boardId;

@@ -13,6 +13,7 @@ import com.ldh.exam.demo.service.ReactionService;
 import com.ldh.exam.demo.service.RecipeService;
 import com.ldh.exam.demo.service.ReplyService;
 import com.ldh.exam.demo.util.Ut;
+import com.ldh.exam.demo.vo.Board;
 import com.ldh.exam.demo.vo.Recipe;
 import com.ldh.exam.demo.vo.Reply;
 import com.ldh.exam.demo.vo.ResultData;
@@ -50,7 +51,10 @@ public class UserRecipeController {
 
 	// 레시피 분류목록 페이지 메서드
 	@RequestMapping("/user/list/category")
-	public String showCategoryList() {
+	public String showCategoryList(Model model) {
+
+		List<Board> boards = boardService.getBoards();
+		model.addAttribute("boards", boards);
 
 		return "user/list/category";
 	}

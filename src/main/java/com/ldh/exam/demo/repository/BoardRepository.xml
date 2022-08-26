@@ -3,5 +3,10 @@
 
 <mapper namespace="com.ldh.exam.demo.repository.BoardRepository">
 
+	<select id="getBoards" resultType="Board">
+		SELECT *
+		FROM board
+	</select>
+
 
 </mapper> 

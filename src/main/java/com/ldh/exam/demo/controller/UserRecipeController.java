@@ -14,6 +14,7 @@ import com.ldh.exam.demo.service.RecipeService;
 import com.ldh.exam.demo.service.ReplyService;
 import com.ldh.exam.demo.util.Ut;
 import com.ldh.exam.demo.vo.Board;
+import com.ldh.exam.demo.vo.Category;
 import com.ldh.exam.demo.vo.Recipe;
 import com.ldh.exam.demo.vo.Reply;
 import com.ldh.exam.demo.vo.ResultData;
@@ -53,8 +54,14 @@ public class UserRecipeController {
 	@RequestMapping("/user/list/category")
 	public String showCategoryList(Model model) {
 
+		// 대분류 가져오기, 종류, 재료, 방법..
 		List<Board> boards = boardService.getBoards();
+
+		// 중분류 가져오기
+		List<Category> categories = boardService.getCategoriesByBoardId(2);
+
 		model.addAttribute("boards", boards);
+		model.addAttribute("categories", categories);
 
 		return "user/list/category";
 	}

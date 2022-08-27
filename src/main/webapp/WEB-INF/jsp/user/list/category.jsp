@@ -27,11 +27,19 @@
 <div class="bg-gray-200 py-4">
 	<div class="list-box w-10/12 mx-auto">
 		<div class="flex flex-col space-y-6">
+			<!-- 대분류 -->
 			<c:forEach var="board" items="${ boards }">
-				<section class="bg-white rounded-md p-4">
-					<div class="mb-2">
-						<div class="text-xl mb-1">${ board.boardName }</div>
-						내용내용
+				<section class="bg-white rounded-md p-8">
+					<!-- 중분류 -->
+					<div class="text-3xl border-b border-gray-300 mb-4 p-3 mx-4">${ board.boardName }</div>
+					<div class="flex grid grid-cols-5 text-center mx-20">
+						<c:forEach var="category" items="${ categories }">
+							<c:if test="${ category.boardId == board.id }">
+								<div class="flex justify-center items-center w-32 h-16 my-4 border border-gray-400 rounded-full mx-auto hover:bg-yellow-300">
+									<div class="text-gray-600 text-xl">${ category.name }</div>
+								</div>
+							</c:if>
+						</c:forEach>
 					</div>
 				</section>
 			</c:forEach>

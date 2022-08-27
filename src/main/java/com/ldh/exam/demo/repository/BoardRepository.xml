@@ -5,7 +5,13 @@
 
 	<select id="getBoards" resultType="Board">
 		SELECT *
-		FROM board
+		FROM board AS B
+	</select>
+
+	<select id="getCategoriesByBoardId" resultType="Category">
+		SELECT *
+		FROM
+		category AS C
 	</select>
 
 

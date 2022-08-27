@@ -15,14 +15,6 @@
 		FROM board AS B
 	</select>
 
-	<select id="getBoardNameByBoardId" resultType="String">
-		SELECT boardName
-		FROM
-		category AS C
-		WHERE boardId =
-		#{boardId}
-	</select>
-
 	<select id="getCategoryByBoardId" resultType="Category">
 		SELECT C.*
 		FROM
@@ -35,29 +27,6 @@
 		FROM
 		category
 		AS C
-	</select>
-
-	<select id="getGuideIdByBoardIdAndRelId" resultType="int">
-		SELECT G.id
-		FROM guide AS G
-		WHERE 1
-		<choose>
-			<when test="boardId== 1">
-				AND G.sortId = #{relId}
-			</when>
-			<when test="boardId== 2">
-				AND G.sortId = #{relId}
-			</when>
-			<when test="boardId== 3">
-				AND G.sortId = #{relId}
-			</when>
-			<when test="boardId== 4">
-				AND G.sortId = #{relId}
-			</when>
-			<otherwise>
-				AND 1
-			</otherwise>
-		</choose>
 	</select>
 
 </mapper> 

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import com.ldh.exam.demo.repository.BoardRepository;
 import com.ldh.exam.demo.vo.Board;
 import com.ldh.exam.demo.vo.Category;
+import com.ldh.exam.demo.vo.Guide;
 
 @Service
 public class BoardService {
@@ -27,11 +28,6 @@ public class BoardService {
 		return boardRepository.getBoards();
 	}
 
-	public String getBoardNameByBoardId(int boardId) {
-
-		return boardRepository.getBoardNameByBoardId(boardId);
-	}
-
 	public Category getCategoryByBoardId(int boardId) {
 
 		return boardRepository.getCategoryByBoardId(boardId);
@@ -40,10 +36,5 @@ public class BoardService {
 	public List<Category> getCategories() {
 
 		return boardRepository.getCategories();
-	}
-
-	public int getGuideIdByBoardIdAndRelId(int boardId, int relId) {
-
-		return boardRepository.getGuideIdByBoardIdAndRelId(boardId, relId);
 	}
 }

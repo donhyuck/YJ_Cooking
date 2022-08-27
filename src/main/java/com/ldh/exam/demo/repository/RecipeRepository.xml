@@ -16,8 +16,7 @@
 		FROM recipe AS R
 		LEFT JOIN `member` AS M
 		ON
-		R.memberId =
-		M.id
+		R.memberId = M.id
 		WHERE R.id = #{id}
 	</select>
 
@@ -34,10 +33,35 @@
 	<select id="getRecipesByGuideId" resultType="Recipe">
 		SELECT R.*,
 		M.nickname AS extra__writerName
-		FROM recipe AS R
-		LEFT JOIN `member` AS M
-		ON R.memberId = M.id
-		WHERE R.guideId = #{guideId}
+		FROM (
+		SELECT G.*
+		FROM `guide`
+		AS G
+		WHERE 1
+		<choose>
+			<when test="boardId == 1">
+				AND G.sortId = #{relId}
+			</when>
+			<when test="boardId == 2">
+				AND G.methodId = #{relId}
+			</when>
+			<when test="boardId == 3">
+				AND G.contentId = #{relId}
+			</when>
+			<when test="boardId == 4">
+				AND G.freeId = #{relId}
+			</when>
+			<otherwise>
+				AND 1
+			</otherwise>
+		</choose>
+		) AS G
+		LEFT JOIN `recipe`
+		AS R
+		ON G.recipeId = R.id
+		LEFT JOIN `member`
+		AS M
+		ON R.memberId = M.id;
 	</select>
 
 	<select id="getScrapRecipes" resultType="Recipe">

@@ -15,6 +15,7 @@ import com.ldh.exam.demo.service.ReplyService;
 import com.ldh.exam.demo.util.Ut;
 import com.ldh.exam.demo.vo.Board;
 import com.ldh.exam.demo.vo.Category;
+import com.ldh.exam.demo.vo.Guide;
 import com.ldh.exam.demo.vo.Recipe;
 import com.ldh.exam.demo.vo.Reply;
 import com.ldh.exam.demo.vo.ResultData;
@@ -71,13 +72,10 @@ public class UserRecipeController {
 	public String showChoice(Model model, int boardId, int relId) {
 
 		// 분류 이름
-		String boardName = boardService.getBoardNameByBoardId(boardId);
-
-		// board번호, relId로 가이드번호 가져오기
-		int guideId = boardService.getGuideIdByBoardIdAndRelId(boardId, relId);
+		String boardName = boardService.getBoardByBoardId(boardId).getBoardName();
 
 		// 분류페이지에서 선택한 레시피 목록 가져오기
-		List<Recipe> choicedRecipes = recipeService.getRecipesByGuideId(guideId);
+		List<Recipe> choicedRecipes = recipeService.getRecipesByGuideId(boardId, relId);
 
 		model.addAttribute("boardName", boardName);
 		model.addAttribute("choicedRecipes", choicedRecipes);

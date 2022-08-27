@@ -13,7 +13,7 @@ public interface RecipeRepository {
 
 	public List<Recipe> getForPrintRecipes();
 
-	public List<Recipe> getRecipesByGuideId(int guideId);
+	public List<Recipe> getRecipesByGuideId(int boardId, int relId);
 
 	public List<Recipe> getScrapRecipes(int memberId);
 

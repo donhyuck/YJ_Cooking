@@ -40,6 +40,12 @@ public class RecipeService {
 		return recipes;
 	}
 
+	// 분류페이지에서 선택한 레시피 목록 가져오기
+	public List<Recipe> getRecipesOfChoice(int boardId, int relId) {
+
+		return recipeRepository.getRecipesOfChoice(boardId, relId);
+	}
+
 	// 레시피 등록하기
 	public int writeRecipe(int memberId, String title, String body) {
 

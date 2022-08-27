@@ -66,6 +66,18 @@ public class UserRecipeController {
 		return "user/list/category";
 	}
 
+	// 분류페이지에서 선택한 레시피 목록 보기
+	@RequestMapping("/user/list/choice")
+	public String showChoice(Model model, int boardId, int relId) {
+
+		// 소분류, 분류페이지에서 선택한 레시피 목록 가져오기
+		List<Recipe> choicedRecipes = recipeService.getRecipesOfChoice(boardId, relId);
+
+		model.addAttribute("choicedRecipes", choicedRecipes);
+
+		return "user/list/choice";
+	}
+
 	// 레시피 랭킹목록 페이지 메서드
 	@RequestMapping("/user/list/rank")
 	public String showRankList(Model model) {

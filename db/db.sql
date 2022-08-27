@@ -865,6 +865,20 @@ SELECT * FROM category;
 SELECT * FROM guide;
 SELECT * FROM recipe;
 
-SELECT COUNT(*)
+SELECT *
 FROM category
 GROUP BY boardId;
+
+## 분류 페이지에서 선택한 레시피 목록 가져오기
+SELECT R.*,
+M.nickname AS extra__writerName
+FROM recipe AS R
+LEFT JOIN `member` AS M
+ON R.memberId = M.id
+LEFT JOIN guide AS G
+ON G.id = R.guideId
+WHERE 1
+AND IF( 1 = 4, G.sortId = 5, 1)
+AND IF( 2 = 4, G.methodId = 1, 1)
+AND IF( 3 = 4, G.contentId = 12, 1)
+AND IF( 4 = 4, G.freeId = 5, 1);

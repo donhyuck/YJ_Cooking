@@ -13,6 +13,8 @@ public interface RecipeRepository {
 
 	public List<Recipe> getForPrintRecipes();
 
+	public List<Recipe> getRecipesOfChoice(int boardId, int relId);
+
 	public List<Recipe> getScrapRecipes(int memberId);
 
 	public void writeRecipe(int memberId, String title, String body);

@@ -35,9 +35,11 @@
 					<div class="flex grid grid-cols-5 text-center mx-20">
 						<c:forEach var="category" items="${ categories }">
 							<c:if test="${ category.boardId == board.id }">
-								<div class="flex justify-center items-center w-32 h-16 my-4 border border-gray-400 rounded-full mx-auto hover:bg-yellow-300">
+								<!--소분류, 선택한 카테고리의 레시피 보기 -->
+								<a href="../list/choice?boardId=${ category.boardId }&relId=${category.relId}"
+									class="flex justify-center items-center w-32 h-16 my-4 border border-gray-400 rounded-full mx-auto hover:bg-yellow-300">
 									<div class="text-gray-600 text-xl">${ category.name }</div>
-								</div>
+								</a>
 							</c:if>
 						</c:forEach>
 					</div>

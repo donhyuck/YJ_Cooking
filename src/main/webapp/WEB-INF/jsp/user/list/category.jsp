@@ -36,8 +36,8 @@
 						<c:forEach var="category" items="${ categories }">
 							<c:if test="${ category.boardId == board.id }">
 								<!--소분류, 선택한 카테고리의 레시피 보기 -->
-								<a href="../list/choice?boardId=${ category.boardId }&relId=${category.relId}"
-									class="flex justify-center items-center w-32 h-16 my-4 border border-gray-400 rounded-full mx-auto hover:bg-yellow-300">
+								<a href="/user/list/choice?boardId=${ category.boardId }&relId=${category.relId}"
+									class="flex justify-center items-center w-32 h-16 my-4 border border-gray-400 rounded-full mx-auto hover:bg-yellow-200">
 									<div class="text-gray-600 text-xl">${ category.name }</div>
 								</a>
 							</c:if>

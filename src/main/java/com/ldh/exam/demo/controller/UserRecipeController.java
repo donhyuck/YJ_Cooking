@@ -58,7 +58,7 @@ public class UserRecipeController {
 		List<Board> boards = boardService.getBoards();
 
 		// 중분류 가져오기
-		List<Category> categories = boardService.getCategoriesByBoardId(2);
+		List<Category> categories = boardService.getCategories();
 
 		model.addAttribute("boards", boards);
 		model.addAttribute("categories", categories);
@@ -70,9 +70,16 @@ public class UserRecipeController {
 	@RequestMapping("/user/list/choice")
 	public String showChoice(Model model, int boardId, int relId) {
 
-		// 소분류, 분류페이지에서 선택한 레시피 목록 가져오기
-		List<Recipe> choicedRecipes = recipeService.getRecipesOfChoice(boardId, relId);
+		// 분류 이름
+		String boardName = boardService.getBoardNameByBoardId(boardId);
 
+		// board번호, relId로 가이드번호 가져오기
+		int guideId = boardService.getGuideIdByBoardIdAndRelId(boardId, relId);
+
+		// 분류페이지에서 선택한 레시피 목록 가져오기
+		List<Recipe> choicedRecipes = recipeService.getRecipesByGuideId(guideId);
+
+		model.addAttribute("boardName", boardName);
 		model.addAttribute("choicedRecipes", choicedRecipes);
 
 		return "user/list/choice";

@@ -10,7 +10,15 @@ import com.ldh.exam.demo.vo.Category;
 @Mapper
 public interface BoardRepository {
 
+	public Board getBoardByBoardId(int id);
+
 	public List<Board> getBoards();
 
-	public List<Category> getCategoriesByBoardId(int boardId);
+	public String getBoardNameByBoardId(int boardId);
+
+	public Category getCategoryByBoardId(int boardId);
+
+	public List<Category> getCategories();
+
+	public int getGuideIdByBoardIdAndRelId(int boardId, int relId);
 }

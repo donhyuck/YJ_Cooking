@@ -31,32 +31,13 @@
 		BY R.id DESC
 	</select>
 
-	<select id="getRecipesOfChoice" resultType="Recipe">
+	<select id="getRecipesByGuideId" resultType="Recipe">
 		SELECT R.*,
 		M.nickname AS extra__writerName
 		FROM recipe AS R
-		LEFT JOIN
-		`member`
-		AS M
+		LEFT JOIN `member` AS M
 		ON R.memberId = M.id
-		LEFT JOIN guide AS G
-		ON G.id =
-		R.guideId
-		WHERE 1
-		<choose>
-			<when test="boardId = 1">
-				AND G.sortId = #{relId}
-			</when>
-			<when test="boardId = 2">
-				AND G.methodId = #{relId}
-			</when>
-			<when test="boardId = 3">
-				AND G.contentId = #{relId}
-			</when>
-			<otherwise>
-				AND G.freeId = #{relId}
-			</otherwise>
-		</choose>
+		WHERE R.guideId = #{guideId}
 	</select>
 
 	<select id="getScrapRecipes" resultType="Recipe">

@@ -17,13 +17,33 @@ public class BoardService {
 		this.boardRepository = boardRepository;
 	}
 
+	public Board getBoardByBoardId(int id) {
+
+		return boardRepository.getBoardByBoardId(id);
+	}
+
 	public List<Board> getBoards() {
 
 		return boardRepository.getBoards();
 	}
 
-	public List<Category> getCategoriesByBoardId(int boardId) {
+	public String getBoardNameByBoardId(int boardId) {
 
-		return boardRepository.getCategoriesByBoardId(boardId);
+		return boardRepository.getBoardNameByBoardId(boardId);
+	}
+
+	public Category getCategoryByBoardId(int boardId) {
+
+		return boardRepository.getCategoryByBoardId(boardId);
+	}
+
+	public List<Category> getCategories() {
+
+		return boardRepository.getCategories();
+	}
+
+	public int getGuideIdByBoardIdAndRelId(int boardId, int relId) {
+
+		return boardRepository.getGuideIdByBoardIdAndRelId(boardId, relId);
 	}
 }

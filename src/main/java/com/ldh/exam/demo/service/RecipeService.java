@@ -41,9 +41,9 @@ public class RecipeService {
 	}
 
 	// 분류페이지에서 선택한 레시피 목록 가져오기
-	public List<Recipe> getRecipesOfChoice(int boardId, int relId) {
+	public List<Recipe> getRecipesByGuideId(int guideId) {
 
-		return recipeRepository.getRecipesOfChoice(boardId, relId);
+		return recipeRepository.getRecipesByGuideId(guideId);
 	}
 
 	// 레시피 등록하기

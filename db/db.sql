@@ -150,19 +150,19 @@ ALTER TABLE recipe ADD COLUMN `level` INT(10) UNSIGNED NOT NULL DEFAULT 1 COMMEN
 UPDATE recipe
 SET `amount` = 3,
 `time` = 15,
-`level` = '1'
+`level` = 1
 WHERE id = 1;
 
 UPDATE recipe
 SET `amount` = 4,
 `time` = 120,
-`level` = '4'
+`level` = 4
 WHERE id = 2;
 
 UPDATE recipe
 SET `amount` = 2,
 `time` = 20,
-`level` = '3'
+`level` = 3
 WHERE id = 3;
 
 SELECT * FROM recipe;
@@ -817,7 +817,7 @@ CREATE TABLE guide (
     id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
     regDate DATETIME NOT NULL,
     updateDate DATETIME NOT NULL,
-    recipeId INT(10) UNSIGNED NOT NULL UNIQUE,
+    recipeId INT(10) UNSIGNED NOT NULL,
     sortId INT(10) UNSIGNED NOT NULL,
     methodId INT(10) UNSIGNED NOT NULL,
     contentId INT(10) UNSIGNED NOT NULL,
@@ -882,3 +882,64 @@ AND IF( 1 = 4, G.sortId = 5, 1)
 AND IF( 2 = 4, G.methodId = 1, 1)
 AND IF( 3 = 4, G.contentId = 12, 1)
 AND IF( 4 = 4, G.freeId = 5, 1);
+
+## 각 board별 갯수
+SELECT COUNT(CASE WHEN boardId=1 THEN 1 END) AS sortId,
+COUNT(CASE WHEN boardId=2 THEN 1 END) AS methodId,
+COUNT(CASE WHEN boardId=3 THEN 1 END) AS contentId,
+COUNT(CASE WHEN boardId=4 THEN 1 END) AS freeId
+FROM category;
+
+## 대량 데이터 생성 후 업데이트 시작
+## 레시피 guideId 업데이트
+UPDATE recipe
+SET guideId = id
+WHERE guideId = 0;
+
+UPDATE guide
+SET recipeId = id
+WHERE recipeId != id;
+
+## 레시피 제목 설정
+UPDATE recipe R, guide G,category C
+SET R.title = C.name
+WHERE G.sortId = C.relId
+AND C.boardId = 1
+AND G.id = guideId;
+
+UPDATE recipe R, guide G,category C
+SET R.title = CONCAT(R.title,"/",C.name)
+WHERE G.contentId = C.relId
+AND C.boardId = 3
+AND G.id = guideId;
+
+UPDATE recipe R, guide G,category C
+SET R.title = CONCAT(R.title,C.name)
+WHERE G.methodId = C.relId
+AND C.boardId = 2
+AND G.id = guideId;
+
+UPDATE recipe R, guide G,category C
+SET R.title = CONCAT(R.title,"/",C.name)
+WHERE G.freeId = C.relId
+AND C.boardId = 4
+AND G.id = guideId;
+
+## 레시피 내용 설정
+UPDATE recipe
+SET `body` = REPLACE(title, "/","");
+
+## 대량 데이터 생성 후 업데이트 끝
+
+SELECT G.*, C.name
+FROM `guide` AS G
+LEFT JOIN category AS C
+ON G.sortId = C.relId
+AND C.boardId = 1;
+
+SELECT * FROM `recipe`;
+SELECT * FROM `member`;
+SELECT * FROM `guide`;
+SELECT * FROM `category`;
+SELECT COUNT(*) FROM `recipe`;
+SELECT COUNT(*) FROM `guide`;

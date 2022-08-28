@@ -26,57 +26,84 @@
 
 <div class="bg-gray-200 py-4">
 	<div class="list-box w-10/12 mx-auto">
-		<section class="today-list bg-white rounded-md p-4">
-			<div class="mb-2">
-				<div class="text-xl mb-1">오늘 뭐 먹지?</div>
-				<div class="text-lg">끼니 고민 덜어드려요</div>
+		<section class="today-list bg-white rounded-md p-8 mb-5">
+			<!-- 안내문구 -->
+			<div class="p-3 mx-4">
+				<div class="text-3xl">오늘 뭐 먹지?</div>
+				<div class="text-2xl">끼니 고민 덜어드려요</div>
 			</div>
-			<div class="flex grid grid-cols-3 gap-10">
-				<!-- 일일추천레시피 -->
+
+			<!-- 일일추천레시피 -->
+			<div class="grid grid-cols-4">
 				<c:forEach var="recipe" items="${ randomRecipes }">
-					<div>
-						<a href="/user/recipe/detail?id=${ recipe.id }">
-							<img class="w-full rounded-md" src="https://tse4.mm.bing.net/th?id=OIP.kwt4oKZDd-goVuBezaVQRQHaE7&pid=Api&P=0"
-								alt="" />
-						</a>
-						<div class="ml-3 mt-2">
-							<div class="text-lg">${ recipe.title }</div>
-							<div>${ recipe.extra__writerName }</div>
-							<!-- 좋아요 , 조회수 -->
-							<div class="text-sm">
-								<span class="text-red-500 mr-1">
-									<i class="fa-solid fa-heart"></i>
+					<div class="card w-64 bg-base-100 shadow-xl my-6 border-2 border-gray-100 hover:border-yellow-500">
+
+						<!-- 레시피 대표 사진 -->
+						<figure>
+							<a href="/user/recipe/detail?id=${ recipe.id }">
+								<img class="w-full rounded-md" src="https://tse4.mm.bing.net/th?id=OIP.kwt4oKZDd-goVuBezaVQRQHaE7&pid=Api&P=0"
+									alt="" />
+							</a>
+						</figure>
+
+						<!-- 안내영역, 제목, 등록자, 설명일부, 하트 스크랩 수 -->
+						<div class="card-body">
+							<div class="card-title">${ recipe.title }</div>
+							<a href="/user/member/detail?memberId=${ recipe.memberId }" class="badge badge-lg badge-primary">
+								<span>${ recipe.extra__writerName }</span>
+							</a>
+							<div class="truncate text-gray-500">${ recipe.body }</div>
+
+							<div class="card-actions justify-end">
+								<div class="badge badge-outline">조회수 ${ recipe.hitCount }</div>
+								<div class="badge badge-outline">
+									<span class="text-red-500 mr-1">
+										<i class="fa-solid fa-heart"></i>
+									</span>
 									${ recipe.goodRP }
-								</span>
-								<span class="text-gray-500">조회수 ${ recipe.hitCount }</span>
+								</div>
 							</div>
 						</div>
 					</div>
 				</c:forEach>
 			</div>
 		</section>
-		<section class="recent-list bg-white rounded-md p-4 mt-4">
-			<div class="mb-2">
-				<div class="text-xl mb-1">최근 등록된 레시피</div>
+
+		<section class="recent-list bg-white rounded-md p-8 mt-5">
+			<!-- 안내문구 -->
+			<div class="p-3 mx-4">
+				<div class="text-3xl">최근 등록된 레시피</div>
 			</div>
-			<div class="flex grid grid-cols-3 gap-10">
-				<!-- 최근 레시피 -->
+
+			<!-- 일일추천레시피 -->
+			<div class="grid grid-cols-4">
 				<c:forEach var="recipe" items="${ recentRecipes }">
-					<div>
-						<a href="/user/recipe/detail?id=${ recipe.id }">
-							<img class="w-full rounded-md" src="https://tse4.mm.bing.net/th?id=OIP.kwt4oKZDd-goVuBezaVQRQHaE7&pid=Api&P=0"
-								alt="" />
-						</a>
-						<div class="ml-3 mt-2">
-							<div class="text-lg">${ recipe.title }</div>
-							<div>${ recipe.extra__writerName }</div>
-							<!-- 좋아요 , 조회수 -->
-							<div class="text-sm">
-								<span class="text-red-500 mr-1">
-									<i class="fa-solid fa-heart"></i>
+					<div class="card w-64 bg-base-100 shadow-xl my-6 border-2 border-gray-100 hover:border-yellow-500">
+
+						<!-- 레시피 대표 사진 -->
+						<figure>
+							<a href="/user/recipe/detail?id=${ recipe.id }">
+								<img class="w-full rounded-md" src="https://tse4.mm.bing.net/th?id=OIP.kwt4oKZDd-goVuBezaVQRQHaE7&pid=Api&P=0"
+									alt="" />
+							</a>
+						</figure>
+
+						<!-- 안내영역, 제목, 등록자, 설명일부, 하트 스크랩 수 -->
+						<div class="card-body">
+							<div class="card-title">${ recipe.title }</div>
+							<a href="/user/member/detail?memberId=${ recipe.memberId }" class="badge badge-lg badge-primary">
+								<span>${ recipe.extra__writerName }</span>
+							</a>
+							<div class="truncate text-gray-500">${ recipe.body }</div>
+
+							<div class="card-actions justify-end">
+								<div class="badge badge-outline">조회수 ${ recipe.hitCount }</div>
+								<div class="badge badge-outline">
+									<span class="text-red-500 mr-1">
+										<i class="fa-solid fa-heart"></i>
+									</span>
 									${ recipe.goodRP }
-								</span>
-								<span class="text-gray-500">조회수 ${ recipe.hitCount }</span>
+								</div>
 							</div>
 						</div>
 					</div>

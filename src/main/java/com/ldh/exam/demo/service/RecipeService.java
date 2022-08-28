@@ -40,7 +40,7 @@ public class RecipeService {
 		return recipes;
 	}
 
-	// 램덤 레시피 목록 가져오기
+	// 추천 - 램덤목록 가져오기
 	public List<Recipe> getRandomRecipes(int memberId, int randomCount) {
 
 		List<Recipe> recipes = recipeRepository.getRandomRecipes(randomCount);
@@ -52,7 +52,19 @@ public class RecipeService {
 		return recipes;
 	}
 
-	// 분류페이지에서 선택한 레시피 목록 가져오기
+	// 추천 - 최근목록 가져오기
+	public List<Recipe> getRecentRecipes(int memberId, int recentCount) {
+
+		List<Recipe> recipes = recipeRepository.getRecentRecipes(recentCount);
+
+		for (Recipe recipe : recipes) {
+			updateForPrintData(memberId, recipe);
+		}
+
+		return recipes;
+	}
+
+	// 분류 - 선택목록 가져오기
 	public List<Recipe> getRecipesByGuideId(int boardId, int relId) {
 
 		return recipeRepository.getRecipesByGuideId(boardId, relId);

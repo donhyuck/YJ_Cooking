@@ -15,6 +15,8 @@ public interface RecipeRepository {
 
 	public List<Recipe> getRandomRecipes(int randomCount);
 
+	public List<Recipe> getRecentRecipes(int recentCount);
+
 	public List<Recipe> getRecipesByGuideId(int boardId, int relId);
 
 	public List<Recipe> getScrapRecipes(int memberId);

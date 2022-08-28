@@ -48,10 +48,12 @@ public class UserRecipeController {
 		int randomCount = 10;
 		List<Recipe> randomRecipes = recipeService.getRandomRecipes(rq.getLoginedMemberId(), randomCount);
 
-		List<Recipe> recipes = recipeService.getForPrintRecipes(rq.getLoginedMemberId());
-		
+		// 최근 등록된 레시피 목록 가져오기
+		int recentCount = 10;
+		List<Recipe> recentRecipes = recipeService.getRecentRecipes(rq.getLoginedMemberId(), recentCount);
+
 		model.addAttribute("randomRecipes", randomRecipes);
-		model.addAttribute("recipes", recipes);
+		model.addAttribute("recentRecipes", recentRecipes);
 
 		return "user/list/suggest";
 	}

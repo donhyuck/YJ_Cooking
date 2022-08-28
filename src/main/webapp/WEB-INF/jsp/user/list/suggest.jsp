@@ -61,7 +61,7 @@
 			</div>
 			<div class="flex grid grid-cols-3 gap-10">
 				<!-- 최근 레시피 -->
-				<c:forEach var="recipe" items="${ recipes }">
+				<c:forEach var="recipe" items="${ recentRecipes }">
 					<div>
 						<a href="/user/recipe/detail?id=${ recipe.id }">
 							<img class="w-full rounded-md" src="https://tse4.mm.bing.net/th?id=OIP.kwt4oKZDd-goVuBezaVQRQHaE7&pid=Api&P=0"

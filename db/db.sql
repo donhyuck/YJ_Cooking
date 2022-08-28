@@ -970,3 +970,12 @@ LEFT JOIN `member` AS M
 ON R.memberId = M.id
 ORDER BY RAND() DESC
 LIMIT 10;
+
+## 최근 레시피 목록 가져오기 (10개)
+SELECT R.*,
+M.nickname AS extra__writerName
+FROM recipe AS R
+LEFT JOIN `member` AS M
+ON R.memberId = M.id
+ORDER BY R.regDate DESC
+LIMIT 10;

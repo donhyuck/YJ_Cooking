@@ -15,11 +15,12 @@
 		FROM board AS B
 	</select>
 
-	<select id="getCategoryByBoardId" resultType="Category">
+	<select id="getCategoryByBoardIdAndRelId" resultType="Category">
 		SELECT C.*
 		FROM
 		category AS C
-		WHERE boardId = #{boardId}
+		WHERE C.boardId = #{boardId}
+		AND C.relId = #{relId}
 	</select>
 
 	<select id="getCategories" resultType="Category">

@@ -15,8 +15,8 @@ public interface BoardRepository {
 
 	public List<Board> getBoards();
 
-	public Category getCategoryByBoardId(int boardId);
+	public Category getCategoryByBoardIdAndRelId(int boardId, int relId);
 
 	public List<Category> getCategories();
-	
+
 }

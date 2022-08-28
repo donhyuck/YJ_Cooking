@@ -28,9 +28,9 @@ public class BoardService {
 		return boardRepository.getBoards();
 	}
 
-	public Category getCategoryByBoardId(int boardId) {
+	public Category getCategoryByBoardIdAndRelId(int boardId, int relId) {
 
-		return boardRepository.getCategoryByBoardId(boardId);
+		return boardRepository.getCategoryByBoardIdAndRelId(boardId, relId);
 	}
 
 	public List<Category> getCategories() {

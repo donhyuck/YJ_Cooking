@@ -73,11 +73,13 @@ public class UserRecipeController {
 
 		// 분류 이름
 		String boardName = boardService.getBoardByBoardId(boardId).getBoardName();
+		Category category = boardService.getCategoryByBoardIdAndRelId(boardId, relId);
 
 		// 분류페이지에서 선택한 레시피 목록 가져오기
 		List<Recipe> choicedRecipes = recipeService.getRecipesByGuideId(boardId, relId);
 
 		model.addAttribute("boardName", boardName);
+		model.addAttribute("category", category);
 		model.addAttribute("choicedRecipes", choicedRecipes);
 
 		return "user/list/choice";

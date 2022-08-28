@@ -31,7 +31,7 @@
 			<c:forEach var="board" items="${ boards }">
 				<section class="bg-white rounded-md p-8">
 					<!-- 중분류 -->
-					<div class="text-3xl border-b border-gray-300 mb-4 p-3 mx-4">${ board.boardName }</div>
+					<div class="text-3xl border-b border-gray-400 mb-4 p-3 mx-4">${ board.boardName }</div>
 					<div class="flex grid grid-cols-5 text-center mx-20">
 						<c:forEach var="category" items="${ categories }">
 							<c:if test="${ category.boardId == board.id }">

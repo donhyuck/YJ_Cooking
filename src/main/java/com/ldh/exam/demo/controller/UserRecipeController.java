@@ -15,7 +15,6 @@ import com.ldh.exam.demo.service.ReplyService;
 import com.ldh.exam.demo.util.Ut;
 import com.ldh.exam.demo.vo.Board;
 import com.ldh.exam.demo.vo.Category;
-import com.ldh.exam.demo.vo.Guide;
 import com.ldh.exam.demo.vo.Recipe;
 import com.ldh.exam.demo.vo.Reply;
 import com.ldh.exam.demo.vo.ResultData;
@@ -45,7 +44,13 @@ public class UserRecipeController {
 	@RequestMapping("/user/list/suggest")
 	public String showSuggestList(Model model) {
 
+		// 램덤 레시피 목록 가져오기
+		int randomCount = 10;
+		List<Recipe> randomRecipes = recipeService.getRandomRecipes(rq.getLoginedMemberId(), randomCount);
+
 		List<Recipe> recipes = recipeService.getForPrintRecipes(rq.getLoginedMemberId());
+		
+		model.addAttribute("randomRecipes", randomRecipes);
 		model.addAttribute("recipes", recipes);
 
 		return "user/list/suggest";

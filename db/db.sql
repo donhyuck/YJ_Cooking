@@ -937,9 +937,36 @@ LEFT JOIN category AS C
 ON G.sortId = C.relId
 AND C.boardId = 1;
 
+SELECT * FROM `board`;
 SELECT * FROM `recipe`;
 SELECT * FROM `member`;
 SELECT * FROM `guide`;
 SELECT * FROM `category`;
 SELECT COUNT(*) FROM `recipe`;
 SELECT COUNT(*) FROM `guide`;
+
+SELECT R.* 
+FROM (
+SELECT G.*
+FROM `guide` AS G
+WHERE 1 
+AND G.methodId = 4
+) AS G
+LEFT JOIN `recipe` AS R
+ON G.recipeId = R.id
+LEFT JOIN `member` AS M
+ON R.memberId = M.id;
+
+SELECT G.*
+FROM `guide` AS G
+WHERE 1 
+AND G.methodId = 4;
+
+## 램던 레시피 목록 가져오기 (10개)
+SELECT R.*,
+M.nickname AS extra__writerName
+FROM recipe AS R
+LEFT JOIN `member` AS M
+ON R.memberId = M.id
+ORDER BY RAND() DESC
+LIMIT 10;

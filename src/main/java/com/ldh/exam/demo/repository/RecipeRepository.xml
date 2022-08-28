@@ -30,6 +30,16 @@
 		BY R.id DESC
 	</select>
 
+	<select id="getRandomRecipes" resultType="Recipe">
+		SELECT R.*,
+		M.nickname AS extra__writerName
+		FROM recipe AS R
+		LEFT JOIN `member` AS M
+		ON R.memberId = M.id
+		ORDER BY RAND() DESC
+		LIMIT 10
+	</select>
+
 	<select id="getRecipesByGuideId" resultType="Recipe">
 		SELECT R.*,
 		M.nickname AS extra__writerName

@@ -26,7 +26,7 @@
 
 <div class="bg-gray-200 py-4">
 	<div class="list-box w-10/12 mx-auto">
-		<section class="today-list bg-white rounded-md p-4">
+		<section class="bg-white rounded-md p-4 mb-5">
 			<!-- 안내문구 -->
 			<div class="p-3 mx-4">
 				<div class="text-3xl">명예의 전당</div>
@@ -69,7 +69,7 @@
 			</div>
 		</section>
 
-		<section class="today-list bg-white rounded-md p-4">
+		<section class="bg-white rounded-md p-4 mb-5">
 			<!-- 안내문구 -->
 			<div class="p-3 mx-4">
 				<div class="text-3xl">함께 먹어요</div>

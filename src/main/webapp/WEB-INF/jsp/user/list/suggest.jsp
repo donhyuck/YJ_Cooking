@@ -26,7 +26,7 @@
 
 <div class="bg-gray-200 py-4">
 	<div class="list-box w-10/12 mx-auto">
-		<section class="today-list bg-white rounded-md p-8 mb-5">
+		<section class="bg-white rounded-md p-4 mb-5">
 			<!-- 안내문구 -->
 			<div class="p-3 mx-4">
 				<div class="text-3xl">오늘 뭐 먹지?</div>
@@ -69,7 +69,7 @@
 			</div>
 		</section>
 
-		<section class="recent-list bg-white rounded-md p-8 mt-5">
+		<section class="bg-white rounded-md p-4 mt-5">
 			<!-- 안내문구 -->
 			<div class="p-3 mx-4">
 				<div class="text-3xl">최근 등록된 레시피</div>

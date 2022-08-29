@@ -30,12 +30,14 @@
 			<!-- 대분류 -->
 			<c:forEach var="board" items="${ boards }">
 				<section class="bg-white rounded-md p-8">
-					<!-- 중분류 -->
 					<div class="text-3xl border-b border-gray-400 mb-4 p-3 mx-4">${ board.boardName }</div>
 					<div class="flex grid grid-cols-5 text-center mx-20">
+
+						<!-- 중분류 -->
 						<c:forEach var="category" items="${ categories }">
+
+							<!--소분류, 선택한 카테고리의 레시피 보기 -->
 							<c:if test="${ category.boardId == board.id }">
-								<!--소분류, 선택한 카테고리의 레시피 보기 -->
 								<a href="/user/list/choice?boardId=${ category.boardId }&relId=${category.relId}"
 									class="flex justify-center items-center w-32 h-16 my-4 border border-gray-400 rounded-full mx-auto hover:bg-yellow-200">
 									<div class="text-gray-600 text-xl">${ category.name }</div>

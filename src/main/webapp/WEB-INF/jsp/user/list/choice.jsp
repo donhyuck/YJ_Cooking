@@ -5,7 +5,7 @@
 
 <div class="bg-gray-200 py-4">
 	<div class="list-box w-10/12 mx-auto">
-		<section class="bg-white rounded-md p-8 mb-5">
+		<section class="bg-white rounded-md p-4 mb-5">
 
 			<!-- 선택 안내영역 -->
 			<div class="flex items-center space-x-4 border-b border-gray-400 p-3 mx-4 mb-3">
@@ -54,7 +54,5 @@
 		</section>
 	</div>
 </div>
-
-
 
 <%@include file="../common/foot.jspf"%>

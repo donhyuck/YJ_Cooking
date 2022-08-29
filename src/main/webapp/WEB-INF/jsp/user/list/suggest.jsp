@@ -36,7 +36,7 @@
 			<!-- 일일추천레시피 -->
 			<div class="grid grid-cols-4">
 				<c:forEach var="recipe" items="${ randomRecipes }">
-					<div class="card w-64 bg-base-100 shadow-xl my-6 border-2 border-gray-100 hover:border-yellow-500">
+					<div class="card w-64 bg-base-100 shadow-xl my-6 border-2 border-base-100 hover:border-yellow-500">
 
 						<!-- 레시피 대표 사진 -->
 						<figure>

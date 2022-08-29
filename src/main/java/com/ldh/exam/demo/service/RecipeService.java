@@ -70,6 +70,18 @@ public class RecipeService {
 		return recipeRepository.getRecipesByGuideId(boardId, relId);
 	}
 
+	// 랭킹 - 최다 조회수, 하트를 받은 레시피 목록 가져오기
+	public List<Recipe> getRankRecipes(int loginedMemberId, int rankCount) {
+		
+		return null;
+	}
+
+	// 랭킹 - 최다 스크랩된 레시피 목록 가져오기
+	public List<Recipe> getManyScrapRecipes(int loginedMemberId, int manyScrapCount) {
+		
+		return null;
+	}
+
 	// 레시피 등록하기
 	public int writeRecipe(int memberId, String title, String body) {
 

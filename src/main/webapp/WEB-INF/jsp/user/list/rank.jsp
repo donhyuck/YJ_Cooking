@@ -27,88 +27,88 @@
 <div class="bg-gray-200 py-4">
 	<div class="list-box w-10/12 mx-auto">
 		<section class="today-list bg-white rounded-md p-4">
-			<div class="mb-2">
-				<div class="text-xl mb-1">명예의 전당</div>
-				<div class="text-lg">BEST 10</div>
+			<!-- 안내문구 -->
+			<div class="p-3 mx-4">
+				<div class="text-3xl">명예의 전당</div>
+				<div class="text-2xl">BEST 10</div>
 			</div>
-			<div class="flex items-center">
-				<a href="#" class="text-3xl mb-20">
-					<i class="fa-solid fa-angle-left"></i>
-				</a>
-				<div class="flex grid grid-cols-3 gap-6">
-					<!-- 최다 조회수, 하트를 받은 레시피 -->
-					<c:forEach var="recipe" items="${ recipes }">
-						<div class="relative">
-							<div class="rank-number absolute top-0 w-10 h-10 bg-white border border-2 border-gray-400 rounded-lg">
-								<div class="font-bold text-center mt-2">${ recipe.id }</div>
-							</div>
-							<div class="p-1">
-								<a href="/user/recipe/detail?id=${ recipe.id }">
-									<img class="w-full rounded-md" src="https://tse4.mm.bing.net/th?id=OIP.kwt4oKZDd-goVuBezaVQRQHaE7&pid=Api&P=0"
-										alt="" />
-								</a>
-								<div class="ml-3 mt-2">
-									<div class="text-xl">${ recipe.title }</div>
-									<div class="text-lg">${ recipe.extra__writerName }</div>
-									<!-- 좋아요 , 조회수 -->
-									<div class="text-lg">
-										<span class="text-red-500 mr-1">
-											<i class="fa-solid fa-heart"></i>
-											${ recipe.goodRP }
-										</span>
-										<span class="text-gray-500">조회수 ${ recipe.hitCount }</span>
-									</div>
+
+			<!-- 최다 조회수, 하트를 받은 레시피 -->
+			<div class="grid grid-cols-4">
+				<c:forEach var="recipe" items="${ rankRecipes }">
+					<div class="card w-64 bg-base-100 shadow-xl my-6 border-2 border-base-100 hover:border-yellow-500">
+
+						<!-- 레시피 대표 사진 -->
+						<figure>
+							<a href="/user/recipe/detail?id=${ recipe.id }">
+								<img class="w-full rounded-md" src="https://tse4.mm.bing.net/th?id=OIP.kwt4oKZDd-goVuBezaVQRQHaE7&pid=Api&P=0"
+									alt="" />
+							</a>
+						</figure>
+
+						<!-- 안내영역, 제목, 등록자, 설명일부, 하트 스크랩 수 -->
+						<div class="card-body">
+							<div class="card-title">${ recipe.title }</div>
+							<a href="/user/member/detail?memberId=${ recipe.memberId }" class="badge badge-lg badge-primary">
+								<span>${ recipe.extra__writerName }</span>
+							</a>
+							<div class="truncate text-gray-500">${ recipe.body }</div>
+
+							<div class="card-actions justify-end">
+								<div class="badge badge-outline">조회수 ${ recipe.hitCount }</div>
+								<div class="badge badge-outline">
+									<span class="text-red-500 mr-1">
+										<i class="fa-solid fa-heart"></i>
+									</span>
+									${ recipe.goodRP }
 								</div>
 							</div>
 						</div>
-					</c:forEach>
-				</div>
-				<a href="#" class="text-3xl mb-20">
-					<i class="fa-solid fa-angle-right"></i>
-				</a>
+					</div>
+				</c:forEach>
 			</div>
 		</section>
 
-		<section class="recent-list bg-white rounded-md p-4 mt-4">
-			<div class="mb-2">
-				<div class="text-xl mb-1">함께 먹어요</div>
-				<div class="text-lg">최근 많은 사람들이 스크랩 했어요</div>
+		<section class="today-list bg-white rounded-md p-4">
+			<!-- 안내문구 -->
+			<div class="p-3 mx-4">
+				<div class="text-3xl">함께 먹어요</div>
+				<div class="text-2xl">최근 많은 사람들이 스크랩 했어요</div>
 			</div>
-			<div class="flex items-center">
-				<a href="#" class="text-3xl mb-20">
-					<i class="fa-solid fa-angle-left"></i>
-				</a>
-				<div class="flex grid grid-cols-3 gap-3">
-					<!-- 최다 스크랩된 레시피 -->
-					<c:forEach var="recipe" items="${ recipes }">
-						<div class="relative">
-							<div class="rank-number absolute top-0 w-10 h-10 bg-white border border-2 border-gray-400 rounded-lg">
-								<div class="font-bold text-center mt-2">${ recipe.id }</div>
-							</div>
-							<div class="p-1">
-								<a href="/user/recipe/detail?id=${ recipe.id }">
-									<img class="w-full rounded-md" src="https://tse4.mm.bing.net/th?id=OIP.kwt4oKZDd-goVuBezaVQRQHaE7&pid=Api&P=0"
-										alt="" />
-								</a>
-								<div class="ml-3 mt-2">
-									<div class="text-xl">${ recipe.title }</div>
-									<div class="text-lg">${ recipe.extra__writerName }</div>
-									<!-- 좋아요 , 조회수 -->
-									<div class="text-lg">
-										<span class="text-red-500 mr-1">
-											<i class="fa-solid fa-heart"></i>
-											${ recipe.goodRP }
-										</span>
-										<span class="text-gray-500">조회수 ${ recipe.hitCount }</span>
-									</div>
+
+			<!-- 최다 스크랩된 레시피 -->
+			<div class="grid grid-cols-4">
+				<c:forEach var="recipe" items="${ manyScrapRecipes }">
+					<div class="card w-64 bg-base-100 shadow-xl my-6 border-2 border-base-100 hover:border-yellow-500">
+
+						<!-- 레시피 대표 사진 -->
+						<figure>
+							<a href="/user/recipe/detail?id=${ recipe.id }">
+								<img class="w-full rounded-md" src="https://tse4.mm.bing.net/th?id=OIP.kwt4oKZDd-goVuBezaVQRQHaE7&pid=Api&P=0"
+									alt="" />
+							</a>
+						</figure>
+
+						<!-- 안내영역, 제목, 등록자, 설명일부, 하트 스크랩 수 -->
+						<div class="card-body">
+							<div class="card-title">${ recipe.title }</div>
+							<a href="/user/member/detail?memberId=${ recipe.memberId }" class="badge badge-lg badge-primary">
+								<span>${ recipe.extra__writerName }</span>
+							</a>
+							<div class="truncate text-gray-500">${ recipe.body }</div>
+
+							<div class="card-actions justify-end">
+								<div class="badge badge-outline">조회수 ${ recipe.hitCount }</div>
+								<div class="badge badge-outline">
+									<span class="text-red-500 mr-1">
+										<i class="fa-solid fa-heart"></i>
+									</span>
+									${ recipe.goodRP }
 								</div>
 							</div>
 						</div>
-					</c:forEach>
-				</div>
-				<a href="#" class="text-3xl mb-20">
-					<i class="fa-solid fa-angle-right"></i>
-				</a>
+					</div>
+				</c:forEach>
 			</div>
 		</section>
 	</div>

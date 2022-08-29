@@ -112,6 +112,16 @@
 		LIMIT #{ manyScrapCount }
 	</select>
 
+	<select id="getRegisteredRecipes" resultType="Recipe">
+		SELECT R.*,
+		M.nickname
+		AS extra__writerName
+		FROM recipe AS R
+		LEFT JOIN `member` AS M
+		ON R.memberId = M.id
+		WHERE R.memberId = #{ memberId }
+	</select>
+
 	<select id="getScrapRecipes" resultType="Recipe">
 		SELECT R.*
 		FROM (

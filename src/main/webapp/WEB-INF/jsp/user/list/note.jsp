@@ -43,9 +43,9 @@
 
 			<!-- 로그인 상태에서 보이기 -->
 			<c:if test="${ rq.loginedMember != null }">
-				<!-- 일일추천레시피 -->
+				<!-- 내가 등록한 레시피 -->
 				<div class="grid grid-cols-4">
-					<c:forEach var="recipe" items="${ recipes }">
+					<c:forEach var="recipe" items="${ registeredRecipes }">
 						<div class="card w-64 bg-base-100 shadow-xl my-6 border-2 border-base-100 hover:border-yellow-500">
 
 							<!-- 레시피 대표 사진 -->
@@ -98,9 +98,9 @@
 
 			<!-- 로그인 상태에서 보이기 -->
 			<c:if test="${ rq.loginedMember != null }">
-				<!-- 일일추천레시피 -->
+				<!-- 스크랩한 레시피 -->
 				<div class="grid grid-cols-4">
-					<c:forEach var="recipe" items="${ recipes }">
+					<c:forEach var="recipe" items="${ scrapRecipes }">
 						<div class="card w-64 bg-base-100 shadow-xl my-6 border-2 border-base-100 hover:border-yellow-500">
 
 							<!-- 레시피 대표 사진 -->

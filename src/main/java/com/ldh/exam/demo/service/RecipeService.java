@@ -94,6 +94,38 @@ public class RecipeService {
 		return recipes;
 	}
 
+	// 노트 - 내가 등록한 레시피 목록
+	public List<Recipe> getRegisteredRecipes(int memberId) {
+
+		if (memberId == 0) {
+			return null;
+		}
+
+		List<Recipe> recipes = recipeRepository.getRegisteredRecipes(memberId);
+
+		for (Recipe recipe : recipes) {
+			updateForPrintData(memberId, recipe);
+		}
+
+		return recipes;
+	}
+
+	// 노트 - 내가 스크랩한 레시피 목록
+	public List<Recipe> getScrapRecipes(int memberId) {
+
+		if (memberId == 0) {
+			return null;
+		}
+
+		List<Recipe> recipes = recipeRepository.getScrapRecipes(memberId);
+
+		for (Recipe recipe : recipes) {
+			updateForPrintData(memberId, recipe);
+		}
+
+		return recipes;
+	}
+
 	// 레시피 등록하기
 	public int writeRecipe(int memberId, String title, String body) {
 
@@ -134,6 +166,7 @@ public class RecipeService {
 		recipe.setExtra__actorCanDelete(actorCanDeleteRd.isSuccess());
 	}
 
+	// 수정권한 확인
 	public ResultData actorCanModify(int memberId, int id) {
 
 		// 레시피 찾기
@@ -151,6 +184,7 @@ public class RecipeService {
 		return ResultData.from("S-1", "수정가능합니다.", "recipe", recipe);
 	}
 
+	// 삭제권한 확인
 	public ResultData actorCanDelete(int memberId, int id) {
 
 		// 레시피 찾기
@@ -168,7 +202,7 @@ public class RecipeService {
 		return ResultData.from("S-1", "삭제가능합니다.");
 	}
 
-	// 레시피가 있을 경우 조회수 증가
+	// 조회수 증가
 	public ResultData increaseHitCount(int id) {
 
 		Recipe recipe = recipeRepository.getRecipeById(id);
@@ -182,13 +216,13 @@ public class RecipeService {
 		return ResultData.from("S-1", "조회수가 1만큼 증가했습니다.");
 	}
 
-	// 조회수 가져오기
+	// 특정 레시피 조회수 가져오기
 	public int getRecipeHitCount(int id) {
 
 		return recipeRepository.getRecipeHitCount(id);
 	}
 
-	// 레시피가 있을 경우 좋아요 수 증가
+	// 좋아요 수 처리
 	public ResultData increaseGoodRP(int id) {
 
 		Recipe recipe = recipeRepository.getRecipeById(id);
@@ -202,7 +236,7 @@ public class RecipeService {
 		return ResultData.from("S-1", Ut.f("%d번 레시피 [좋아요]가 1만큼 증가했습니다.", id));
 	}
 
-	// 레시피가 있을 경우 좋아요 수 감소
+	// 좋아요 수 취소
 	public ResultData decreaseGoodRP(int id) {
 
 		Recipe recipe = recipeRepository.getRecipeById(id);
@@ -216,7 +250,7 @@ public class RecipeService {
 		return ResultData.from("S-1", Ut.f("%d번 레시피 [좋아요]가 1만큼 감소했습니다.", id));
 	}
 
-	// 레시피가 있을 경우 스크랩 수 증가
+	// 스크랩 처리
 	public ResultData increaseScrapPoint(int id) {
 
 		Recipe recipe = recipeRepository.getRecipeById(id);
@@ -231,7 +265,7 @@ public class RecipeService {
 
 	}
 
-	// 레시피가 있을 경우 좋아요 수 감소
+	// 스크랩 취소
 	public ResultData decreaseScrapPoint(int id) {
 
 		Recipe recipe = recipeRepository.getRecipeById(id);
@@ -243,23 +277,6 @@ public class RecipeService {
 		recipeRepository.decreaseScrapPoint(id);
 
 		return ResultData.from("S-1", Ut.f("%d번 레시피 [스크랩]이 1만큼 감소했습니다.", id));
-
-	}
-
-	// 스크랩한 레시피
-	public List<Recipe> getScrapRecipes(int memberId) {
-
-		if (memberId == 0) {
-			return null;
-		}
-
-		List<Recipe> recipes = recipeRepository.getScrapRecipes(memberId);
-
-		for (Recipe recipe : recipes) {
-			updateForPrintData(memberId, recipe);
-		}
-
-		return recipes;
 
 	}
 }

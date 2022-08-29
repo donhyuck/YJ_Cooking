@@ -23,6 +23,8 @@ public interface RecipeRepository {
 
 	public List<Recipe> getManyScrapRecipes(int manyScrapCount);
 
+	public List<Recipe> getRegisteredRecipes(int memberId);
+
 	public List<Recipe> getScrapRecipes(int memberId);
 
 	public void writeRecipe(int memberId, String title, String body);

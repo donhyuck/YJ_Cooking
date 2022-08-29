@@ -962,7 +962,7 @@ FROM `guide` AS G
 WHERE 1 
 AND G.methodId = 4;
 
-## 램던 레시피 목록 가져오기 (10개)
+## 램덤 레시피 목록 가져오기 (10개)
 SELECT R.*,
 M.nickname AS extra__writerName
 FROM recipe AS R
@@ -979,3 +979,42 @@ LEFT JOIN `member` AS M
 ON R.memberId = M.id
 ORDER BY R.regDate DESC
 LIMIT 10;
+
+# 초기화
+UPDATE recipe
+SET hitCount = 0,
+goodRP = 0,
+scrap = 0;
+
+# 기존 데이터 조회수, 하트수, 스크랩 설정
+UPDATE recipe
+SET hitCount = FLOOR(RAND() * 300)+1
+WHERE hitCount = 0;
+
+UPDATE recipe
+SET goodRP = hitCount + FLOOR(RAND() * 200)+1,
+scrap = hitCount +FLOOR(RAND() * 200)+1
+WHERE goodRP = 0
+AND scrap = 0;
+
+## 최다 하트, 조회수 순 레시피 목록 가져오기 (10개)
+SELECT R.*,
+M.nickname
+AS extra__writerName
+FROM recipe AS R
+LEFT JOIN `member` AS M
+ON R.memberId = M.id
+ORDER BY R.goodRP DESC, R.hitCount DESC
+LIMIT 10;
+
+## 최다 스크랩 레시피 목록 가져오기 (10개)
+SELECT R.*,
+M.nickname
+AS extra__writerName
+FROM recipe AS R
+LEFT JOIN `member` AS M
+ON R.memberId = M.id
+ORDER BY R.scrap DESC
+LIMIT 10;
+
+SELECT * FROM recipe;

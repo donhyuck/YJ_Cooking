@@ -88,6 +88,30 @@
 		ON R.memberId = M.id;
 	</select>
 
+	<select id="getRankRecipes" resultType="Recipe">
+		SELECT R.*,
+		M.nickname
+		AS
+		extra__writerName
+		FROM recipe AS R
+		LEFT JOIN `member` AS M
+		ON R.memberId
+		= M.id
+		ORDER BY R.goodRP DESC, R.hitCount DESC
+		LIMIT #{ rankCount }
+	</select>
+
+	<select id="getManyScrapRecipes" resultType="Recipe">
+		SELECT R.*,
+		M.nickname
+		AS extra__writerName
+		FROM recipe AS R
+		LEFT JOIN `member` AS M
+		ON R.memberId = M.id
+		ORDER BY R.scrap DESC
+		LIMIT #{ manyScrapCount }
+	</select>
+
 	<select id="getScrapRecipes" resultType="Recipe">
 		SELECT R.*
 		FROM (

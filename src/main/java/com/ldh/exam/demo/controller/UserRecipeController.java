@@ -96,7 +96,7 @@ public class UserRecipeController {
 	@RequestMapping("/user/list/rank")
 	public String showRankList(Model model) {
 
-		// 최다 조회수, 하트를 받은 레시피 목록 가져오기
+		// 최다 하트, 조회수를 받은 레시피 목록 가져오기
 		int rankCount = 10;
 		List<Recipe> rankRecipes = recipeService.getRankRecipes(rq.getLoginedMemberId(), rankCount);
 
@@ -105,7 +105,7 @@ public class UserRecipeController {
 		List<Recipe> manyScrapRecipes = recipeService.getManyScrapRecipes(rq.getLoginedMemberId(), manyScrapCount);
 
 		model.addAttribute("rankRecipes", rankRecipes);
-		model.addAttribute("recentRecipes", manyScrapRecipes);
+		model.addAttribute("manyScrapRecipes", manyScrapRecipes);
 
 		return "user/list/rank";
 	}

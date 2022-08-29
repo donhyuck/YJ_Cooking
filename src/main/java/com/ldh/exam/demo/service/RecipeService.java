@@ -70,16 +70,28 @@ public class RecipeService {
 		return recipeRepository.getRecipesByGuideId(boardId, relId);
 	}
 
-	// 랭킹 - 최다 조회수, 하트를 받은 레시피 목록 가져오기
-	public List<Recipe> getRankRecipes(int loginedMemberId, int rankCount) {
-		
-		return null;
+	// 랭킹 - 최다 하트, 조회수를 받은 레시피 목록 가져오기
+	public List<Recipe> getRankRecipes(int memberId, int rankCount) {
+
+		List<Recipe> recipes = recipeRepository.getRankRecipes(rankCount);
+
+		for (Recipe recipe : recipes) {
+			updateForPrintData(memberId, recipe);
+		}
+
+		return recipes;
 	}
 
 	// 랭킹 - 최다 스크랩된 레시피 목록 가져오기
-	public List<Recipe> getManyScrapRecipes(int loginedMemberId, int manyScrapCount) {
-		
-		return null;
+	public List<Recipe> getManyScrapRecipes(int memberId, int manyScrapCount) {
+
+		List<Recipe> recipes = recipeRepository.getManyScrapRecipes(manyScrapCount);
+
+		for (Recipe recipe : recipes) {
+			updateForPrintData(memberId, recipe);
+		}
+
+		return recipes;
 	}
 
 	// 레시피 등록하기

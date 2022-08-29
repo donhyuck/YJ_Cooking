@@ -19,6 +19,10 @@ public interface RecipeRepository {
 
 	public List<Recipe> getRecipesByGuideId(int boardId, int relId);
 
+	public List<Recipe> getRankRecipes(int rankCount);
+
+	public List<Recipe> getManyScrapRecipes(int manyScrapCount);
+
 	public List<Recipe> getScrapRecipes(int memberId);
 
 	public void writeRecipe(int memberId, String title, String body);

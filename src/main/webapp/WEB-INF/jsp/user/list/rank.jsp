@@ -98,12 +98,22 @@
 							<div class="truncate text-gray-500">${ recipe.body }</div>
 
 							<div class="card-actions justify-end">
-								<div class="badge badge-outline">조회수 ${ recipe.hitCount }</div>
 								<div class="badge badge-outline">
-									<span class="text-red-500 mr-1">
-										<i class="fa-solid fa-heart"></i>
+									<span class="text-yellow-400 mr-1">
+										<i class="fa-solid fa-file"></i>
 									</span>
-									${ recipe.goodRP }
+									${ recipe.scrap }
+								</div>
+								<div>
+									<div class="badge badge-outline">
+										<span class="text-red-500 mr-1">
+											<i class="fa-solid fa-heart"></i>
+										</span>
+										${ recipe.goodRP }
+									</div>
+									<div class="badge badge-outline">
+										<span>조회수 ${ recipe.hitCount }</span>
+									</div>
 								</div>
 							</div>
 						</div>

@@ -26,46 +26,45 @@
 
 <div class="bg-gray-200 py-4">
 	<div class="list-box w-10/12 mx-auto">
+
 		<section class="bg-white rounded-md p-4 mb-5">
 			<!-- 안내문구 -->
 			<div class="p-3 mx-4">
 				<div class="text-3xl">내가 등록한 레시피</div>
-				<div class="text-2xl">끼니 고민 덜어드려요</div>
-
-				<!-- 로그아웃 상태 -->
-				<c:if test="${ rq.loginedMember == null }">
-					<div class="text-lg text-gray-600 mt-3">
-						<a href="/user/member/login" class="link link-primary">로그인</a>
-						후 확인해보세요.
-					</div>
-				</c:if>
 			</div>
 
-			<!-- 로그인 상태에서 보이기 -->
-			<c:if test="${ rq.loginedMember != null }">
-				<!-- 내가 등록한 레시피 -->
-				<div class="grid grid-cols-4">
-					<c:forEach var="recipe" items="${ registeredRecipes }">
-						<div class="card w-64 bg-base-100 shadow-xl my-6 border-2 border-base-100 hover:border-yellow-500">
+			<!-- 등록한 레시피 영역 시작 -->
+			<div class="grid grid-cols-4">
+				<c:forEach var="recipe" items="${ registeredRecipes }">
+					<div
+						class="w-64 h-80 mx-auto mb-10 flex flex-col justify-between rounded-2xl shadow-xl border-2 border-white hover:border-yellow-500">
 
+						<div class="w-full">
 							<!-- 레시피 대표 사진 -->
-							<figure>
-								<a href="/user/recipe/detail?id=${ recipe.id }">
-									<img class="w-full rounded-md" src="https://tse4.mm.bing.net/th?id=OIP.kwt4oKZDd-goVuBezaVQRQHaE7&pid=Api&P=0"
-										alt="" />
-								</a>
-							</figure>
+							<a href="/user/recipe/detail?id=${ recipe.id }">
+								<img class="w-full rounded-t-2xl"
+									src="https://tse4.mm.bing.net/th?id=OIP.kwt4oKZDd-goVuBezaVQRQHaE7&pid=Api&P=0" alt="" />
+							</a>
 
-							<!-- 안내영역, 제목, 등록자, 설명일부, 하트 스크랩 수 -->
-							<div class="card-body">
-								<div class="card-title">${ recipe.title }</div>
-								<a href="/user/member/detail?memberId=${ recipe.memberId }" class="badge badge-lg badge-primary">
+							<!-- 제목 -->
+							<div class="recipe-title text-lg font-bold mt-3 mx-2">
+								<span>${ recipe.title }</span>
+							</div>
+						</div>
+
+						<!-- 등록자, 설명일부, 레시피 정보 -->
+						<div class="recipe-info flex flex-col">
+							<div class="flex justify-between mx-2">
+								<!-- 작성자 -->
+								<a href="/user/member/detail?memberId=${ recipe.memberId }" class="badge badge-primary">
 									<span>${ recipe.extra__writerName }</span>
 								</a>
-								<div class="truncate text-gray-500">${ recipe.body }</div>
 
-								<div class="card-actions justify-end">
-									<div class="badge badge-outline">조회수 ${ recipe.hitCount }</div>
+								<!-- 조회수 좋아요 -->
+								<div>
+									<div class="badge badge-outline">
+										<span>조회수 ${ recipe.hitCount }</span>
+									</div>
 									<div class="badge badge-outline">
 										<span class="text-red-500 mr-1">
 											<i class="fa-solid fa-heart"></i>
@@ -74,53 +73,55 @@
 									</div>
 								</div>
 							</div>
-						</div>
-					</c:forEach>
-				</div>
-			</c:if>
 
+							<!-- 내용일부 -->
+							<div class="text-gray-500 m-2 truncate ...">${ recipe.body }</div>
+
+						</div>
+					</div>
+				</c:forEach>
+			</div>
+			<!-- 등록한 레시피 영역 끝 -->
 		</section>
 
 		<section class="bg-white rounded-md p-4 mb-5">
-
 			<!-- 안내문구 -->
 			<div class="p-3 mx-4">
 				<div class="text-3xl">스크랩한 레시피</div>
-
-				<!-- 로그아웃 상태 -->
-				<c:if test="${ rq.loginedMember == null }">
-					<div class="text-lg text-gray-600 mt-3">
-						<a href="/user/member/login" class="link link-primary">로그인</a>
-						후 확인해보세요.
-					</div>
-				</c:if>
 			</div>
 
-			<!-- 로그인 상태에서 보이기 -->
-			<c:if test="${ rq.loginedMember != null }">
-				<!-- 스크랩한 레시피 -->
-				<div class="grid grid-cols-4">
-					<c:forEach var="recipe" items="${ scrapRecipes }">
-						<div class="card w-64 bg-base-100 shadow-xl my-6 border-2 border-base-100 hover:border-yellow-500">
+			<!-- 스크랩한 레시피 영역 시작 -->
+			<div class="grid grid-cols-4">
+				<c:forEach var="recipe" items="${ scrapRecipes }">
+					<div
+						class="w-64 h-80 mx-auto mb-10 flex flex-col justify-between rounded-2xl shadow-xl border-2 border-white hover:border-yellow-500">
 
+						<div class="w-full">
 							<!-- 레시피 대표 사진 -->
-							<figure>
-								<a href="/user/recipe/detail?id=${ recipe.id }">
-									<img class="w-full rounded-md" src="https://tse4.mm.bing.net/th?id=OIP.kwt4oKZDd-goVuBezaVQRQHaE7&pid=Api&P=0"
-										alt="" />
-								</a>
-							</figure>
+							<a href="/user/recipe/detail?id=${ recipe.id }">
+								<img class="w-full rounded-t-2xl"
+									src="https://tse4.mm.bing.net/th?id=OIP.kwt4oKZDd-goVuBezaVQRQHaE7&pid=Api&P=0" alt="" />
+							</a>
 
-							<!-- 안내영역, 제목, 등록자, 설명일부, 하트 스크랩 수 -->
-							<div class="card-body">
-								<div class="card-title">${ recipe.title }</div>
-								<a href="/user/member/detail?memberId=${ recipe.memberId }" class="badge badge-lg badge-primary">
+							<!-- 제목 -->
+							<div class="recipe-title text-lg font-bold mt-3 mx-2">
+								<span>${ recipe.title }</span>
+							</div>
+						</div>
+
+						<!-- 등록자, 설명일부, 레시피 정보 -->
+						<div class="recipe-info flex flex-col">
+							<div class="flex justify-between mx-2">
+								<!-- 작성자 -->
+								<a href="/user/member/detail?memberId=${ recipe.memberId }" class="badge badge-primary">
 									<span>${ recipe.extra__writerName }</span>
 								</a>
-								<div class="truncate text-gray-500">${ recipe.body }</div>
 
-								<div class="card-actions justify-end">
-									<div class="badge badge-outline">조회수 ${ recipe.hitCount }</div>
+								<!-- 조회수 좋아요 -->
+								<div>
+									<div class="badge badge-outline">
+										<span>조회수 ${ recipe.hitCount }</span>
+									</div>
 									<div class="badge badge-outline">
 										<span class="text-red-500 mr-1">
 											<i class="fa-solid fa-heart"></i>
@@ -129,10 +130,15 @@
 									</div>
 								</div>
 							</div>
+
+							<!-- 내용일부 -->
+							<div class="text-gray-500 m-2 truncate ...">${ recipe.body }</div>
+
 						</div>
-					</c:forEach>
-				</div>
-			</c:if>
+					</div>
+				</c:forEach>
+			</div>
+			<!-- 스크랩한 레시피 영역 끝 -->
 		</section>
 	</div>
 </div>

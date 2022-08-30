@@ -34,12 +34,16 @@
 		SELECT R.*,
 		M.nickname
 		AS extra__writerName
-		FROM recipe AS R
-		LEFT JOIN `member` AS M
-		ON
-		R.memberId = M.id
-		ORDER BY RAND() DESC
+		FROM (
+		SELECT * FROM recipe
+		ORDER BY (goodRP+hitCount+scrap) DESC
 		LIMIT #{randomCount}
+		) AS R
+		LEFT JOIN `member` AS M
+		ON R.memberId = M.id
+		ORDER
+		BY RAND() DESC
+		LIMIT #{itemsCountInAPage}
 	</select>
 
 	<select id="getRecentRecipes" resultType="Recipe">

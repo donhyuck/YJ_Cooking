@@ -41,9 +41,9 @@ public class RecipeService {
 	}
 
 	// 추천 - 램덤목록 가져오기
-	public List<Recipe> getRandomRecipes(int memberId, int randomCount) {
+	public List<Recipe> getRandomRecipes(int memberId, int randomCount, int itemsCountInAPage) {
 
-		List<Recipe> recipes = recipeRepository.getRandomRecipes(randomCount);
+		List<Recipe> recipes = recipeRepository.getRandomRecipes(randomCount, itemsCountInAPage);
 
 		for (Recipe recipe : recipes) {
 			updateForPrintData(memberId, recipe);

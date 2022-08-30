@@ -13,7 +13,7 @@ public interface RecipeRepository {
 
 	public List<Recipe> getForPrintRecipes();
 
-	public List<Recipe> getRandomRecipes(int randomCount);
+	public List<Recipe> getRandomRecipes(int randomCount, int itemsCountInAPage);
 
 	public List<Recipe> getRecentRecipes(int recentCount);
 

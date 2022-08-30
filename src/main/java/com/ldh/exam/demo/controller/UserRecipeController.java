@@ -45,8 +45,11 @@ public class UserRecipeController {
 	public String showSuggestList(Model model) {
 
 		// 램덤 레시피 목록 가져오기
-		int randomCount = 10;
-		List<Recipe> randomRecipes = recipeService.getRandomRecipes(rq.getLoginedMemberId(), randomCount);
+		int randomCount = 15;
+		int itemsCountInAPage = 3;
+
+		List<Recipe> randomRecipes = recipeService.getRandomRecipes(rq.getLoginedMemberId(), randomCount,
+				itemsCountInAPage);
 
 		// 최근 등록된 레시피 목록 가져오기
 		int recentCount = 10;

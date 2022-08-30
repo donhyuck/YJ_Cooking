@@ -28,16 +28,16 @@
 	<div class="list-box w-10/12 mx-auto">
 		<section class="bg-white rounded-md p-4 mb-5">
 			<!-- 안내문구 -->
-			<div class="p-3 mx-4">
+			<div class="p-3 mx-4 mb-3">
 				<div class="text-3xl">오늘 뭐 먹지?</div>
 				<div class="text-2xl">끼니 고민 덜어드려요</div>
 			</div>
 
 			<!-- 일일추천레시피 영역 시작 -->
-			<div class="grid grid-cols-4">
+			<div class="grid grid-cols-3 justify-items-center mx-12 mb-7">
 				<c:forEach var="recipe" items="${ randomRecipes }">
 					<div
-						class="w-64 h-80 mx-auto mb-10 flex flex-col justify-between rounded-2xl shadow-xl border-2 border-white hover:border-yellow-500">
+						class="w-80 h-full flex flex-col justify-between rounded-2xl shadow-xl border-2 border-white hover:border-yellow-500">
 
 						<div class="w-full">
 							<!-- 레시피 대표 사진 -->
@@ -47,29 +47,38 @@
 							</a>
 
 							<!-- 제목 -->
-							<div class="recipe-title text-lg font-bold mt-3 mx-2">
+							<div class="recipe-title text-lg font-bold my-3 mx-2">
 								<span>${ recipe.title }</span>
 							</div>
 						</div>
 
 						<!-- 등록자, 설명일부, 레시피 정보 -->
-						<div class="recipe-info flex flex-col">
-							<div class="flex justify-between mx-2">
+						<div class="recipe-info flex flex-col p-3">
+							<div class="flex justify-between items-center mx-2">
 								<!-- 작성자 -->
 								<a href="/user/member/detail?memberId=${ recipe.memberId }" class="badge badge-primary">
 									<span>${ recipe.extra__writerName }</span>
 								</a>
 
-								<!-- 조회수 좋아요 -->
+								<!-- 조회수 좋아요 스크랩 -->
 								<div>
 									<div class="badge badge-outline">
-										<span>조회수 ${ recipe.hitCount }</span>
+										<span class="text-black mr-1">
+											<i class="fa-solid fa-arrow-pointer"></i>
+										</span>
+										${ recipe.hitCount }
 									</div>
 									<div class="badge badge-outline">
 										<span class="text-red-500 mr-1">
 											<i class="fa-solid fa-heart"></i>
 										</span>
 										${ recipe.goodRP }
+									</div>
+									<div class="badge badge-outline">
+										<span class="text-yellow-400 mr-1">
+											<i class="fa-solid fa-file"></i>
+										</span>
+										${ recipe.scrap }
 									</div>
 								</div>
 							</div>

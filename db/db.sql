@@ -1050,3 +1050,16 @@ ON R.memberId = M.id
 WHERE R.memberId = 1;
 
 SELECT * FROM recipe;
+
+## 일정 좋아요, 조회수, 스크랩 수 이상에서 램덤 목록 가져오기
+SELECT R.*,
+M.nickname AS extra__writerName
+FROM (
+SELECT * FROM recipe 
+ORDER BY (goodRP+hitCount+scrap) DESC 
+LIMIT 50
+) AS R
+LEFT JOIN `member` AS M
+ON R.memberId = M.id
+ORDER BY RAND() DESC
+LIMIT 3;

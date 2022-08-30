@@ -45,7 +45,7 @@ public class UserRecipeController {
 	public String showSuggestList(Model model) {
 
 		// 램덤 레시피 목록 가져오기
-		int randomCount = 15;
+		int randomCount = 50;
 		int itemsCountInAPage = 3;
 
 		List<Recipe> randomRecipes = recipeService.getRandomRecipes(rq.getLoginedMemberId(), randomCount,
@@ -59,6 +59,22 @@ public class UserRecipeController {
 		model.addAttribute("recentRecipes", recentRecipes);
 
 		return "user/list/suggest";
+	}
+
+	// 레시피 추천 전체목록 페이지 메서드
+	@RequestMapping("/user/list/moreSuggest")
+	public String showMoreSuggest(Model model) {
+
+		// 램덤 레시피 전체목록 가져오기
+		int randomCount = 50;
+		int itemsCountInAPage = -1;
+
+		List<Recipe> moreSuggestRecipes = recipeService.getRandomRecipes(rq.getLoginedMemberId(), randomCount,
+				itemsCountInAPage);
+
+		model.addAttribute("moreSuggestRecipes", moreSuggestRecipes);
+
+		return "user/list/moreSuggest";
 	}
 
 	// 레시피 분류목록 페이지 메서드

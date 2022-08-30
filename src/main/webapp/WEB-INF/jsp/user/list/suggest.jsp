@@ -91,6 +91,13 @@
 				</c:forEach>
 			</div>
 			<!-- 일일추천레시피 영역 끝 -->
+
+			<!-- 추천 더보기 -->
+			<div class="flex justify-end mr-10 mb-3">
+				<a href="/user/list/moreSuggest" class="btn btn-accent">
+					<span>추천 더보기</span>
+				</a>
+			</div>
 		</section>
 
 		<section class="bg-white rounded-md p-4 mb-5">

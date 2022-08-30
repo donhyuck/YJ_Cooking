@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ldh.exam.demo.service.BoardService;
@@ -42,18 +43,18 @@ public class UserRecipeController {
 
 	// 레시피 추천목록 페이지 메서드
 	@RequestMapping("/user/list/suggest")
-	public String showSuggestList(Model model) {
+	public String showSuggestList(Model model, @RequestParam(defaultValue = "1") int page) {
 
 		// 램덤 레시피 목록 가져오기
 		int randomCount = 50;
-		int itemsCountInAPage = 3;
+		int randomCountInAPage = 3;
 
 		List<Recipe> randomRecipes = recipeService.getRandomRecipes(rq.getLoginedMemberId(), randomCount,
-				itemsCountInAPage);
+				randomCountInAPage);
 
 		// 최근 등록된 레시피 목록 가져오기
-		int recentCount = 10;
-		List<Recipe> recentRecipes = recipeService.getRecentRecipes(rq.getLoginedMemberId(), recentCount);
+		int itemsCountInAPage = 4;
+		List<Recipe> recentRecipes = recipeService.getRecentRecipes(rq.getLoginedMemberId(), itemsCountInAPage, page);
 
 		model.addAttribute("randomRecipes", randomRecipes);
 		model.addAttribute("recentRecipes", recentRecipes);

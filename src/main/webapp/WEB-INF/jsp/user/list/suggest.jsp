@@ -34,10 +34,10 @@
 			</div>
 
 			<!-- 일일추천레시피 영역 시작 -->
-			<div class="grid grid-cols-3 justify-items-center mx-12 mb-7">
+			<div class="flex justify-center mb-7 mx-10">
 				<c:forEach var="recipe" items="${ randomRecipes }">
 					<div
-						class="w-80 h-full flex flex-col justify-between rounded-2xl shadow-xl border-2 border-white hover:border-yellow-500">
+						class="w-80 h-full mx-auto flex flex-col justify-between rounded-2xl shadow-xl border-2 border-white hover:border-yellow-500">
 
 						<div class="w-full">
 							<!-- 레시피 대표 사진 -->
@@ -53,7 +53,7 @@
 						</div>
 
 						<!-- 등록자, 설명일부, 레시피 정보 -->
-						<div class="recipe-info flex flex-col p-3">
+						<div class="recipe-info flex flex-col">
 							<div class="flex justify-between items-center mx-2">
 								<!-- 작성자 -->
 								<a href="/user/member/detail?memberId=${ recipe.memberId }" class="badge badge-primary">
@@ -107,7 +107,7 @@
 			</div>
 
 			<!-- 최근 등록된 레시피 영역 시작 -->
-			<div class="grid grid-cols-4">
+			<div class="grid grid-cols-4 mx-10">
 				<c:forEach var="recipe" items="${ recentRecipes }">
 					<div
 						class="w-64 h-80 mx-auto mb-10 flex flex-col justify-between rounded-2xl shadow-xl border-2 border-white hover:border-yellow-500">
@@ -153,6 +153,15 @@
 						</div>
 					</div>
 				</c:forEach>
+			</div>
+
+			<!-- 페이징 영역 -->
+			<div class="page-menu mt-3">
+				<div class="btn-group justify-center">
+					<c:forEach begin="1" end="20" var="i">
+						<a href="?page=${ i }" class="btn btn-sm ${ param.page == i ? 'btn-active' : '' }">${ i }</a>
+					</c:forEach>
+				</div>
 			</div>
 			<!-- 최근 등록된 레시피 영역 끝 -->
 		</section>

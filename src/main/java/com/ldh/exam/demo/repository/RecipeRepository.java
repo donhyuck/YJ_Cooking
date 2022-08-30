@@ -13,9 +13,9 @@ public interface RecipeRepository {
 
 	public List<Recipe> getForPrintRecipes();
 
-	public List<Recipe> getRandomRecipes(int randomCount, int itemsCountInAPage);
+	public List<Recipe> getRandomRecipes(int randomCount, int randomCountInAPage);
 
-	public List<Recipe> getRecentRecipes(int recentCount);
+	public List<Recipe> getRecentRecipes(int limitStart, int limitTake);
 
 	public List<Recipe> getRecipesByGuideId(int boardId, int relId);
 

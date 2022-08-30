@@ -44,8 +44,8 @@
 		ON R.memberId = M.id
 		ORDER
 		BY RAND() DESC
-		<if test="itemsCountInAPage != -1">
-			LIMIT #{itemsCountInAPage}
+		<if test="randomCountInAPage != -1">
+			LIMIT #{randomCountInAPage}
 		</if>
 	</select>
 
@@ -54,11 +54,13 @@
 		M.nickname
 		AS extra__writerName
 		FROM recipe AS R
-		LEFT JOIN `member` AS M
-		ON
-		R.memberId = M.id
+		LEFT JOIN
+		`member` AS M
+		ON R.memberId = M.id
 		ORDER BY R.regDate DESC
-		LIMIT #{recentCount}
+		<if test="limitStart != -1">
+			LIMIT #{limitStart}, #{limitTake}
+		</if>
 	</select>
 
 	<select id="getRecipesByGuideId" resultType="Recipe">

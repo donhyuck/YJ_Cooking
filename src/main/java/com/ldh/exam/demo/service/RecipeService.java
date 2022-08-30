@@ -41,9 +41,9 @@ public class RecipeService {
 	}
 
 	// 추천 - 램덤목록 가져오기
-	public List<Recipe> getRandomRecipes(int memberId, int randomCount, int itemsCountInAPage) {
+	public List<Recipe> getRandomRecipes(int memberId, int randomCount, int randomCountInAPage) {
 
-		List<Recipe> recipes = recipeRepository.getRandomRecipes(randomCount, itemsCountInAPage);
+		List<Recipe> recipes = recipeRepository.getRandomRecipes(randomCount, randomCountInAPage);
 
 		for (Recipe recipe : recipes) {
 			updateForPrintData(memberId, recipe);
@@ -53,9 +53,12 @@ public class RecipeService {
 	}
 
 	// 추천 - 최근목록 가져오기
-	public List<Recipe> getRecentRecipes(int memberId, int recentCount) {
+	public List<Recipe> getRecentRecipes(int memberId, int itemsCountInAPage, int page) {
 
-		List<Recipe> recipes = recipeRepository.getRecentRecipes(recentCount);
+		int limitStart = (page - 1) * itemsCountInAPage;
+		int limitTake = itemsCountInAPage;
+
+		List<Recipe> recipes = recipeRepository.getRecentRecipes(limitStart, limitTake);
 
 		for (Recipe recipe : recipes) {
 			updateForPrintData(memberId, recipe);

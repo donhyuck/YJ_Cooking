@@ -53,11 +53,18 @@ public class UserRecipeController {
 				randomCountInAPage);
 
 		// 최근 등록된 레시피 목록 가져오기
-		int itemsCountInAPage = 4;
+		int recipesCount = 50; // 총 레시피 갯수
+		int itemsCountInAPage = 4; // 한 페이지 당 갯수
+
+		int pagesCount = (int) Math.ceil((double) recipesCount / itemsCountInAPage); // 페이지 갯수
+
 		List<Recipe> recentRecipes = recipeService.getRecentRecipes(rq.getLoginedMemberId(), itemsCountInAPage, page);
 
 		model.addAttribute("randomRecipes", randomRecipes);
 		model.addAttribute("recentRecipes", recentRecipes);
+		model.addAttribute("page", page);
+		model.addAttribute("pagesCount", pagesCount);
+		model.addAttribute("recipesCount", recipesCount);
 
 		return "user/list/suggest";
 	}

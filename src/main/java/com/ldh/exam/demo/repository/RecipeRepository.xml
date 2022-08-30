@@ -89,27 +89,28 @@
 	</select>
 
 	<select id="getRankRecipes" resultType="Recipe">
-		SELECT R.*,
-		M.nickname
-		AS
-		extra__writerName
-		FROM recipe AS R
+		SELECT (@num:=@num+1) AS
+		extra__rank,
+		R.*, M.nickname AS extra__writerName
+		FROM (SELECT @num:=0)
+		AS rankTable,
+		recipe AS R
 		LEFT JOIN `member` AS M
-		ON R.memberId
-		= M.id
-		ORDER BY R.goodRP DESC, R.hitCount DESC
-		LIMIT #{ rankCount }
+		ON R.memberId = M.id
+		ORDER BY (R.goodRP + R.hitCount) DESC
+		LIMIT #{rankCount}
 	</select>
 
 	<select id="getManyScrapRecipes" resultType="Recipe">
-		SELECT R.*,
-		M.nickname
-		AS extra__writerName
-		FROM recipe AS R
+		SELECT
+		(@num:=@num+1) AS extra__rank,
+		R.*, M.nickname AS extra__writerName
+		FROM (SELECT @num:=0) AS rankTable,
+		recipe AS R
 		LEFT JOIN `member` AS M
 		ON R.memberId = M.id
 		ORDER BY R.scrap DESC
-		LIMIT #{ manyScrapCount }
+		LIMIT #{manyScrapCount}
 	</select>
 
 	<select id="getRegisteredRecipes" resultType="Recipe">

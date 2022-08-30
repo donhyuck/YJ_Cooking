@@ -818,10 +818,10 @@ CREATE TABLE guide (
     regDate DATETIME NOT NULL,
     updateDate DATETIME NOT NULL,
     recipeId INT(10) UNSIGNED NOT NULL,
-    sortId INT(10) UNSIGNED NOT NULL,
-    methodId INT(10) UNSIGNED NOT NULL,
-    contentId INT(10) UNSIGNED NOT NULL,
-    freeId INT(10) UNSIGNED NOT NULL,
+    sortId INT(10) UNSIGNED NOT NULL DEFAULT 0 COMMENT,
+    methodId INT(10) UNSIGNED NOT NULL DEFAULT 0 COMMENT,
+    contentId INT(10) UNSIGNED NOT NULL DEFAULT 0 COMMENT,
+    freeId INT(10) UNSIGNED NOT NULL DEFAULT 0 COMMENT,
     delStatus TINYINT(1) UNSIGNED NOT NULL DEFAULT 0 COMMENT '삭제여부(0=삭제전,1=삭제)'
 );
 
@@ -988,26 +988,38 @@ scrap = 0;
 
 # 기존 데이터 조회수, 하트수, 스크랩 설정
 UPDATE recipe
-SET hitCount = FLOOR(RAND() * 300)+1
-WHERE hitCount = 0;
-
-UPDATE recipe
-SET goodRP = hitCount + FLOOR(RAND() * 200)+1,
-scrap = hitCount +FLOOR(RAND() * 200)+1
+SET goodRP = FLOOR(RAND() * 200)+1,
+scrap = FLOOR(RAND() * 350)+1
 WHERE goodRP = 0
 AND scrap = 0;
 
+UPDATE recipe
+SET hitCount = goodRP + FLOOR(RAND() * 500)+1
+WHERE hitCount = 0;
+
 ## 최다 하트, 조회수 순 레시피 목록 가져오기 (10개)
+## 랭킹 표시 (x)
 SELECT R.*,
-M.nickname
-AS extra__writerName
+M.nickname AS extra__writerName
 FROM recipe AS R
 LEFT JOIN `member` AS M
 ON R.memberId = M.id
-ORDER BY R.goodRP DESC, R.hitCount DESC
+ORDER BY (R.goodRP + R.hitCount) DESC
+LIMIT 10;
+
+## 랭킹 표시 (o)
+SELECT (@num:=@num + 1) AS extra__rank,
+R.*,
+M.nickname AS extra__writerName
+FROM (SELECT @num:=0) AS rankTable,
+recipe AS R
+LEFT JOIN `member` AS M
+ON R.memberId = M.id
+ORDER BY (R.goodRP + R.hitCount) DESC
 LIMIT 10;
 
 ## 최다 스크랩 레시피 목록 가져오기 (10개)
+## 랭킹 표시 (x)
 SELECT R.*,
 M.nickname
 AS extra__writerName
@@ -1016,5 +1028,25 @@ LEFT JOIN `member` AS M
 ON R.memberId = M.id
 ORDER BY R.scrap DESC
 LIMIT 10;
+
+## 랭킹 표시 (o)
+SELECT (@num:=@num + 1) AS extra__rank,
+R.*,
+M.nickname AS extra__writerName
+FROM (SELECT @num:=0) AS rankTable,
+recipe AS R
+LEFT JOIN `member` AS M
+ON R.memberId = M.id
+ORDER BY R.scrap DESC
+LIMIT 10;
+
+## 내가 등록한 레시피 목록
+SELECT R.*,
+M.nickname
+AS extra__writerName
+FROM recipe AS R
+LEFT JOIN `member` AS M
+ON R.memberId = M.id
+WHERE R.memberId = 1;
 
 SELECT * FROM recipe;

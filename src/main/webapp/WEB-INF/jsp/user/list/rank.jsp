@@ -40,7 +40,12 @@
 					<div
 						class="w-64 h-80 mx-auto mb-10 flex flex-col justify-between rounded-2xl shadow-xl border-2 border-white hover:border-yellow-500">
 
-						<div class="w-full">
+						<div class="w-full relative">
+							<!-- 랭킹 번호 -->
+							<div class="rank-number w-10 h-10 absolute -top-2 -left-2 bg-white border-2 rounded-lg">
+								<div class="font-bold text-center mt-2">${ recipe.extra__rank }</div>
+							</div>
+
 							<!-- 레시피 대표 사진 -->
 							<a href="/user/recipe/detail?id=${ recipe.id }">
 								<img class="w-full rounded-t-2xl"
@@ -98,7 +103,12 @@
 					<div
 						class="w-64 h-80 mx-auto mb-10 flex flex-col justify-between rounded-2xl shadow-xl border-2 border-white hover:border-yellow-500">
 
-						<div class="w-full">
+						<div class="w-full relative">
+							<!-- 랭킹 번호 -->
+							<div class="rank-number w-10 h-10 absolute -top-2 -left-2 bg-white border-2 rounded-lg">
+								<div class="font-bold text-center mt-2">${ recipe.extra__rank }</div>
+							</div>
+							
 							<!-- 레시피 대표 사진 -->
 							<a href="/user/recipe/detail?id=${ recipe.id }">
 								<img class="w-full rounded-t-2xl"

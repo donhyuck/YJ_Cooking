@@ -24,6 +24,7 @@ public class Recipe {
 	private int scrap;
 	private String tip;
 
+	private int extra__rank;
 	private String extra__writerName;
 	private boolean extra__actorCanModify;
 	private boolean extra__actorCanDelete;

@@ -34,22 +34,22 @@
 
 				<!-- 탭메뉴 -->
 				<div class="tabs mt-4 font-bold">
-					<a class="tab tab-lg tab-bordered tab-active">
+					<a href="/user/list/moreSuggest?tapCode=1" class="tab tab-lg tab-bordered tab-active">
 						<span class="text-2xl">종합</span>
 					</a>
-					<a class="tab tab-lg tab-bordered">
+					<a href="/user/list/moreSuggest?tapCode=2" class="tab tab-lg tab-bordered">
 						<span class="text-2xl">조회수</span>
 						<span class="text-black ml-1">
 							<i class="fa-solid fa-arrow-pointer"></i>
 						</span>
 					</a>
-					<a class="tab tab-lg tab-bordered">
+					<a href="/user/list/moreSuggest?tapCode=3" class="tab tab-lg tab-bordered">
 						<span class="text-2xl">스크랩</span>
 						<span class="text-yellow-400 ml-1">
 							<i class="fa-solid fa-file"></i>
 						</span>
 					</a>
-					<a class="tab tab-lg tab-bordered">
+					<a href="/user/list/moreSuggest?tapCode=4" class="tab tab-lg tab-bordered">
 						<span class="text-2xl">좋아요</span>
 						<span class="text-red-500 ml-1">
 							<i class="fa-solid fa-heart"></i>
@@ -61,6 +61,7 @@
 			<!-- 추천 전체 레시피 영역 시작 -->
 			<div class="grid grid-cols-4 border-2 rounded-xl border-gray-300 pt-5">
 				<c:forEach var="recipe" items="${ moreSuggestRecipes }">
+					<input type="hidden" name="tapCode" value="${ param.tapCode }">
 					<div
 						class="w-64 h-80 mx-auto mb-10 flex flex-col justify-between rounded-2xl shadow-xl border-2 border-white hover:border-yellow-500">
 

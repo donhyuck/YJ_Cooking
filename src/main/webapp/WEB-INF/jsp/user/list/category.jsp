@@ -5,7 +5,7 @@
 
 <section class="second-bar bg-green-400 opacity-80 w-full h-16">
 	<div class="menu-box flex items-center justify-around h-full text-center text-lg font-bold px-40">
-		<a href="/user/list/suggest" class="">
+		<a href="/user/list/suggest?page=1" class="">
 			<div class="text-white hover:text-yellow-300">추천 레시피</div>
 			<div class="text-xs font-normal text-black">오늘 뭐 먹지?</div>
 		</a>

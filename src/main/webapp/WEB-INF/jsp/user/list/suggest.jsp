@@ -5,7 +5,7 @@
 
 <section class="second-bar bg-green-400 opacity-80 w-full h-16">
 	<div class="menu-box flex items-center justify-around h-full text-center text-lg font-bold px-40">
-		<a href="/user/list/suggest" class="">
+		<a href="/user/list/suggest?page=1" class="">
 			<div class="text-yellow-300">추천 레시피</div>
 			<div class="text-xs">오늘 뭐 먹지?</div>
 		</a>
@@ -33,21 +33,21 @@
 			<c:set var="endPage" value="${page + pageMenuArmLen <= pagesCount ? page + pageMenuArmLen : pagesCount}" />
 
 			<!-- 안내문구 -->
-			<div class="p-3 mx-4">
+			<div class="p-3 mx-4 mb-3">
 				<div class="text-3xl">최근 등록된 레시피</div>
 			</div>
 
-			<div class="grid grid-cols-4 relative">
+			<div class="grid grid-cols-4 mx-6 relative">
 
 				<!-- 좌우 이동 버튼 -->
-				<div class="absolute -left-2 top-32 flex items-center h-20 w-5 hover:text-yellow-500">
+				<div class="absolute -left-7 top-32 flex justify-center items-center text-gray-400 hover:text-yellow-500">
 					<c:if test="${ page > 1 }">
-						<a href="?page=${ page-1 }" class=" text-4xl font-black">〈</a>
+						<a href="?page=${ page-1 }" class="text-6xl font-semibold">〈</a>
 					</c:if>
 				</div>
-				<div class="absolute -right-2 top-32 flex items-center h-20 w-5 hover:text-yellow-500">
+				<div class="absolute -right-7 top-32 flex justify-center items-center text-gray-400 hover:text-yellow-500">
 					<c:if test="${ page < pagesCount }">
-						<a href="?page=${ page+1 }" class=" text-4xl font-black">〉</a>
+						<a href="?page=${ page+1 }" class="text-6xl font-semibold">〉</a>
 					</c:if>
 				</div>
 
@@ -105,7 +105,7 @@
 				<div class="btn-group justify-center">
 
 					<c:if test="${ startPage > 1 }">
-						<a href="?page=1" class="btn btn-sm">《</a>
+						<a href="?page=1" class="btn btn-sm btn-outline">《</a>
 					</c:if>
 
 					<c:forEach begin="${ startPage }" end="${ endPage }" var="i">
@@ -113,7 +113,7 @@
 					</c:forEach>
 
 					<c:if test="${ endPage < pagesCount }">
-						<a href="?page=${ pagesCount }" class="btn btn-sm">${ pagesCount }</a>
+						<a href="?page=${ pagesCount }" class="btn btn-sm btn-outline">${ pagesCount }</a>
 					</c:if>
 				</div>
 			</div>

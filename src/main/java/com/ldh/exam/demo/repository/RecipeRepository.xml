@@ -137,6 +137,13 @@
 		</if>
 	</select>
 
+	<select id="getRegisteredRecipesCount" resultType="int">
+		SELECT
+		COUNT(*)
+		FROM recipe AS R
+		WHERE R.memberId = #{ memberId }
+	</select>
+
 	<select id="getScrapRecipes" resultType="Recipe">
 		SELECT R.*
 		FROM (

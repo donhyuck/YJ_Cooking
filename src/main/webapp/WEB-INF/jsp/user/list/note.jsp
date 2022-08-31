@@ -17,7 +17,7 @@
 			<div class="text-white hover:text-yellow-300">랭킹보기</div>
 			<div class="text-xs font-normal text-black">명예의 전당</div>
 		</a>
-		<a href="/user/list/note" class="">
+		<a href="/user/list/note?page=1" class="">
 			<div class="text-yellow-300">레시피 노트</div>
 			<div class="text-xs">나만의 요리사전</div>
 		</a>

@@ -25,6 +25,8 @@ public interface RecipeRepository {
 
 	public List<Recipe> getRegisteredRecipes(int memberId, int limitStart, int limitTake);
 
+	public int getRegisteredRecipesCount(int memberId);
+
 	public List<Recipe> getScrapRecipes(int memberId);
 
 	public void writeRecipe(int memberId, String title, String body);

@@ -116,6 +116,12 @@ public class RecipeService {
 		return recipes;
 	}
 
+	// 내가 등록한 레시피 갯수 가져오기
+	public int getRegisteredRecipesCount(int memberId) {
+
+		return recipeRepository.getRegisteredRecipesCount(memberId);
+	}
+
 	// 노트 - 내가 스크랩한 레시피 목록
 	public List<Recipe> getScrapRecipes(int memberId) {
 

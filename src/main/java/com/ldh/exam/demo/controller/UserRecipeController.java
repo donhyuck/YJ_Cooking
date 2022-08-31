@@ -45,6 +45,19 @@ public class UserRecipeController {
 	@RequestMapping("/user/list/suggest")
 	public String showSuggestList(Model model, @RequestParam(defaultValue = "1") int page) {
 
+		// 최근 등록된 레시피 목록 가져오기
+		int recipesCount = 50; // 총 레시피 갯수
+		int itemsCountInAPage = 4; // 한 페이지 당 갯수
+		int pagesCount = (int) Math.ceil((double) recipesCount / itemsCountInAPage); // 페이지 갯수
+
+		// 페이지에 해당하는 레시피 목록가져오기
+		List<Recipe> recentRecipes = recipeService.getRecentRecipes(rq.getLoginedMemberId(), itemsCountInAPage, page);
+
+		model.addAttribute("page", page);
+		model.addAttribute("pagesCount", pagesCount);
+		model.addAttribute("recipesCount", recipesCount);
+		model.addAttribute("recentRecipes", recentRecipes);
+
 		// 램덤 레시피 목록 가져오기
 		int randomCount = 50;
 		int randomCountInAPage = 3;
@@ -52,19 +65,7 @@ public class UserRecipeController {
 		List<Recipe> randomRecipes = recipeService.getRandomRecipes(rq.getLoginedMemberId(), randomCount,
 				randomCountInAPage);
 
-		// 최근 등록된 레시피 목록 가져오기
-		int recipesCount = 50; // 총 레시피 갯수
-		int itemsCountInAPage = 4; // 한 페이지 당 갯수
-
-		int pagesCount = (int) Math.ceil((double) recipesCount / itemsCountInAPage); // 페이지 갯수
-
-		List<Recipe> recentRecipes = recipeService.getRecentRecipes(rq.getLoginedMemberId(), itemsCountInAPage, page);
-
 		model.addAttribute("randomRecipes", randomRecipes);
-		model.addAttribute("recentRecipes", recentRecipes);
-		model.addAttribute("page", page);
-		model.addAttribute("pagesCount", pagesCount);
-		model.addAttribute("recipesCount", recipesCount);
 
 		return "user/list/suggest";
 	}
@@ -142,16 +143,17 @@ public class UserRecipeController {
 	public String showNoteList(Model model, @RequestParam(defaultValue = "1") int page) {
 
 		// 내가 등록한 레시피 목록
-		int recipesCount = 50; // 총 레시피 갯수
+		int registeredRecipesCount = recipeService.getRegisteredRecipesCount(rq.getLoginedMemberId()); // 총 레시피 갯수
 		int itemsCountInAPage = 4; // 한 페이지 당 갯수
-		int pagesCount = (int) Math.ceil((double) recipesCount / itemsCountInAPage); // 페이지 갯수
+		int pagesCount = (int) Math.ceil((double) registeredRecipesCount / itemsCountInAPage); // 페이지 갯수
 
+		// 페이지에 해당하는 레시피 목록가져오기
 		List<Recipe> registeredRecipes = recipeService.getRegisteredRecipes(rq.getLoginedMemberId(), itemsCountInAPage,
 				page);
 
 		model.addAttribute("page", page);
 		model.addAttribute("pagesCount", pagesCount);
-		model.addAttribute("recipesCount", recipesCount);
+		model.addAttribute("recipesCount", registeredRecipesCount);
 		model.addAttribute("registeredRecipes", registeredRecipes);
 
 		// 내가 스크랩한 레시피 목록

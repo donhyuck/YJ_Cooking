@@ -28,24 +28,38 @@
 	<div class="list-box w-10/12 mx-auto">
 		<section class="bg-white rounded-md p-4 mb-5">
 			<!-- 안내문구 -->
-			<div class="p-3 mx-4 mb-3">
+			<div class="px-3 pt-3 mx-4">
 				<div class="text-3xl">추천 레시피</div>
-				<div class="text-2xl">TOP 50 -</div>
-				<div class="text-xl">
-					<span class="text-black">
-						<i class="fa-solid fa-arrow-pointer"></i>
-					</span>
-					<span class="text-red-500 mr-1">
-						<i class="fa-solid fa-heart"></i>
-					</span>
-					<span class="text-yellow-400 mr-1">
-						<i class="fa-solid fa-file"></i>
-					</span>
+				<div class="text-xl text-gray-500">원하시는 추천순서를 선택하세요.</div>
+
+				<!-- 탭메뉴 -->
+				<div class="tabs mt-4 font-bold">
+					<a class="tab tab-lg tab-bordered tab-active">
+						<span class="text-2xl">종합</span>
+					</a>
+					<a class="tab tab-lg tab-bordered">
+						<span class="text-2xl">조회수</span>
+						<span class="text-black ml-1">
+							<i class="fa-solid fa-arrow-pointer"></i>
+						</span>
+					</a>
+					<a class="tab tab-lg tab-bordered">
+						<span class="text-2xl">스크랩</span>
+						<span class="text-yellow-400 ml-1">
+							<i class="fa-solid fa-file"></i>
+						</span>
+					</a>
+					<a class="tab tab-lg tab-bordered">
+						<span class="text-2xl">좋아요</span>
+						<span class="text-red-500 ml-1">
+							<i class="fa-solid fa-heart"></i>
+						</span>
+					</a>
 				</div>
 			</div>
 
 			<!-- 추천 전체 레시피 영역 시작 -->
-			<div class="grid grid-cols-4">
+			<div class="grid grid-cols-4 border-2 rounded-xl border-gray-300 pt-5">
 				<c:forEach var="recipe" items="${ moreSuggestRecipes }">
 					<div
 						class="w-64 h-80 mx-auto mb-10 flex flex-col justify-between rounded-2xl shadow-xl border-2 border-white hover:border-yellow-500">

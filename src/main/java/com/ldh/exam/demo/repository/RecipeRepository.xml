@@ -42,10 +42,12 @@
 		LEFT
 		JOIN `member` AS M
 		ON R.memberId = M.id
-		ORDER
-		BY RAND() DESC
 		<if test="randomCountInAPage != -1">
+			ORDER BY RAND() DESC
 			LIMIT #{randomCountInAPage}
+		</if>
+		<if test="randomCountInAPage == -1">
+			ORDER BY R.id DESC
 		</if>
 	</select>
 

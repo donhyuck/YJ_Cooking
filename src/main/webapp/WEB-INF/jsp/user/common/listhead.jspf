@@ -29,6 +29,24 @@
 </head>
 
 <body>
+	<!-- 탭메뉴스크립트 시작 -->
+	<script>
+		$(document).ready(function() {
+
+			$('div.tabs a').click(function() {
+				var tab_id = $(this).attr('data-tab');
+
+				$('div.tabs a').removeClass('tab-active');
+				$('.tab-content').removeClass('tab-active');
+
+				$(this).addClass('tab-active');
+				$("#" + tab_id).addClass('tab-active');
+			})
+
+		})
+	</script>
+	<!-- 탭메뉴스크립트 시작 -->
+	
 	<div class="header min-w-fit">
 		<section class="top-bar flex items-center justify-center mx-auto w-10/12 h-28 text-xl">
 			<!-- 로고박스 영역 시작 -->

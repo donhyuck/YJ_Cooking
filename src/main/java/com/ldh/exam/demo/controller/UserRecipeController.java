@@ -59,7 +59,7 @@ public class UserRecipeController {
 		model.addAttribute("recentRecipes", recentRecipes);
 
 		// 램덤 레시피 목록 가져오기
-		int randomCount = 50;
+		int randomCount = 20;
 		int randomCountInAPage = 3;
 
 		List<Recipe> randomRecipes = recipeService.getRandomRecipes(rq.getLoginedMemberId(), randomCount,

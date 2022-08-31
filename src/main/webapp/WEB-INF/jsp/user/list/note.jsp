@@ -26,15 +26,32 @@
 
 <div class="bg-gray-200 py-4">
 	<div class="list-box w-10/12 mx-auto">
-
 		<section class="bg-white rounded-md p-4 mb-5">
+
+			<c:set var="pageMenuArmLen" value="3" />
+			<c:set var="startPage" value="${page - pageMenuArmLen >= 1 ? page - pageMenuArmLen : 1}" />
+			<c:set var="endPage" value="${page + pageMenuArmLen <= pagesCount ? page + pageMenuArmLen : pagesCount}" />
+
 			<!-- 안내문구 -->
-			<div class="p-3 mx-4">
+			<div class="p-3 mx-4 mb-3">
 				<div class="text-3xl">내가 등록한 레시피</div>
 			</div>
 
-			<!-- 등록한 레시피 영역 시작 -->
-			<div class="grid grid-cols-4">
+			<div class="grid grid-cols-4 mx-6 relative">
+
+				<!-- 좌우 이동 버튼 -->
+				<div class="absolute -left-7 top-32 flex justify-center items-center text-gray-400 hover:text-yellow-500">
+					<c:if test="${ page > 1 }">
+						<a href="?page=${ page-1 }" class="text-6xl font-semibold">〈</a>
+					</c:if>
+				</div>
+				<div class="absolute -right-7 top-32 flex justify-center items-center text-gray-400 hover:text-yellow-500">
+					<c:if test="${ page < pagesCount }">
+						<a href="?page=${ page+1 }" class="text-6xl font-semibold">〉</a>
+					</c:if>
+				</div>
+
+				<!-- 등록한 레시피 영역 시작 -->
 				<c:forEach var="recipe" items="${ registeredRecipes }">
 					<div
 						class="w-64 h-80 mx-auto mb-10 flex flex-col justify-between rounded-2xl shadow-xl border-2 border-white hover:border-yellow-500">
@@ -80,8 +97,26 @@
 						</div>
 					</div>
 				</c:forEach>
+				<!-- 등록한 레시피 영역 끝 -->
 			</div>
-			<!-- 등록한 레시피 영역 끝 -->
+
+			<!-- 페이징 영역 -->
+			<div class="page-menu mb-3">
+				<div class="btn-group justify-center">
+
+					<c:if test="${ startPage > 1 }">
+						<a href="?page=1" class="btn btn-sm btn-outline">《</a>
+					</c:if>
+
+					<c:forEach begin="${ startPage }" end="${ endPage }" var="i">
+						<a href="?page=${ i }" class="btn btn-sm ${ param.page == i ? 'btn-active' : '' }">${ i }</a>
+					</c:forEach>
+
+					<c:if test="${ endPage < pagesCount }">
+						<a href="?page=${ pagesCount }" class="btn btn-sm btn-outline">${ pagesCount }</a>
+					</c:if>
+				</div>
+			</div>
 		</section>
 
 		<section class="bg-white rounded-md p-4 mb-5">

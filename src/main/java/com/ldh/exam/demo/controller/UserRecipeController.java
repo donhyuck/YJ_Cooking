@@ -139,10 +139,19 @@ public class UserRecipeController {
 
 	// 레시피 노트목록 페이지 메서드
 	@RequestMapping("/user/list/note")
-	public String showNoteList(Model model) {
+	public String showNoteList(Model model, @RequestParam(defaultValue = "1") int page) {
 
 		// 내가 등록한 레시피 목록
-		List<Recipe> registeredRecipes = recipeService.getRegisteredRecipes(rq.getLoginedMemberId());
+		int recipesCount = 50; // 총 레시피 갯수
+		int itemsCountInAPage = 4; // 한 페이지 당 갯수
+		int pagesCount = (int) Math.ceil((double) recipesCount / itemsCountInAPage); // 페이지 갯수
+
+		List<Recipe> registeredRecipes = recipeService.getRegisteredRecipes(rq.getLoginedMemberId(), itemsCountInAPage,
+				page);
+
+		model.addAttribute("page", page);
+		model.addAttribute("pagesCount", pagesCount);
+		model.addAttribute("recipesCount", recipesCount);
 		model.addAttribute("registeredRecipes", registeredRecipes);
 
 		// 내가 스크랩한 레시피 목록

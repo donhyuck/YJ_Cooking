@@ -23,7 +23,7 @@ public interface RecipeRepository {
 
 	public List<Recipe> getManyScrapRecipes(int manyScrapCount);
 
-	public List<Recipe> getRegisteredRecipes(int memberId);
+	public List<Recipe> getRegisteredRecipes(int memberId, int limitStart, int limitTake);
 
 	public List<Recipe> getScrapRecipes(int memberId);
 

@@ -98,13 +98,16 @@ public class RecipeService {
 	}
 
 	// 노트 - 내가 등록한 레시피 목록
-	public List<Recipe> getRegisteredRecipes(int memberId) {
+	public List<Recipe> getRegisteredRecipes(int memberId, int itemsCountInAPage, int page) {
 
 		if (memberId == 0) {
 			return null;
 		}
 
-		List<Recipe> recipes = recipeRepository.getRegisteredRecipes(memberId);
+		int limitStart = (page - 1) * itemsCountInAPage;
+		int limitTake = itemsCountInAPage;
+
+		List<Recipe> recipes = recipeRepository.getRegisteredRecipes(memberId, limitStart, limitTake);
 
 		for (Recipe recipe : recipes) {
 			updateForPrintData(memberId, recipe);

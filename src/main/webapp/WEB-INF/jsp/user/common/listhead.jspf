@@ -10,7 +10,10 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
 <script>
-	const param = ${rq.paramJsonStr};
+	const param = $
+	{
+		rq.paramJsonStr
+	};
 </script>
 
 <!-- 테일윈드 불러오기 -->
@@ -31,24 +34,6 @@
 <!-- 사이트 공통 JS -->
 <script src="resource/common.js" defer="defer"></script>
 </head>
-
-<!-- 탭메뉴스크립트 시작 -->
-<script>
-	$(document).ready(function() {
-
-		$('div.tabs a').click(function() {
-			var tab_id = $(this).attr('data-tab');
-
-			$('div.tabs a').removeClass('tab-active');
-			$('.tab-content').removeClass('tab-active');
-
-			$(this).addClass('tab-active');
-			$("#" + tab_id).addClass('tab-active');
-		})
-
-	})
-</script>
-<!-- 탭메뉴스크립트 시작 -->
 
 <body>
 	<div class="header min-w-fit">

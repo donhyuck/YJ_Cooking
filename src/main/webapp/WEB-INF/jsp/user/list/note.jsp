@@ -35,6 +35,12 @@
 			<!-- 안내문구 -->
 			<div class="p-3 mx-4 mb-3">
 				<div class="text-3xl">내가 등록한 레시피</div>
+				<c:if test="${ rq.logined == false }">
+					<div class="text-xl text-gray-500 mt-2">
+						<a href="${ rq.loginUri }" class="link link-primary">로그인</a>
+						후 확인해보세요.
+					</div>
+				</c:if>
 			</div>
 
 			<div class="grid grid-cols-4 mx-6 relative">
@@ -123,6 +129,12 @@
 			<!-- 안내문구 -->
 			<div class="p-3 mx-4">
 				<div class="text-3xl">스크랩한 레시피</div>
+				<c:if test="${ rq.logined == false }">
+					<div class="text-xl text-gray-500 mt-2">
+						<a href="${ rq.loginUri }" class="link link-primary">로그인</a>
+						후 확인해보세요.
+					</div>
+				</c:if>
 			</div>
 
 			<!-- 스크랩한 레시피 영역 시작 -->

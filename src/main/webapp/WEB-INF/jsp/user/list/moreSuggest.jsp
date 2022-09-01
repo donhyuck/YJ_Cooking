@@ -84,17 +84,26 @@
 						</div>
 
 						<!-- 작성자, 설명일부, 레시피 정보 -->
-						<div class="recipe-info flex flex-col">
-							<div class="flex justify-between mx-2">
+						<div class="recipe-info flex flex-col p-2 mb-3">
+							<div class="mx-2">
 								<!-- 작성자 -->
-								<a href="/user/member/detail?memberId=${ recipe.memberId }" class="badge badge-primary">
+								<a href="/user/member/detail?memberId=${ recipe.memberId }" class="badge badge-primary mb-2">
 									<span>${ recipe.extra__writerName }</span>
 								</a>
 
 								<!-- 조회수 좋아요 -->
 								<div>
 									<div class="badge badge-outline">
-										<span>조회수 ${ recipe.hitCount }</span>
+										<span class="text-black mr-1">
+											<i class="fa-solid fa-arrow-pointer"></i>
+										</span>
+										${ recipe.hitCount }
+									</div>
+									<div class="badge badge-outline">
+										<span class="text-yellow-400 mr-1">
+											<i class="fa-solid fa-file"></i>
+										</span>
+										${ recipe.scrap }
 									</div>
 									<div class="badge badge-outline">
 										<span class="text-red-500 mr-1">
@@ -104,10 +113,6 @@
 									</div>
 								</div>
 							</div>
-
-							<!-- 내용일부 -->
-							<div class="text-gray-500 m-2 truncate ...">${ recipe.body }</div>
-
 						</div>
 					</div>
 				</c:forEach>

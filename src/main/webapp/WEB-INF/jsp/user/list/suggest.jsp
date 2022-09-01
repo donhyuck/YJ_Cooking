@@ -34,7 +34,10 @@
 
 			<!-- 안내문구 -->
 			<div class="p-3 mx-4 mb-3">
-				<div class="text-3xl">최근 등록된 레시피</div>
+				<div class="text-3xl">최신 레시피</div>
+				<div class="text-xl text-gray-500 mt-2">
+					최근 등록된 레시피 모음이에요
+				</div>
 			</div>
 
 			<div class="grid grid-cols-4 mx-6 relative">
@@ -123,7 +126,11 @@
 			<!-- 안내문구 -->
 			<div class="p-3 mx-4 mb-3">
 				<div class="text-3xl">오늘 뭐 먹지?</div>
-				<div class="text-2xl">끼니 고민 덜어드려요</div>
+				<div class="text-xl text-gray-500 mt-2">
+					*새로고침(F5) 혹은 하단의
+					<span class="text-green-500">추천 더보기 버튼</span>
+					으로 추천받을 수 있어요 *
+				</div>
 			</div>
 
 			<!-- 일일추천레시피 영역 시작 -->

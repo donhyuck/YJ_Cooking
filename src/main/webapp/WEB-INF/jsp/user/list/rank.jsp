@@ -31,7 +31,7 @@
 			<!-- 안내문구 -->
 			<div class="p-3 mx-4">
 				<div class="text-3xl">명예의 전당</div>
-				<div class="text-2xl">BEST 10</div>
+				<div class="text-2xl text-red-400 font-bold">BEST 10</div>
 			</div>
 
 			<!-- 레시피 랭킹 영역 시작 -->
@@ -60,22 +60,31 @@
 
 						<!-- 등록자, 설명일부, 레시피 정보 -->
 						<div class="recipe-info flex flex-col">
-							<div class="flex justify-between mx-2">
+							<div class="mx-2">
 								<!-- 작성자 -->
 								<a href="/user/member/detail?memberId=${ recipe.memberId }" class="badge badge-primary">
 									<span>${ recipe.extra__writerName }</span>
 								</a>
 
-								<!-- 조회수 좋아요 -->
+								<!-- 조회수 좋아요 스크랩 -->
 								<div>
 									<div class="badge badge-outline">
-										<span>조회수 ${ recipe.hitCount }</span>
+										<span class="text-black mr-1">
+											<i class="fa-solid fa-arrow-pointer"></i>
+										</span>
+										${ recipe.hitCount }
 									</div>
 									<div class="badge badge-outline">
 										<span class="text-red-500 mr-1">
 											<i class="fa-solid fa-heart"></i>
 										</span>
 										${ recipe.goodRP }
+									</div>
+									<div class="badge badge-outline">
+										<span class="text-yellow-400 mr-1">
+											<i class="fa-solid fa-file"></i>
+										</span>
+										${ recipe.scrap }
 									</div>
 								</div>
 							</div>
@@ -108,7 +117,7 @@
 							<div class="rank-number w-10 h-10 absolute -top-2 -left-2 bg-white border-2 rounded-lg">
 								<div class="font-bold text-center mt-2">${ recipe.extra__rank }</div>
 							</div>
-							
+
 							<!-- 레시피 대표 사진 -->
 							<a href="/user/recipe/detail?id=${ recipe.id }">
 								<img class="w-full rounded-t-2xl"
@@ -129,17 +138,12 @@
 									<span>${ recipe.extra__writerName }</span>
 								</a>
 
-								<!-- 조회수 좋아요 -->
-								<div>
-									<div class="badge badge-outline">
-										<span>조회수 ${ recipe.hitCount }</span>
-									</div>
-									<div class="badge badge-outline">
-										<span class="text-red-500 mr-1">
-											<i class="fa-solid fa-heart"></i>
-										</span>
-										${ recipe.goodRP }
-									</div>
+								<!-- 스크랩 -->
+								<div class="badge badge-outline">
+									<span class="text-yellow-400 mr-1">
+										<i class="fa-solid fa-file"></i>
+									</span>
+									${ recipe.scrap }
 								</div>
 							</div>
 

@@ -32,7 +32,7 @@
 				<div class="text-3xl">추천 레시피</div>
 				<div class="text-xl text-gray-500 mt-1">원하시는 추천순서를 선택하세요. ${tabCode}</div>
 
-				<!-- 탭메뉴 -->
+				<!-- 탭메뉴 시작 -->
 				<div class="tabs mt-4 font-bold text-center">
 					<a href="?tabCode=1"
 						class="tab tab-lg tab-bordered rounded-t-xl ${ param.tabCode == 1 ? 'tab-active bg-yellow-200' : '' }">
@@ -60,10 +60,11 @@
 						</span>
 					</a>
 				</div>
+				<!-- 탭메뉴 끝 -->
 			</div>
 
 			<!-- 추천 전체 레시피 영역 시작 -->
-			<div class="grid grid-cols-4 border-2 rounded-xl border-gray-300 pt-5">
+			<div class="grid grid-cols-4 border-2 border-t-4 rounded-xl border-gray-300 pt-5">
 				<c:forEach var="recipe" items="${ moreSuggestRecipes }">
 					<input type="hidden" name="tabCode" value="${ param.tabCode }">
 					<div

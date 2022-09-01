@@ -72,14 +72,13 @@ public class UserRecipeController {
 
 	// 레시피 추천 전체목록 페이지 메서드
 	@RequestMapping("/user/list/moreSuggest")
-	public String showMoreSuggest(Model model) {
+	public String showMoreSuggest(Model model, @RequestParam(defaultValue = "1") int tabCode) {
 
 		// 램덤 레시피 전체목록 가져오기
-		int randomCount = 50;
-		int itemsCountInAPage = -1;
+		int suggestCount = 50;
 
-		List<Recipe> moreSuggestRecipes = recipeService.getRandomRecipes(rq.getLoginedMemberId(), randomCount,
-				itemsCountInAPage);
+		List<Recipe> moreSuggestRecipes = recipeService.getMoreSuggestRecipeByTabCode(rq.getLoginedMemberId(),
+				suggestCount, tabCode);
 
 		model.addAttribute("moreSuggestRecipes", moreSuggestRecipes);
 

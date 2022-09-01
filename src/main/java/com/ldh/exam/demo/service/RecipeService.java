@@ -52,6 +52,18 @@ public class RecipeService {
 		return recipes;
 	}
 
+	// 추천 - 추천목록 더 가져오기
+	public List<Recipe> getMoreSuggestRecipeByTabCode(int memberId, int suggestCount, int tabCode) {
+
+		List<Recipe> recipes = recipeRepository.getMoreSuggestRecipeByTabCode(suggestCount, tabCode);
+
+		for (Recipe recipe : recipes) {
+			updateForPrintData(memberId, recipe);
+		}
+
+		return recipes;
+	}
+
 	// 추천 - 최근목록 가져오기
 	public List<Recipe> getRecentRecipes(int memberId, int itemsCountInAPage, int page) {
 

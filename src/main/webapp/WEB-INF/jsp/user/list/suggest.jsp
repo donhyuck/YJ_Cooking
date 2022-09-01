@@ -187,7 +187,7 @@
 
 			<!-- 추천 더보기 -->
 			<div class="flex justify-end mr-10 mb-3">
-				<a href="/user/list/moreSuggest" class="btn btn-accent">
+				<a href="/user/list/moreSuggest?tabCode=1" class="btn btn-accent">
 					<span>추천 더보기</span>
 				</a>
 			</div>

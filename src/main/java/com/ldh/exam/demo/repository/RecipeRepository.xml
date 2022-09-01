@@ -36,19 +36,46 @@
 		AS extra__writerName
 		FROM (
 		SELECT * FROM recipe
-		ORDER BY (goodRP+hitCount+scrap) DESC
+		ORDER BY
+		(goodRP+hitCount+scrap) DESC
 		LIMIT #{randomCount}
 		) AS R
 		LEFT
-		JOIN `member` AS M
+		JOIN
+		`member` AS M
 		ON R.memberId = M.id
-		<if test="randomCountInAPage != -1">
-			ORDER BY RAND() DESC
-			LIMIT #{randomCountInAPage}
-		</if>
-		<if test="randomCountInAPage == -1">
-			ORDER BY R.id DESC
-		</if>
+		ORDER BY RAND() DESC
+		LIMIT
+		#{randomCountInAPage}
+	</select>
+
+	<select id="getMoreSuggestRecipeByTabCode" resultType="Recipe">
+		SELECT
+		R.*,
+		M.nickname
+		AS extra__writerName
+		FROM recipe AS R
+		LEFT JOIN
+		`member` AS M
+		ON R.memberId = M.id
+		<choose>
+			<when test="tabCode == 1">
+				ORDER BY (R.hitCount + R.scrap + R.goodRP) DESC
+			</when>
+			<when test="tabCode == 2">
+				ORDER BY R.hitCount DESC
+			</when>
+			<when test="tabCode == 3">
+				ORDER BY R.scrap DESC
+			</when>
+			<when test="tabCode == 4">
+				ORDER BY R.goodRP DESC
+			</when>
+			<otherwise>
+				ORDER BY (R.hitCount + R.scrap + R.goodRP) DESC
+			</otherwise>
+		</choose>
+		LIMIT #{suggestCount}
 	</select>
 
 	<select id="getRecentRecipes" resultType="Recipe">

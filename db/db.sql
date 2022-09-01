@@ -1063,3 +1063,13 @@ LEFT JOIN `member` AS M
 ON R.memberId = M.id
 ORDER BY RAND() DESC
 LIMIT 3;
+
+## 추천순서에 따라 레시피 목록 가져오기
+SELECT R.*,
+M.nickname
+AS extra__writerName
+FROM recipe AS R
+LEFT JOIN `member` AS M
+ON R.memberId = M.id
+ORDER BY R.hitCount DESC
+LIMIT 50;

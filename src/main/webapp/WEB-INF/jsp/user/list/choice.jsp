@@ -26,7 +26,7 @@
 
 <div class="bg-gray-200 py-4">
 	<div class="list-box w-10/12 mx-auto">
-	
+
 		<!-- TOP 버튼 -->
 		<div class="fixed bottom-10 right-10 text-4xl text-center hover:text-yellow-400">
 			<a href="#topTarget" class="scroll">
@@ -34,7 +34,7 @@
 				<div class="text-xl font-black">TOP</div>
 			</a>
 		</div>
-		
+
 		<section class="bg-white rounded-md px-4 mb-5">
 
 			<!-- 안내영역 시작 -->
@@ -51,25 +51,23 @@
 				<!-- 추가 선택영역 시작-->
 				<div class="ml-10">
 					<span class="text-gray-400 ml-2">다른 레시피를 찾아보세요.</span>
-					<div class="form-control mt-2">
-						<div class="flex w-full max-w-xs space-x-4">
-							<select class="select select-bordered w-3/5">
-								<option disabled selected>선택1</option>
-								<option>종류</option>
-								<option>방법</option>
-								<option>재료</option>
-								<option>자유</option>
-							</select>
-							<select class="select select-bordered w-3/5">
-								<option disabled selected>선택2</option>
-								<option>Star Wars</option>
-								<option>Harry Potter</option>
-								<option>Lord of the Rings</option>
-								<option>Planet of the Apes</option>
-								<option>Star Trek</option>
-							</select>
-						</div>
-					</div>
+					<form class="flex w-full max-w-xs space-x-4 mt-2">
+						<select class="select select-bordered w-3/5" name="boardId">
+							<option disabled selected>선택1</option>
+							<option value="0" class="text-lg">전체</option>
+							<c:forEach var="board" items="${ boards }">
+								<option value="${ board.id }" class="text-lg">${ board.boardName }</option>
+							</c:forEach>
+						</select>
+						<select class="select select-bordered w-3/5 text-lg" name="relId">
+							<option disabled selected>선택2</option>
+							<option value="0" class="text-lg">전체</option>
+							<c:forEach var="category" items="${ categories }">
+								<option value="${ category.id }" class="text-lg">${ category.name }</option>
+							</c:forEach>
+						</select>
+						<button type="submit" class="btn btn-success">찾기</button>
+					</form>
 				</div>
 				<!-- 추가 선택영역 끝-->
 			</div>

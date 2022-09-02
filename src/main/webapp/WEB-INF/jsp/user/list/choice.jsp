@@ -49,21 +49,23 @@
 				</div>
 
 				<!-- 추가 선택영역 시작-->
-				<div class="ml-10">
-					<span class="text-gray-400 ml-2">다른 레시피를 찾아보세요.</span>
-					<form class="flex w-full max-w-xs space-x-4 mt-2">
+				<div class="ml-auto mr-20 w-5/12">
+					<div class="text-gray-400 ml-2 mb-2">다른 레시피를 찾아보세요.</div>
+					<form class="flex w-full max-w-xs space-x-4">
 						<select class="select select-bordered w-3/5" name="boardId">
-							<option disabled selected>선택1</option>
+							<option select class="text-lg bg-green-100">${ nowBoardName }</option>
+							<option disabled class="text-lg text-gray-400">대분류</option>
 							<option value="0" class="text-lg">전체</option>
 							<c:forEach var="board" items="${ boards }">
 								<option value="${ board.id }" class="text-lg">${ board.boardName }</option>
 							</c:forEach>
 						</select>
 						<select class="select select-bordered w-3/5 text-lg" name="relId">
-							<option disabled selected>선택2</option>
+							<option select class="text-lg bg-green-100">${ nowCategoryName }</option>
+							<option disabled class="text-lg text-gray-400">소분류</option>
 							<option value="0" class="text-lg">전체</option>
 							<c:forEach var="category" items="${ categories }">
-								<option value="${ category.id }" class="text-lg">${ category.name }</option>
+								<option value="${ category.relId }" class="text-lg">${ category.name }</option>
 							</c:forEach>
 						</select>
 						<button type="submit" class="btn btn-success">찾기</button>

@@ -107,14 +107,20 @@ public class UserRecipeController {
 
 		// 분류 이름
 		String nowBoardName = boardService.getBoardByBoardId(boardId).getBoardName();
-		Category category = boardService.getCategoryByBoardIdAndRelId(boardId, relId);
+		String nowCategoryName = boardService.getCategoryByBoardIdAndRelId(boardId, relId).getName();
 
 		// 분류페이지에서 선택한 레시피 목록 가져오기
 		List<Recipe> choicedRecipes = recipeService.getRecipesByGuideId(boardId, relId);
 
-		model.addAttribute("boardName", nowBoardName);
-		model.addAttribute("category", category);
+		// 추가선택을 위한 리스트 가져오기
+		List<Board> boards = boardService.getBoards();
+		List<Category> categories = boardService.getCategories();
+
+		model.addAttribute("nowBoardName", nowBoardName);
+		model.addAttribute("nowCategoryName", nowCategoryName);
 		model.addAttribute("choicedRecipes", choicedRecipes);
+		model.addAttribute("boards", boards);
+		model.addAttribute("categories", categories);
 
 		return "user/list/choice";
 	}

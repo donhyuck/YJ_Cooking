@@ -41,11 +41,11 @@
 			<div class="flex border-b border-gray-400 p-5 mx-4 mb-8">
 				<!-- 선택 상황 보기 -->
 				<div class="flex space-x-4 items-center">
-					<span class="text-3xl">${ boardName }</span>
+					<span class="text-3xl">${ nowBoardName }</span>
 					<span class="text-2xl font-bold">
 						<i class="fa-solid fa-angle-right"></i>
 					</span>
-					<span class="text-2xl">${ category.name }</span>
+					<span class="text-2xl">${ nowCategoryName }</span>
 				</div>
 
 				<!-- 추가 선택영역 시작-->
@@ -53,14 +53,14 @@
 					<span class="text-gray-400 ml-2">다른 레시피를 찾아보세요.</span>
 					<div class="form-control mt-2">
 						<div class="flex w-full max-w-xs space-x-4">
-							<select class="select w-3/5">
+							<select class="select select-bordered w-3/5">
 								<option disabled selected>선택1</option>
 								<option>종류</option>
 								<option>방법</option>
 								<option>재료</option>
 								<option>자유</option>
 							</select>
-							<select class="select w-3/5">
+							<select class="select select-bordered w-3/5">
 								<option disabled selected>선택2</option>
 								<option>Star Wars</option>
 								<option>Harry Potter</option>

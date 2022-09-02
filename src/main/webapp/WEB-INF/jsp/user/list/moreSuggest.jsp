@@ -36,7 +36,7 @@
 				<div class="tabs mt-4 font-bold text-center">
 					<a href="?tabCode=1"
 						class="tab tab-lg tab-bordered rounded-t-xl ${ param.tabCode == 1 ? 'tab-active bg-yellow-200' : '' }">
-						<span class="text-2xl">종합</span>
+						<span class="text-2xl">최신</span>
 					</a>
 					<a href="?tabCode=2"
 						class="tab tab-lg tab-bordered rounded-t-xl ${ param.tabCode == 2 ? 'tab-active bg-yellow-200' : '' }">

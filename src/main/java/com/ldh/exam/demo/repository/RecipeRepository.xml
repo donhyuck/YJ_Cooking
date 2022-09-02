@@ -60,7 +60,7 @@
 		ON R.memberId = M.id
 		<choose>
 			<when test="tabCode == 1">
-				ORDER BY (R.hitCount + R.scrap + R.goodRP) DESC
+				ORDER BY R.regDate DESC
 			</when>
 			<when test="tabCode == 2">
 				ORDER BY R.hitCount DESC
@@ -71,9 +71,6 @@
 			<when test="tabCode == 4">
 				ORDER BY R.goodRP DESC
 			</when>
-			<otherwise>
-				ORDER BY (R.hitCount + R.scrap + R.goodRP) DESC
-			</otherwise>
 		</choose>
 		LIMIT #{suggestCount}
 	</select>
@@ -135,7 +132,7 @@
 		recipe AS R
 		LEFT JOIN `member` AS M
 		ON R.memberId = M.id
-		ORDER BY (R.goodRP + R.hitCount) DESC
+		ORDER BY (R.goodRP + R.hitCount + R.scrap) DESC
 		LIMIT #{rankCount}
 	</select>
 

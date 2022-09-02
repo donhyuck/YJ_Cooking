@@ -33,7 +33,7 @@
 			<c:set var="endPage" value="${page + pageMenuArmLen <= pagesCount ? page + pageMenuArmLen : pagesCount}" />
 
 			<!-- 안내문구 -->
-			<div class="p-3 mx-4 mb-3">
+			<div class="p-3 mx-4 mb-1">
 				<div class="text-3xl">최신 레시피</div>
 				<div class="text-xl text-gray-500 mt-2">
 					최근 등록된 레시피 모음이에요

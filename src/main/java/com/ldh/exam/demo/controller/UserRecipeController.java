@@ -46,7 +46,7 @@ public class UserRecipeController {
 	public String showSuggestList(Model model, @RequestParam(defaultValue = "1") int page) {
 
 		// 최근 등록된 레시피 목록 가져오기
-		int recipesCount = 50; // 총 레시피 갯수
+		int recipesCount = 20; // 총 레시피 갯수
 		int itemsCountInAPage = 4; // 한 페이지 당 갯수
 		int pagesCount = (int) Math.ceil((double) recipesCount / itemsCountInAPage); // 페이지 갯수
 
@@ -75,7 +75,7 @@ public class UserRecipeController {
 	public String showMoreSuggest(Model model, @RequestParam(defaultValue = "1") int tabCode) {
 
 		// 램덤 레시피 전체목록 가져오기
-		int suggestCount = 50;
+		int suggestCount = 52;
 
 		List<Recipe> moreSuggestRecipes = recipeService.getMoreSuggestRecipeByTabCode(rq.getLoginedMemberId(),
 				suggestCount, tabCode);
@@ -106,13 +106,13 @@ public class UserRecipeController {
 	public String showChoice(Model model, int boardId, int relId) {
 
 		// 분류 이름
-		String boardName = boardService.getBoardByBoardId(boardId).getBoardName();
+		String nowBoardName = boardService.getBoardByBoardId(boardId).getBoardName();
 		Category category = boardService.getCategoryByBoardIdAndRelId(boardId, relId);
 
 		// 분류페이지에서 선택한 레시피 목록 가져오기
 		List<Recipe> choicedRecipes = recipeService.getRecipesByGuideId(boardId, relId);
 
-		model.addAttribute("boardName", boardName);
+		model.addAttribute("boardName", nowBoardName);
 		model.addAttribute("category", category);
 		model.addAttribute("choicedRecipes", choicedRecipes);
 
@@ -123,7 +123,7 @@ public class UserRecipeController {
 	@RequestMapping("/user/list/rank")
 	public String showRankList(Model model) {
 
-		// 최다 하트, 조회수를 받은 레시피 목록 가져오기
+		// 최다 하트, 조회수, 스크랩 수를 받은 레시피 목록 가져오기
 		int rankCount = 10;
 		List<Recipe> rankRecipes = recipeService.getRankRecipes(rq.getLoginedMemberId(), rankCount);
 

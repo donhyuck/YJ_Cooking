@@ -103,7 +103,7 @@
 			<!-- 안내문구 -->
 			<div class="p-3 mx-4">
 				<div class="text-3xl">함께 먹어요</div>
-				<div class="text-2xl">최근 많은 사람들이 스크랩 했어요</div>
+				<div class="text-2xl text-red-400 font-bold">스크랩순 BEST 10</div>
 			</div>
 
 			<!-- 최다 스크랩된 레시피 영역 시작 -->

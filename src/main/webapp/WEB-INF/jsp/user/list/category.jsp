@@ -26,6 +26,15 @@
 
 <div class="bg-gray-200 py-4">
 	<div class="list-box w-10/12 mx-auto">
+
+		<!-- TOP 버튼 -->
+		<div class="fixed bottom-10 right-10 text-4xl text-center hover:text-yellow-400">
+			<a href="#topTarget" class="scroll">
+				<i class="fa-solid fa-circle-arrow-up"></i>
+				<div class="text-xl font-black">TOP</div>
+			</a>
+		</div>
+		
 		<div class="flex flex-col space-y-6">
 			<!-- 대분류 -->
 			<c:forEach var="board" items="${ boards }">

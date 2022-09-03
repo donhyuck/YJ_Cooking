@@ -24,6 +24,45 @@
 	</div>
 </section>
 
+<!-- 다중 셀렉트박스 동적 생성 스크립트 시작 -->
+<script type="text/javascript">
+	$(function() {
+		<!-- 기본상태 -->
+		choiceCategory('1', '1');
+	});
+</script>
+
+<script type="text/javascript">
+	function choiceCategory(type, select) {
+
+		$('#relId').empty();
+
+		<!-- 현재 선택사항 -->
+		$('#relId').append("<option select>${ nowCategoryName }</option>'");
+		$('#relId').append("<option disabled>소분류</option>'");
+		
+		if (type == '1') {
+			$('#relId').append("<option value='11' >aa</option>'");
+		} else if (type == '2') {
+			$('#relId').append("<option value='21' >bb</option>'");
+		} else if (type == '3') {
+			$('#relId').append("<option value='31' >cc</option>'");
+		} else if (type == '4') {
+			$('#relId').append("<option value='41' >dd</option>'");
+		} else {
+			$('#relId').append("<option value='00' >전체</option>'");
+		}
+
+		document.getElementById("relId").style.display = "";
+
+		if ($.trim(select) != "") {
+			$('#selectBoard').val(type);
+			$('#relId').val(select);
+		}
+	}
+</script>
+<!-- 다중 셀렉트박스 동적 생성 스크립트 끝 -->
+
 <div class="bg-gray-200 py-4">
 	<div class="list-box w-10/12 mx-auto">
 
@@ -52,7 +91,9 @@
 				<div class="ml-auto mr-20 w-5/12">
 					<div class="text-gray-400 ml-2 mb-2">다른 레시피를 찾아보세요.</div>
 					<form class="flex w-full max-w-xs space-x-4">
-						<select class="select select-bordered w-3/5" name="boardId">
+
+						<!-- 대분류 선택 -->
+						<select id="selectBoard" name="boardId" class="select select-bordered w-3/5" onChange="choiceCategory(this.value)">
 							<option select class="text-lg bg-green-100">${ nowBoardName }</option>
 							<option disabled class="text-lg text-gray-400">대분류</option>
 							<option value="0" class="text-lg">전체</option>
@@ -60,14 +101,9 @@
 								<option value="${ board.id }" class="text-lg">${ board.boardName }</option>
 							</c:forEach>
 						</select>
-						<select class="select select-bordered w-3/5 text-lg" name="relId">
-							<option select class="text-lg bg-green-100">${ nowCategoryName }</option>
-							<option disabled class="text-lg text-gray-400">소분류</option>
-							<option value="0" class="text-lg">전체</option>
-							<c:forEach var="category" items="${ categories }">
-								<option value="${ category.relId }" class="text-lg">${ category.name }</option>
-							</c:forEach>
-						</select>
+						<!-- 소분류 선택 -->
+						<select id="relId" name="relId" class="select select-bordered w-3/5 text-lg"></select>
+
 						<button type="submit" class="btn btn-success">찾기</button>
 					</form>
 				</div>

@@ -107,24 +107,62 @@ public class UserRecipeController {
 			@RequestParam(defaultValue = "-1") int relId) {
 
 		// 해당 레시피 목록 확인
-		if (boardId == -1 || relId == -1 || Ut.empty(boardId) || Ut.empty(relId)) {
+		if (boardId == -1 || relId == -1) {
 			return rq.replaceUriOnView("잘못 선택되었습니다. 다시 시도하시거나 검색으로 찾아보세요.", "/user/list/category");
 		}
 
-		// 선택사항 확인
-		Board board = boardService.getBoardByBoardId(boardId);
-		Category category = boardService.getCategoryByBoardIdAndRelId(boardId, relId);
+		// 선택사항 및 레시피 목록 초기화
+		List<Recipe> choicedRecipes = null;
+		String nowBoardName = "";
+		String nowCategoryName = "";
 
-		if (board == null || category == null) {
-			return rq.historyBackOnView("해당 선택내용을 찾을 수 없습니다.");
+		if (boardId != 0) {
+
+			Board board = boardService.getBoardByBoardId(boardId);
+			if (board == null) {
+				return rq.historyBackOnView("등록되지 않은 상위분류내역입니다.");
+			}
+
+			// 현재 분류 이름
+			nowBoardName = board.getBoardName();
+
+			// 상위 분류 전체 선택시
+			if (relId == 0) {
+
+				// 현재 카테고리 이름
+				nowCategoryName = "전체";
+
+			}
+			// 일반 선택
+			else if (relId != 0) {
+
+				Category category = boardService.getCategoryByBoardIdAndRelId(boardId, relId);
+				if (category == null) {
+					return rq.historyBackOnView("등록되지 않은 카테고리내역입니다.");
+				}
+
+				// 현재 카테고리 이름
+				nowCategoryName = category.getName();
+			}
+
+			// 선택한 레시피 목록 가져오기
+			choicedRecipes = recipeService.getRecipesByGuideId(boardId, relId);
+
+		}
+		// 전체 선택
+		else if (boardId == 0) {
+
+			// 현재 분류 이름
+			nowBoardName = "전체";
+			nowCategoryName = "전체";
+
+			// 모든 레시피 목록 가져오기
+			choicedRecipes = recipeService.getForPrintRecipes(rq.getLoginedMemberId());
 		}
 
-		// 현재 분류 이름
-		String nowBoardName = board.getBoardName();
-		String nowCategoryName = category.getName();
-
-		// 선택한 레시피 목록 가져오기
-		List<Recipe> choicedRecipes = recipeService.getRecipesByGuideId(boardId, relId);
+		if (choicedRecipes == null) {
+			return rq.historyBackOnView("해당되는 레시피 목록을 찾을 수 없습니다.");
+		}
 
 		// 추가선택을 위한 리스트 가져오기
 		List<Board> boards = boardService.getBoards();

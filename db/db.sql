@@ -1073,3 +1073,27 @@ LEFT JOIN `member` AS M
 ON R.memberId = M.id
 ORDER BY R.hitCount DESC
 LIMIT 50;
+
+## 상위분류 전체 가져오기
+SELECT * 
+FROM category
+WHERE boardId = 2;
+
+SELECT * 
+FROM guide
+WHERE methodId IS NOT NULL;
+
+SELECT R.*,
+M.nickname AS extra__writerName
+FROM (
+    SELECT G.*
+    FROM `guide`
+    AS G
+    WHERE G.methodId IS NOT NULL
+) AS G
+LEFT JOIN `recipe`
+AS R
+ON G.recipeId = R.id
+LEFT JOIN `member`
+AS M
+ON R.memberId = M.id

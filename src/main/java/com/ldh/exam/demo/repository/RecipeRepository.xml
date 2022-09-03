@@ -99,16 +99,24 @@
 		WHERE 1
 		<choose>
 			<when test="boardId == 1">
-				AND G.sortId = #{relId}
+				AND G.sortId
+				<if test="relId != 0">=#{relId}</if>
+				<if test="relId == 0">IS NOT NULL</if>
 			</when>
 			<when test="boardId == 2">
-				AND G.methodId = #{relId}
+				AND G.methodId
+				<if test="relId != 0">=#{relId}</if>
+				<if test="relId == 0">IS NOT NULL</if>
 			</when>
 			<when test="boardId == 3">
-				AND G.contentId = #{relId}
+				AND G.contentId
+				<if test="relId != 0">=#{relId}</if>
+				<if test="relId == 0">IS NOT NULL</if>
 			</when>
 			<when test="boardId == 4">
-				AND G.freeId = #{relId}
+				AND G.freeId
+				<if test="relId != 0">=#{relId}</if>
+				<if test="relId == 0">IS NOT NULL</if>
 			</when>
 			<otherwise>
 				AND 1
@@ -120,7 +128,7 @@
 		ON G.recipeId = R.id
 		LEFT JOIN `member`
 		AS M
-		ON R.memberId = M.id;
+		ON R.memberId = M.id
 	</select>
 
 	<select id="getRankRecipes" resultType="Recipe">

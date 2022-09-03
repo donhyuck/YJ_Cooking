@@ -42,6 +42,7 @@
 		if (type == '0') {
 			$('#relId').append("<option value='0' class='text-lg'>전체</option>'");
 		} else if (type == '1') {
+			$('#relId').append("<option value='0' class='text-lg'>전체</option>'");
 			$('#relId').append("<option value='1' class='text-lg'>밑반찬</option>'");
 			$('#relId').append("<option value='2' class='text-lg'>메인반찬</option>'");
 			$('#relId').append("<option value='3' class='text-lg'>국/탕/찌게</option>'");
@@ -56,6 +57,7 @@
 			$('#relId').append("<option value='12' class='text-lg'>베이커리</option>'");
 			$('#relId').append("<option value='13' class='text-lg'>음료/차</option>'");
 		} else if (type == '2') {
+			$('#relId').append("<option value='0' class='text-lg'>전체</option>'");
 			$('#relId').append("<option value='1' class='text-lg'>볶기</option>'");
 			$('#relId').append("<option value='2' class='text-lg'>굽기</option>'");
 			$('#relId').append("<option value='3' class='text-lg'>끓이기</option>'");
@@ -67,6 +69,7 @@
 			$('#relId').append("<option value='9' class='text-lg'>무치기</option>'");
 			$('#relId').append("<option value='10' class='text-lg'>전/부침</option>'");
 		} else if (type == '3') {
+			$('#relId').append("<option value='0' class='text-lg'>전체</option>'");
 			$('#relId').append("<option value='1' class='text-lg'>소고기</option>'");
 			$('#relId').append("<option value='2' class='text-lg'>돼지고기</option>'");
 			$('#relId').append("<option value='3' class='text-lg'>닭고기</option>'");
@@ -83,6 +86,7 @@
 			$('#relId').append("<option value='14' class='text-lg'>구황작물</option>'");
 			$('#relId').append("<option value='14' class='text-lg'>가공식품</option>'");
 		} else if (type == '4') {
+			$('#relId').append("<option value='0' class='text-lg'>전체</option>'");
 			$('#relId').append("<option value='1' class='text-lg'>술안주</option>'");
 			$('#relId').append("<option value='2' class='text-lg'>해장</option>'");
 			$('#relId').append("<option value='3' class='text-lg'>야식</option>'");
@@ -93,8 +97,6 @@
 			$('#relId').append("<option value='8' class='text-lg'>기념일</option>'");
 			$('#relId').append("<option value='9' class='text-lg'>집들이</option>'");
 			$('#relId').append("<option value='10' class='text-lg'>기타</option>'");
-		} else {
-			$('#relId').append("<option value='-1' class='text-lg'>해당없음</option>'");
 		}
 
 		document.getElementById("relId").style.display = "";

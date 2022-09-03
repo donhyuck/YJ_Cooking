@@ -103,24 +103,36 @@ public class UserRecipeController {
 
 	// 분류페이지에서 선택한 레시피 목록 보기
 	@RequestMapping("/user/list/choice")
-	public String showChoice(Model model, int boardId, int relId) {
+	public String showChoice(Model model, @RequestParam(defaultValue = "-1") int boardId,
+			@RequestParam(defaultValue = "-1") int relId) {
 
-		// 분류 이름
-		String nowBoardName = boardService.getBoardByBoardId(boardId).getBoardName();
-		String nowCategoryName = boardService.getCategoryByBoardIdAndRelId(boardId, relId).getName();
+		// 해당 레시피 목록 확인
+		if (boardId == -1 || relId == -1 || Ut.empty(boardId) || Ut.empty(relId)) {
+			return rq.replaceUriOnView("잘못 선택되었습니다. 다시 시도하시거나 검색으로 찾아보세요.", "/user/list/category");
+		}
 
-		// 분류페이지에서 선택한 레시피 목록 가져오기
+		// 선택사항 확인
+		Board board = boardService.getBoardByBoardId(boardId);
+		Category category = boardService.getCategoryByBoardIdAndRelId(boardId, relId);
+
+		if (board == null || category == null) {
+			return rq.historyBackOnView("해당 선택내용을 찾을 수 없습니다.");
+		}
+
+		// 현재 분류 이름
+		String nowBoardName = board.getBoardName();
+		String nowCategoryName = category.getName();
+
+		// 선택한 레시피 목록 가져오기
 		List<Recipe> choicedRecipes = recipeService.getRecipesByGuideId(boardId, relId);
 
 		// 추가선택을 위한 리스트 가져오기
 		List<Board> boards = boardService.getBoards();
-		List<Category> categories = boardService.getCategories();
 
 		model.addAttribute("nowBoardName", nowBoardName);
 		model.addAttribute("nowCategoryName", nowCategoryName);
 		model.addAttribute("choicedRecipes", choicedRecipes);
 		model.addAttribute("boards", boards);
-		model.addAttribute("categories", categories);
 
 		return "user/list/choice";
 	}

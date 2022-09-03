@@ -94,7 +94,7 @@
 			$('#relId').append("<option value='9' class='text-lg'>집들이</option>'");
 			$('#relId').append("<option value='10' class='text-lg'>기타</option>'");
 		} else {
-			$('#relId').append("<option class='text-lg'>해당없음</option>'");
+			$('#relId').append("<option value='-1' class='text-lg'>해당없음</option>'");
 		}
 
 		document.getElementById("relId").style.display = "";

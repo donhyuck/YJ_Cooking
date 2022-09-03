@@ -100,6 +100,14 @@ public class Rq {
 		return "common/js";
 	}
 
+	public String replaceUriOnView(String msg, String replaceUri) {
+
+		req.setAttribute("msg", msg);
+		req.setAttribute("replaceUri", replaceUri);
+
+		return "common/js";
+	}
+
 	public String jsHistoryBack(String msg) {
 
 		resp.setContentType("text/html; charset=UTF-8");

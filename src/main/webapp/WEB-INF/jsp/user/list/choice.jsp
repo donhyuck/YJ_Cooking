@@ -131,6 +131,8 @@
 						<i class="fa-solid fa-angle-right"></i>
 					</span>
 					<span class="text-2xl">${ nowCategoryName }</span>
+					<!-- 레시피 갯수 -->
+					<div class="text-xl text-gray-400 mt-2 text-center">(${ choicedRecipes.size() }건)</div>
 				</div>
 
 				<!-- 추가 선택영역 시작-->

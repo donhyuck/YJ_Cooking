@@ -111,54 +111,43 @@ public class UserRecipeController {
 			return rq.replaceUriOnView("잘못 선택되었습니다. 다시 시도하시거나 검색으로 찾아보세요.", "/user/list/category");
 		}
 
-		// 선택사항 및 레시피 목록 초기화
-		List<Recipe> choicedRecipes = null;
+		// 선택사항 초기화
 		String nowBoardName = "";
 		String nowCategoryName = "";
 
-		if (boardId != 0) {
+		ResultData<String> nowBoardNameRd = boardService.getNowBoardName(boardId);
+		ResultData<String> nowCategoryNameRd = boardService.getNowCategoryName(boardId, relId);
 
-			Board board = boardService.getBoardByBoardId(boardId);
-			if (board == null) {
-				return rq.historyBackOnView("등록되지 않은 상위분류내역입니다.");
-			}
-
-			// 현재 분류 이름
-			nowBoardName = board.getBoardName();
-
-			// 상위 분류 전체 선택시
-			if (relId == 0) {
-
-				// 현재 카테고리 이름
-				nowCategoryName = "전체";
-
-			}
-			// 일반 선택
-			else if (relId != 0) {
-
-				Category category = boardService.getCategoryByBoardIdAndRelId(boardId, relId);
-				if (category == null) {
-					return rq.historyBackOnView("등록되지 않은 카테고리내역입니다.");
-				}
-
-				// 현재 카테고리 이름
-				nowCategoryName = category.getName();
-			}
-
-			// 선택한 레시피 목록 가져오기
-			choicedRecipes = recipeService.getRecipesByGuideId(boardId, relId);
-
+		// 미등록된 상위분류 선택시
+		if (nowBoardNameRd.isFail()) {
+			return rq.historyBackOnView(nowBoardNameRd.getMsg());
 		}
-		// 전체 선택
-		else if (boardId == 0) {
 
-			// 현재 분류 이름
-			nowBoardName = "전체";
-			nowCategoryName = "전체";
+		// 상위분류 전체선택시
+		if (nowBoardNameRd.getResultCode().equals("S-1")) {
 
-			// 모든 레시피 목록 가져오기
-			choicedRecipes = recipeService.getForPrintRecipes(rq.getLoginedMemberId());
+			nowBoardName = nowBoardNameRd.getData1();
+			nowCategoryName = nowBoardName;
 		}
+
+		// 상위분류 일반선택시
+		if (nowBoardNameRd.getResultCode().equals("S-2")) {
+
+			// 미등록된 카테고리 선택시
+			if (nowCategoryNameRd.isFail()) {
+				return rq.historyBackOnView(nowCategoryNameRd.getMsg());
+			}
+
+			// 카테고리 전체선택시 or 일반 선택
+			if (nowCategoryNameRd.isSuccess()) {
+
+				nowBoardName = nowBoardNameRd.getData1();
+				nowCategoryName = nowCategoryNameRd.getData1();
+			}
+		}
+
+		// 선택한 레시피 목록 가져오기
+		List<Recipe> choicedRecipes = recipeService.getRecipesByGuideId(boardId, relId);
 
 		if (choicedRecipes == null) {
 			return rq.historyBackOnView("해당되는 레시피 목록을 찾을 수 없습니다.");

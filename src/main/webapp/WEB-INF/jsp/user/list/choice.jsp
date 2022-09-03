@@ -26,31 +26,75 @@
 
 <!-- 다중 셀렉트박스 동적 생성 스크립트 시작 -->
 <script type="text/javascript">
+	<!-- 현재 대분류, 소분류 선택사항 표시 -->
 	$(function() {
-		<!-- 기본상태 -->
-		choiceCategory('1', '1');
+		choiceCategory('-1', '-1');
 	});
-</script>
-
-<script type="text/javascript">
+	
 	function choiceCategory(type, select) {
 
 		$('#relId').empty();
 
 		<!-- 현재 선택사항 -->
-		$('#relId').append("<option select>${ nowCategoryName }</option>'");
-		$('#relId').append("<option disabled>소분류</option>'");
-		
-		if (type == '1') {
-			$('#relId').append("<option value='11' >aa</option>'");
+		$('#relId').append("<option select disabled value='-1' class='text-lg bg-green-100'>${ nowCategoryName }</option>'");
+
+		<!-- 대분류 선택에 따라 변동 -->
+		if (type == '0') {
+			$('#relId').append("<option value='0' class='text-lg'>전체</option>'");
+		} else if (type == '1') {
+			$('#relId').append("<option value='1' class='text-lg'>밑반찬</option>'");
+			$('#relId').append("<option value='2' class='text-lg'>메인반찬</option>'");
+			$('#relId').append("<option value='3' class='text-lg'>국/탕/찌게</option>'");
+			$('#relId').append("<option value='4' class='text-lg'>밥/죽</option>'");
+			$('#relId').append("<option value='5' class='text-lg'>면/국수</option>'");
+			$('#relId').append("<option value='6' class='text-lg'>장류</option>'");
+			$('#relId').append("<option value='7' class='text-lg'>소스/양념</option>'");
+			$('#relId').append("<option value='8' class='text-lg'>한식</option>'");
+			$('#relId').append("<option value='9' class='text-lg'>중식</option>'");
+			$('#relId').append("<option value='10' class='text-lg'>양식</option>'");
+			$('#relId').append("<option value='11' class='text-lg'>동남아식</option>'");
+			$('#relId').append("<option value='12' class='text-lg'>베이커리</option>'");
+			$('#relId').append("<option value='13' class='text-lg'>음료/차</option>'");
 		} else if (type == '2') {
-			$('#relId').append("<option value='21' >bb</option>'");
+			$('#relId').append("<option value='1' class='text-lg'>볶기</option>'");
+			$('#relId').append("<option value='2' class='text-lg'>굽기</option>'");
+			$('#relId').append("<option value='3' class='text-lg'>끓이기</option>'");
+			$('#relId').append("<option value='4' class='text-lg'>찜</option>'");
+			$('#relId').append("<option value='5' class='text-lg'>조림</option>'");
+			$('#relId').append("<option value='6' class='text-lg'>튀김</option>'");
+			$('#relId').append("<option value='7' class='text-lg'>삶기</option>'");
+			$('#relId').append("<option value='8' class='text-lg'>데치기</option>'");
+			$('#relId').append("<option value='9' class='text-lg'>무치기</option>'");
+			$('#relId').append("<option value='10' class='text-lg'>전/부침</option>'");
 		} else if (type == '3') {
-			$('#relId').append("<option value='31' >cc</option>'");
+			$('#relId').append("<option value='1' class='text-lg'>소고기</option>'");
+			$('#relId').append("<option value='2' class='text-lg'>돼지고기</option>'");
+			$('#relId').append("<option value='3' class='text-lg'>닭고기</option>'");
+			$('#relId').append("<option value='4' class='text-lg'>생선류</option>'");
+			$('#relId').append("<option value='5' class='text-lg'>갑각류</option>'");
+			$('#relId').append("<option value='6' class='text-lg'>해조류</option>'");
+			$('#relId').append("<option value='7' class='text-lg'>건어물류</option>'");
+			$('#relId').append("<option value='8' class='text-lg'>과일류</option>'");
+			$('#relId').append("<option value='9' class='text-lg'>채소류</option>'");
+			$('#relId').append("<option value='10' class='text-lg'>버섯류</option>'");
+			$('#relId').append("<option value='11' class='text-lg'>견과류/곡류</option>'");
+			$('#relId').append("<option value='12' class='text-lg'>쌀/밀</option>'");
+			$('#relId').append("<option value='13' class='text-lg'>달걀/유제품</option>'");
+			$('#relId').append("<option value='14' class='text-lg'>구황작물</option>'");
+			$('#relId').append("<option value='14' class='text-lg'>가공식품</option>'");
 		} else if (type == '4') {
-			$('#relId').append("<option value='41' >dd</option>'");
+			$('#relId').append("<option value='1' class='text-lg'>술안주</option>'");
+			$('#relId').append("<option value='2' class='text-lg'>해장</option>'");
+			$('#relId').append("<option value='3' class='text-lg'>야식</option>'");
+			$('#relId').append("<option value='4' class='text-lg'>다이어트</option>'");
+			$('#relId').append("<option value='5' class='text-lg'>간편식</option>'");
+			$('#relId').append("<option value='6' class='text-lg'>영양식</option>'");
+			$('#relId').append("<option value='7' class='text-lg'>도시락</option>'");
+			$('#relId').append("<option value='8' class='text-lg'>기념일</option>'");
+			$('#relId').append("<option value='9' class='text-lg'>집들이</option>'");
+			$('#relId').append("<option value='10' class='text-lg'>기타</option>'");
 		} else {
-			$('#relId').append("<option value='00' >전체</option>'");
+			$('#relId').append("<option class='text-lg'>해당없음</option>'");
 		}
 
 		document.getElementById("relId").style.display = "";
@@ -94,8 +138,7 @@
 
 						<!-- 대분류 선택 -->
 						<select id="selectBoard" name="boardId" class="select select-bordered w-3/5" onChange="choiceCategory(this.value)">
-							<option select class="text-lg bg-green-100">${ nowBoardName }</option>
-							<option disabled class="text-lg text-gray-400">대분류</option>
+							<option select disabled value="-1" class="text-lg bg-green-100">${ nowBoardName }</option>
 							<option value="0" class="text-lg">전체</option>
 							<c:forEach var="board" items="${ boards }">
 								<option value="${ board.id }" class="text-lg">${ board.boardName }</option>

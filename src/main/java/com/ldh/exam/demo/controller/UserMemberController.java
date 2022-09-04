@@ -1,13 +1,18 @@
 package com.ldh.exam.demo.controller;
 
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ldh.exam.demo.service.MemberService;
+import com.ldh.exam.demo.service.RecipeService;
 import com.ldh.exam.demo.util.Ut;
 import com.ldh.exam.demo.vo.Member;
+import com.ldh.exam.demo.vo.Recipe;
 import com.ldh.exam.demo.vo.ResultData;
 import com.ldh.exam.demo.vo.Rq;
 
@@ -15,10 +20,12 @@ import com.ldh.exam.demo.vo.Rq;
 public class UserMemberController {
 
 	private MemberService memberService;
+	private RecipeService recipeService;
 	private Rq rq;
 
-	public UserMemberController(MemberService memberService, Rq rq) {
+	public UserMemberController(MemberService memberService, RecipeService recipeService, Rq rq) {
 		this.memberService = memberService;
+		this.recipeService = recipeService;
 		this.rq = rq;
 	}
 
@@ -136,7 +143,11 @@ public class UserMemberController {
 
 	// My홈 페이지 메서드
 	@RequestMapping("/user/member/myPage")
-	public String showMyPage() {
+	public String showMyPage(Model model) {
+
+		List<Recipe> haveReplyRecipes = recipeService.getForPrintRecipes(rq.getLoginedMemberId());
+
+		model.addAttribute("haveReplyRecipes", haveReplyRecipes);
 
 		return "user/member/myPage";
 	}

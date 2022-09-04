@@ -9,7 +9,7 @@
 		<!-- 로그인한 회원의 정보 -->
 		<c:set var="member" value="${ rq.loginedMember }" />
 
-		<section class="myPage-box bg-white rounded-md p-4">
+		<section class="myPage-box bg-white rounded-md p-4 mb-5">
 			<div class="text-2xl mb-1">회원정보</div>
 			<div class="myInfo-box flex p-3">
 				<div class="w-80">

@@ -150,6 +150,12 @@ public class RecipeService {
 		return recipes;
 	}
 
+	// 댓글 남긴 레시피 목록 가져오기
+	public List<Recipe> getHaveReplyRecipes(int memberId) {
+		
+		return recipeRepository.getHaveReplyRecipes(memberId);
+	}
+
 	// 레시피 등록하기
 	public int writeRecipe(int memberId, String title, String body) {
 

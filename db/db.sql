@@ -1089,11 +1089,23 @@ FROM (
     SELECT G.*
     FROM `guide`
     AS G
-    WHERE G.methodId IS NOT NULL
+    WHERE G.methodId = 0
 ) AS G
 LEFT JOIN `recipe`
 AS R
 ON G.recipeId = R.id
 LEFT JOIN `member`
 AS M
+ON R.memberId = M.id;
+
+## 내가 댓글 남긴 레시피 보기
+SELECT R.*,
+M.nickname AS extra__writerName,
+RE.memberId AS replyWriter,
+RE.body AS replyBody
+FROM recipe AS R
+LEFT JOIN reply AS RE
+ON R.id = RE.relId
+LEFT JOIN `member` AS M
 ON R.memberId = M.id
+WHERE RE.memberId = 1;

@@ -31,6 +31,8 @@ public interface RecipeRepository {
 
 	public List<Recipe> getScrapRecipes(int memberId);
 
+	public List<Recipe> getHaveReplyRecipes(int memberId);
+
 	public void writeRecipe(int memberId, String title, String body);
 
 	public void modifyRecipe(int id, String title, String body);

@@ -145,7 +145,7 @@ public class UserMemberController {
 	@RequestMapping("/user/member/myPage")
 	public String showMyPage(Model model) {
 
-		List<Recipe> haveReplyRecipes = recipeService.getForPrintRecipes(rq.getLoginedMemberId());
+		List<Recipe> haveReplyRecipes = recipeService.getHaveReplyRecipes(rq.getLoginedMemberId());
 
 		model.addAttribute("haveReplyRecipes", haveReplyRecipes);
 

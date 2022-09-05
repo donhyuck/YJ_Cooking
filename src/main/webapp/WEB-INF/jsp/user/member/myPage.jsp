@@ -77,7 +77,7 @@
 				<!-- 댓글 남긴 레시피 영역 시작 -->
 				<c:forEach var="recipe" items="${ haveReplyRecipes }">
 					<div
-						class="w-64 h-80 mx-auto mb-10 flex flex-col justify-between rounded-2xl shadow-xl border-2 border-white hover:border-yellow-500">
+						class="w-64 h-84 mx-auto mb-10 flex flex-col justify-between rounded-2xl shadow-xl border-2 border-white hover:border-yellow-500">
 
 						<div class="w-full">
 							<!-- 레시피 대표 사진 -->

@@ -5,6 +5,8 @@
 
 <form class="" action="../recipe/doModify" method="POST">
 	<input type="hidden" name="id" value="${ recipe.id }" />
+	<input type="hidden" name="replaceUri" value="${ param.replaceUri }" />
+
 	<table>
 		<colgroup>
 			<col width="200" />
@@ -29,7 +31,8 @@
 			<tr>
 				<th>요리제목</th>
 				<td>
-					<input type="text" name="title" value="${ recipe.title }" class="input input-bordered w-96 border p-2" placeholder="수정할 제목을 입력하세요." />
+					<input type="text" name="title" value="${ recipe.title }" class="input input-bordered w-96 border p-2"
+						placeholder="수정할 제목을 입력하세요." />
 				</td>
 			</tr>
 			<tr>
@@ -42,7 +45,7 @@
 	</table>
 
 	<div class="btns mt-3">
-		<button type="button" class="btn btn-outline btn-sm" onclick="history.back();">뒤로가기</button>
+		<a href="${ param.replaceUri }" class="btn btn-outline btn-sm">뒤로가기</a>
 		<button type="submit" class="btn btn-outline btn-primary btn-sm">수정</button>
 	</div>
 </form>

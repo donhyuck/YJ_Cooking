@@ -91,6 +91,7 @@
 
 					<input type="hidden" name="id" value="${ reply.id }" />
 					<input type="hidden" name="relId" value="${ reply.relId }" />
+					<input type="hidden" name="replaceUri" value="${ param.replaceUri }" />
 
 					<!-- 요리후기 사진 등록 -->
 					<div class="mr-4">
@@ -110,7 +111,7 @@
 					</button>
 				</form>
 				<div class="btns text-right mt-3">
-					<div type="button" class="btn btn-outline" onclick="history.back();">뒤로가기</div>
+					<a href="${ param.replaceUri }" class="btn btn-outline btn-sm">뒤로가기</a>
 					<div type="submit" class="btn btn-outline btn-secondary">사진변경</div>
 				</div>
 			</div>

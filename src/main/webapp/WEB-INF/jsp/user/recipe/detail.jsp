@@ -219,10 +219,12 @@
 						</c:if>
 						<div class="mt-3">
 							<c:if test="${ recipe.extra__actorCanModify }">
-								<a class="btn btn-primary btn-outline mr-1" href="../recipe/modify?id=${recipe.id}">수정</a>
+								<a class="btn btn-primary btn-outline mr-1"
+									href="../recipe/modify?id=${recipe.id}&replaceUri=${rq.encodedCurrentUri}">수정</a>
 							</c:if>
 							<c:if test="${ recipe.extra__actorCanDelete }">
-								<a class="btn btn-secondary btn-outline ml-1" href="../recipe/doDelete?id=${ recipe.id }"
+								<a class="btn btn-secondary btn-outline ml-1"
+									href="../recipe/doDelete?id=${ recipe.id }&replaceUri=${rq.encodedCurrentUri}"
 									onclick="if ( confirm('정말 삭제하시겠습니까?') == false) return false;">삭제</a>
 							</c:if>
 						</div>
@@ -335,8 +337,8 @@
 						<!-- 댓글 수정, 삭제 영역 시작 -->
 						<div class="btns flex flex-col w-32 justify-center items-center space-y-5">
 							<c:if test="${ reply.extra__actorCanModify }">
-								<a href="../reply/modify?id=${ reply.id }" class="btn btn-primary btn-outline"
-									onclick="if( confirm('수정하시겠습니까?') == false ) return false;">
+								<a href="../reply/modify?id=${ reply.id }&replaceUri=${rq.encodedCurrentUri}"
+									class="btn btn-primary btn-outline" onclick="if( confirm('수정하시겠습니까?') == false ) return false;">
 									<i class="fas fa-edit"></i>
 									<div class="ml-1">수정</div>
 								</a>
@@ -390,9 +392,11 @@
 							class="flex justify-center items-center w-36 h-36 rounded-xl bg-gray-200 hover:bg-gray-300 mr-4 text-4xl">
 							<i class="fa-solid fa-plus"></i>
 						</a>
+						<!-- 댓글 작성 -->
 						<div class="border border-gray-300 rounded-xl p-2 w-10/12">
 							<textarea name="body" rows="5" class="w-full" placeholder="요리후기를 사진과 함께 작성해보세요."></textarea>
 						</div>
+
 						<button type="submit" class="w-36 h-36 hover:bg-gray-100 border-double border-4 border-gray-300 rounded-xl ml-3">
 							<div class="text-xl">등록</div>
 						</button>

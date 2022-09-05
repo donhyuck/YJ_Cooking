@@ -10,10 +10,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
 <script>
-	const param = $
-	{
-		rq.paramJsonStr
-	};
+	const param = ${rq.paramJsonStr};
 </script>
 
 <!-- 테일윈드 불러오기 -->

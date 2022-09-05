@@ -63,5 +63,6 @@ public class MyWebMvcConfigurer implements WebMvcConfigurer {
 		ir.addPathPatterns("/user/member/doFindLoginId");
 		ir.addPathPatterns("/user/member/findLoginPw");
 		ir.addPathPatterns("/user/member/doFindLoginPw");
+		ir.addPathPatterns("/user/member/getLoginIdDup");
 	}
 }

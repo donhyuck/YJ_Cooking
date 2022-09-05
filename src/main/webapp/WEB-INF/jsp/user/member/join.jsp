@@ -6,6 +6,7 @@
 <!-- 입력데이터 검사 스크립트 시작 -->
 <script>
 	let MemberJoin_submitFormDone = false;
+	let validLogind = "";
 
 	function MemberJoin_submitForm(form) {
 		if (MemberJoin_submitFormDone) {
@@ -16,6 +17,12 @@
 		form.loginId.value = form.loginId.value.trim();
 		if (form.loginId.value.length == 0) {
 			alert('로그인아이디를 입력해주세요.');
+			form.loginId.focus();
+			return;
+		}
+
+		if (form.loginId.value != validLogind) {
+			alert('해당 로그인아이디는 사용할 수 없습니다.');
 			form.loginId.focus();
 			return;
 		}
@@ -59,19 +66,44 @@
 		MemberJoin_submitFormDone = true;
 		form.submit();
 	}
+
+	function checkLoginIdDup(el) {
+		$('.loginId-message').empty();
+		const form = $(el).closest('form').get(0);
+
+		if (form.loginId.value == 0) {
+			validLogind = '';
+			return;
+		}
+
+		$.get('../member/getLoginIdDup', {
+			isAjax : 'Y',
+			loginId : form.loginId.value,
+		}, function(data) {
+			$('.loginId-message').html(
+					'<div class="mt-2">' + data.msg + '</div>');
+			if (data.success) {
+				validLogind = data.data1;
+			} else {
+				validLogind = '';
+			}
+		}, 'json');
+
+	}
 </script>
 <!-- 입력데이터 검사 스크립트 끝 -->
 
 <div class="mt-6">
 	<div class="member-box w-2/5 mx-auto">
-		<form class="flex flex-col space-y-4 items-center" method="POST" enctype="multipart/form-data" action="../member/doJoin"
-			onsubmit="MemberJoin_submitForm(this); return false;">
-			<input type="hidden" name="afterLoginUri" value="${ param.afterLoginUri }"/>
-			
+		<form class="flex flex-col space-y-4 items-center" method="POST" enctype="multipart/form-data"
+			action="../member/doJoin" onsubmit="MemberJoin_submitForm(this); return false;">
+			<input type="hidden" name="afterLoginUri" value="${ param.afterLoginUri }" />
+
 			<div class="text-3xl font-bold mb-2">회원가입</div>
 			<div>
-				<input name="loginId" type="text" class="input input-bordered w-96 member-inputType" placeholder="아이디" />
-				<div class="member-msgType text-green-400 mt-1 ml-4">사용가능합니다.</div>
+				<input name="loginId" type="text" class="input input-bordered w-96 member-inputType"
+					onkeyup="checkLoginIdDup(this);" autocomplete="off" placeholder="아이디" />
+				<div class="loginId-message member-msgType text-green-400 mt-1 ml-4"></div>
 			</div>
 			<div>
 				<input name="loginPw" type="password" class="input input-bordered w-96 member-inputType" placeholder="비밀번호" />
@@ -96,7 +128,8 @@
 				<div class="member-msgType text-green-400 mt-1 ml-4">사용가능합니다.</div>
 			</div>
 			<div>
-				<input name="profileImg" type="file" class="input input-bordered w-96 member-inputType" placeholder="프로필 이미지를 선택해주세요." />
+				<input name="profileImg" type="file" class="input input-bordered w-96 member-inputType"
+					placeholder="프로필 이미지를 선택해주세요." />
 				<div class="member-msgType text-green-400 mt-1 ml-4">사용가능합니다.</div>
 			</div>
 

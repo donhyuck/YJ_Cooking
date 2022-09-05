@@ -6,8 +6,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.ldh.exam.demo.service.RecipeService;
 import com.ldh.exam.demo.service.ReplyService;
 import com.ldh.exam.demo.util.Ut;
+import com.ldh.exam.demo.vo.Recipe;
 import com.ldh.exam.demo.vo.Reply;
 import com.ldh.exam.demo.vo.ResultData;
 import com.ldh.exam.demo.vo.Rq;
@@ -16,10 +18,12 @@ import com.ldh.exam.demo.vo.Rq;
 public class UserReplyController {
 
 	private ReplyService replyService;
+	private RecipeService recipeService;
 	private Rq rq;
 
-	public UserReplyController(ReplyService replyService, Rq rq) {
+	public UserReplyController(ReplyService replyService, RecipeService recipeService, Rq rq) {
 		this.replyService = replyService;
+		this.recipeService = recipeService;
 		this.rq = rq;
 	}
 
@@ -65,7 +69,11 @@ public class UserReplyController {
 		// 해당 댓글을 수정 페이지로 넘기기
 		Reply reply = replyService.getForPrintReply(rq.getLoginedMemberId(), "recipe", id);
 
+		// 댓글에 해당하는 레시피 정보 넘기기
+		Recipe recipe = recipeService.getForPrintRecipe(rq.getLoginedMemberId(), reply.getRelId());
+
 		model.addAttribute("reply", reply);
+		model.addAttribute("recipe", recipe);
 
 		return "/user/reply/modify";
 	}

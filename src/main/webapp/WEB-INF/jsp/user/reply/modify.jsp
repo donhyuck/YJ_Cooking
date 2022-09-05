@@ -76,8 +76,14 @@
 						<span>${ recipe.extra__writerName }님</span>
 						에게 궁금한점들을남겨주세요.
 					</div>
-					<div>등록일 : ${ reply.forPrintRegDate_Type2 }</div>
-					<div>수정일 : ${ reply.forPrintUpdateDate_Type2 }</div>
+					<div class="text-right">
+						<c:if test="${ reply.regDate == reply.updateDate }">
+							<span>${ reply.forPrintRegDate_Type2 } &nbsp;(최초등록일)</span>
+						</c:if>
+						<c:if test="${ reply.regDate != reply.updateDate }">
+							<span>${ reply.forPrintUpdateDate_Type2 } &nbsp;(최근수정일)</span>
+						</c:if>
+					</div>
 				</div>
 
 				<form class="flex items-center" method="POST" action="../reply/doModify" method="POST"

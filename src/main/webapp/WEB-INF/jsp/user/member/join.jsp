@@ -66,6 +66,8 @@
 	<div class="member-box w-2/5 mx-auto">
 		<form class="flex flex-col space-y-4 items-center" method="POST" enctype="multipart/form-data" action="../member/doJoin"
 			onsubmit="MemberJoin_submitForm(this); return false;">
+			<input type="hidden" name="afterLoginUri" value="${ param.afterLoginUri }"/>
+			
 			<div class="text-3xl font-bold mb-2">회원가입</div>
 			<div>
 				<input name="loginId" type="text" class="input input-bordered w-96 member-inputType" placeholder="아이디" />

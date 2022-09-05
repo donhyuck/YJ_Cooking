@@ -38,7 +38,8 @@ public class UserMemberController {
 	// 회원 등록하기 메서드
 	@RequestMapping("/user/member/doJoin")
 	@ResponseBody
-	public String doJoin(String loginId, String loginPw, String nickname, String cellphoneNo, String email) {
+	public String doJoin(String loginId, String loginPw, String nickname, String cellphoneNo, String email,
+			@RequestParam(defaultValue = "/") String afterLoginUri) {
 
 		// 입력 데이터 유효성 검사
 		if (Ut.empty(loginId)) {
@@ -69,7 +70,9 @@ public class UserMemberController {
 			return rq.jsHistoryBack(joinMemberRd.getMsg());
 		}
 
-		return rq.jsReplace(Ut.f("%s 님의 회원등록이 완료되었습니다.", nickname), "/");
+		String afterJoinUri = "/user/member/login?afterLoginUri=" + Ut.getUriEncoded(afterLoginUri);
+
+		return rq.jsReplace(Ut.f("%s 님의 회원등록이 완료되었습니다. 로그인 페이지로 이동합니다.", nickname), afterJoinUri);
 	}
 
 	// 회원 로그인 페이지 메서드

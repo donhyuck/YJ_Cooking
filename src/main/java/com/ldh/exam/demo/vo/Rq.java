@@ -235,4 +235,9 @@ public class Rq {
 
 		return "/user/recipe/detail?id=" + recipe.getId() + "&listUri=" + getEncodedCurrentUri();
 	}
+
+	public String getJoinUri() {
+
+		return "/user/member/join?afterLoginUri=" + getEncodedCurrentUri();
+	}
 }

@@ -1098,14 +1098,48 @@ LEFT JOIN `member`
 AS M
 ON R.memberId = M.id;
 
-## 내가 댓글 남긴 레시피 보기
+## 레시피, 작성자 보기
 SELECT R.*,
-M.nickname AS extra__writerName,
-RE.memberId AS replyWriter,
-RE.body AS replyBody
+M.nickname AS extra__writerName
 FROM recipe AS R
-LEFT JOIN reply AS RE
-ON R.id = RE.relId
 LEFT JOIN `member` AS M
-ON R.memberId = M.id
-WHERE RE.memberId = 1;
+ON R.memberId = M.id;
+
+## 레시피, 댓글 보기
+SELECT R.*,
+RE.memberId AS extra__replyWriter,
+RE.body AS extra__replyBody
+FROM recipe AS R
+LEFT JOIN `reply` AS RE
+ON R.id = RE.relId
+WHERE RE.memberId = 3;
+
+## 댓글, 작성자 보기
+SELECT RE.*,
+M.nickname AS extra__replyWriteName
+FROM reply AS RE
+LEFT JOIN `member` AS M
+ON RE.memberId = M.id
+WHERE RE.memberId = 2;
+
+## 3번 회원이 댓글 남긴 레시피 목록
+SELECT R.*,
+RE.extra__replyWriteName AS extra__replyWriteName,
+RE.body AS extra__replyBody
+FROM (
+    SELECT R.*,
+    M.nickname AS extra__writerName
+    FROM recipe AS R
+    LEFT JOIN `member` AS M
+    ON R.memberId = M.id
+) AS R
+LEFT JOIN (
+    SELECT RE.*,
+    M.nickname AS extra__replyWriteName
+    FROM reply AS RE
+    LEFT JOIN `member` AS M
+    ON RE.memberId = M.id
+) AS RE
+ON R.id = RE.relId
+WHERE RE.memberId = 3
+ORDER BY R.id DESC;

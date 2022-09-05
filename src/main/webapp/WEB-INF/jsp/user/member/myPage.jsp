@@ -114,8 +114,8 @@
 								</div>
 							</div>
 
-							<!-- 내용일부 -->
-							<div class="text-gray-500 m-2 truncate ...">${ recipe.body }</div>
+							<!-- 댓글일부 -->
+							<div class="text-gray-500 m-2 truncate ...">댓글 "${ recipe.extra__replyBody }"</div>
 
 						</div>
 					</div>

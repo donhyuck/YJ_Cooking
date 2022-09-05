@@ -200,15 +200,30 @@
 
 	<select id="getHaveReplyRecipes" resultType="Recipe">
 		SELECT R.*,
-		M.nickname AS extra__writerName,
-		RE.memberId AS replyWriter,
-		RE.body AS replyBody
-		FROM recipe AS R
-		LEFT JOIN reply AS RE
-		ON R.id = RE.relId
+		RE.extra__replyWriteName AS extra__replyWriteName,
+		RE.body AS
+		extra__replyBody
+		FROM (
+		SELECT R.*,
+		M.nickname AS extra__writerName
+		FROM
+		recipe AS R
 		LEFT JOIN `member` AS M
 		ON R.memberId = M.id
-		WHERE RE.memberId = #{memberId}
+		) AS R
+		LEFT JOIN
+		( SELECT RE.*,
+		M.nickname AS extra__replyWriteName
+		FROM reply AS RE
+		LEFT
+		JOIN `member`
+		AS M
+		ON RE.memberId = M.id
+		) AS RE
+		ON R.id = RE.relId
+		WHERE
+		RE.memberId = 3
+		ORDER BY R.id DESC
 	</select>
 
 	<insert id="writeRecipe">

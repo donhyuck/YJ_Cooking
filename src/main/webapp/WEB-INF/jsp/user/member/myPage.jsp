@@ -86,6 +86,11 @@
 									src="https://tse4.mm.bing.net/th?id=OIP.kwt4oKZDd-goVuBezaVQRQHaE7&pid=Api&P=0" alt="" />
 							</a>
 
+							<!-- 레시피 번호 -->
+							<div class="m-2">
+								<span class="badge badge-outline">${ recipe.id }</span>
+							</div>
+
 							<!-- 제목 -->
 							<div class="recipe-title text-lg font-bold mt-3 mx-2">
 								<span>${ recipe.title }</span>

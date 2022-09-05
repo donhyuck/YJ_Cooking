@@ -14,9 +14,7 @@
 			<!-- 안내문구 -->
 			<div class="p-3 mx-4 mb-1">
 				<div class="text-3xl">최신 레시피</div>
-				<div class="text-xl text-gray-500 mt-2">
-					최근 등록된 레시피 모음이에요
-				</div>
+				<div class="text-xl text-gray-500 mt-2">최근 등록된 레시피 모음이에요</div>
 			</div>
 
 			<div class="grid grid-cols-4 mx-6 relative">
@@ -40,7 +38,7 @@
 
 						<div class="w-full">
 							<!-- 레시피 대표 사진 -->
-							<a href="/user/recipe/detail?id=${ recipe.id }">
+							<a href="${ rq.getRecipeDetailUriFromList(recipe) }">
 								<img class="w-full rounded-t-2xl"
 									src="https://tse4.mm.bing.net/th?id=OIP.kwt4oKZDd-goVuBezaVQRQHaE7&pid=Api&P=0" alt="" />
 							</a>
@@ -120,7 +118,7 @@
 
 						<div class="w-full">
 							<!-- 레시피 대표 사진 -->
-							<a href="/user/recipe/detail?id=${ recipe.id }">
+							<a href="${ rq.getRecipeDetailUriFromList(recipe) }">
 								<img class="w-full rounded-t-2xl"
 									src="https://tse4.mm.bing.net/th?id=OIP.kwt4oKZDd-goVuBezaVQRQHaE7&pid=Api&P=0" alt="" />
 							</a>

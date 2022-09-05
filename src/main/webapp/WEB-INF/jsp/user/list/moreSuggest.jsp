@@ -51,7 +51,7 @@
 
 						<div class="w-full">
 							<!-- 레시피 대표 사진 -->
-							<a href="/user/recipe/detail?id=${ recipe.id }">
+							<a href="${ rq.getRecipeDetailUriFromList(recipe) }">
 								<img class="w-full rounded-t-2xl"
 									src="https://tse4.mm.bing.net/th?id=OIP.kwt4oKZDd-goVuBezaVQRQHaE7&pid=Api&P=0" alt="" />
 							</a>

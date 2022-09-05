@@ -230,4 +230,9 @@ public class Rq {
 
 		return getEncodedCurrentUri();
 	}
+
+	public String getRecipeDetailUriFromList(Recipe recipe) {
+
+		return "/user/recipe/detail?id=" + recipe.getId() + "&listUri=" + getEncodedCurrentUri();
+	}
 }

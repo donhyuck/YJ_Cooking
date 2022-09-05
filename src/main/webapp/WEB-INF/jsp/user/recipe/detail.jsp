@@ -211,7 +211,12 @@
 
 					<!-- 레시피 조작 영역 시작 -->
 					<div class="btns text-center">
-						<button type="button" class="btn btn-outline" onclick="history.back();">뒤로가기</button>
+						<c:if test="${ empty param.listUri }">
+							<button type="button" class="btn btn-outline" onclick="history.back();">뒤로가기</button>
+						</c:if>
+						<c:if test="${not empty param.listUri}">
+							<a class="btn btn-outline" href="${param.listUri}">뒤로가기</a>
+						</c:if>
 						<div class="mt-3">
 							<c:if test="${ recipe.extra__actorCanModify }">
 								<a class="btn btn-primary btn-outline mr-1" href="../recipe/modify?id=${recipe.id}">수정</a>
@@ -351,7 +356,7 @@
 			<!-- 댓글 목록 영역 끝 -->
 
 			<!-- TOP 버튼 -->
-			<div class="absolute -right-20 bottom-64 text-4xl text-center hover:text-yellow-400">
+			<div class="fixed right-10 bottom-20 text-4xl text-center hover:text-yellow-400">
 				<a href="#topTarget" class="scroll">
 					<i class="fa-solid fa-circle-arrow-up"></i>
 					<div class="text-xl font-black">TOP</div>

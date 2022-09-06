@@ -238,6 +238,20 @@ public class Rq {
 
 	public String getJoinUri() {
 
-		return "/user/member/join?afterLoginUri=" + getEncodedCurrentUri();
+		return "/user/member/join?afterJoinUri=" + getAfterJoinUri();
+	}
+
+	public String getAfterJoinUri() {
+
+		String requestUri = req.getRequestURI();
+
+		// 회원가입시 다시 돌아가는 url 반복되지 않도록
+		switch (requestUri) {
+		case "/user/member/login":
+		case "/user/member/join":
+			return Ut.getUriEncoded(Ut.getStrAttr(paramMap, "afterJoinUri", ""));
+		}
+
+		return getEncodedCurrentUri();
 	}
 }

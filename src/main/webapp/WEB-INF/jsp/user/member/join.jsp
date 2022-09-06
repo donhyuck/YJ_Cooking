@@ -6,7 +6,6 @@
 <!-- 입력데이터 검사 스크립트 시작 -->
 <script>
 	let MemberJoin_submitFormDone = false;
-	let validLoginId = "";
 
 	function MemberJoin_submitForm(form) {
 		if (MemberJoin_submitFormDone) {
@@ -17,12 +16,6 @@
 		form.loginId.value = form.loginId.value.trim();
 		if (form.loginId.value.length == 0) {
 			alert('로그인아이디를 입력해주세요.');
-			form.loginId.focus();
-			return;
-		}
-
-		if (form.loginId.value != validLogind) {
-			alert('해당 로그인아이디는 사용할 수 없습니다.');
 			form.loginId.focus();
 			return;
 		}
@@ -66,54 +59,10 @@
 		MemberJoin_submitFormDone = true;
 		form.submit();
 	}
-
-	// 로그인 아이디 확인
-	function checkLoginIdDup(el) {
-
-		const form = $(el).closest('form').get(0);
-
-		if (form.loginId.value.length == 0) {
-			validLoginId = '';
-			return;
-		}
-
-		if (validLoginId == form.loginId.value) {
-			return;
-		}
-
-		$.get('../member/getLoginIdDup', {
-			isAjax : 'Y',
-			loginId : form.loginId.value
-		}, function(data) {
-
-			var $message = $(form.loginId).next();
-
-			if (data.resultCode.substr(0, 3) == 'F-1') {
-				$message.empty().append(
-						'<div class="text-gray-400">' + data.msg + '</div>');
-				validLoginId = '';
-			} else if (data.resultCode.substr(0, 3) == 'F-A') {
-				$message.empty().append(
-						'<div class="text-red-400">' + data.msg + '</div>');
-				validLoginId = '';
-			} else if (data.resultCode.substr(0, 2) == 'S-') {
-				$message.empty().append(
-						'<div class="text-green-400">' + data.msg + '</div>');
-				validLoginId = data.body.loginId;
-			}
-
-			if (data.success) {
-				validLoginId = data.data1;
-			} else {
-				validLoginId = '';
-			}
-
-		}, 'json');
-	}
-
-	const checkLoginIdDupAsDebounce = _.debounce(checkLoginIdDup, 300);
 </script>
 <!-- 입력데이터 검사 스크립트 끝 -->
+<!-- ajax 메세지 스크립트 -->
+<script src="/member/join.js" defer="defer"></script>
 
 <div class="mt-6">
 	<div class="member-box w-2/5 mx-auto">

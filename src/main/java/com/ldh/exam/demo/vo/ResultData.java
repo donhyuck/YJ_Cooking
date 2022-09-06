@@ -34,6 +34,17 @@ public class ResultData<DT> {
 		return rd;
 	}
 
+	public static <DT> ResultData<DT> from(String resultCode, String msg, DT data1, DT data2) {
+
+		ResultData<DT> rd = new ResultData<DT>();
+		rd.resultCode = resultCode;
+		rd.msg = msg;
+		rd.data1 = data1;
+		rd.data2 = data2;
+
+		return rd;
+	}
+
 	public boolean isSuccess() {
 		return resultCode.startsWith("S-");
 	}

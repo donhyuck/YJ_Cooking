@@ -87,20 +87,26 @@
 				<div class="text-green-400 mt-1 ml-4">사용가능합니다.</div>
 			</div>
 			<div>
-				<input name="nickname" type="text" class="input input-lg input-bordered w-96" placeholder="닉네임" />
-				<div class="text-green-400 mt-1 ml-4">사용가능합니다.</div>
+				<input name="nickname" type="text" class="input input-lg input-bordered w-96" placeholder="닉네임"
+					onkeyup="checkNicknameAndEmailDupAsDebounce(this);" autocomplete="off" />
+				<div class="message mt-1 ml-4">
+					<div class="text-gray-400">닉네임을 입력해주세요.</div>
+				</div>
 			</div>
 			<div>
 				<input name="cellphoneNo" type="text" class="input input-lg input-bordered w-96" placeholder="연락처 예) 하이픈(-) 제외" />
 				<div class="text-green-400 mt-1 ml-4">사용가능합니다.</div>
 			</div>
 			<div>
-				<input name="email" type="email" class="input input-lg input-bordered w-96" placeholder="이메일" />
-				<div class="member-msgType text-green-400 mt-1 ml-4">사용가능합니다.</div>
+				<input name="email" type="email" class="input input-lg input-bordered w-96" placeholder="이메일"
+					onkeyup="checkNicknameAndEmailDupAsDebounce(this);" autocomplete="off" />
+				<div class="message mt-1 ml-4">
+					<div class="text-gray-400">이메일을 입력해주세요.</div>
+				</div>
 			</div>
 			<div>
 				<input name="profileImg" type="file" class="input input-lg input-bordered w-96" placeholder="프로필 이미지를 선택해주세요." />
-				<div class="member-msgType text-green-400 mt-1 ml-4">사용가능합니다.</div>
+				<div class="text-green-400 mt-1 ml-4">사용가능합니다.</div>
 			</div>
 
 			<div class="btns mt-2">

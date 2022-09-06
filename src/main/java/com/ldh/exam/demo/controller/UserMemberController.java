@@ -338,7 +338,7 @@ public class UserMemberController {
 	@RequestMapping("/user/member/getLoginIdDup")
 	@ResponseBody
 	public ResultData getLoginIdDup(String loginId) {
-		
+
 		if (Ut.empty(loginId)) {
 			return ResultData.from("F-1", "아이디를 입력해주세요.");
 		}
@@ -350,5 +350,27 @@ public class UserMemberController {
 		}
 
 		return ResultData.from("S-A", "사용가능한 로그인아이디 입니다.", "loginId", loginId);
+	}
+
+	@RequestMapping("/user/member/getNicknameAndEmailDup")
+	@ResponseBody
+	public ResultData getNicknameAndEmailDup(String nickname, String email) {
+
+		if (Ut.empty(nickname)) {
+			return ResultData.from("F-1", "닉네임를 입력해주세요.");
+		}
+
+		if (Ut.empty(email)) {
+			return ResultData.from("F-2", "이메일 입력해주세요.");
+		}
+
+		Member oldMember = memberService.getMemberByNicknameAndEmail(nickname, email);
+
+		if (oldMember != null) {
+			return ResultData.from("F-A", Ut.f("입력하신 닉네임 [ %s ], 이메일 [ %s ] 은 이미 등록되었습니다.", nickname, email), nickname,
+					email);
+		}
+
+		return ResultData.from("S-A", "사용가능한 닉네임과 이메일 입니다.");
 	}
 }

@@ -1,3 +1,4 @@
+// 로그인 아이디 확인 스크립트 시작
 let validLoginId = "";
 
 function checkLoginIdDup(el) {
@@ -44,7 +45,9 @@ function checkLoginIdDup(el) {
 }
 
 const checkLoginIdDupAsDebounce = _.debounce(checkLoginIdDup, 300);
+// 로그인 아이디 확인 스크립트 끝
 
+// 닉네임, 이메일 확인 스크립트 시작
 let validNickname = "";
 let validEmail = "";
 
@@ -106,3 +109,42 @@ function checkNicknameAndEmailDup(el) {
 	}, 'json');
 }
 const checkNicknameAndEmailDupAsDebounce = _.debounce(checkNicknameAndEmailDup, 300);
+
+// 닉네임, 이메일 확인 스크립트 끝
+
+// 연락처 입력시 자동 하이픈(-) 삽입 스크립트 시작
+// 버전 1
+const autoHyphenByReplace = (target) => {
+	target.value = target.value
+		.replace(/[^0-9]/g, '')
+		.replace(/^(\d{0,3})(\d{0,4})(\d{0,4})$/g, "$1-$2-$3").replace(/(\-{1,2})$/g, "");
+}
+
+// 버전 2
+function autoHyphenBySplit(target) {
+	// 특수문자 제거
+	target.value = target.value.replace(/[^0-9]/g, "");
+
+	const value = target.value.split("");
+
+	const textArr = [
+		// 첫번째 구간 (00 or 000)
+		[0, value.length > 9 ? 3 : 2],
+		// 두번째 구간 (000 or 0000)
+		[0, value.length > 10 ? 4 : 3],
+		// 남은 마지막 모든 숫자
+		[0, 4]
+	];
+
+	// 총 3번의 반복 ({2,3}) - ({3,4}) - ({4})
+	target.value = textArr
+		.map(function(v) {
+			return value.splice(v[0], v[1]).join("")
+		})
+		.filter(function(text) {
+			return text
+		})
+		.join("-");
+}
+
+// 연락처 입력시 자동 하이픈(-) 삽입 스크립트 끝

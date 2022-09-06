@@ -79,18 +79,14 @@
 					<div class="text-gray-400">아이디를 입력해주세요.</div>
 				</div>
 			</div>
-			<div>
+			<div class="flex flex-col mt-3">
 				<div class="ml-1 mt-2 font-medium text-slate-700">비밀번호</div>
 				<input name="loginPw" type="password" class="input input-lg input-bordered w-96" placeholder="로그인시 사용할 비밀번호입니다." />
-				<div class="text-green-400 mt-1 ml-4">사용가능합니다.</div>
-			</div>
-			<div>
 				<div class="ml-1 mt-2 font-medium text-slate-700">비밀번호 재입력</div>
 				<input name="loginPwConfirm" type="password" class="input input-lg input-bordered w-96"
 					placeholder="비밀번호를 다시 입력해주세요." />
-				<div class="text-green-400 mt-1 ml-4">사용가능합니다.</div>
 			</div>
-			<div onkeyup="checkNicknameAndEmailDupAsDebounce(this);" class="flex flex-col">
+			<div onkeyup="checkNicknameAndEmailDupAsDebounce(this);" class="flex flex-col mt-3">
 				<div class="ml-1 mt-2 font-medium text-slate-700">닉네임</div>
 				<input name="nickname" type="text" class="input input-lg input-bordered w-96" placeholder="레시피와 댓글에서 사용될 닉네임입니다."
 					autocomplete="off" />
@@ -103,9 +99,9 @@
 			</div>
 			<div>
 				<div class="ml-1 mt-2 font-medium text-slate-700">연락처</div>
-				<input name="cellphoneNo" type="text" class="input input-lg input-bordered w-96" required="required"
-					placeholder="예) 01012341234" />
-				<div class="text-gray-400 mt-1 ml-4">하이픈(-)을 제외하고 입력해주세요.</div>
+				<input name="cellphoneNo" type="text" class="input input-lg input-bordered w-96" oninput="autoHyphenBySplit(this);"
+					maxlength="13" required="required" placeholder="예) 01012341234" />
+				<div class="mt-1 ml-4">하이픈(-)을 제외하고 입력해주세요.</div>
 			</div>
 			<div>
 				<div class="ml-1 mt-2 font-medium text-slate-700">프로필 사진</div>

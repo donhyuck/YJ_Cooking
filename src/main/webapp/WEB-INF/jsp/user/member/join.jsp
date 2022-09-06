@@ -69,7 +69,6 @@
 
 	// 로그인 아이디 확인
 	function checkLoginIdDup(el) {
-		// $message.empty().append('<div class="mt-2"> 아이디를 입력해주세요. </div>');
 
 		const form = $(el).closest('form').get(0);
 
@@ -89,16 +88,18 @@
 
 			var $message = $(form.loginId).next();
 
-			if (data.resultCode.substr(0, 2) == 'S-') {
+			if (data.resultCode.substr(0, 3) == 'F-1') {
 				$message.empty().append(
-						'<div class="text-green-400 mt-2 ml-4">' + data.msg
-								+ '</div>');
-				validLoginId = data.body.loginId;
-			} else {
-				$message.empty().append(
-						'<div class="text-red-400 mt-2 ml-4">' + data.msg
-								+ '</div>');
+						'<div class="text-gray-400">' + data.msg + '</div>');
 				validLoginId = '';
+			} else if (data.resultCode.substr(0, 3) == 'F-A') {
+				$message.empty().append(
+						'<div class="text-red-400">' + data.msg + '</div>');
+				validLoginId = '';
+			} else if (data.resultCode.substr(0, 2) == 'S-') {
+				$message.empty().append(
+						'<div class="text-green-400">' + data.msg + '</div>');
+				validLoginId = data.body.loginId;
 			}
 
 			if (data.success) {
@@ -106,6 +107,7 @@
 			} else {
 				validLoginId = '';
 			}
+
 		}, 'json');
 	}
 
@@ -121,35 +123,34 @@
 
 			<div class="text-3xl font-bold mb-2">회원가입</div>
 			<div>
-				<input name="loginId" type="text" class="input input-bordered w-96 member-inputType"
-					onkeyup="checkLoginIdDupAsDebounce(this);" autocomplete="off" placeholder="아이디" />
-				<div class="message"></div>
+				<input name="loginId" type="text" class="input input-lg input-bordered w-96" placeholder="아이디"
+					onkeyup="checkLoginIdDupAsDebounce(this);" autocomplete="off" />
+				<div class="message mt-1 ml-4">
+					<div class="text-gray-400">아이디를 입력해주세요.</div>
+				</div>
 			</div>
 			<div>
-				<input name="loginPw" type="password" class="input input-bordered w-96 member-inputType" placeholder="비밀번호" />
+				<input name="loginPw" type="password" class="input input-lg input-bordered w-96" placeholder="비밀번호" />
 				<div class="text-green-400 mt-1 ml-4">사용가능합니다.</div>
 			</div>
 			<div>
-				<input name="loginPwConfirm" type="password" class="input input-bordered w-96 member-inputType"
-					placeholder="비밀번호 확인" />
+				<input name="loginPwConfirm" type="password" class="input input-lg input-bordered w-96" placeholder="비밀번호 확인" />
 				<div class="text-green-400 mt-1 ml-4">사용가능합니다.</div>
 			</div>
 			<div>
-				<input name="nickname" type="text" class="input input-bordered w-96 member-inputType" placeholder="닉네임" />
+				<input name="nickname" type="text" class="input input-lg input-bordered w-96" placeholder="닉네임" />
 				<div class="text-green-400 mt-1 ml-4">사용가능합니다.</div>
 			</div>
 			<div>
-				<input name="cellphoneNo" type="text" class="input input-bordered w-96 member-inputType"
-					placeholder="연락처 예) 하이픈(-) 제외" />
+				<input name="cellphoneNo" type="text" class="input input-lg input-bordered w-96" placeholder="연락처 예) 하이픈(-) 제외" />
 				<div class="text-green-400 mt-1 ml-4">사용가능합니다.</div>
 			</div>
 			<div>
-				<input name="email" type="email" class="input input-bordered w-96 member-inputType" placeholder="이메일" />
+				<input name="email" type="email" class="input input-lg input-bordered w-96" placeholder="이메일" />
 				<div class="member-msgType text-green-400 mt-1 ml-4">사용가능합니다.</div>
 			</div>
 			<div>
-				<input name="profileImg" type="file" class="input input-bordered w-96 member-inputType"
-					placeholder="프로필 이미지를 선택해주세요." />
+				<input name="profileImg" type="file" class="input input-lg input-bordered w-96" placeholder="프로필 이미지를 선택해주세요." />
 				<div class="member-msgType text-green-400 mt-1 ml-4">사용가능합니다.</div>
 			</div>
 

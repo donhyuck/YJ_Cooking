@@ -6,7 +6,7 @@
 <!-- 입력데이터 검사 스크립트 시작 -->
 <script>
 	let MemberJoin_submitFormDone = false;
-	let validLogind = "";
+	let validLoginId = "";
 
 	function MemberJoin_submitForm(form) {
 		if (MemberJoin_submitFormDone) {
@@ -67,28 +67,51 @@
 		form.submit();
 	}
 
-	function checkLoginIdDup(el) {
-		$('.loginId-message').empty();
-		const form = $(el).closest('form').get(0);
-
-		if (form.loginId.value == 0) {
-			validLogind = '';
-			return;
-		}
+	// 로그인 아이디 확인
+	var checkLoginIdDup = _.debounce(function(form) {
+		// $message.empty().append('<div class="mt-2"> 아이디를 입력해주세요. </div>');
 
 		$.get('../member/getLoginIdDup', {
 			isAjax : 'Y',
-			loginId : form.loginId.value,
+			loginId : form.loginId.value
 		}, function(data) {
-			$('.loginId-message').html(
-					'<div class="mt-2">' + data.msg + '</div>');
-			if (data.success) {
-				validLogind = data.data1;
+
+			var $message = $(form.loginId).next();
+
+			if (data.resultCode.substr(0, 2) == 'S-') {
+				$message.empty().append(
+						'<div class="text-green-400 mt-2 ml-4">' + data.msg
+								+ '</div>');
+				validLoginId = data.body.loginId;
 			} else {
-				validLogind = '';
+				$message.empty().append(
+						'<div class="text-red-400 mt-2 ml-4">' + data.msg
+								+ '</div>');
+				validLoginId = '';
+			}
+
+			if (data.success) {
+				validLoginId = data.data1;
+			} else {
+				validLoginId = '';
 			}
 		}, 'json');
 
+	}, 1000);
+
+	function MemberJoin_checkLoginIdDupForm(input) {
+
+		var form = input.form;
+		form.loginId.value = form.loginId.value.trim();
+
+		var $message = $(form.loginId).next();
+
+		if (form.loginId.value.length == 0) {
+			$message.empty();
+			return;
+		}
+
+		checkLoginIdDup(form);
 	}
 </script>
 <!-- 입력데이터 검사 스크립트 끝 -->
@@ -102,26 +125,26 @@
 			<div class="text-3xl font-bold mb-2">회원가입</div>
 			<div>
 				<input name="loginId" type="text" class="input input-bordered w-96 member-inputType"
-					onkeyup="checkLoginIdDup(this);" autocomplete="off" placeholder="아이디" />
-				<div class="loginId-message member-msgType text-green-400 mt-1 ml-4"></div>
+					onkeyup="MemberJoin_checkLoginIdDupForm(this);" autocomplete="off" placeholder="아이디" />
+				<div class="message-msg"></div>
 			</div>
 			<div>
 				<input name="loginPw" type="password" class="input input-bordered w-96 member-inputType" placeholder="비밀번호" />
-				<div class="member-msgType text-green-400 mt-1 ml-4">사용가능합니다.</div>
+				<div class="text-green-400 mt-1 ml-4">사용가능합니다.</div>
 			</div>
 			<div>
 				<input name="loginPwConfirm" type="password" class="input input-bordered w-96 member-inputType"
 					placeholder="비밀번호 확인" />
-				<div class="member-msgType text-green-400 mt-1 ml-4">사용가능합니다.</div>
+				<div class="text-green-400 mt-1 ml-4">사용가능합니다.</div>
 			</div>
 			<div>
 				<input name="nickname" type="text" class="input input-bordered w-96 member-inputType" placeholder="닉네임" />
-				<div class="member-msgType text-green-400 mt-1 ml-4">사용가능합니다.</div>
+				<div class="text-green-400 mt-1 ml-4">사용가능합니다.</div>
 			</div>
 			<div>
 				<input name="cellphoneNo" type="text" class="input input-bordered w-96 member-inputType"
 					placeholder="연락처 예) 하이픈(-) 제외" />
-				<div class="member-msgType text-green-400 mt-1 ml-4">사용가능합니다.</div>
+				<div class="text-green-400 mt-1 ml-4">사용가능합니다.</div>
 			</div>
 			<div>
 				<input name="email" type="email" class="input input-bordered w-96 member-inputType" placeholder="이메일" />

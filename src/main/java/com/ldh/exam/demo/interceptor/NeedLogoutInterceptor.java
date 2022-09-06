@@ -22,9 +22,16 @@ public class NeedLogoutInterceptor implements HandlerInterceptor {
 
 		// 로그아웃 확인후 요청처리
 		if (rq.isLogined() == true) {
-			String afterLogoutUri = rq.getAfterLogoutUri();
-			rq.printReplaceJsForConfirm("로그아웃", "로그아웃 후 이용해주세요.",
-					"/user/member/doLogout?afterLogoutUri=" + afterLogoutUri);
+
+			if (rq.isAjax()) {
+				resp.setContentType("application/json; charset=UTF-8");
+				rq.print("{\"resultCode\":\"F-B\",\"msg\":\"로그아웃 후 이용해주세요.\"}");
+			} else {
+				String afterLogoutUri = rq.getAfterLogoutUri();
+				rq.printReplaceJsForConfirm("로그아웃", "로그아웃 후 이용해주세요.",
+						"/user/member/doLogout?afterLogoutUri=" + afterLogoutUri);
+			}
+
 			return false;
 		}
 

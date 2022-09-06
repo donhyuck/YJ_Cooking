@@ -45,7 +45,6 @@ function checkLoginIdDup(el) {
 
 const checkLoginIdDupAsDebounce = _.debounce(checkLoginIdDup, 300);
 
-
 let validNickname = "";
 let validEmail = "";
 
@@ -57,7 +56,7 @@ function checkNicknameAndEmailDup(el) {
 		validNickname = '';
 		return;
 	}
-	
+
 	if (form.email.value.length == 0) {
 		validEmail = '';
 		return;
@@ -79,14 +78,14 @@ function checkNicknameAndEmailDup(el) {
 
 		var $message = $(form.email).next();
 
-		if (data.resultCode.substr(0, 3) == 'F-1') {
-			$message.empty().append(
-				'<div class="text-gray-400">' + data.msg + '</div>');
-			validNickname = '';
-			validEmail = '';
-		} else if (data.resultCode.substr(0, 3) == 'F-A') {
+		if (data.resultCode.substr(0, 3) == 'F-A') {
 			$message.empty().append(
 				'<div class="text-red-400">' + data.msg + '</div>');
+			validNickname = '';
+			validEmail = '';
+		} else if (data.resultCode.substr(0, 2) == 'F-') {
+			$message.empty().append(
+				'<div class="text-gray-400">' + data.msg + '</div>');
 			validNickname = '';
 			validEmail = '';
 		} else if (data.resultCode.substr(0, 2) == 'S-') {

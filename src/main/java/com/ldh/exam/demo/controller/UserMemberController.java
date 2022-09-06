@@ -357,20 +357,19 @@ public class UserMemberController {
 	public ResultData getNicknameAndEmailDup(String nickname, String email) {
 
 		if (Ut.empty(nickname)) {
-			return ResultData.from("F-1", "닉네임를 입력해주세요.");
+			return ResultData.from("F-1", "닉네임을 입력해주세요.");
 		}
 
 		if (Ut.empty(email)) {
-			return ResultData.from("F-2", "이메일 입력해주세요.");
+			return ResultData.from("F-2", "이메일을 입력해주세요.");
 		}
 
 		Member oldMember = memberService.getMemberByNicknameAndEmail(nickname, email);
 
 		if (oldMember != null) {
-			return ResultData.from("F-A", Ut.f("입력하신 닉네임 [ %s ], 이메일 [ %s ] 은 이미 등록되었습니다.", nickname, email), nickname,
-					email);
+			return ResultData.from("F-A", "해당 닉네임과 이메일은 이미 등록되었습니다.", nickname, email);
 		}
 
-		return ResultData.from("S-A", "사용가능한 닉네임과 이메일 입니다.");
+		return ResultData.from("S-A", "사용가능한 닉네임과 이메일 입니다.", nickname, email);
 	}
 }

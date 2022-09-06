@@ -72,39 +72,43 @@
 
 			<div class="text-3xl font-bold mb-2">회원가입</div>
 			<div>
-				<input name="loginId" type="text" class="input input-lg input-bordered w-96" placeholder="아이디"
+				<div class="ml-1 mt-2 font-medium text-slate-700">아이디</div>
+				<input name="loginId" type="text" class="input input-lg input-bordered w-96" placeholder="로그인시 사용할 아이디입니다."
 					onkeyup="checkLoginIdDupAsDebounce(this);" autocomplete="off" />
 				<div class="message mt-1 ml-4">
 					<div class="text-gray-400">아이디를 입력해주세요.</div>
 				</div>
 			</div>
 			<div>
-				<input name="loginPw" type="password" class="input input-lg input-bordered w-96" placeholder="비밀번호" />
+				<div class="ml-1 mt-2 font-medium text-slate-700">비밀번호</div>
+				<input name="loginPw" type="password" class="input input-lg input-bordered w-96" placeholder="로그인시 사용할 비밀번호입니다." />
 				<div class="text-green-400 mt-1 ml-4">사용가능합니다.</div>
 			</div>
 			<div>
-				<input name="loginPwConfirm" type="password" class="input input-lg input-bordered w-96" placeholder="비밀번호 확인" />
+				<div class="ml-1 mt-2 font-medium text-slate-700">비밀번호 재입력</div>
+				<input name="loginPwConfirm" type="password" class="input input-lg input-bordered w-96"
+					placeholder="비밀번호를 다시 입력해주세요." />
 				<div class="text-green-400 mt-1 ml-4">사용가능합니다.</div>
 			</div>
-			<div>
-				<input name="nickname" type="text" class="input input-lg input-bordered w-96" placeholder="닉네임"
-					onkeyup="checkNicknameAndEmailDupAsDebounce(this);" autocomplete="off" />
+			<div onkeyup="checkNicknameAndEmailDupAsDebounce(this);" class="flex flex-col">
+				<div class="ml-1 mt-2 font-medium text-slate-700">닉네임</div>
+				<input name="nickname" type="text" class="input input-lg input-bordered w-96" placeholder="레시피와 댓글에서 사용될 닉네임입니다."
+					autocomplete="off" />
+				<div class="ml-1 mt-2 font-medium text-slate-700">이메일</div>
+				<input name="email" type="text" class="input input-lg input-bordered w-96" placeholder="예) abc@email.com"
+					autocomplete="off" />
 				<div class="message mt-1 ml-4">
-					<div class="text-gray-400">닉네임을 입력해주세요.</div>
+					<div class="text-gray-400">닉네임과 이메일을 입력해주세요.</div>
 				</div>
 			</div>
 			<div>
-				<input name="cellphoneNo" type="text" class="input input-lg input-bordered w-96" placeholder="연락처 예) 하이픈(-) 제외" />
-				<div class="text-green-400 mt-1 ml-4">사용가능합니다.</div>
+				<div class="ml-1 mt-2 font-medium text-slate-700">연락처</div>
+				<input name="cellphoneNo" type="text" class="input input-lg input-bordered w-96" required="required"
+					placeholder="예) 01012341234" />
+				<div class="text-gray-400 mt-1 ml-4">하이픈(-)을 제외하고 입력해주세요.</div>
 			</div>
 			<div>
-				<input name="email" type="email" class="input input-lg input-bordered w-96" placeholder="이메일"
-					onkeyup="checkNicknameAndEmailDupAsDebounce(this);" autocomplete="off" />
-				<div class="message mt-1 ml-4">
-					<div class="text-gray-400">이메일을 입력해주세요.</div>
-				</div>
-			</div>
-			<div>
+				<div class="ml-1 mt-2 font-medium text-slate-700">프로필 사진</div>
 				<input name="profileImg" type="file" class="input input-lg input-bordered w-96" placeholder="프로필 이미지를 선택해주세요." />
 				<div class="text-green-400 mt-1 ml-4">사용가능합니다.</div>
 			</div>

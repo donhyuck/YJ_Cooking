@@ -68,8 +68,19 @@
 	}
 
 	// 로그인 아이디 확인
-	var checkLoginIdDup = _.debounce(function(form) {
+	function checkLoginIdDup(el) {
 		// $message.empty().append('<div class="mt-2"> 아이디를 입력해주세요. </div>');
+
+		const form = $(el).closest('form').get(0);
+
+		if (form.loginId.value.length == 0) {
+			validLoginId = '';
+			return;
+		}
+
+		if (validLoginId == form.loginId.value) {
+			return;
+		}
 
 		$.get('../member/getLoginIdDup', {
 			isAjax : 'Y',
@@ -96,23 +107,9 @@
 				validLoginId = '';
 			}
 		}, 'json');
-
-	}, 1000);
-
-	function MemberJoin_checkLoginIdDupForm(input) {
-
-		var form = input.form;
-		form.loginId.value = form.loginId.value.trim();
-
-		var $message = $(form.loginId).next();
-
-		if (form.loginId.value.length == 0) {
-			$message.empty();
-			return;
-		}
-
-		checkLoginIdDup(form);
 	}
+
+	const checkLoginIdDupAsDebounce = _.debounce(checkLoginIdDup, 300);
 </script>
 <!-- 입력데이터 검사 스크립트 끝 -->
 
@@ -125,8 +122,8 @@
 			<div class="text-3xl font-bold mb-2">회원가입</div>
 			<div>
 				<input name="loginId" type="text" class="input input-bordered w-96 member-inputType"
-					onkeyup="MemberJoin_checkLoginIdDupForm(this);" autocomplete="off" placeholder="아이디" />
-				<div class="message-msg"></div>
+					onkeyup="checkLoginIdDupAsDebounce(this);" autocomplete="off" placeholder="아이디" />
+				<div class="message"></div>
 			</div>
 			<div>
 				<input name="loginPw" type="password" class="input input-bordered w-96 member-inputType" placeholder="비밀번호" />

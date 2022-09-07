@@ -19,7 +19,7 @@
 				</a>
 
 				<!-- 레시피 기본정보 입력 -->
-				<div class="flex flex-col space-y-4 w-3/5 h-80 m-auto">
+				<div class="flex flex-col space-y-4 w-3/5 h-80 m-auto mb-8">
 					<!-- 제목 -->
 					<div>
 						<div class="ml-1 mb-2 font-medium text-slate-700 text-lg">레시피 제목</div>
@@ -35,27 +35,80 @@
 							placeholder="예) 아빠표 특제 레시피를 소개합니다. 저녁 한끼로도 안주로도 딱이에요.&#13;&#10;밥솥으로 조리를 하여 푹 끓인 맛이 나요."></textarea>
 					</div>
 				</div>
-
-
 			</section>
 
-			<section class="bg-white rounded-md p-12 flex mb-5">
-				<!-- 인원, 소요시간, 난이도 -->
-				<div class="info-box flex justify-center items-end space-x-5 mt-auto mb-3 text-2xl">
-					<div>
-						<i class="fa-solid fa-user-check"></i>
-						<span class="ml-1">${ recipe.amount }인분</span>
+			<!-- 요리정보 입력 영역 시작(인원, 소요시간, 난이도) -->
+			<section class="bg-white rounded-md p-12 pt-8 mb-5 flex justify-between">
+
+				<div class="select-box w-full">
+					<!-- 안내문구 -->
+					<div class="text-xl text-gray-600 mb-10">
+						<i class="fa-regular fa-square-check"></i>
+						<span>선택란을 클릭하여 요리정보를 입력할 수 있습니다.</span>
 					</div>
-					<div>
-						<i class="fa-solid fa-clock"></i>
-						<span class="ml-1">${ recipe.forPrintTime } 이내</span>
+					<!-- 선택영역 시작 -->
+					<div class="flex justify-around">
+						<div class="select-amount">
+							<div class="mr-2 font-medium text-slate-700 text-2xl text-center">
+								<i class="fa-solid fa-user-check"></i>
+								<span class="ml-1">인원</span>
+							</div>
+							<div class="text-gray-400 my-4">등록하실 재료의 양으로 선택해주세요.</div>
+							<select name="amount" class="select select-lg select-accent w-full max-w-xs">
+								<option disabled selected>선택</option>
+								<option class="text-xl" value='1'>1인분</option>
+								<option class="text-xl" value='2'>2인분</option>
+								<option class="text-xl" value='3'>3인분</option>
+								<option class="text-xl" value='4'>4인분</option>
+								<option class="text-xl" value='5'>5인분</option>
+								<option class="text-xl" value='6'>6인분 이상</option>
+							</select>
+						</div>
+
+						<div class="select-time">
+							<div class="mr-2 font-medium text-slate-700 text-2xl text-center">
+								<i class="fa-solid fa-clock"></i>
+								<span class="ml-1">소요시간</span>
+							</div>
+							<div class="text-gray-400 my-4">재료손질부터 완성까지 소요되는 시간</div>
+							<select name="time" class="select select-lg select-accent w-full max-w-xs">
+								<option disabled selected>선택</option>
+								<option class="text-xl" value='5'>5분이내</option>
+								<option class="text-xl" value='10'>10분이내</option>
+								<option class="text-xl" value='30'>30분이내</option>
+								<option class="text-xl" value='60'>1시간이내</option>
+								<option class="text-xl" value='120'>2시간이내</option>
+								<option class="text-xl" value='180'>3시간이내</option>
+							</select>
+						</div>
+
+						<div class="select-level">
+							<div class="mr-2 font-medium text-slate-700 text-2xl text-center">
+								<i class="fa-solid fa-star"></i>
+								<span class="ml-1">난이도</span>
+							</div>
+							<div class="text-gray-400 my-4">자유롭게 판단해주세요.</div>
+							<select name="level" class="select select-lg select-accent w-full max-w-xs">
+								<option disabled selected>선택</option>
+								<option class="text-xl" value='1'>누구나</option>
+								<option class="text-xl" value='2'>초급</option>
+								<option class="text-xl" value='3'>중급</option>
+								<option class="text-xl" value='4'>고급</option>
+							</select>
+						</div>
 					</div>
-					<div>
-						<i class="fa-solid fa-star"></i>
-						<span class="ml-1">${ recipe.forPrintLevel }</span>
-					</div>
+					<!-- 선택영역 끝 -->
 				</div>
+
+				<!-- 안내영역, 직접입력 영역 시작 -->
+				<div class="info-box bg-green-400 w-80">
+					<!-- 안내문구 -->
+					<div class="text-3xl text-center mb-10">요리정보</div>
+				</div>
+				<!-- 안내영역, 직접입력 영역 끝 -->
+
 			</section>
+			<!-- 요리정보 입력 영역 끝(인원, 소요시간, 난이도) -->
 
 			<!-- 팁 / 주의사항 시작 -->
 			<section class="bg-white rounded-md p-12 flex mb-5">

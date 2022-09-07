@@ -3,6 +3,31 @@
 <c:set var="pageTitle" value="레시피 등록페이지" />
 <%@include file="../common/head.jspf"%>
 
+<!-- 요리정보 입력 스크립트 시작 -->
+<script>
+	var changeAmountBox = function(value) {
+		$("#changeAmountInput").val(value + "인분");
+	}
+	var changeTimeBox = function(value) {
+		$("#changeTimeInput").val(value + "분이내");
+	}
+	var changeLevelBox = function(value) {
+
+		if (value == "1") {
+			value = "누구나";
+		} else if (value == "2") {
+			value = "초급";
+		} else if (value == "3") {
+			value = "중급";
+		} else if (value == "4") {
+			value = "고급";
+		}
+
+		$("#changeLevelInput").val(value);
+	}
+</script>
+<!-- 요리정보 입력 스크립트 끝 -->
+
 <form class="" action="../recipe/doWrite" method="POST">
 
 	<div class="bg-gray-200 py-4">
@@ -53,14 +78,15 @@
 								<i class="fa-solid fa-user-check"></i>
 								<span class="ml-1">인원</span>
 							</div>
-							<select name="amount" class="select select-lg select-accent w-full max-w-xs mt-4">
+							<select name="amount" id="changeAmount" onchange="changeAmountBox(this.value)"
+								class="select select-lg select-accent w-full max-w-xs mt-4">
 								<option disabled selected>선택</option>
-								<option class="text-xl" value='1'>1인분</option>
-								<option class="text-xl" value='2'>2인분</option>
-								<option class="text-xl" value='3'>3인분</option>
-								<option class="text-xl" value='4'>4인분</option>
-								<option class="text-xl" value='5'>5인분</option>
-								<option class="text-xl" value='6'>6인분 이상</option>
+								<option class="text-xl" value="1">1인분</option>
+								<option class="text-xl" value="2">2인분</option>
+								<option class="text-xl" value="3">3인분</option>
+								<option class="text-xl" value="4">4인분</option>
+								<option class="text-xl" value="5">5인분</option>
+								<option class="text-xl" value="6">6인분 이상</option>
 							</select>
 						</div>
 
@@ -69,14 +95,15 @@
 								<i class="fa-solid fa-clock"></i>
 								<span class="ml-1">소요시간</span>
 							</div>
-							<select name="time" class="select select-lg select-accent w-full max-w-xs mt-4">
+							<select name="time" id="changeTime" onchange="changeTimeBox(this.value)"
+								class="select select-lg select-accent w-full max-w-xs mt-4">
 								<option disabled selected>선택</option>
-								<option class="text-xl" value='5'>5분이내</option>
-								<option class="text-xl" value='10'>10분이내</option>
-								<option class="text-xl" value='30'>30분이내</option>
-								<option class="text-xl" value='60'>1시간이내</option>
-								<option class="text-xl" value='120'>2시간이내</option>
-								<option class="text-xl" value='180'>3시간이내</option>
+								<option class="text-xl" value="5">5분이내</option>
+								<option class="text-xl" value="10">10분이내</option>
+								<option class="text-xl" value="30">30분이내</option>
+								<option class="text-xl" value="60">1시간이내</option>
+								<option class="text-xl" value="120">2시간이내</option>
+								<option class="text-xl" value="180">3시간이내</option>
 							</select>
 						</div>
 
@@ -85,12 +112,13 @@
 								<i class="fa-solid fa-star"></i>
 								<span class="ml-1">난이도</span>
 							</div>
-							<select name="level" class="select select-lg select-accent w-full max-w-xs mt-4">
+							<select name="level" id="changeLevel" onchange="changeLevelBox(this.value)"
+								class="select select-lg select-accent w-full max-w-xs mt-4">
 								<option disabled selected>선택</option>
-								<option class="text-xl" value='1'>누구나</option>
-								<option class="text-xl" value='2'>초급</option>
-								<option class="text-xl" value='3'>중급</option>
-								<option class="text-xl" value='4'>고급</option>
+								<option class="text-xl" value="1">누구나</option>
+								<option class="text-xl" value="2">초급</option>
+								<option class="text-xl" value="3">중급</option>
+								<option class="text-xl" value="4">고급</option>
 							</select>
 						</div>
 					</div>
@@ -100,7 +128,11 @@
 						<!-- 우측 요리정보 입력란에서 직접 입력가능 -->
 						<li>등록하신 요리재료를 기준으로 "인원"을 선택해주세요.</li>
 						<li>재료손질부터 요리완성까지를 기준으로 "소요시간"을 선택해주세요.</li>
-						<li>당신은 당신의 요리가 어떤가요? <br />자유롭게 "난이도"를 판단해보세요.</li>
+						<li>
+							당신은 당신의 요리가 어떤가요?
+							<br />
+							자유롭게 "난이도"를 판단해보세요.
+						</li>
 					</ul>
 				</div>
 
@@ -114,15 +146,15 @@
 					<div class="px-10 flex flex-col space-y-4">
 						<div>
 							<div class="ml-2 font-medium text-slate-700 text-lg">인원</div>
-							<input name="amount" type="text" class="input input-lg input-bordered w-full" value="2인분" />
+							<input name="amount" id="changeAmountInput" type="text" class="input input-lg input-bordered w-full" value="" />
 						</div>
 						<div>
 							<div class="ml-2 font-medium text-slate-700 text-lg">소요시간</div>
-							<input name="amount" type="text" class="input input-lg input-bordered w-full" value="2인분" />
+							<input name="time" id="changeTimeInput" type="text" class="input input-lg input-bordered w-full" value="" />
 						</div>
 						<div>
 							<div class="ml-2 font-medium text-slate-700 text-lg">난이도</div>
-							<input name="amount" type="text" class="input input-lg input-bordered w-full" value="2인분" />
+							<input name="level" id="changeLevelInput" type="text" class="input input-lg input-bordered w-full" value="" />
 						</div>
 					</div>
 				</div>

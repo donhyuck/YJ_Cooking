@@ -43,18 +43,17 @@
 				<div class="select-box w-full">
 					<!-- 안내문구 -->
 					<div class="text-xl text-gray-600 mb-10">
-						<i class="fa-regular fa-square-check"></i>
+						<i class="fa-regular fa-square-check text-green-400"></i>
 						<span>선택란을 클릭하여 요리정보를 입력할 수 있습니다.</span>
 					</div>
 					<!-- 선택영역 시작 -->
 					<div class="flex justify-around">
-						<div class="select-amount">
+						<div class="select-amount w-48">
 							<div class="mr-2 font-medium text-slate-700 text-2xl text-center">
 								<i class="fa-solid fa-user-check"></i>
 								<span class="ml-1">인원</span>
 							</div>
-							<div class="text-gray-400 my-4">등록하실 재료의 양으로 선택해주세요.</div>
-							<select name="amount" class="select select-lg select-accent w-full max-w-xs">
+							<select name="amount" class="select select-lg select-accent w-full max-w-xs mt-4">
 								<option disabled selected>선택</option>
 								<option class="text-xl" value='1'>1인분</option>
 								<option class="text-xl" value='2'>2인분</option>
@@ -65,13 +64,12 @@
 							</select>
 						</div>
 
-						<div class="select-time">
+						<div class="select-time w-48">
 							<div class="mr-2 font-medium text-slate-700 text-2xl text-center">
 								<i class="fa-solid fa-clock"></i>
 								<span class="ml-1">소요시간</span>
 							</div>
-							<div class="text-gray-400 my-4">재료손질부터 완성까지 소요되는 시간</div>
-							<select name="time" class="select select-lg select-accent w-full max-w-xs">
+							<select name="time" class="select select-lg select-accent w-full max-w-xs mt-4">
 								<option disabled selected>선택</option>
 								<option class="text-xl" value='5'>5분이내</option>
 								<option class="text-xl" value='10'>10분이내</option>
@@ -82,13 +80,12 @@
 							</select>
 						</div>
 
-						<div class="select-level">
+						<div class="select-level w-48">
 							<div class="mr-2 font-medium text-slate-700 text-2xl text-center">
 								<i class="fa-solid fa-star"></i>
 								<span class="ml-1">난이도</span>
 							</div>
-							<div class="text-gray-400 my-4">자유롭게 판단해주세요.</div>
-							<select name="level" class="select select-lg select-accent w-full max-w-xs">
+							<select name="level" class="select select-lg select-accent w-full max-w-xs mt-4">
 								<option disabled selected>선택</option>
 								<option class="text-xl" value='1'>누구나</option>
 								<option class="text-xl" value='2'>초급</option>
@@ -98,14 +95,38 @@
 						</div>
 					</div>
 					<!-- 선택영역 끝 -->
+					<!-- 안내문구 -->
+					<ul class="list-disc text-lg leading-loose mt-10 mx-20">
+						<!-- 우측 요리정보 입력란에서 직접 입력가능 -->
+						<li>등록하신 요리재료를 기준으로 "인원"을 선택해주세요.</li>
+						<li>재료손질부터 요리완성까지를 기준으로 "소요시간"을 선택해주세요.</li>
+						<li>당신은 당신의 요리가 어떤가요? <br />자유롭게 "난이도"를 판단해보세요.</li>
+					</ul>
 				</div>
 
-				<!-- 안내영역, 직접입력 영역 시작 -->
-				<div class="info-box bg-green-400 w-80">
+				<!-- 요리정보 안내영역 시작 -->
+				<div class="info-box bg-gray-100 w-3/6 rounded-xl ml-4 p-3 pb-6">
 					<!-- 안내문구 -->
-					<div class="text-3xl text-center mb-10">요리정보</div>
+					<div class="text-2xl text-center text-green-400 text-bold my-3">
+						<i class="fa-regular fa-square-check"></i>
+						요리정보
+					</div>
+					<div class="px-10 flex flex-col space-y-4">
+						<div>
+							<div class="ml-2 font-medium text-slate-700 text-lg">인원</div>
+							<input name="amount" type="text" class="input input-lg input-bordered w-full" value="2인분" />
+						</div>
+						<div>
+							<div class="ml-2 font-medium text-slate-700 text-lg">소요시간</div>
+							<input name="amount" type="text" class="input input-lg input-bordered w-full" value="2인분" />
+						</div>
+						<div>
+							<div class="ml-2 font-medium text-slate-700 text-lg">난이도</div>
+							<input name="amount" type="text" class="input input-lg input-bordered w-full" value="2인분" />
+						</div>
+					</div>
 				</div>
-				<!-- 안내영역, 직접입력 영역 끝 -->
+				<!-- 요리정보 안내영역 끝 -->
 
 			</section>
 			<!-- 요리정보 입력 영역 끝(인원, 소요시간, 난이도) -->

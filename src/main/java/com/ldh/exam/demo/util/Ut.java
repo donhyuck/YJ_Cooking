@@ -105,8 +105,7 @@ public class Ut {
 				}
 
 				else {
-					alert('메인홈으로 이동합니다. 다시 시도해주세요.');
-					location.replace('/');
+					history.back();
 				}
 				</script>
 				""", goal, msg, uri);

@@ -11,7 +11,10 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.20/lodash.min.js"></script>
 
 <script>
-	const param = ${rq.paramJsonStr};
+	const param = $
+	{
+		rq.paramJsonStr
+	};
 </script>
 
 <!-- 테일윈드 불러오기 -->
@@ -64,34 +67,39 @@
 
 				<!-- 마이 페이지 -->
 				<c:if test="${ rq.logined == true }">
-					<a href="/user/member/myPage" type="button" class="text-green-500">
+					<a href="/user/member/myPage" type="button" class="text-green-500 text-center">
 						<i class="fa-solid fa-user-circle"></i>
+						<div class="text-sm font-bold mt-1">마이홈</div>
 					</a>
 				</c:if>
 
 				<!-- 회원가입 -->
 				<c:if test="${ rq.logined == false }">
-					<a href="${ rq.joinUri }" type="button" class="text-green-500">
+					<a href="${ rq.joinUri }" type="button" class="text-green-500 text-center">
 						<i class="fa-solid fa-id-card-clip"></i>
+						<div class="text-sm font-bold mt-1">회원가입</div>
 					</a>
 				</c:if>
 
 				<!-- 레시피 등록 -->
-				<a href="/user/recipe/write" type="button" class="text-red-500">
+				<a href="/user/recipe/write" type="button" class="text-red-500 text-center">
 					<i class="fa-solid fa-square-pen"></i>
+					<div class="text-sm font-bold mt-1">레시피등록</div>
 				</a>
 
 				<!-- 로그인 -->
 				<c:if test="${ rq.logined == false }">
-					<a href="${ rq.loginUri }" type="button" class="text-yellow-500">
+					<a href="${ rq.loginUri }" type="button" class="text-yellow-500 text-center">
 						<i class="fa-solid fa-arrow-right-to-bracket"></i>
+						<div class="text-sm font-bold mt-1">로그인</div>
 					</a>
 				</c:if>
 
 				<!-- 로그아웃 -->
 				<c:if test="${ rq.logined == true }">
-					<a href="${ rq.logoutUri }" type="button" class="text-yellow-500">
+					<a href="${ rq.logoutUri }" type="button" class="text-yellow-500 text-center">
 						<i class="fa-solid fa-arrow-right-from-bracket"></i>
+						<div class="text-sm font-bold mt-1">로그아웃</div>
 					</a>
 				</c:if>
 			</div>

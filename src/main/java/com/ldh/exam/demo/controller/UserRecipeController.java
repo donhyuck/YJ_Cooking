@@ -250,7 +250,8 @@ public class UserRecipeController {
 	// 레시피 등록하기 메서드
 	@RequestMapping("/user/recipe/doWrite")
 	@ResponseBody
-	public String doWrite(String title, String body, String replaceUri) {
+	public String doWrite(String title, String body, int amount, int time, int level, String tip,
+			@RequestParam(defaultValue = "/") String replaceUri) {
 
 		// 입력 데이터 유효성 검사
 		if (Ut.empty(title)) {
@@ -260,16 +261,13 @@ public class UserRecipeController {
 		if (Ut.empty(body)) {
 			return rq.jsHistoryBack("내용(을)를 입력해주세요.");
 		}
-
+		
 		// 레시피 등록하기
-		int id = recipeService.writeRecipe(rq.getLoginedMemberId(), title, body);
+//		int id = recipeService.writeRecipe(rq.getLoginedMemberId(), title, body);
 
 		// 레시피 등록 후 이동
-		if (Ut.empty(replaceUri)) {
-			replaceUri = Ut.f("../recipe/detail?id=%d", id);
-		}
 
-		return rq.jsReplace(Ut.f("%s번 레시피가 등록되었습니다.", id), replaceUri);
+		return null;
 	}
 
 	// 레시피 수정 페이지 메서드

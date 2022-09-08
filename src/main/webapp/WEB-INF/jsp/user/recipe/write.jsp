@@ -276,6 +276,70 @@
 		</section>
 		<!-- 재료, 양념 영역 끝 -->
 
+		<!-- 레시피 분류 영역 시작 -->
+		<section class="bg-white rounded-md p-12 mb-5">
+			<!-- 안내문구 -->
+			<div class="mb-5">
+				<div class="text-3xl font-bold">레시피 분류 선택</div>
+			</div>
+
+			<div class="flex justify-around">
+				<div class="w-52">
+					<div class="font-medium text-slate-700 text-2xl text-center mb-3">
+						<span>종류</span>
+					</div>
+					<select class="select select-lg select-info select-bordered w-full max-w-xs">
+						<option disabled selected>선택</option>
+						<option class="text-xl" value="1">1인분</option>
+						<option class="text-xl" value="2">2인분</option>
+					</select>
+				</div>
+				<div class="w-52">
+					<div class="font-medium text-slate-700 text-2xl text-center mb-3">
+						<span>분류</span>
+					</div>
+					<select class="select select-lg select-info select-bordered w-full max-w-xs">
+						<option disabled selected>선택</option>
+						<option class="text-xl" value="1">1인분</option>
+						<option class="text-xl" value="2">2인분</option>
+					</select>
+				</div>
+				<div class="w-52">
+					<div class="font-medium text-slate-700 text-2xl text-center mb-3">
+						<span>재료</span>
+					</div>
+					<select class="select select-lg select-info select-bordered w-full max-w-xs">
+						<option disabled selected>선택</option>
+						<option class="text-xl" value="1">1인분</option>
+						<option class="text-xl" value="2">2인분</option>
+					</select>
+				</div>
+				<div class="w-52">
+					<div class="font-medium text-slate-700 text-2xl text-center mb-3">
+						<span>자유</span>
+					</div>
+					<select class="select select-lg select-info w-full max-w-xs">
+						<option disabled selected>선택</option>
+						<option class="text-xl" value="1">1인분</option>
+						<option class="text-xl" value="2">2인분</option>
+					</select>
+				</div>
+			</div>
+
+			<!-- 안내문구 -->
+			<div class="text-lg text-gray-600 mt-5">
+				<div>
+					<i class="fa-regular fa-square-check text-blue-400"></i>
+					<span>키워드에 따라 다른 분들이 쉽게 레시피를 검색할 수 있어요.</span>
+				</div>
+				<div>
+					<i class="fa-regular fa-circle-question"></i>
+					<span>어울리는 키워드가 없다면? 자유 카테고리에서 입력해보세요.</span>
+				</div>
+			</div>
+		</section>
+		<!-- 레시피 분류 영역 끝 -->
+
 		<!-- 조리순서 영역 시작 -->
 		<section class="bg-white rounded-md p-12 mb-5">
 			<div class="text-3xl font-bold mb-8">조리순서</div>

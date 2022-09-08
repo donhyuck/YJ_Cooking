@@ -56,6 +56,27 @@
 			return;
 		}
 
+		form.amount.value = form.amount.value.trim();
+		if (form.amount.value.length == 0) {
+			alert('인원을 선택 또는 입력해주세요.');
+			form.amount.focus();
+			return;
+		}
+
+		form.time.value = form.time.value.trim();
+		if (form.time.value.length == 0) {
+			alert('소요시간을 선택 또는 입력해주세요.');
+			form.time.focus();
+			return;
+		}
+
+		form.level.value = form.level.value.trim();
+		if (form.level.value == 0) {
+			alert('난이도를 선택해주세요.');
+			form.level.focus();
+			return;
+		}
+
 		RecipeWrite_submitFormDone = true;
 		form.submit();
 	}
@@ -150,7 +171,7 @@
 							</div>
 							<select name="level" onchange="changeLevelBox(this.value)"
 								class="select select-lg select-accent w-full max-w-xs mt-4">
-								<option disabled selected>선택</option>
+								<option disabled selected value="0">선택</option>
 								<option class="text-xl" value="1">누구나</option>
 								<option class="text-xl" value="2">초급</option>
 								<option class="text-xl" value="3">중급</option>
@@ -160,7 +181,7 @@
 					</div>
 					<!-- 선택영역 (인원, 소요시간, 난이도) 끝 -->
 					<!-- 안내문구 -->
-					<ul class="list-disc text-lg leading-loose mt-10 mx-20">
+					<ul class="list-disc text-lg flex flex-col space-y-5 mt-10 mx-20">
 						<!-- 우측 요리정보 입력란에서 직접 입력가능 -->
 						<li>등록하신 요리재료를 기준으로 "인원"을 선택해주세요.</li>
 						<li>재료손질부터 요리완성까지를 기준으로 "소요시간"을 선택해주세요.</li>
@@ -176,7 +197,7 @@
 				<div class="info-box bg-gray-100 w-3/6 rounded-xl ml-4 p-3 pb-6">
 					<!-- 안내문구 -->
 					<div class="text-2xl text-center text-green-400 text-bold my-3">
-						<div>
+						<div class="mb-1">
 							<i class="fa-regular fa-square-check"></i>
 							<span>요리정보</span>
 						</div>
@@ -185,26 +206,29 @@
 							<i class="fa-regular fa-pen-field"></i>
 							<i class="fa-light fa-pen-field"></i>
 							<i class="fa-solid fa-pen-field"></i>
-							<span>숫자를 입력하여 변경 할 수 있습니다.</span>
+							<span>입력란에서 직접 변경이 가능합니다.</span>
+							<div class="text-sm">(숫자만 입력, 최대 세자리까지 가능)</div>
 						</div>
 					</div>
 					<div class="px-10 flex flex-col space-y-4">
 						<div>
 							<div class="ml-2 font-medium text-slate-700 text-lg">인원</div>
-							<input name="amount" id="changeAmountInput" type="text" maxlength="3"
+							<input name="amount" id="changeAmountInput" type="text" maxlength="3" autocomplete="off"
+								oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
 								class="input input-lg input-bordered w-24 text-center font-bold" placeholder="입력" />
 							<span class="text-xl">인분</span>
 						</div>
 						<div>
 							<div class="ml-2 font-medium text-slate-700 text-lg">소요시간</div>
-							<input name="time" id="changeTimeInput" type="text" maxlength="3"
+							<input name="time" id="changeTimeInput" type="text" maxlength="3" autocomplete="off"
+								oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
 								class="input input-lg input-bordered w-24 text-center font-bold" placeholder="입력" />
 							<span class="text-xl">분이내</span>
 						</div>
 						<div>
 							<div class="ml-2 font-medium text-slate-700 text-lg">난이도</div>
 							<input id="changeLevelInput" type="text" class="input input-lg input-bordered w-32 text-center font-bold"
-								placeholder="미선택" disabled />
+								placeholder="미선택" disabled value="" />
 						</div>
 					</div>
 				</div>
@@ -270,15 +294,15 @@
 					</div>
 				</c:forEach>
 			</div>
+
+			<!-- 레시피 조작 영역 시작 -->
+			<div class="btns flex justify-end space-x-5">
+				<button type="button" class="btn btn-lg btn-outline" onclick="history.back();">뒤로가기</button>
+				<button type="submit" class="btn btn-lg btn-primary btn-outline">등록하기</button>
+			</div>
+			<!-- 레시피 조작 영역 끝 -->
 		</section>
 		<!-- 조리순서 영역 시작 -->
-
-		<!-- 레시피 조작 영역 시작 -->
-		<div class="btns text-center">
-			<button type="button" class="btn btn-outline" onclick="history.back();">뒤로가기</button>
-			<button type="submit" class="btn btn-primary btn-outline">등록</button>
-		</div>
-		<!-- 레시피 조작 영역 끝 -->
 	</div>
 
 </form>

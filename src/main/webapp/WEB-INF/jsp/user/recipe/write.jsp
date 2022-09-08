@@ -7,29 +7,27 @@
 <script>
 	var changeAmountBox = function(value) {
 
-		let amountName = value + "인분";
-		$("#changeAmountInput").val(amountName);
+		$("#changeAmountInput").val(value);
 	}
 	var changeTimeBox = function(value) {
 
-		let timeName = value + "분이내";
-		$("#changeTimeInput").val(timeName);
+		$("#changeTimeInput").val(value);
 	}
 	var changeLevelBox = function(value) {
 
-		let levelName = "";
+		let valueName = "미선택";
 
 		if (value == "1") {
-			levelName = "누구나";
+			valueName = "누구나";
 		} else if (value == "2") {
-			levelName = "초급";
+			valueName = "초급";
 		} else if (value == "3") {
-			levelName = "중급";
+			valueName = "중급";
 		} else if (value == "4") {
-			levelName = "고급";
+			valueName = "고급";
 		}
 
-		$("#changeLevelInput").val(levelName);
+		$("#changeLevelInput").val(valueName);
 	}
 </script>
 <!-- 요리정보 입력 스크립트 끝 -->
@@ -55,24 +53,6 @@
 		if (form.body.value.length == 0) {
 			alert('요리소개를 입력해주세요.');
 			form.body.focus();
-			return;
-		}
-		form.amount.value = form.amount.value.trim();
-		if (form.amount.value.length == 0) {
-			alert('인원을 선택 또는 입력해주세요.');
-			form.amount.focus();
-			return;
-		}
-		form.time.value = form.time.value.trim();
-		if (form.time.value.length == 0) {
-			alert('소요시간을 선택 또는 입력해주세요.');
-			form.time.focus();
-			return;
-		}
-		form.level.value = form.level.value.trim();
-		if (form.level.value.length == 0) {
-			alert('난이도를 선택 또는 입력해주세요.');
-			form.level.focus();
 			return;
 		}
 
@@ -123,7 +103,11 @@
 					<!-- 안내문구 -->
 					<div class="text-xl text-gray-600 mb-10">
 						<i class="fa-regular fa-square-check text-green-400"></i>
-						<span>선택란을 클릭하여 요리정보를 입력할 수 있습니다.</span>
+						<span>
+							선택란을 클릭하여
+							<span class="text-green-400">요리정보</span>
+							를 입력할 수 있습니다.
+						</span>
 					</div>
 					<!-- 선택영역 (인원, 소요시간, 난이도) 시작 -->
 					<div class="flex justify-around">
@@ -132,8 +116,7 @@
 								<i class="fa-solid fa-user-check"></i>
 								<span class="ml-1">인원</span>
 							</div>
-							<select name="amount" onchange="changeAmountBox(this.value)"
-								class="select select-lg select-accent w-full max-w-xs mt-4">
+							<select onchange="changeAmountBox(this.value)" class="select select-lg select-accent w-full max-w-xs mt-4">
 								<option disabled selected>선택</option>
 								<option class="text-xl" value="1">1인분</option>
 								<option class="text-xl" value="2">2인분</option>
@@ -149,8 +132,7 @@
 								<i class="fa-solid fa-clock"></i>
 								<span class="ml-1">소요시간</span>
 							</div>
-							<select name="time" onchange="changeTimeBox(this.value)"
-								class="select select-lg select-accent w-full max-w-xs mt-4">
+							<select onchange="changeTimeBox(this.value)" class="select select-lg select-accent w-full max-w-xs mt-4">
 								<option disabled selected>선택</option>
 								<option class="text-xl" value="5">5분이내</option>
 								<option class="text-xl" value="10">10분이내</option>
@@ -194,22 +176,35 @@
 				<div class="info-box bg-gray-100 w-3/6 rounded-xl ml-4 p-3 pb-6">
 					<!-- 안내문구 -->
 					<div class="text-2xl text-center text-green-400 text-bold my-3">
-						<i class="fa-regular fa-square-check"></i>
-						요리정보
+						<div>
+							<i class="fa-regular fa-square-check"></i>
+							<span>요리정보</span>
+						</div>
+						<div class="text-gray-500 text-lg">
+							<i class="fa-sharp fa-solid fa-pen-to-square"></i>
+							<i class="fa-regular fa-pen-field"></i>
+							<i class="fa-light fa-pen-field"></i>
+							<i class="fa-solid fa-pen-field"></i>
+							<span>숫자를 입력하여 변경 할 수 있습니다.</span>
+						</div>
 					</div>
 					<div class="px-10 flex flex-col space-y-4">
 						<div>
 							<div class="ml-2 font-medium text-slate-700 text-lg">인원</div>
-							<input name="amount" id="changeAmountInput" type="text" class="input input-lg input-bordered w-full" value="" />
+							<input name="amount" id="changeAmountInput" type="text" maxlength="3"
+								class="input input-lg input-bordered w-24 text-center font-bold" placeholder="입력" />
+							<span class="text-xl">인분</span>
 						</div>
 						<div>
 							<div class="ml-2 font-medium text-slate-700 text-lg">소요시간</div>
-							<input name="time" id="changeTimeInput" type="text" class="input input-lg input-bordered w-full" value="" />
+							<input name="time" id="changeTimeInput" type="text" maxlength="3"
+								class="input input-lg input-bordered w-24 text-center font-bold" placeholder="입력" />
+							<span class="text-xl">분이내</span>
 						</div>
 						<div>
 							<div class="ml-2 font-medium text-slate-700 text-lg">난이도</div>
-							<input name="level" id="changeLevelInput" type="text" class="input input-lg input-bordered w-full" disabled
-								value="" />
+							<input id="changeLevelInput" type="text" class="input input-lg input-bordered w-32 text-center font-bold"
+								placeholder="미선택" disabled />
 						</div>
 					</div>
 				</div>

@@ -261,7 +261,11 @@ public class UserRecipeController {
 		if (Ut.empty(body)) {
 			return rq.jsHistoryBack("내용(을)를 입력해주세요.");
 		}
-		
+
+		System.out.println("amount = " + amount);
+		System.out.println("time = " + time);
+		System.out.println("level = " + level);
+
 		// 레시피 등록하기
 //		int id = recipeService.writeRecipe(rq.getLoginedMemberId(), title, body);
 

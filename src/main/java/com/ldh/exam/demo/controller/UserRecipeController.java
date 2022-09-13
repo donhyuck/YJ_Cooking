@@ -268,25 +268,14 @@ public class UserRecipeController {
 			return rq.jsHistoryBack("내용(을)를 입력해주세요.");
 		}
 
-		System.out.println("amount = " + amount);
-		System.out.println("time = " + time);
-		System.out.println("level = " + level);
-		System.out.println("sortId = " + sortId);
-		System.out.println("methodId = " + methodId);
-		System.out.println("contentId = " + contentId);
-		System.out.println("freeId = " + freeId);
-
 		// 등록된 레시피의 가이드 설정
 		int guideId = boardService.makeGuideForWriteRecipe(sortId, methodId, contentId, freeId);
-		
-		System.out.println("guideId = " + guideId);
 
 		// 레시피 등록하기
-//		int id = recipeService.writeRecipe(rq.getLoginedMemberId(), title, body);
+		int id = recipeService.writeRecipe(rq.getLoginedMemberId(), title, body, amount, time, level, guideId, tip);
 
 		// 레시피 등록 후 이동
-
-		return null;
+		return rq.jsReplace(Ut.f("%s번 레시피가 등록되었습니다.", id), Ut.f("../recipe/detail?id=%d", id));
 	}
 
 	// 레시피 수정 페이지 메서드

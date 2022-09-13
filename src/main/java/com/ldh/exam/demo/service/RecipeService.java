@@ -152,14 +152,15 @@ public class RecipeService {
 
 	// 댓글 남긴 레시피 목록 가져오기
 	public List<Recipe> getHaveReplyRecipes(int memberId) {
-		
+
 		return recipeRepository.getHaveReplyRecipes(memberId);
 	}
 
 	// 레시피 등록하기
-	public int writeRecipe(int memberId, String title, String body) {
+	public int writeRecipe(int memberId, String title, String body, int amount, int time, int level, int guideId,
+			String tip) {
 
-		recipeRepository.writeRecipe(memberId, title, body);
+		recipeRepository.writeRecipe(memberId, title, body, amount, time, level, guideId, tip);
 
 		return recipeRepository.getLastInsertId();
 	}

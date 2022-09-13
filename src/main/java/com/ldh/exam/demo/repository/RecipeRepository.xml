@@ -228,12 +228,17 @@
 
 	<insert id="writeRecipe">
 		INSERT INTO recipe
-		SET regDate = NOW(),
-		updateDate =
-		NOW(),
+		SET regDate=NOW(),
+		updateDate=NOW(),
 		memberId = #{memberId},
-		title = #{title},
-		`body` = #{body}
+		`title` = #{title},
+		`body` =
+		#{body},
+		`amount` = #{amount},
+		`time` = #{time},
+		`level` = #{level},
+		`guideId` = #{guideId},
+		`tip` = #{tip}
 	</insert>
 
 	<update id="modifyRecipe">

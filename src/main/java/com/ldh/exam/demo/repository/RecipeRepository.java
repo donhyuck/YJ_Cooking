@@ -33,7 +33,8 @@ public interface RecipeRepository {
 
 	public List<Recipe> getHaveReplyRecipes(int memberId);
 
-	public void writeRecipe(int memberId, String title, String body);
+	public void writeRecipe(int memberId, String title, String body, int amount, int time, int level, int guideId,
+			String tip);
 
 	public void modifyRecipe(int id, String title, String body);
 

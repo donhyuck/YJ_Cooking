@@ -31,7 +31,6 @@
 	}
 </script>
 <!-- 요리정보 입력 스크립트 끝 -->
-
 <!-- 입력데이터 검사 스크립트 시작 -->
 <script>
 	let RecipeWrite_submitFormDone = false;
@@ -83,10 +82,23 @@
 </script>
 <!-- 입력데이터 검사 스크립트 끝 -->
 
+<!-- 버튼 클릭시 이동 효과 스크립트 시작 -->
+<script>
+	jQuery(document).ready(function($) {
+		$(".scroll").click(function(event) {
+			event.preventDefault();
+			$("html,body").animate({
+				scrollTop : $(this.hash).offset().top
+			}, 400);
+		});
+	});
+</script>
+<!-- 버튼 클릭시 이동 효과 스크립트 끝 -->
+
 <form class="bg-gray-200 py-4" action="../recipe/doWrite" method="POST"
 	onsubmit="RecipeWrite_submitForm(this); return false;">
 
-	<div class="write-box w-10/12 mx-auto">
+	<div class="write-box w-10/12 mx-auto" id="topTarget">
 		<section class="bg-white rounded-md p-12 flex mb-5">
 			<!-- 대표사진 등록 -->
 			<a href="#"
@@ -300,6 +312,7 @@
 								<option class="text-2xl" value="${ category.relId }">${ category.name }</option>
 							</c:if>
 						</c:forEach>
+						<option class="text-xl text-red-600" value="0">(선택취소)</option>
 					</select>
 				</div>
 				<div class="w-52">
@@ -313,6 +326,7 @@
 								<option class="text-2xl" value="${ category.relId }">${ category.name }</option>
 							</c:if>
 						</c:forEach>
+						<option class="text-xl text-red-600" value="0">(선택취소)</option>
 					</select>
 				</div>
 				<div class="w-52">
@@ -326,6 +340,7 @@
 								<option class="text-2xl" value="${ category.relId }">${ category.name }</option>
 							</c:if>
 						</c:forEach>
+						<option class="text-xl text-red-600" value="0">(선택취소)</option>
 					</select>
 				</div>
 				<div class="w-52">
@@ -339,6 +354,7 @@
 								<option class="text-2xl" value="${ category.relId }">${ category.name }</option>
 							</c:if>
 						</c:forEach>
+						<option class="text-xl text-red-600" value="0">(선택취소)</option>
 					</select>
 				</div>
 			</div>
@@ -347,6 +363,11 @@
 			<div class="text-lg text-gray-600 mt-7">
 				<ul class="list-disc text-lg mx-10">
 					<li>선택하신 키워드를 통해 다른 분들이 쉽게 레시피를 검색할 수 있어요.</li>
+					<li>
+						원하는 선택사항이 없다면,
+						<span class="text-red-600">(선택취소)</span>
+						를 해주세요.
+					</li>
 				</ul>
 				<!-- <div>
 					<i class="fa-regular fa-circle-question"></i>
@@ -376,13 +397,27 @@
 			</div>
 
 			<!-- 레시피 조작 영역 시작 -->
-			<div class="btns flex justify-end space-x-5">
+			<div class="btns flex justify-end space-x-5" id="downTarget">
 				<button type="button" class="btn btn-lg btn-outline" onclick="history.back();">뒤로가기</button>
 				<button type="submit" class="btn btn-lg btn-primary btn-outline">등록하기</button>
 			</div>
 			<!-- 레시피 조작 영역 끝 -->
+
+			<!-- 스크롤 버튼 -->
+			<div class="fixed right-10 bottom-28 text-4xl text-center hover:text-yellow-400">
+				<a href="#topTarget" class="scroll">
+					<i class="fa-solid fa-circle-arrow-up"></i>
+					<div class="text-xl font-black">TOP</div>
+				</a>
+			</div>
+			<div class="fixed right-7 bottom-6 text-4xl text-center hover:text-yellow-400">
+				<a href="#downTarget" class="scroll">
+					<i class="fa-solid fa-circle-arrow-down"></i>
+					<div class="text-xl font-black">DOWN</div>
+				</a>
+			</div>
 		</section>
-		<!-- 조리순서 영역 시작 -->
+		<!-- 조리순서 영역 끝 -->
 	</div>
 
 </form>

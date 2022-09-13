@@ -45,5 +45,11 @@
 		SELECT
 		LAST_INSERT_ID()
 	</select>
+	
+	<update id="updateRecipeId">
+		UPDATE guide
+		SET recipeId = #{recipeId}
+		WHERE id = #{guideId}
+	</update>
 
 </mapper> 

@@ -274,6 +274,9 @@ public class UserRecipeController {
 		// 레시피 등록하기
 		int id = recipeService.writeRecipe(rq.getLoginedMemberId(), title, body, amount, time, level, guideId, tip);
 
+		// 등록된 레시피 번호를 가이드로 갱신
+		boardService.updateRecipeId(guideId, id);
+
 		// 레시피 등록 후 이동
 		return rq.jsReplace(Ut.f("%s번 레시피가 등록되었습니다.", id), Ut.f("../recipe/detail?id=%d", id));
 	}

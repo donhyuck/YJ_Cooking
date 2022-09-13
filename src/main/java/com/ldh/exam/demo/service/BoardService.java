@@ -88,11 +88,18 @@ public class BoardService {
 		return ResultData.from("S-2", "선택된 카테고리내역입니다.", "nowCategoryName", nowCategoryName);
 	}
 
+	// 등록된 레시피의 가이드 설정
 	public int makeGuideForWriteRecipe(int sortId, int methodId, int contentId, int freeId) {
 
 		boardRepository.makeGuideForWriteRecipe(sortId, methodId, contentId, freeId);
 
 		return boardRepository.getLastInsertId();
+	}
+
+	// 등록된 레시피 번호를 가이드로 갱신
+	public void updateRecipeId(int guideId, int recipeId) {
+
+		boardRepository.updateRecipeId(guideId, recipeId);
 	}
 
 }

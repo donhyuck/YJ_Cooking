@@ -23,4 +23,6 @@ public interface BoardRepository {
 
 	public int getLastInsertId();
 
+	public void updateRecipeId(int guideId, int recipeId);
+
 }

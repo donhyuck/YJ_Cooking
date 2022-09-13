@@ -242,7 +242,11 @@ public class UserRecipeController {
 
 	// 레시피 등록 페이지 메서드
 	@RequestMapping("/user/recipe/write")
-	public String showWrite() {
+	public String showWrite(Model model) {
+
+		// 분류 선택시 카테고리 목록
+		List<Category> categories = boardService.getCategories();
+		model.addAttribute("categories", categories);
 
 		return "user/recipe/write";
 	}
@@ -250,8 +254,8 @@ public class UserRecipeController {
 	// 레시피 등록하기 메서드
 	@RequestMapping("/user/recipe/doWrite")
 	@ResponseBody
-	public String doWrite(String title, String body, int amount, int time, int level, String tip,
-			@RequestParam(defaultValue = "/") String replaceUri) {
+	public String doWrite(String title, String body, int amount, int time, int level, String tip, int sortId,
+			int methodId, int contentId, int freeId, @RequestParam(defaultValue = "/") String replaceUri) {
 
 		// 입력 데이터 유효성 검사
 		if (Ut.empty(title)) {
@@ -265,6 +269,10 @@ public class UserRecipeController {
 		System.out.println("amount = " + amount);
 		System.out.println("time = " + time);
 		System.out.println("level = " + level);
+		System.out.println("sortId = " + sortId);
+		System.out.println("methodId = " + methodId);
+		System.out.println("contentId = " + contentId);
+		System.out.println("freeId = " + freeId);
 
 		// 레시피 등록하기
 //		int id = recipeService.writeRecipe(rq.getLoginedMemberId(), title, body);

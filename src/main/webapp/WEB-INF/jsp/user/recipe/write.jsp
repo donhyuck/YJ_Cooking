@@ -293,40 +293,52 @@
 					<div class="font-medium text-slate-700 text-2xl text-center mb-3">
 						<span class="font-bold">종류</span>
 					</div>
-					<select class="select select-lg select-info select-bordered w-full max-w-xs">
-						<option disabled selected>선택</option>
-						<option class="text-xl" value="1">1인분</option>
-						<option class="text-xl" value="2">2인분</option>
+					<select name="sortId" class="select select-lg select-info select-bordered w-full max-w-xs">
+						<option disabled selected value="0">선택</option>
+						<c:forEach var="category" items="${ categories }">
+							<c:if test="${ category.boardId == 1 }">
+								<option class="text-xl" value="${ category.relId }">${ category.name }</option>
+							</c:if>
+						</c:forEach>
 					</select>
 				</div>
 				<div class="w-52">
 					<div class="font-medium text-slate-700 text-2xl text-center mb-3">
-						<span class="font-bold">분류</span>
+						<span class="font-bold">방법</span>
 					</div>
-					<select class="select select-lg select-info select-bordered w-full max-w-xs">
-						<option disabled selected>선택</option>
-						<option class="text-xl" value="1">1인분</option>
-						<option class="text-xl" value="2">2인분</option>
+					<select name="methodId" class="select select-lg select-info select-bordered w-full max-w-xs">
+						<option disabled selected value="0">선택</option>
+						<c:forEach var="category" items="${ categories }">
+							<c:if test="${ category.boardId == 2 }">
+								<option class="text-xl" value="${ category.relId }">${ category.name }</option>
+							</c:if>
+						</c:forEach>
 					</select>
 				</div>
 				<div class="w-52">
 					<div class="font-medium text-slate-700 text-2xl text-center mb-3">
 						<span class="font-bold">재료</span>
 					</div>
-					<select class="select select-lg select-info select-bordered w-full max-w-xs">
-						<option disabled selected>선택</option>
-						<option class="text-xl" value="1">1인분</option>
-						<option class="text-xl" value="2">2인분</option>
+					<select name="contentId" class="select select-lg select-info select-bordered w-full max-w-xs">
+						<option disabled selected value="0">선택</option>
+						<c:forEach var="category" items="${ categories }">
+							<c:if test="${ category.boardId == 3 }">
+								<option class="text-xl" value="${ category.relId }">${ category.name }</option>
+							</c:if>
+						</c:forEach>
 					</select>
 				</div>
 				<div class="w-52">
 					<div class="font-medium text-slate-700 text-2xl text-center mb-3">
 						<span class="font-bold">자유</span>
 					</div>
-					<select class="select select-lg select-info w-full max-w-xs">
-						<option disabled selected>선택</option>
-						<option class="text-xl" value="1">1인분</option>
-						<option class="text-xl" value="2">2인분</option>
+					<select name="freeId" class="select select-lg select-info select-bordered w-full max-w-xs">
+						<option disabled selected value="0">선택</option>
+						<c:forEach var="category" items="${ categories }">
+							<c:if test="${ category.boardId == 4 }">
+								<option class="text-xl" value="${ category.relId }">${ category.name }</option>
+							</c:if>
+						</c:forEach>
 					</select>
 				</div>
 			</div>

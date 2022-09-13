@@ -101,14 +101,14 @@
 			<div class="flex flex-col space-y-4 w-3/5 h-80 m-auto mb-8">
 				<!-- 제목 -->
 				<div>
-					<div class="ml-1 mb-2 font-medium text-slate-700 text-lg">레시피 제목</div>
+					<div class="ml-1 mb-2 font-medium text-slate-700 text-2xl">레시피 제목</div>
 					<input name="title" type="text" class="input input-lg input-bordered w-full" placeholder="예) 돼지듬뿍 김치찌게" />
 				</div>
 				<!-- 내용 -->
 				<div>
-					<div class="ml-1 mb-2 font-medium text-slate-700 text-lg">
+					<div class="ml-1 mb-2 font-medium text-slate-700 text-2xl">
 						<div>레시피 소개</div>
-						<div class="text-base text-gray-400">"어떻게 만들게 되었나요?" "직접 먹어보니 어떠셨나요?" 자유롭게 적어보세요</div>
+						<div class="text-base text-gray-400">> "어떻게 만들게 되었나요?" "직접 먹어보니 어떠셨나요?" 자유롭게 소개해보세요</div>
 					</div>
 					<textarea rows="5" name="body" type="text" class="w-full text-lg p-5 border border-gray-300 rounded-lg"
 						placeholder="예) 아빠표 특제 레시피를 소개합니다. 저녁 한끼로도 안주로도 딱이에요.&#13;&#10;밥솥으로 조리를 하여 푹 끓인 맛이 나요."></textarea>
@@ -125,7 +125,7 @@
 					<div class="text-xl text-gray-600 mb-10">
 						<i class="fa-regular fa-square-check text-green-400"></i>
 						<span>
-							선택란을 클릭하여
+							아래의 선택란을 이용하여
 							<span class="text-green-400">요리정보</span>
 							를 입력할 수 있습니다.
 						</span>
@@ -182,13 +182,16 @@
 					<!-- 선택영역 (인원, 소요시간, 난이도) 끝 -->
 					<!-- 안내문구 -->
 					<ul class="list-disc text-lg flex flex-col space-y-5 mt-10 mx-20">
-						<!-- 우측 요리정보 입력란에서 직접 입력가능 -->
 						<li>등록하신 요리재료를 기준으로 "인원"을 선택해주세요.</li>
 						<li>재료손질부터 요리완성까지를 기준으로 "소요시간"을 선택해주세요.</li>
+						<li>간단한 소개로서 자유롭게 "난이도"를 판단해보세요.</li>
 						<li>
-							당신은 당신의 요리가 어떤가요?
-							<br />
-							자유롭게 "난이도"를 판단해보세요.
+							원하는 선택지가 없다면 우측의
+							<span class="text-yellow-400">
+								<i class="fa-sharp fa-solid fa-pen-to-square"></i>
+								<span>입력칸</span>
+							</span>
+							을 이용해보세요.
 						</li>
 					</ul>
 				</div>
@@ -201,25 +204,24 @@
 							<i class="fa-regular fa-square-check"></i>
 							<span>요리정보</span>
 						</div>
-						<div class="text-gray-500 text-lg">
-							<i class="fa-sharp fa-solid fa-pen-to-square"></i>
-							<i class="fa-regular fa-pen-field"></i>
-							<i class="fa-light fa-pen-field"></i>
-							<i class="fa-solid fa-pen-field"></i>
-							<span>입력란에서 직접 변경이 가능합니다.</span>
-							<div class="text-sm">(숫자만 입력, 최대 세자리까지 가능)</div>
-						</div>
+						<div class="text-sm">(숫자만 입력, 최대 세자리까지 가능)</div>
 					</div>
 					<div class="px-10 flex flex-col space-y-4">
 						<div>
-							<div class="ml-2 font-medium text-slate-700 text-lg">인원</div>
+							<div class="ml-2 font-medium text-slate-700 text-lg">
+								<i class="fa-sharp fa-solid fa-pen-to-square text-yellow-400"></i>
+								인원
+							</div>
 							<input name="amount" id="changeAmountInput" type="text" maxlength="3" autocomplete="off"
 								oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
 								class="input input-lg input-bordered w-24 text-center font-bold" placeholder="입력" />
 							<span class="text-xl">인분</span>
 						</div>
 						<div>
-							<div class="ml-2 font-medium text-slate-700 text-lg">소요시간</div>
+							<div class="ml-2 font-medium text-slate-700 text-lg">
+								<i class="fa-sharp fa-solid fa-pen-to-square text-yellow-400"></i>
+								소요시간
+							</div>
 							<input name="time" id="changeTimeInput" type="text" maxlength="3" autocomplete="off"
 								oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
 								class="input input-lg input-bordered w-24 text-center font-bold" placeholder="입력" />
@@ -240,10 +242,10 @@
 				<div class="mb-2 font-bold text-red-600">
 					<i class="fa-solid fa-lightbulb"></i>
 					<span class="ml-1">팁 / 주의사항</span>
-					<span class="text-black font-normal">- 알아두면 좋은 점들이나 주의사항을 남길 수 있어요.</span>
+					<span class="text-black font-normal">- 알아두면 좋은 점들이나 주의사항을 남길 수 있어요. (선택사항)</span>
 				</div>
 				<textarea type="text" name="tip" class="p-3 mx-4 border border-gray-300 rounded-lg" rows="4"
-					placeholder="예시) 간장을 넣으실땐 기름에 눌리도록 넣으면 향이 더 강해져요.&#13;&#10;양념을 넣을땐 소금보다 설탕을 먼저 넣어야 잘 스며들어요."></textarea>
+					placeholder="예시) 간장을 넣으실땐 달궈진 기름 위로 눌리도록 넣으면 향이 더 강해져요.&#13;&#10;양념을 넣을땐 소금보다 설탕을 먼저 넣어야 잘 스며들어요."></textarea>
 			</div>
 			<!-- 팁 / 주의사항 끝 -->
 
@@ -279,14 +281,17 @@
 		<!-- 레시피 분류 영역 시작 -->
 		<section class="bg-white rounded-md p-12 mb-5">
 			<!-- 안내문구 -->
-			<div class="mb-5">
-				<div class="text-3xl font-bold">레시피 분류 선택</div>
+			<div class="mb-7">
+				<div class="text-3xl font-bold">
+					<i class="fa-regular fa-square-check text-blue-400 mr-1"></i>
+					<span>레시피 분류 선택</span>
+				</div>
 			</div>
 
 			<div class="flex justify-around">
 				<div class="w-52">
 					<div class="font-medium text-slate-700 text-2xl text-center mb-3">
-						<span>종류</span>
+						<span class="font-bold">종류</span>
 					</div>
 					<select class="select select-lg select-info select-bordered w-full max-w-xs">
 						<option disabled selected>선택</option>
@@ -296,7 +301,7 @@
 				</div>
 				<div class="w-52">
 					<div class="font-medium text-slate-700 text-2xl text-center mb-3">
-						<span>분류</span>
+						<span class="font-bold">분류</span>
 					</div>
 					<select class="select select-lg select-info select-bordered w-full max-w-xs">
 						<option disabled selected>선택</option>
@@ -306,7 +311,7 @@
 				</div>
 				<div class="w-52">
 					<div class="font-medium text-slate-700 text-2xl text-center mb-3">
-						<span>재료</span>
+						<span class="font-bold">재료</span>
 					</div>
 					<select class="select select-lg select-info select-bordered w-full max-w-xs">
 						<option disabled selected>선택</option>
@@ -316,7 +321,7 @@
 				</div>
 				<div class="w-52">
 					<div class="font-medium text-slate-700 text-2xl text-center mb-3">
-						<span>자유</span>
+						<span class="font-bold">자유</span>
 					</div>
 					<select class="select select-lg select-info w-full max-w-xs">
 						<option disabled selected>선택</option>
@@ -327,15 +332,14 @@
 			</div>
 
 			<!-- 안내문구 -->
-			<div class="text-lg text-gray-600 mt-5">
-				<div>
-					<i class="fa-regular fa-square-check text-blue-400"></i>
-					<span>키워드에 따라 다른 분들이 쉽게 레시피를 검색할 수 있어요.</span>
-				</div>
-				<div>
+			<div class="text-lg text-gray-600 mt-7">
+				<ul class="list-disc text-lg mx-10">
+					<li>선택하신 키워드를 통해 다른 분들이 쉽게 레시피를 검색할 수 있어요.</li>
+				</ul>
+				<!-- <div>
 					<i class="fa-regular fa-circle-question"></i>
 					<span>어울리는 키워드가 없다면? 자유 카테고리에서 입력해보세요.</span>
-				</div>
+				</div> -->
 			</div>
 		</section>
 		<!-- 레시피 분류 영역 끝 -->

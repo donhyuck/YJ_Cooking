@@ -294,10 +294,10 @@
 						<span class="font-bold">종류</span>
 					</div>
 					<select name="sortId" class="select select-lg select-info select-bordered w-full max-w-xs">
-						<option disabled selected value="0">선택</option>
+						<option disabled selected>선택</option>
 						<c:forEach var="category" items="${ categories }">
 							<c:if test="${ category.boardId == 1 }">
-								<option class="text-xl" value="${ category.relId }">${ category.name }</option>
+								<option class="text-2xl" value="${ category.relId }">${ category.name }</option>
 							</c:if>
 						</c:forEach>
 					</select>
@@ -307,10 +307,10 @@
 						<span class="font-bold">방법</span>
 					</div>
 					<select name="methodId" class="select select-lg select-info select-bordered w-full max-w-xs">
-						<option disabled selected value="0">선택</option>
+						<option disabled selected>선택</option>
 						<c:forEach var="category" items="${ categories }">
 							<c:if test="${ category.boardId == 2 }">
-								<option class="text-xl" value="${ category.relId }">${ category.name }</option>
+								<option class="text-2xl" value="${ category.relId }">${ category.name }</option>
 							</c:if>
 						</c:forEach>
 					</select>
@@ -320,10 +320,10 @@
 						<span class="font-bold">재료</span>
 					</div>
 					<select name="contentId" class="select select-lg select-info select-bordered w-full max-w-xs">
-						<option disabled selected value="0">선택</option>
+						<option disabled selected>선택</option>
 						<c:forEach var="category" items="${ categories }">
 							<c:if test="${ category.boardId == 3 }">
-								<option class="text-xl" value="${ category.relId }">${ category.name }</option>
+								<option class="text-2xl" value="${ category.relId }">${ category.name }</option>
 							</c:if>
 						</c:forEach>
 					</select>
@@ -333,10 +333,10 @@
 						<span class="font-bold">자유</span>
 					</div>
 					<select name="freeId" class="select select-lg select-info select-bordered w-full max-w-xs">
-						<option disabled selected value="0">선택</option>
+						<option disabled selected>선택</option>
 						<c:forEach var="category" items="${ categories }">
 							<c:if test="${ category.boardId == 4 }">
-								<option class="text-xl" value="${ category.relId }">${ category.name }</option>
+								<option class="text-2xl" value="${ category.relId }">${ category.name }</option>
 							</c:if>
 						</c:forEach>
 					</select>

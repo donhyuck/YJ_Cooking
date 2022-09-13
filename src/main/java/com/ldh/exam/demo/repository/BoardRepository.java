@@ -19,4 +19,8 @@ public interface BoardRepository {
 
 	public List<Category> getCategories();
 
+	public int makeGuideForWriteRecipe(int sortId, int methodId, int contentId, int freeId);
+
+	public int getLastInsertId();
+
 }

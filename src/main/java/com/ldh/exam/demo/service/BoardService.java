@@ -88,4 +88,11 @@ public class BoardService {
 		return ResultData.from("S-2", "선택된 카테고리내역입니다.", "nowCategoryName", nowCategoryName);
 	}
 
+	public int makeGuideForWriteRecipe(int sortId, int methodId, int contentId, int freeId) {
+
+		boardRepository.makeGuideForWriteRecipe(sortId, methodId, contentId, freeId);
+
+		return boardRepository.getLastInsertId();
+	}
+
 }

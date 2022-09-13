@@ -254,8 +254,10 @@ public class UserRecipeController {
 	// 레시피 등록하기 메서드
 	@RequestMapping("/user/recipe/doWrite")
 	@ResponseBody
-	public String doWrite(String title, String body, int amount, int time, int level, String tip, int sortId,
-			int methodId, int contentId, int freeId, @RequestParam(defaultValue = "/") String replaceUri) {
+	public String doWrite(String title, String body, int amount, int time, int level, String tip,
+			@RequestParam(defaultValue = "0") int sortId, @RequestParam(defaultValue = "0") int methodId,
+			@RequestParam(defaultValue = "0") int contentId, @RequestParam(defaultValue = "0") int freeId,
+			@RequestParam(defaultValue = "/") String replaceUri) {
 
 		// 입력 데이터 유효성 검사
 		if (Ut.empty(title)) {
@@ -273,6 +275,11 @@ public class UserRecipeController {
 		System.out.println("methodId = " + methodId);
 		System.out.println("contentId = " + contentId);
 		System.out.println("freeId = " + freeId);
+
+		// 등록된 레시피의 가이드 설정
+		int guideId = boardService.makeGuideForWriteRecipe(sortId, methodId, contentId, freeId);
+		
+		System.out.println("guideId = " + guideId);
 
 		// 레시피 등록하기
 //		int id = recipeService.writeRecipe(rq.getLoginedMemberId(), title, body);

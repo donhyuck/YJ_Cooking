@@ -30,4 +30,20 @@
 		AS C
 	</select>
 
+	<insert id="makeGuideForWriteRecipe">
+		INSERT INTO
+		guide
+		SET regDate=NOW(),
+		updateDate=NOW(),
+		sortId=#{sortId},
+		methodId=#{methodId},
+		contentId=#{contentId},
+		freeId=#{freeId}
+	</insert>
+
+	<select id="getLastInsertId" resultType="int">
+		SELECT
+		LAST_INSERT_ID()
+	</select>
+
 </mapper> 

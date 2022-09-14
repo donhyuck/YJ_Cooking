@@ -75,7 +75,6 @@
 			$('#relId').append("<option value='7' class='text-lg'>도시락</option>'");
 			$('#relId').append("<option value='8' class='text-lg'>기념일</option>'");
 			$('#relId').append("<option value='9' class='text-lg'>집들이</option>'");
-			$('#relId').append("<option value='10' class='text-lg'>기타</option>'");
 		}
 
 		document.getElementById("relId").style.display = "";

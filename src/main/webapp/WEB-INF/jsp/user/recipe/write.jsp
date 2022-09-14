@@ -82,19 +82,6 @@
 </script>
 <!-- 입력데이터 검사 스크립트 끝 -->
 
-<!-- 버튼 클릭시 이동 효과 스크립트 시작 -->
-<script>
-	jQuery(document).ready(function($) {
-		$(".scroll").click(function(event) {
-			event.preventDefault();
-			$("html,body").animate({
-				scrollTop : $(this.hash).offset().top
-			}, 400);
-		});
-	});
-</script>
-<!-- 버튼 클릭시 이동 효과 스크립트 끝 -->
-
 <form class="bg-gray-200 py-4" action="../recipe/doWrite" method="POST"
 	onsubmit="RecipeWrite_submitForm(this); return false;">
 
@@ -294,9 +281,10 @@
 		<section class="bg-white rounded-md p-12 mb-5">
 			<!-- 안내문구 -->
 			<div class="mb-7">
-				<div class="text-3xl font-bold">
-					<i class="fa-regular fa-square-check text-blue-400 mr-1"></i>
+				<div class="text-3xl font-bold flex items-center">
+					<i class="fa-regular fa-square-check text-blue-400 mr-2"></i>
 					<span>레시피 분류 선택</span>
+					<span class="text-lg font-light ml-2">(선택사항)</span>
 				</div>
 			</div>
 
@@ -306,7 +294,7 @@
 						<span class="font-bold">종류</span>
 					</div>
 					<select name="sortId" class="select select-lg select-info select-bordered w-full max-w-xs">
-						<option disabled selected>선택</option>
+						<option disabled selected>(미선택)</option>
 						<c:forEach var="category" items="${ categories }">
 							<c:if test="${ category.boardId == 1 }">
 								<option class="text-2xl" value="${ category.relId }">${ category.name }</option>
@@ -320,7 +308,7 @@
 						<span class="font-bold">방법</span>
 					</div>
 					<select name="methodId" class="select select-lg select-info select-bordered w-full max-w-xs">
-						<option disabled selected>선택</option>
+						<option disabled selected>(미선택)</option>
 						<c:forEach var="category" items="${ categories }">
 							<c:if test="${ category.boardId == 2 }">
 								<option class="text-2xl" value="${ category.relId }">${ category.name }</option>
@@ -334,7 +322,7 @@
 						<span class="font-bold">재료</span>
 					</div>
 					<select name="contentId" class="select select-lg select-info select-bordered w-full max-w-xs">
-						<option disabled selected>선택</option>
+						<option disabled selected>(미선택)</option>
 						<c:forEach var="category" items="${ categories }">
 							<c:if test="${ category.boardId == 3 }">
 								<option class="text-2xl" value="${ category.relId }">${ category.name }</option>
@@ -345,13 +333,13 @@
 				</div>
 				<div class="w-52">
 					<div class="font-medium text-slate-700 text-2xl text-center mb-3">
-						<span class="font-bold">자유</span>
+						<span class="font-bold">상황</span>
 					</div>
 					<select name="freeId" class="select select-lg select-info select-bordered w-full max-w-xs">
-						<option disabled selected>선택</option>
+						<option disabled selected>(미선택)</option>
 						<c:forEach var="category" items="${ categories }">
 							<c:if test="${ category.boardId == 4 }">
-								<option class="text-2xl" value="${ category.relId }">${ category.name }</option>
+								<option class="text-2xl" value="${ category.name }">${ category.name }</option>
 							</c:if>
 						</c:forEach>
 						<option class="text-xl text-red-600" value="0">(선택취소)</option>
@@ -363,8 +351,9 @@
 			<div class="text-lg text-gray-600 mt-7">
 				<ul class="list-disc text-lg mx-10">
 					<li>선택하신 키워드를 통해 다른 분들이 쉽게 레시피를 검색할 수 있어요.</li>
+					<li>분류 선택을 윈하지 않는 항목은 (미선택)으로 그대로 넘어가시면 됩니다.</li>
 					<li>
-						원하는 선택사항이 없다면,
+						이미 키워드 선택을 했다면
 						<span class="text-red-600">(선택취소)</span>
 						를 해주세요.
 					</li>

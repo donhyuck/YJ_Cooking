@@ -427,7 +427,7 @@ CREATE TABLE board (
     regDate DATETIME NOT NULL,
     updateDate DATETIME NOT NULL,
     `code` CHAR(50) NOT NULL UNIQUE COMMENT 'sort,method,content,free...',
-    `boardName` CHAR(50) NOT NULL UNIQUE COMMENT '종류,방법,재료,자유...',
+    `boardName` CHAR(50) NOT NULL UNIQUE COMMENT '종류,방법,재료,상황...',
     delStatus TINYINT(1) UNSIGNED NOT NULL DEFAULT 0 COMMENT '삭제여부(0=삭제전,1=삭제)'
 );
 
@@ -454,7 +454,7 @@ INSERT INTO board
 SET regDate=NOW(),
 updateDate=NOW(),
 `code`='free',
-`boardName`='자유';
+`boardName`='상황';
 
 SELECT * FROM board;
 
@@ -799,13 +799,6 @@ boardId = 4,
 relId = 9,
 `name`='집들이';
 
-INSERT INTO category
-SET regDate=NOW(),
-updateDate=NOW(),
-boardId = 4,
-relId = 10,
-`name`='기타';
-
 ## 카테고리의 상위분류 이름과 함께 보기
 SELECT C.*, B.boardName
 FROM category AS C
@@ -826,7 +819,7 @@ CREATE TABLE guide (
 );
 
 ## 레시피 테이블에 guide 추가
-ALTER TABLE recipe ADD COLUMN guideId INT(10) UNSIGNED NOT NULL DEFAULT 0 AFTER memberId;
+ALTER TABLE recipe ADD COLUMN guideId INT(10) UNSIGNED NOT NULL DEFAULT 0 AFTER `level`;
 
 ## 기존 레시피데이터에 guide 속성부여
 INSERT INTO guide

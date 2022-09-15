@@ -1156,3 +1156,45 @@ UPDATE recipe
 SET title = '로제파스타',
 `body` = '한번만 먹어본 사람은 없다.'
 WHERE id = 3;
+
+# ingredient 테이블 생성(rowArr, rowValueArr, sauceArr, sauceValueArr);
+CREATE TABLE ingredient (
+    id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    regDate DATETIME NOT NULL,
+    updateDate DATETIME NOT NULL,
+    recipeId INT(10) UNSIGNED NOT NULL DEFAULT 0,
+    rowArr VARCHAR(50) NOT NULL DEFAULT '',
+    rowValueArr VARCHAR(50) NOT NULL DEFAULT '',
+    sauceArr VARCHAR(50) NOT NULL DEFAULT '',
+    sauceValueArr VARCHAR(50) NOT NULL DEFAULT ''
+);
+
+## 재료양념 데이터 구성
+INSERT INTO ingredient
+SET regDate=NOW(),
+updateDate=NOW(),
+recipeId=1,
+rowArr='파스타면,마늘,베이컨 또는 새우,양파',
+rowValueArr='500원크기,4개,1장,1줌,1/3개',
+sauceArr='토마토소스,생크림,치즈',
+sauceValueArr='120ml,170ml,1장';
+
+INSERT INTO ingredient
+SET regDate=NOW(),
+updateDate=NOW(),
+recipeId=2,
+rowArr='갈비대,밤,표고버섯',
+rowValueArr='2kg,1컵,4개',
+sauceArr='간배,간양파,간장,물,설탕,참기름,다진마늘,대파',
+sauceValueArr='1/2개,1/2개,3/4컵,1컵,1/2컵,1/2컵,3큰술,1개';
+
+INSERT INTO ingredient
+SET regDate=NOW(),
+updateDate=NOW(),
+recipeId=3,
+rowArr='감자,당근,양파',
+rowValueArr='3개,1/3개,1/2개',
+sauceArr='굴소스(선택),소금,후추',
+sauceValueArr='1T,약간,약간';
+
+SELECT * FROM ingredient;

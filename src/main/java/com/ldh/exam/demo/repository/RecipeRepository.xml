@@ -242,7 +242,13 @@
 	</insert>
 	
 	<insert id="doInsertIngredient">
-	
+		INSERT INTO ingredient
+		SET regDate=NOW(),
+		updateDate=NOW(),
+		rowArr=#{rowArr},
+		rowValueArr=#{rowValueArr},
+		sauceArr=#{sauceArr},
+		sauceValueArr=#{sauceValueArr}
 	</insert>
 
 	<update id="modifyRecipe">

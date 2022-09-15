@@ -483,6 +483,7 @@
 		param.map(function(item){
 			rowStr += item + ',';
 		});
+		rowStr = rowStr.substr(0, rowStr.lastIndexOf(',') );
 		
 		// 재료 값
 		param = [];
@@ -496,6 +497,7 @@
 		param.map(function(item){
 			rowValueStr += item + ',';
 		});
+		rowValueStr = rowValueStr.substr(0, rowValueStr.lastIndexOf(',') );
 		
 		// 양념 재료
 		param = [];
@@ -509,6 +511,7 @@
 		param.map(function(item){
 			sauceStr += item + ',';
 		});
+		sauceStr = sauceStr.substr(0, sauceStr.lastIndexOf(',') );
 		
 		// 양념 값
 		param = [];
@@ -522,12 +525,9 @@
 		param.map(function(item){
 			sauceValueStr += item + ',';
 		});
+		sauceValueStr = sauceValueStr.substr(0, sauceValueStr.lastIndexOf(',') );
 		
 		// 마지막 값에 붙은 구분점 지우기
-		rowStr = rowStr.substr(0, rowStr.lastIndexOf(',') );
-		rowValueStr = rowValueStr.substr(0, rowValueStr.lastIndexOf(',') );
-		sauceStr = sauceStr.substr(0, sauceStr.lastIndexOf(',') );
-		sauceValueStr = sauceValueStr.substr(0, sauceValueStr.lastIndexOf(',') );
 
 		// 구성된 문자열을 input테그 값으로
 		document['do-write-recipe-form'].rowArr.value = rowStr;

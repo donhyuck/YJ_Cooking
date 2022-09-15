@@ -258,7 +258,7 @@ public class UserRecipeController {
 	public String doWrite(String title, String body, int amount, int time, int level, String tip,
 			@RequestParam(defaultValue = "0") int sortId, @RequestParam(defaultValue = "0") int methodId,
 			@RequestParam(defaultValue = "0") int contentId, @RequestParam(defaultValue = "0") int freeId,
-			String rowValues, @RequestParam(defaultValue = "/") String replaceUri) {
+			String rowValueArr, @RequestParam(defaultValue = "/") String replaceUri) {
 
 		// 입력 데이터 유효성 검사
 		if (Ut.empty(title)) {
@@ -269,10 +269,11 @@ public class UserRecipeController {
 			return rq.jsHistoryBack("내용(을)를 입력해주세요.");
 		}
 
-		System.out.println("rowValues=" + rowValues);
-
 		// 등록된 레시피의 가이드 설정
 		int guideId = boardService.makeGuideForWriteRecipe(sortId, methodId, contentId, freeId);
+
+		// 재료, 양념 데이터 추가
+		// recipeService.doInsertIngredient(rowValueArr);
 
 		// 레시피 등록하기
 		int id = recipeService.writeRecipe(rq.getLoginedMemberId(), title, body, amount, time, level, guideId, tip);
@@ -282,14 +283,6 @@ public class UserRecipeController {
 
 		// 레시피 등록 후 이동
 		return rq.jsReplace(Ut.f("%s번 레시피가 등록되었습니다.", id), Ut.f("../recipe/detail?id=%d", id));
-	}
-
-	// 재료양념 데이터 추가
-	@RequestMapping("/user/recipe/doInsertIngredient")
-	@ResponseBody
-	public String doInsertIngredient(@RequestParam(defaultValue = "") String rowValues) {
-
-		return null;
 	}
 
 	// 레시피 수정 페이지 메서드

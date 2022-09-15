@@ -254,26 +254,33 @@
 		<!-- 재료, 양념 영역 시작 -->
 		<section class="bg-white rounded-md p-12 mb-5">
 			<div class="text-3xl font-bold mb-8">재료 준비</div>
-			<div class="flex justify-between space-x-5 text-2xl px-5">
+			<div class="flex justify-between text-2xl px-5">
 				<div class="w-1/2">
 					<div class="font-bold mb-5">[ 재료 ]</div>
-					<c:forEach begin="1" end="8" step="1">
-						<div class="grid grid-cols-2 mb-2 ml-4 px-3 border-b-2 border-dashed border-gray-300">
-							<div class="">버섯</div>
-							<div class="text-center">1개</div>
-						</div>
-					</c:forEach>
+					<div class="grid grid-cols-2 gap-x-20 gap-y-5">
+						<c:forEach begin="1" end="6" step="1">
+							<input name="row" type="text" class="input input-lg input-bordered" placeholder="양파" />
+							<input name="rowValue" type="text" class="input input-lg input-bordered" placeholder="2개" />
+						</c:forEach>
+					</div>
 				</div>
+				<div class="w-1 h-max mx-7 mt-12 -mb-2 rounded-lg opacity-50 bg-gray-200"></div>
 				<div class="w-1/2">
 					<div class="font-bold mb-5">[ 양념 ]</div>
-					<c:forEach begin="1" end="5" step="1">
-						<div class="grid grid-cols-2 mb-2 ml-4 px-3 border-b-2 border-dashed border-gray-300">
-							<div class="">간장</div>
-							<div class="text-center">1숟가락</div>
-						</div>
-					</c:forEach>
+					<div class="grid grid-cols-2 gap-x-20 gap-y-5">
+						<c:forEach begin="1" end="4" step="1">
+							<input name="sauce" type="text" class="input input-lg input-bordered bg-red-400" placeholder="간장" />
+							<input name="sauceValue" type="text" class="input input-lg input-bordered" placeholder="2T" />
+						</c:forEach>
+					</div>
 				</div>
 			</div>
+
+			<!-- 안내문구 -->
+			<ul class="list-disc text-lg flex flex-col space-y-5 mt-10 ml-10">
+				<li>부족해지거나 낭비를 막기 위해 계량정보를 입력해주세요.</li>
+				<li>계량컵, 계량스푼 등 대신에 가정용품으로 확인할 수 있어요. 1T = 1숟가락, 1티스푼 = 1t, 종이컵가득 = 약180ml</li>
+			</ul>
 		</section>
 		<!-- 재료, 양념 영역 끝 -->
 

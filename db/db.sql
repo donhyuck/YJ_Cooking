@@ -1140,3 +1140,19 @@ ORDER BY R.id DESC;
 SELECT * FROM `member`;
 SELECT * FROM recipe;
 SELECT * FROM guide;
+
+# 레시피 테스트 데이터 재등록
+UPDATE recipe
+SET title = '감자볶음',
+`body` = '손쉽게 만들어요.'
+WHERE id =1;
+
+UPDATE recipe
+SET title = '소갈비찜',
+`body` = '온가족 든든하게 즐겨요.'
+WHERE id = 2;
+
+UPDATE recipe
+SET title = '로제파스타',
+`body` = '한번만 먹어본 사람은 없다.'
+WHERE id = 3;

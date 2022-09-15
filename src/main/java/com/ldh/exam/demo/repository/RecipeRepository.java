@@ -36,6 +36,8 @@ public interface RecipeRepository {
 	public void writeRecipe(int memberId, String title, String body, int amount, int time, int level, int guideId,
 			String tip);
 
+	public int doInsertIngredient(String rowArr, String rowValueArr, String sauceArr, String sauceValueArr);
+
 	public void modifyRecipe(int id, String title, String body);
 
 	public void deleteRecipe(int id);

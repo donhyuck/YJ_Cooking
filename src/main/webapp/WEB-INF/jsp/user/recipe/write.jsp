@@ -284,8 +284,12 @@
 		<!-- 재료, 양념 영역 시작 -->
 		<section class="bg-white rounded-md p-12 mb-5">
 			<div class="text-3xl font-bold">재료 준비</div>
-			<!-- 재료양념 데이터 배열을 넘기기 -->
-			<input type="hidden" name="rowValueArr" value="" id="rowValue" />
+
+			<!-- 재료양념 데이터 문자열을 넘기기 -->
+			<input type="hidden" name="rowArr" />
+			<input type="hidden" name="rowValueArr" />
+			<input type="hidden" name="sauceArr" />
+			<input type="hidden" name="sauceValueArr" />
 
 			<!-- 안내문구 -->
 			<ul class="list-disc text-lg flex flex-col space-y-4 m-10">
@@ -467,7 +471,21 @@
 <script>
 	$('.btn-write-recipe').click(function() {
 		
+		// 재료 항목
 		var param = [];
+		var rowArr = $('[name="row"]');
+		
+		for ( var i = 0 ; i < rowArr.length ; i++ ) {
+			param.push(rowArr[i].value);
+		}
+		
+		var rowStr = '';
+		param.map(function(item){
+			rowStr += item + ',';
+		});
+		
+		// 재료 값
+		param = [];
 		var rowValueArr = $('[name="rowValue"]');
 		
 		for ( var i = 0 ; i < rowValueArr.length ; i++ ) {
@@ -475,15 +493,47 @@
 		}
 		
 		var rowValueStr = '';
-
 		param.map(function(item){
 			rowValueStr += item + ',';
 		});
 		
-		// 마지막 값에 붙은 구분점 지우기
-		rowValueStr = rowValueStr.substr(0, rowValueStr.lastIndexOf(',') );
+		// 양념 재료
+		param = [];
+		var sauceArr = $('[name="sauce"]');
 		
+		for ( var i = 0 ; i < sauceArr.length ; i++ ) {
+			param.push(sauceArr[i].value);
+		}
+		
+		var sauceStr = '';
+		param.map(function(item){
+			sauceStr += item + ',';
+		});
+		
+		// 양념 값
+		param = [];
+		var sauceValueArr = $('[name="sauceValue"]');
+		
+		for ( var i = 0 ; i < sauceValueArr.length ; i++ ) {
+			param.push(sauceValueArr[i].value);
+		}
+		
+		var sauceValueStr = '';
+		param.map(function(item){
+			sauceValueStr += item + ',';
+		});
+		
+		// 마지막 값에 붙은 구분점 지우기
+		rowStr = rowStr.substr(0, rowStr.lastIndexOf(',') );
+		rowValueStr = rowValueStr.substr(0, rowValueStr.lastIndexOf(',') );
+		sauceStr = sauceStr.substr(0, sauceStr.lastIndexOf(',') );
+		sauceValueStr = sauceValueStr.substr(0, sauceValueStr.lastIndexOf(',') );
+
+		// 구성된 문자열을 input테그 값으로
+		document['do-write-recipe-form'].rowArr.value = rowStr;
 		document['do-write-recipe-form'].rowValueArr.value = rowValueStr;
+		document['do-write-recipe-form'].sauceArr.value = sauceStr;
+		document['do-write-recipe-form'].sauceValueArr.value = sauceValueStr;
 	})
 </script>
 <!-- 재료양념 데이터 배열처리 스크립트 끝 -->

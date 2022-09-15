@@ -240,6 +240,10 @@
 		`guideId` = #{guideId},
 		`tip` = #{tip}
 	</insert>
+	
+	<insert id="doInsertIngredient">
+	
+	</insert>
 
 	<update id="modifyRecipe">
 		UPDATE recipe

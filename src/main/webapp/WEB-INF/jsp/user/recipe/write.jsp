@@ -82,6 +82,36 @@
 </script>
 <!-- 입력데이터 검사 스크립트 끝 -->
 
+<!-- 재료양념 입력칸 추가/삭제 스크립트 시작 -->
+<script>
+	const add_rowBox = () => {
+		const rowBox = document.getElementById("rowBox");
+		const newRowP = document.createElement('p');
+		newRowP.innerHTML = "<input name='row' type='text' class='input input-lg input-bordered w-60 text-center mb-5' placeholder='당근'/>"
+		+"<input name='rowValue' type='text' class='input input-lg input-bordered w-48 text-center ml-12 mr-0 mb-5' placeholder='1/2개'/>"
+		+"<div type='button' onclick='removeRow(this)' class='btn btn-circle ml-3 hover:text-red-400'>삭제</div>";
+		rowBox.appendChild(newRowP);
+	}
+	
+	const removeRow = (obj) => {
+	    document.getElementById('rowBox').removeChild(obj.parentNode);
+	}
+	
+	const add_sauceBox = () => {
+		const sauceBox = document.getElementById("sauceBox");
+		const newSauceP = document.createElement('p');
+		newSauceP.innerHTML = "<input name='sauce' type='text' class='input input-lg input-bordered w-60 text-center mb-5' placeholder='소금'/>"
+		+"<input name='sauceValue' type='text' class='input input-lg input-bordered w-48 text-center ml-12 mr-0 mb-5' placeholder='1t'/>"
+		+"<div type='button' onclick='removeSauce(this)' class='btn btn-circle ml-3 hover:text-red-400'>삭제</div>";
+		sauceBox.appendChild(newSauceP);
+	}
+	
+	const removeSauce = (obj) => {
+	    document.getElementById('sauceBox').removeChild(obj.parentNode);
+	}
+</script>
+<!-- 재료양념 입력칸 추가/삭제 스크립트 끝 -->
+
 <form class="bg-gray-200 py-4" action="../recipe/doWrite" method="POST"
 	onsubmit="RecipeWrite_submitForm(this); return false;">
 
@@ -253,34 +283,46 @@
 
 		<!-- 재료, 양념 영역 시작 -->
 		<section class="bg-white rounded-md p-12 mb-5">
-			<div class="text-3xl font-bold mb-8">재료 준비</div>
+			<div class="text-3xl font-bold">재료 준비</div>
+			<!-- 안내문구 -->
+			<ul class="list-disc text-lg flex flex-col space-y-4 m-10">
+				<li>부족해지거나 낭비를 막기 위해 계량정보를 입력해주세요.</li>
+				<li>
+					계량컵, 계량스푼 등 대신에 주방용품으로 확인할 수 있어요.
+					<i class="fa-solid fa-right-long"></i>
+					1T = 1숟가락, 1t = 1티스푼, 1종이컵 = 약180ml
+				</li>
+			</ul>
+
 			<div class="flex justify-between text-2xl px-5">
 				<div class="w-1/2">
 					<div class="font-bold mb-5">[ 재료 ]</div>
-					<div class="grid grid-cols-2 gap-x-20 gap-y-5">
-						<c:forEach begin="1" end="6" step="1">
-							<input name="row" type="text" class="input input-lg input-bordered" placeholder="양파" />
-							<input name="rowValue" type="text" class="input input-lg input-bordered" placeholder="2개" />
-						</c:forEach>
+					<div class="" id="rowBox">
+						<input name="row" type="text" class="input input-lg input-bordered w-60 text-center mb-5" placeholder="양파" />
+						<input name="rowValue" type="text" class="input input-lg input-bordered w-48 text-center ml-10 mr-0 mb-5"
+							placeholder="2개" />
+						<input name="row" type="text" class="input input-lg input-bordered w-60 text-center mb-5" placeholder="돼지고기" />
+						<input name="rowValue" type="text" class="input input-lg input-bordered w-48 text-center ml-10 mr-0 mb-5"
+							placeholder="300g" />
 					</div>
+					<div type="button" onclick="add_rowBox()" class="btn btn-success btn-wide mt-5">추가</div>
 				</div>
-				<div class="w-1 h-max mx-7 mt-12 -mb-2 rounded-lg opacity-50 bg-gray-200"></div>
+				<!-- 구분선 -->
+				<div class="w-1 h-max mx-3 mt-12 -mb-2 rounded-lg opacity-50 bg-gray-200"></div>
+
 				<div class="w-1/2">
 					<div class="font-bold mb-5">[ 양념 ]</div>
-					<div class="grid grid-cols-2 gap-x-20 gap-y-5">
-						<c:forEach begin="1" end="4" step="1">
-							<input name="sauce" type="text" class="input input-lg input-bordered bg-red-400" placeholder="간장" />
-							<input name="sauceValue" type="text" class="input input-lg input-bordered" placeholder="2T" />
-						</c:forEach>
+					<div class="" id="sauceBox">
+						<input name="sauce" type="text" class="input input-lg input-bordered w-60 text-center mb-5" placeholder="간장" />
+						<input name="sauceValue" type="text" class="input input-lg input-bordered w-48 text-center ml-10 mr-0 mb-5"
+							placeholder="2T" />
+						<input name="sauce" type="text" class="input input-lg input-bordered w-60 text-center mb-5" placeholder="고추장" />
+						<input name="sauceValue" type="text" class="input input-lg input-bordered w-48 text-center ml-10 mr-0 mb-5"
+							placeholder="3T" />
 					</div>
+					<div type="button" onclick="add_sauceBox()" class="btn btn-success btn-wide mt-5">추가</div>
 				</div>
 			</div>
-
-			<!-- 안내문구 -->
-			<ul class="list-disc text-lg flex flex-col space-y-5 mt-10 ml-10">
-				<li>부족해지거나 낭비를 막기 위해 계량정보를 입력해주세요.</li>
-				<li>계량컵, 계량스푼 등 대신에 가정용품으로 확인할 수 있어요. 1T = 1숟가락, 1티스푼 = 1t, 종이컵가득 = 약180ml</li>
-			</ul>
 		</section>
 		<!-- 재료, 양념 영역 끝 -->
 

@@ -295,6 +295,7 @@
 			</ul>
 
 			<div class="flex justify-between text-2xl px-5">
+				<input type="hidden" name="rowValues" value="" />
 				<div class="w-1/2">
 					<div class="font-bold mb-5">[ 재료 ]</div>
 					<div class="" id="rowBox">
@@ -437,7 +438,7 @@
 			<!-- 레시피 조작 영역 시작 -->
 			<div class="btns flex justify-end space-x-5" id="downTarget">
 				<button type="button" class="btn btn-lg btn-outline" onclick="history.back();">뒤로가기</button>
-				<button type="submit" class="btn btn-lg btn-primary btn-outline">등록하기</button>
+				<button type="submit" class="btn-write-recipe btn btn-lg btn-primary btn-outline">등록하기</button>
 			</div>
 			<!-- 레시피 조작 영역 끝 -->
 
@@ -458,6 +459,37 @@
 		<!-- 조리순서 영역 끝 -->
 	</div>
 
+</form>
+
+<!-- 재료양념 데이터 배열처리 스크립트 시작 -->
+<script>
+	$('.btn-write-recipe').click(function() {
+		
+		var param = [];
+		var rowValueArr = $('[name="rowValue"]');
+		
+		for ( var i = 0 ; i < rowValueArr.length ; i++ ) {
+			param.push(rowValueArr[i].value);
+		}
+		
+		var rowValueStr = '';
+
+		param.map(function(item){
+			rowValueStr += item + ',';
+		});
+		
+		// 마지막 값에 붙은 구분점 지우기
+		rowValueStr = rowValueStr.substr(0, rowValueStr.lastIndexOf(',') );
+		alert(rowValueStr);
+		
+		document['do-insert-ingredient-form'].rowValues.value = rowValueStr;
+	})
+</script>
+<!-- 재료양념 데이터 배열처리 스크립트 끝 -->
+
+<!-- 재료양념 데이터 배열을 넘기기 -->
+<form hidden method="POST" name="do-insert-ingredient-form" action="/user/recipe/doInsertIngredient">
+	<input type="hidden" name="rowValues" value="" />
 </form>
 
 <%@include file="../common/foot.jspf"%>

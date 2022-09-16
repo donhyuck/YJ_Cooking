@@ -76,10 +76,111 @@
 			return;
 		}
 		
+		// 재료양념 데이터 배열처리 스크립트 시작
+		var rowArrCnt = 0;
+		var rowValueArrCnt = 0;
+		var sauceArrCnt = 0;
+		var sauceValueArrCnt = 0;
+		var rowArr = $('[name="row"]');
+		var rowValueArr = $('[name="rowValue"]');
+		var sauceArr = $('[name="sauce"]');
+		var sauceValueArr = $('[name="sauceValue"]');
+
+		// 재료 항목
+		var param = [];
+		for ( var i = 0; i < rowArr.length; i++ ) {
+			rowArr[i].value = rowArr[i].value.trim();
+			param.push(rowArr[i].value);
+		}
+		
+		var rowStr = '';
+		param.map(function(item){
+			if ( item != '' && item.length - 1) {
+				rowStr += item + ',';
+				rowArrCnt++;
+			}
+		});
+		
+		// 재료 값
+		param = [];
+		for ( var i = 0; i < rowValueArr.length; i++ ) {
+			rowValueArr[i].value = rowValueArr[i].value.trim();
+			param.push(rowValueArr[i].value);
+		}
+		
+		var rowValueStr = '';
+		param.map(function(item){
+			if ( item != '' && item.length - 1) {
+				rowValueStr += item + ',';
+				rowValueArrCnt++;
+			}
+		});
+		
+		// 양념 항목
+		param = [];
+		for ( var i = 0; i < sauceArr.length; i++ ) {
+			sauceArr[i].value = sauceArr[i].value.trim();
+			param.push(sauceArr[i].value);
+		}
+		
+		var sauceStr = '';
+		param.map(function(item){
+			if ( item != '' && item.length - 1) {
+				sauceStr += item + ',';
+				sauceArrCnt++;
+			}
+		});
+		
+		// 양념 값
+		param = [];
+		for ( var i = 0; i < sauceValueArr.length; i++ ) {
+			sauceValueArr[i].value = sauceValueArr[i].value.trim();
+			param.push(sauceValueArr[i].value);
+		}
+		
+		var sauceValueStr = '';
+		param.map(function(item){
+			if ( item != '' && item.length - 1) {
+				sauceValueStr += item + ',';
+				sauceValueArrCnt++;
+			}
+		});
+
+		// 항목과 값 미입력 확인
+		if (rowArrCnt != rowValueArrCnt) {
+			alert('[재료]의 항목 또는 수량을 확인하시고, 빈칸을 채워주세요.');
+		    $("#rowBox").attr("tabindex", -1).focus();
+			return;
+		}
+		
+		if (sauceArrCnt != sauceValueArrCnt) {
+			alert('[양념]의 항목 또는 수량을 확인하시고, 빈칸을 채워주세요.');
+		    $("#rowBox").attr("tabindex", -1).focus();
+			return;
+		}
+
+		// 마지막 구분자(,)제거
+		rowStr = rowStr.substr(0, rowStr.lastIndexOf(',') );
+		rowValueStr = rowValueStr.substr(0, rowValueStr.lastIndexOf(',') );
+		sauceStr = sauceStr.substr(0, sauceStr.lastIndexOf(',') );
+		
+		sauceValueStr = sauceValueStr.substr(0, sauceValueStr.lastIndexOf(',') );
+
+		// 구성된 문자열을 input테그 값으로
+		document['do-write-recipe-form'].rowArr.value = rowStr;
+		document['do-write-recipe-form'].rowValueArr.value = rowValueStr;
+		document['do-write-recipe-form'].sauceArr.value = sauceStr;
+		document['do-write-recipe-form'].sauceValueArr.value = sauceValueStr;
+		
 		form.rowArr.value = form.rowArr.value.trim();
+		form.rowValueArr.value = form.rowValueArr.value.trim();
+		form.sauceArr.value = form.sauceArr.value.trim();
+		form.sauceValueArr.value = form.sauceValueArr.value.trim();
+		// 재료양념 데이터 배열처리 스크립트 끝
+		
 		if (form.rowArr.value == 0) {
-			alert('난이도를 선택해주세요.');
-			form.rowArr.focus();
+			alert('최소 1개 이상의 재료는 입력해주세요.');
+		    $("#rowBox").attr("tabindex", -1).focus();
 			return;
 		}
 
@@ -311,7 +412,7 @@
 			<div class="flex justify-between text-2xl px-5">
 				<div class="w-1/2">
 					<div class="font-bold mb-5">[ 재료 ]</div>
-					<div class="" id="rowBox">
+					<div id="rowBox">
 						<input name="row" type="text" class="input input-lg input-bordered w-60 text-center mb-5" placeholder="양파" />
 						<input name="rowValue" type="text" class="input input-lg input-bordered w-48 text-center ml-10 mr-0 mb-5"
 							placeholder="2개" />
@@ -326,7 +427,7 @@
 
 				<div class="w-1/2">
 					<div class="font-bold mb-5">[ 양념 ]</div>
-					<div class="" id="sauceBox">
+					<div id="sauceBox">
 						<input name="sauce" type="text" class="input input-lg input-bordered w-60 text-center mb-5" placeholder="간장" />
 						<input name="sauceValue" type="text" class="input input-lg input-bordered w-48 text-center ml-10 mr-0 mb-5"
 							placeholder="2T" />
@@ -451,7 +552,7 @@
 			<!-- 레시피 조작 영역 시작 -->
 			<div class="btns flex justify-end space-x-5" id="downTarget">
 				<button type="button" class="btn btn-lg btn-outline" onclick="history.back();">뒤로가기</button>
-				<button type="submit" class="btn-write-recipe btn btn-lg btn-primary btn-outline">등록하기</button>
+				<button type="submit" class="btn btn-lg btn-primary btn-outline">등록하기</button>
 			</div>
 			<!-- 레시피 조작 영역 끝 -->
 
@@ -471,91 +572,6 @@
 		</section>
 		<!-- 조리순서 영역 끝 -->
 	</div>
-
 </form>
-
-<!-- 재료양념 데이터 배열처리 스크립트 시작 -->
-<script>
-	$('.btn-write-recipe').click(function() {
-		
-		// 재료 항목
-		var param = [];
-		var rowArr = $('[name="row"]');
-		
-		for ( var i = 0 ; i < rowArr.length ; i++ ) {
-			rowArr[i].value = rowArr[i].value.trim();
-			param.push(rowArr[i].value);
-		}
-		
-		var rowStr = '';
-		param.map(function(item){
-			if ( item != '' && item.length - 1) {
-				rowStr += item + ',';
-			}
-		});
-		
-		rowStr = rowStr.substr(0, rowStr.lastIndexOf(',') );
-		
-		// 재료 값
-		param = [];
-		var rowValueArr = $('[name="rowValue"]');
-		
-		for ( var i = 0 ; i < rowValueArr.length ; i++ ) {
-			rowValueArr[i].value = rowValueArr[i].value.trim();
-			param.push(rowValueArr[i].value);
-		}
-		
-		var rowValueStr = '';
-		param.map(function(item){
-			if ( item != '' && item.length - 1) {
-				rowValueStr += item + ',';
-			}
-		});
-		
-		rowValueStr = rowValueStr.substr(0, rowValueStr.lastIndexOf(',') );
-		
-		// 양념 재료
-		param = [];
-		var sauceArr = $('[name="sauce"]');
-		
-		for ( var i = 0 ; i < sauceArr.length ; i++ ) {
-			sauceArr[i].value = sauceArr[i].value.trim();
-			param.push(sauceArr[i].value);
-		}
-		
-		var sauceStr = '';
-		param.map(function(item){
-			if ( item != '' && item.length - 1) {
-				sauceStr += item + ',';
-			}
-		});
-		sauceStr = sauceStr.substr(0, sauceStr.lastIndexOf(',') );
-		
-		// 양념 값
-		param = [];
-		var sauceValueArr = $('[name="sauceValue"]');
-		
-		for ( var i = 0 ; i < sauceValueArr.length ; i++ ) {
-			sauceValueArr[i].value = sauceValueArr[i].value.trim();
-			param.push(sauceValueArr[i].value);
-		}
-		
-		var sauceValueStr = '';
-		param.map(function(item){
-			if ( item != '' && item.length - 1) {
-				sauceValueStr += item + ',';
-			}
-		});
-		
-		sauceValueStr = sauceValueStr.substr(0, sauceValueStr.lastIndexOf(',') );
-
-		// 구성된 문자열을 input테그 값으로
-		document['do-write-recipe-form'].rowArr.value = rowStr;
-		document['do-write-recipe-form'].rowValueArr.value = rowValueStr;
-		document['do-write-recipe-form'].sauceArr.value = sauceStr;
-		document['do-write-recipe-form'].sauceValueArr.value = sauceValueStr;
-	})
-</script>
-<!-- 재료양념 데이터 배열처리 스크립트 끝 -->
 
 <%@include file="../common/foot.jspf"%>

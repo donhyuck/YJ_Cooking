@@ -227,24 +227,40 @@
 		<!-- 재료, 양념 영역 시작 -->
 		<section class="bg-white rounded-md p-12 mb-5">
 			<div class="text-3xl font-bold mb-8">재료 준비</div>
-			<div class="flex justify-between space-x-5 text-2xl px-5">
+
+			<div class="flex justify-between text-2xl px-5">
 				<div class="w-1/2">
 					<div class="font-bold mb-5">[ 재료 ]</div>
-					<c:forEach begin="1" end="8" step="1">
-						<div class="grid grid-cols-2 mb-2 ml-4 px-3 border-b-2 border-dashed border-gray-300">
-							<div class="">버섯</div>
-							<div class="text-center">1개</div>
+					<div class="flex text-center">
+						<div class="flex flex-col space-y-5 w-full text-left">
+							<c:forEach var="row" items="${ rowArr }">
+								<div class="py-3 pl-16 ml-6 border-b border-dashed border-gray-400">${ row }</div>
+							</c:forEach>
 						</div>
-					</c:forEach>
+						<div class="flex flex-col space-y-5 w-full">
+							<c:forEach begin="1" end="5" step="1">
+								<div class="py-3 mr-6 border-b border-dashed border-gray-400">2개</div>
+							</c:forEach>
+						</div>
+					</div>
 				</div>
+				<!-- 구분선 -->
+				<div class="w-1 h-max mx-3 mt-12 -mb-2 rounded-lg opacity-50 bg-gray-200"></div>
+
 				<div class="w-1/2">
 					<div class="font-bold mb-5">[ 양념 ]</div>
-					<c:forEach begin="1" end="5" step="1">
-						<div class="grid grid-cols-2 mb-2 ml-4 px-3 border-b-2 border-dashed border-gray-300">
-							<div class="">간장</div>
-							<div class="text-center">1숟가락</div>
+					<div class="flex text-center">
+						<div class="flex flex-col space-y-5 w-full text-left">
+							<c:forEach begin="1" end="5" step="1">
+								<div class="py-3 pl-16 ml-6 border-b border-dashed border-gray-400">간장</div>
+							</c:forEach>
 						</div>
-					</c:forEach>
+						<div class="flex flex-col space-y-5 w-full">
+							<c:forEach begin="1" end="5" step="1">
+								<div class="py-3 mr-6 border-b border-dashed border-gray-400">1T</div>
+							</c:forEach>
+						</div>
+					</div>
 				</div>
 			</div>
 		</section>

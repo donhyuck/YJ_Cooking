@@ -1201,5 +1201,5 @@ SELECT * FROM ingredient;
 
 ## 등록된 레시피 번호를 갱신
 UPDATE ingredient
-SET recipeId=3
-WHERE id=3;
+SET recipeId=id
+WHERE recipeId=0;

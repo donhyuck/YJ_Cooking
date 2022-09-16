@@ -75,6 +75,13 @@
 			form.level.focus();
 			return;
 		}
+		
+		form.rowArr.value = form.rowArr.value.trim();
+		if (form.rowArr.value == 0) {
+			alert('난이도를 선택해주세요.');
+			form.rowArr.focus();
+			return;
+		}
 
 		RecipeWrite_submitFormDone = true;
 		form.submit();
@@ -476,13 +483,17 @@
 		var rowArr = $('[name="row"]');
 		
 		for ( var i = 0 ; i < rowArr.length ; i++ ) {
+			rowArr[i].value = rowArr[i].value.trim();
 			param.push(rowArr[i].value);
 		}
 		
 		var rowStr = '';
 		param.map(function(item){
-			rowStr += item + ',';
+			if ( item != '' && item.length - 1) {
+				rowStr += item + ',';
+			}
 		});
+		
 		rowStr = rowStr.substr(0, rowStr.lastIndexOf(',') );
 		
 		// 재료 값
@@ -490,13 +501,17 @@
 		var rowValueArr = $('[name="rowValue"]');
 		
 		for ( var i = 0 ; i < rowValueArr.length ; i++ ) {
+			rowValueArr[i].value = rowValueArr[i].value.trim();
 			param.push(rowValueArr[i].value);
 		}
 		
 		var rowValueStr = '';
 		param.map(function(item){
-			rowValueStr += item + ',';
+			if ( item != '' && item.length - 1) {
+				rowValueStr += item + ',';
+			}
 		});
+		
 		rowValueStr = rowValueStr.substr(0, rowValueStr.lastIndexOf(',') );
 		
 		// 양념 재료
@@ -504,12 +519,15 @@
 		var sauceArr = $('[name="sauce"]');
 		
 		for ( var i = 0 ; i < sauceArr.length ; i++ ) {
+			sauceArr[i].value = sauceArr[i].value.trim();
 			param.push(sauceArr[i].value);
 		}
 		
 		var sauceStr = '';
 		param.map(function(item){
-			sauceStr += item + ',';
+			if ( item != '' && item.length - 1) {
+				sauceStr += item + ',';
+			}
 		});
 		sauceStr = sauceStr.substr(0, sauceStr.lastIndexOf(',') );
 		
@@ -518,16 +536,18 @@
 		var sauceValueArr = $('[name="sauceValue"]');
 		
 		for ( var i = 0 ; i < sauceValueArr.length ; i++ ) {
+			sauceValueArr[i].value = sauceValueArr[i].value.trim();
 			param.push(sauceValueArr[i].value);
 		}
 		
 		var sauceValueStr = '';
 		param.map(function(item){
-			sauceValueStr += item + ',';
+			if ( item != '' && item.length - 1) {
+				sauceValueStr += item + ',';
+			}
 		});
-		sauceValueStr = sauceValueStr.substr(0, sauceValueStr.lastIndexOf(',') );
 		
-		// 마지막 값에 붙은 구분점 지우기
+		sauceValueStr = sauceValueStr.substr(0, sauceValueStr.lastIndexOf(',') );
 
 		// 구성된 문자열을 input테그 값으로
 		document['do-write-recipe-form'].rowArr.value = rowStr;

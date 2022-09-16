@@ -231,11 +231,13 @@ public class UserRecipeController {
 
 		// 해당 레시피 페이지의 댓글 목록 가져오기
 		List<Reply> replies = replyService.getForPrintReplies(rq.getLoginedMemberId(), "recipe", id);
-		
+
 		// 해당 레시피 페이지의 재료, 양념 목록 가져오기
+		List<String> rows = recipeService.getRowsById(id);
 
 		model.addAttribute("recipe", recipe);
 		model.addAttribute("replies", replies);
+		model.addAttribute("rows", rows);
 		model.addAttribute("actorCanMakeRP", actorCanReactionRd.isSuccess());
 		model.addAttribute("actorCanMakeScrap", actorCanScrapRd.isSuccess());
 

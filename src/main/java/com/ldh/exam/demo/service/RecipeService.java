@@ -1,11 +1,13 @@
 package com.ldh.exam.demo.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
 import com.ldh.exam.demo.repository.RecipeRepository;
 import com.ldh.exam.demo.util.Ut;
+import com.ldh.exam.demo.vo.Ingredient;
 import com.ldh.exam.demo.vo.Recipe;
 import com.ldh.exam.demo.vo.ResultData;
 
@@ -169,7 +171,7 @@ public class RecipeService {
 	public int doInsertIngredient(String rowArr, String rowValueArr, String sauceArr, String sauceValueArr) {
 
 		recipeRepository.doInsertIngredient(rowArr, rowValueArr, sauceArr, sauceValueArr);
-		
+
 		return recipeRepository.getLastInsertId();
 	}
 
@@ -177,6 +179,23 @@ public class RecipeService {
 	public void updateRecipeIdForIngredient(int ingredientId, int recipeId) {
 
 		recipeRepository.updateRecipeIdForIngredient(ingredientId, recipeId);
+	}
+
+	// 재료 항목 가져오기
+	public List<String> getRowsById(int recipeId) {
+
+		List<String> rows = new ArrayList<>();
+
+		// 레시피에 해당하는 재료항목 가져오기
+		Ingredient ingredient = recipeRepository.getIngredientByRecipeId(recipeId);
+		
+		String[] tempArrayForRows = ingredient.getRowArr().split(",");
+
+		for (int i = 0; i < tempArrayForRows.length; i++) {
+			rows.add(tempArrayForRows[i]);
+		}
+
+		return rows;
 	}
 
 	// 레시피 수정하기

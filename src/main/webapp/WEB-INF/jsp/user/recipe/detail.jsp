@@ -233,7 +233,7 @@
 					<div class="font-bold mb-5">[ 재료 ]</div>
 					<div class="flex text-center">
 						<div class="flex flex-col space-y-5 w-full text-left">
-							<c:forEach var="row" items="${ rowArr }">
+							<c:forEach var="row" items="${ rows }">
 								<div class="py-3 pl-16 ml-6 border-b border-dashed border-gray-400">${ row }</div>
 							</c:forEach>
 						</div>

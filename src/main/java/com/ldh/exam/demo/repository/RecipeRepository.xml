@@ -20,6 +20,12 @@
 		WHERE R.id = #{id}
 	</select>
 
+	<select id="getIngredientByRecipeId" resultType="Ingredient">
+		SELECT *
+		FROM ingredient AS IG
+		WHERE recipeId = #{recipeId}
+	</select>
+
 	<select id="getForPrintRecipes" resultType="Recipe">
 		SELECT R.*,
 		M.nickname AS extra__writerName
@@ -240,7 +246,7 @@
 		`guideId` = #{guideId},
 		`tip` = #{tip}
 	</insert>
-	
+
 	<insert id="doInsertIngredient">
 		INSERT INTO ingredient
 		SET regDate=NOW(),
@@ -250,11 +256,12 @@
 		sauceArr=#{sauceArr},
 		sauceValueArr=#{sauceValueArr}
 	</insert>
-	
+
 	<update id="updateRecipeIdForIngredient">
 		UPDATE ingredient
 		SET recipeId=#{recipeId}
-		WHERE id=#{ingredientId}
+		WHERE
+		id=#{ingredientId}
 	</update>
 
 	<update id="modifyRecipe">

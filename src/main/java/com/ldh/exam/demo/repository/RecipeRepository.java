@@ -4,12 +4,15 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.ldh.exam.demo.vo.Ingredient;
 import com.ldh.exam.demo.vo.Recipe;
 
 @Mapper
 public interface RecipeRepository {
 
 	public Recipe getForPrintRecipe(int id);
+
+	public Ingredient getIngredientByRecipeId(int recipeId);
 
 	public List<Recipe> getForPrintRecipes();
 

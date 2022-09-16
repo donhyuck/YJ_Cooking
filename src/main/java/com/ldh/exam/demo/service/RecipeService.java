@@ -168,7 +168,15 @@ public class RecipeService {
 	// 재료, 양념 데이터 추가
 	public int doInsertIngredient(String rowArr, String rowValueArr, String sauceArr, String sauceValueArr) {
 
-		return recipeRepository.doInsertIngredient(rowArr, rowValueArr, sauceArr, sauceValueArr);
+		recipeRepository.doInsertIngredient(rowArr, rowValueArr, sauceArr, sauceValueArr);
+		
+		return recipeRepository.getLastInsertId();
+	}
+
+	// 재료, 양념 데이터를 레시피 번호 갱신
+	public void updateRecipeIdForIngredient(int ingredientId, int recipeId) {
+
+		recipeRepository.updateRecipeIdForIngredient(ingredientId, recipeId);
 	}
 
 	// 레시피 수정하기

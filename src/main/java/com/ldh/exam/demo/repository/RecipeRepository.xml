@@ -250,6 +250,12 @@
 		sauceArr=#{sauceArr},
 		sauceValueArr=#{sauceValueArr}
 	</insert>
+	
+	<update id="updateRecipeIdForIngredient">
+		UPDATE ingredient
+		SET recipeId=#{recipeId}
+		WHERE id=#{ingredientId}
+	</update>
 
 	<update id="modifyRecipe">
 		UPDATE recipe

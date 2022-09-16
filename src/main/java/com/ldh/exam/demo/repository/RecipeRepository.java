@@ -38,6 +38,8 @@ public interface RecipeRepository {
 
 	public int doInsertIngredient(String rowArr, String rowValueArr, String sauceArr, String sauceValueArr);
 
+	public void updateRecipeIdForIngredient(int ingredientId, int recipeId);
+	
 	public void modifyRecipe(int id, String title, String body);
 
 	public void deleteRecipe(int id);

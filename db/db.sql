@@ -1198,3 +1198,8 @@ sauceArr='굴소스(선택),소금,후추',
 sauceValueArr='1T,약간,약간';
 
 SELECT * FROM ingredient;
+
+## 등록된 레시피 번호를 갱신
+UPDATE ingredient
+SET recipeId=3
+WHERE id=3;

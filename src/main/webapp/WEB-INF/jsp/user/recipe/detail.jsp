@@ -232,14 +232,14 @@
 				<div class="w-1/2">
 					<div class="font-bold mb-5">[ 재료 ]</div>
 					<div class="flex text-center">
-						<div class="flex flex-col space-y-5 w-full text-left">
+						<div class="flex flex-col space-y-5 w-full">
 							<c:forEach var="row" items="${ rows }">
-								<div class="py-3 pl-16 ml-6 border-b border-dashed border-gray-400">${ row }</div>
+								<div class="py-3 pr-14 border-b border-dashed border-gray-400">${ row }</div>
 							</c:forEach>
 						</div>
 						<div class="flex flex-col space-y-5 w-full">
-							<c:forEach begin="1" end="5" step="1">
-								<div class="py-3 mr-6 border-b border-dashed border-gray-400">2개</div>
+							<c:forEach var="rowValue" items="${ rowValues }">
+								<div class="py-3 mr-6 border-b border-dashed border-gray-400">${ rowValue }</div>
 							</c:forEach>
 						</div>
 					</div>
@@ -250,14 +250,14 @@
 				<div class="w-1/2">
 					<div class="font-bold mb-5">[ 양념 ]</div>
 					<div class="flex text-center">
-						<div class="flex flex-col space-y-5 w-full text-left">
-							<c:forEach begin="1" end="5" step="1">
-								<div class="py-3 pl-16 ml-6 border-b border-dashed border-gray-400">간장</div>
+						<div class="flex flex-col space-y-5 w-full">
+							<c:forEach var="sauce" items="${ sauces }">
+								<div class="py-3 pr-14 border-b border-dashed border-gray-400">${ sauce }</div>
 							</c:forEach>
 						</div>
 						<div class="flex flex-col space-y-5 w-full">
-							<c:forEach begin="1" end="5" step="1">
-								<div class="py-3 mr-6 border-b border-dashed border-gray-400">1T</div>
+							<c:forEach var="sauceValue" items="${ sauceValues }">
+								<div class="py-3 mr-6 border-b border-dashed border-gray-400">${ sauceValue }</div>
 							</c:forEach>
 						</div>
 					</div>

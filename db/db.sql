@@ -1174,10 +1174,10 @@ INSERT INTO ingredient
 SET regDate=NOW(),
 updateDate=NOW(),
 recipeId=1,
-rowArr='파스타면,마늘,베이컨 또는 새우,양파',
-rowValueArr='500원크기,4개,1장,1줌,1/3개',
-sauceArr='토마토소스,생크림,치즈',
-sauceValueArr='120ml,170ml,1장';
+rowArr='감자,당근,양파',
+rowValueArr='3개,1/3개,1/2개',
+sauceArr='굴소스(선택),소금,후추',
+sauceValueArr='1T,약간,약간';
 
 INSERT INTO ingredient
 SET regDate=NOW(),
@@ -1192,12 +1192,13 @@ INSERT INTO ingredient
 SET regDate=NOW(),
 updateDate=NOW(),
 recipeId=3,
-rowArr='감자,당근,양파',
-rowValueArr='3개,1/3개,1/2개',
-sauceArr='굴소스(선택),소금,후추',
-sauceValueArr='1T,약간,약간';
+rowArr='파스타면,마늘,베이컨 또는 새우,양파',
+rowValueArr='500원크기,4개,1줌,1/3개',
+sauceArr='토마토소스,생크림,치즈',
+sauceValueArr='120ml,170ml,1장';
 
 SELECT * FROM ingredient;
+SELECT * FROM recipe;
 
 ## 등록된 레시피 번호를 갱신
 UPDATE ingredient

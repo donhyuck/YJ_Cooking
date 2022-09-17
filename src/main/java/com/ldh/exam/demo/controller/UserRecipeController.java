@@ -1,5 +1,6 @@
 package com.ldh.exam.demo.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
@@ -233,17 +234,14 @@ public class UserRecipeController {
 		List<Reply> replies = replyService.getForPrintReplies(rq.getLoginedMemberId(), "recipe", id);
 
 		// 해당 레시피 페이지의 재료, 양념 목록 가져오기
-		List<String> rows = recipeService.getRowsById(id);
-		List<String> rowValues = recipeService.getRowValuesById(id);
-		List<String> sauces = recipeService.getSaucesById(id);
-		List<String> sauceValues = recipeService.getSauceValuesById(id);
+		List<List<String>> IngredientList = recipeService.getIngredientById(id);
 
 		model.addAttribute("recipe", recipe);
 		model.addAttribute("replies", replies);
-		model.addAttribute("rows", rows);
-		model.addAttribute("rowValues", rowValues);
-		model.addAttribute("sauces", sauces);
-		model.addAttribute("sauceValues", sauceValues);
+		model.addAttribute("rows", IngredientList.get(0));
+		model.addAttribute("rowValues", IngredientList.get(1));
+		model.addAttribute("sauces", IngredientList.get(2));
+		model.addAttribute("sauceValues", IngredientList.get(3));
 		model.addAttribute("actorCanMakeRP", actorCanReactionRd.isSuccess());
 		model.addAttribute("actorCanMakeScrap", actorCanScrapRd.isSuccess());
 

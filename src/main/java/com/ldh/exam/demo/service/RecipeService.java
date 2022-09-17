@@ -181,72 +181,41 @@ public class RecipeService {
 		recipeRepository.updateRecipeIdForIngredient(ingredientId, recipeId);
 	}
 
-	// 재료 항목 가져오기
-	public List<String> getRowsById(int recipeId) {
+	// 해당 레시피 페이지의 재료, 양념 목록 가져오기
+	public List<List<String>> getIngredientById(int recipeId) {
 
+		List<List<String>> IngredientList = new ArrayList<List<String>>(4);
+		Ingredient ingredient = recipeRepository.getIngredientByRecipeId(recipeId);
+
+		// 재료 항목 리스트 구성
 		List<String> rows = new ArrayList<>();
-
-		// 레시피에 해당하는 재료항목 가져오기
-		Ingredient ingredient = recipeRepository.getIngredientByRecipeId(recipeId);
-
-		String[] tempArrayForRows = ingredient.getRowArr().split(",");
-
-		for (int i = 0; i < tempArrayForRows.length; i++) {
-			rows.add(tempArrayForRows[i]);
+		for (String rowStr : ingredient.getRowArr().split(",")) {
+			rows.add(rowStr);
 		}
+		IngredientList.add(rows);
 
-		return rows;
-	}
-
-	// 재료 값 가져오기
-	public List<String> getRowValuesById(int recipeId) {
-
+		// 재료 값 리스트 구성
 		List<String> rowValues = new ArrayList<>();
-
-		// 레시피에 해당하는 재료값 가져오기
-		Ingredient ingredient = recipeRepository.getIngredientByRecipeId(recipeId);
-
-		String[] tempArrayForRowValues = ingredient.getRowValueArr().split(",");
-
-		for (int i = 0; i < tempArrayForRowValues.length; i++) {
-			rowValues.add(tempArrayForRowValues[i]);
+		for (String rowValueStr : ingredient.getRowValueArr().split(",")) {
+			rowValues.add(rowValueStr);
 		}
+		IngredientList.add(rowValues);
 
-		return rowValues;
-	}
-
-	// 양념 항목 가져오기
-	public List<String> getSaucesById(int recipeId) {
-
+		// 양념 항목 리스트 구성
 		List<String> sauces = new ArrayList<>();
-
-		// 레시피에 해당하는 양념항목 가져오기
-		Ingredient ingredient = recipeRepository.getIngredientByRecipeId(recipeId);
-
-		String[] tempArrayForSauces = ingredient.getSauceArr().split(",");
-
-		for (int i = 0; i < tempArrayForSauces.length; i++) {
-			sauces.add(tempArrayForSauces[i]);
+		for (String sauceStr : ingredient.getSauceArr().split(",")) {
+			sauces.add(sauceStr);
 		}
+		IngredientList.add(sauces);
 
-		return sauces;
-	}
-
-	// 양념 값 가져오기
-	public List<String> getSauceValuesById(int recipeId) {
-
+		// 양념 값 리스트 구성
 		List<String> sauceValues = new ArrayList<>();
-
-		// 레시피에 해당하는 양념값 가져오기
-		Ingredient ingredient = recipeRepository.getIngredientByRecipeId(recipeId);
-
-		String[] tempArrayForRowValues = ingredient.getSauceValueArr().split(",");
-
-		for (int i = 0; i < tempArrayForRowValues.length; i++) {
-			sauceValues.add(tempArrayForRowValues[i]);
+		for (String sauceValueStr : ingredient.getSauceValueArr().split(",")) {
+			sauceValues.add(sauceValueStr);
 		}
+		IngredientList.add(sauceValues);
 
-		return sauceValues;
+		return IngredientList;
 	}
 
 	// 레시피 수정하기

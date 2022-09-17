@@ -226,18 +226,27 @@
 
 		<!-- 재료, 양념 영역 시작 -->
 		<section class="bg-white rounded-md p-12 mb-5">
-			<div class="text-3xl font-bold mb-8">재료 준비</div>
+			<div class="text-3xl font-bold">재료 준비</div>
+
+			<!-- 안내문구 -->
+			<ul class="list-disc text-lg flex flex-col space-y-5 my-7 mx-10">
+				<li>좌측의 체크박스로 각 항목에서 확인(취소)을 표시할 수 있어요.</li>
+				<li>궁금한 점이 있으시거나 설명이 필요하시면 작성자에게 댓글을 남겨주세요.</li>
+			</ul>
 
 			<div class="flex justify-between text-2xl px-5">
 				<div class="w-1/2">
 					<div class="font-bold mb-5">[ 재료 ]</div>
-					<div class="flex text-center">
-						<div class="flex flex-col space-y-5 w-full">
+					<div class="flex">
+						<div class="flex flex-col space-y-5 w-full form-control">
 							<c:forEach var="row" items="${ rows }">
-								<div class="py-3 pr-14 border-b border-dashed border-gray-400">${ row }</div>
+								<label class="py-3 border-b border-dashed border-gray-400 cursor-pointer hover:underline">
+									<input type="checkbox" class="checkbox checkbox-accent mx-4" />
+									<span>${ row }</span>
+								</label>
 							</c:forEach>
 						</div>
-						<div class="flex flex-col space-y-5 w-full">
+						<div class="flex flex-col space-y-5 w-full text-center">
 							<c:forEach var="rowValue" items="${ rowValues }">
 								<div class="py-3 mr-6 border-b border-dashed border-gray-400">${ rowValue }</div>
 							</c:forEach>
@@ -249,10 +258,13 @@
 
 				<div class="w-1/2">
 					<div class="font-bold mb-5">[ 양념 ]</div>
-					<div class="flex text-center">
-						<div class="flex flex-col space-y-5 w-full">
+					<div class="flex">
+						<div class="flex flex-col space-y-5 w-full form-control">
 							<c:forEach var="sauce" items="${ sauces }">
-								<div class="py-3 pr-14 border-b border-dashed border-gray-400">${ sauce }</div>
+								<label class="py-3 border-b border-dashed border-gray-400 cursor-pointer hover:underline">
+									<input type="checkbox" class="checkbox checkbox-accent mx-4" />
+									<span>${ sauce }</span>
+								</label>
 							</c:forEach>
 						</div>
 						<div class="flex flex-col space-y-5 w-full">

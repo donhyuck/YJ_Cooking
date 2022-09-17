@@ -31,6 +31,7 @@ public class Recipe {
 	private boolean extra__actorCanModify;
 	private boolean extra__actorCanDelete;
 
+	// Type1 - 예시) 20-10-10(줄바꿈)12:00
 	public String getForPrintRegDate_Type1() {
 		return regDate.substring(2, 16).replace(" ", "</br>");
 	}
@@ -39,12 +40,22 @@ public class Recipe {
 		return updateDate.substring(2, 16).replace(" ", "</br>");
 	}
 
+	// Type2 - 예시) 20-10-10 12:00
 	public String getForPrintRegDate_Type2() {
 		return regDate.substring(2, 16);
 	}
 
 	public String getForPrintUpdateDate_Type2() {
 		return updateDate.substring(2, 16);
+	}
+
+	// Type3 - 예시) 2020-10-10
+	public String getForPrintRegDate_Type3() {
+		return regDate.substring(0, 10);
+	}
+
+	public String getForPrintUpdateDate_Type3() {
+		return updateDate.substring(0, 10);
 	}
 
 	public String getForPrintTime() {

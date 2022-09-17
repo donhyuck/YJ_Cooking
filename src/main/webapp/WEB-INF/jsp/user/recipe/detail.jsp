@@ -97,36 +97,52 @@
 	<div class="detail-box w-10/12 mx-auto" id="topTarget">
 
 		<!-- 레시피 기본정보 영역 시작 -->
-		<section class="bg-white rounded-md p-12 flex mb-5">
-			<!-- 대표사진-->
-			<div class="main-photo w-3/6">
-				<img class="w-full rounded-md" src="https://tse4.mm.bing.net/th?id=OIP.kwt4oKZDd-goVuBezaVQRQHaE7&pid=Api&P=0"
-					alt="" />
-				<div class="text-right text-gray-400 text-lg mt-2 mr-4">
-					조회수
-					<span class="recipe-detail__hitCount">${ recipe.hitCount }</span>
+		<section class="bg-white rounded-md p-12 mb-5">
+			<div class="flex">
+				<!-- 대표사진-->
+				<div class="main-photo w-3/6">
+					<img class="w-full rounded-md" src="https://tse4.mm.bing.net/th?id=OIP.kwt4oKZDd-goVuBezaVQRQHaE7&pid=Api&P=0"
+						alt="" />
+					<div class="text-gray-400 text-lg text-right mt-2 mr-4">
+						<span>조회수</span>
+						<span class="recipe-detail__hitCount">${ recipe.hitCount }</span>
+					</div>
+				</div>
+
+				<div class="flex flex-col w-2/5 h-80 m-auto">
+					<!-- 제목, 내용 -->
+					<div class="text-3xl">${ recipe.title }</div>
+					<div class="text-xl text-gray-400 mt-5">${ recipe.body }</div>
+					<!-- 인원, 소요시간, 난이도 -->
+					<div class="info-box flex justify-center items-end space-x-5 mt-auto mb-3 text-2xl">
+						<div>
+							<i class="fa-solid fa-user-check"></i>
+							<span class="ml-1">${ recipe.amount }인분</span>
+						</div>
+						<div>
+							<i class="fa-solid fa-clock"></i>
+							<span class="ml-1">${ recipe.forPrintTime } 이내</span>
+						</div>
+						<div>
+							<i class="fa-solid fa-star"></i>
+							<span class="ml-1">${ recipe.forPrintLevel }</span>
+						</div>
+					</div>
 				</div>
 			</div>
 
-			<div class="flex flex-col w-2/5 h-80 m-auto">
-				<!-- 제목, 내용 -->
-				<div class="text-3xl">${ recipe.title }</div>
-				<div class="text-xl text-gray-400 mt-5">${ recipe.body }</div>
-				<!-- 인원, 소요시간, 난이도 -->
-				<div class="info-box flex justify-center items-end space-x-5 mt-auto mb-3 text-2xl">
-					<div>
-						<i class="fa-solid fa-user-check"></i>
-						<span class="ml-1">${ recipe.amount }인분</span>
-					</div>
-					<div>
-						<i class="fa-solid fa-clock"></i>
-						<span class="ml-1">${ recipe.forPrintTime } 이내</span>
-					</div>
-					<div>
-						<i class="fa-solid fa-star"></i>
-						<span class="ml-1">${ recipe.forPrintLevel }</span>
-					</div>
+			<!-- 날짜 표시 -->
+			<div class="flex flex-col mr-4 text-gray-400 text-lg text-right">
+				<div>
+					<span>최초등록일</span>
+					<span>${ recipe.forPrintRegDate_Type3 }</span>
 				</div>
+				<c:if test="${ recipe.regDate != recipe.updateDate }">
+					<div>
+						<span>최근수정일</span>
+						<span>${ recipe.forPrintUpdateDate_Type3 }</span>
+					</div>
+				</c:if>
 			</div>
 		</section>
 		<!-- 레시피 기본정보 영역 끝 -->

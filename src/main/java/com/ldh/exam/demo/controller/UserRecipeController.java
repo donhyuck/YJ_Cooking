@@ -214,6 +214,9 @@ public class UserRecipeController {
 
 		Recipe recipe = recipeService.getForPrintRecipe(rq.getLoginedMemberId(), id);
 
+		// 특정 레시피에 대한 분류정보 가져오기
+		List<Category> categoriesAboutRecipe = boardService.getCategoriesAboutRecipe(id);
+
 		// 좋아요 가능여부
 		ResultData actorCanReactionRd = reactionService.actorCanReaction(rq.getLoginedMemberId(), id, "recipe");
 
@@ -238,6 +241,7 @@ public class UserRecipeController {
 
 		model.addAttribute("recipe", recipe);
 		model.addAttribute("replies", replies);
+		model.addAttribute("categoriesAboutRecipe", categoriesAboutRecipe);
 		model.addAttribute("rows", IngredientList.get(0));
 		model.addAttribute("rowValues", IngredientList.get(1));
 		model.addAttribute("sauces", IngredientList.get(2));

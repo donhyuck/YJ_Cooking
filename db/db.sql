@@ -1199,8 +1199,22 @@ sauceValueArr='120ml,170ml,1장';
 
 SELECT * FROM ingredient;
 SELECT * FROM recipe;
+SELECT * FROM guide;
+SELECT * FROM category;
 
 ## 등록된 레시피 번호를 갱신
 UPDATE ingredient
 SET recipeId=id
 WHERE recipeId=0;
+
+## 특정 레시피의 분류 정보 가져오기
+SELECT C.*
+FROM guide AS G
+INNER JOIN category AS C
+WHERE G.recipeId=1
+AND (
+C.boardId = 1 AND G.sortId = C.relId
+OR C.boardId = 2 AND G.methodId = C.relId
+OR C.boardId = 3 AND G.contentId = C.relId
+OR C.boardId = 4 AND G.freeId = C.relId
+);

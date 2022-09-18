@@ -45,11 +45,31 @@
 		SELECT
 		LAST_INSERT_ID()
 	</select>
-	
+
 	<update id="updateRecipeId">
 		UPDATE guide
 		SET recipeId = #{recipeId}
-		WHERE id = #{guideId}
+		WHERE id =
+		#{guideId}
 	</update>
+
+	<select id="getCategoriesAboutRecipe" resultType="Category">
+		SELECT C.*
+		FROM
+		guide AS G
+		INNER JOIN category AS C
+		WHERE G.recipeId=1
+		AND (
+		C.boardId=1
+		AND G.sortId=C.relId
+		OR
+		C.boardId=2
+		AND G.methodId=C.relId
+		OR
+		C.boardId=3
+		AND G.contentId=C.relId
+		OR
+		C.boardId=4 AND G.freeId=C.relId)
+	</select>
 
 </mapper> 

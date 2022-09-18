@@ -102,4 +102,10 @@ public class BoardService {
 		boardRepository.updateRecipeId(guideId, recipeId);
 	}
 
+	// 특정 레시피에 대한 분류정보 가져오기
+	public List<Category> getCategoriesAboutRecipe(int recipeId) {
+
+		return boardRepository.getCategoriesAboutRecipe(recipeId);
+	}
+
 }

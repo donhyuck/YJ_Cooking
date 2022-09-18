@@ -97,7 +97,7 @@
 	<div class="detail-box w-10/12 mx-auto" id="topTarget">
 
 		<!-- 레시피 기본정보 영역 시작 -->
-		<section class="bg-white rounded-md p-12 mb-5">
+		<section class="bg-white rounded-md p-12 pb-8 mb-5">
 			<div class="flex">
 				<!-- 대표사진-->
 				<div class="main-photo w-3/6">
@@ -134,16 +134,24 @@
 			<!-- 날짜 표시 -->
 			<div class="flex flex-col mr-4 text-gray-400 text-lg text-right">
 				<div>
-					<span>최초등록일</span>
+					최초등록일
 					<span>${ recipe.forPrintRegDate_Type3 }</span>
 				</div>
 				<c:if test="${ recipe.regDate != recipe.updateDate }">
 					<div>
-						<span>최근수정일</span>
+						최근수정일
 						<span>${ recipe.forPrintUpdateDate_Type3 }</span>
 					</div>
 				</c:if>
 			</div>
+
+			<!-- 레시피 분류 이름표시 영역 시작 -->
+			<div class="flex mt-8 text-2xl m-5 font-medium text-slate-700 text-center">
+				<c:forEach var="category" items="${ categoriesAboutRecipe }">
+					<div class="mr-3">#${ category.name }</div>
+				</c:forEach>
+			</div>
+			<!-- 레시피 분류 이름표시 영역 끝 -->
 		</section>
 		<!-- 레시피 기본정보 영역 끝 -->
 
@@ -195,7 +203,7 @@
 					<!-- 댓글 -->
 					<a href="#replyTarget" class="scroll text-green-500 hover:text-green-700">
 						<i class="fa-solid fa-comment-dots"></i>
-						<div class="text-lg font-bold mt-2">댓글보기 ${replies.size()}</div>
+						<div class="text-lg font-bold mt-2">댓글로 이동 ${replies.size()}</div>
 					</a>
 				</div>
 
@@ -283,7 +291,7 @@
 								</label>
 							</c:forEach>
 						</div>
-						<div class="flex flex-col space-y-5 w-full">
+						<div class="flex flex-col space-y-5 w-full text-center">
 							<c:forEach var="sauceValue" items="${ sauceValues }">
 								<div class="py-3 mr-6 border-b border-dashed border-gray-400">${ sauceValue }</div>
 							</c:forEach>

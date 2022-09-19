@@ -2,6 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set var="pageTitle" value="레시피 등록페이지" />
 <%@include file="../common/head.jspf"%>
+<%@ include file="../../common/toastUiEditorLib.jspf"%>
 
 <!-- 요리정보 입력 스크립트 시작 -->
 <script>
@@ -533,6 +534,12 @@
 		<!-- 조리순서 영역 시작 -->
 		<section class="bg-white rounded-md p-12 mb-5">
 			<div class="text-3xl font-bold mb-8">조리순서</div>
+
+			<!-- 토스트 에디터 적용 -->
+			<div class="toast-ui-editor">
+				<script type="text/x-template"></script>
+			</div>
+
 			<div class="w-full flex flex-col space-y-8 px-5">
 				<c:forEach var="i" begin="1" end="4" step="1">
 					<div class="flex">

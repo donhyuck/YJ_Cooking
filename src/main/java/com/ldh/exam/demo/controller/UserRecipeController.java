@@ -312,7 +312,11 @@ public class UserRecipeController {
 		// 해당 레시피를 수정 페이지로 넘기기
 		Recipe recipe = recipeService.getForPrintRecipe(rq.getLoginedMemberId(), id);
 
+		// 난이도 이름 넘기기
+		String levelName = recipe.getForPrintLevel();
+
 		model.addAttribute("recipe", recipe);
+		model.addAttribute("levelName", levelName);
 
 		return "user/recipe/modify";
 	}

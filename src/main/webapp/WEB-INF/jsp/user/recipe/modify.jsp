@@ -14,10 +14,11 @@
 
 		$("#changeTimeInput").val(value);
 	}
+	
 	var changeLevelBox = function(value) {
 
 		let valueName = "미선택";
-
+		
 		if (value == "1") {
 			valueName = "누구나";
 		} else if (value == "2") {
@@ -243,7 +244,8 @@
 				<!-- 제목 -->
 				<div>
 					<div class="ml-1 mb-2 font-medium text-slate-700 text-2xl">레시피 제목</div>
-					<input name="title" type="text" class="input input-lg input-bordered w-full" placeholder="예) 돼지듬뿍 김치찌게" />
+					<input name="title" type="text" value="${ recipe.title }" class="input input-lg input-bordered w-full"
+						placeholder="예) 돼지듬뿍 김치찌게" />
 				</div>
 				<!-- 내용 -->
 				<div>
@@ -252,7 +254,7 @@
 						<div class="text-base text-gray-400">> "어떻게 만들게 되었나요?" "직접 먹어보니 어떠셨나요?" 자유롭게 소개해보세요</div>
 					</div>
 					<textarea rows="5" name="body" type="text" class="w-full text-lg p-5 border border-gray-300 rounded-lg"
-						placeholder="예) 아빠표 특제 레시피를 소개합니다. 저녁 한끼로도 안주로도 딱이에요.&#13;&#10;밥솥으로 조리를 하여 푹 끓인 맛이 나요."></textarea>
+						placeholder="예) 아빠표 특제 레시피를 소개합니다. 저녁 한끼로도 안주로도 딱이에요.&#13;&#10;밥솥으로 조리를 하여 푹 끓인 맛이 나요.">${ recipe.body }</textarea>
 				</div>
 			</div>
 		</section>
@@ -353,8 +355,8 @@
 								<i class="fa-sharp fa-solid fa-pen-to-square text-yellow-400"></i>
 								인원
 							</div>
-							<input name="amount" id="changeAmountInput" type="text" maxlength="3" autocomplete="off"
-								oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+							<input name="amount" id="changeAmountInput" type="text" value="${ recipe.amount }" maxlength="3"
+								autocomplete="off" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
 								class="input input-lg input-bordered w-24 text-center font-bold" placeholder="입력" />
 							<span class="text-xl">인분</span>
 						</div>
@@ -363,15 +365,15 @@
 								<i class="fa-sharp fa-solid fa-pen-to-square text-yellow-400"></i>
 								소요시간
 							</div>
-							<input name="time" id="changeTimeInput" type="text" maxlength="3" autocomplete="off"
+							<input name="time" id="changeTimeInput" type="text" value="${ recipe.time }" maxlength="3" autocomplete="off"
 								oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
 								class="input input-lg input-bordered w-24 text-center font-bold" placeholder="입력" />
 							<span class="text-xl">분이내</span>
 						</div>
 						<div>
 							<div class="ml-2 font-medium text-slate-700 text-lg">난이도</div>
-							<input id="changeLevelInput" type="text" class="input input-lg input-bordered w-32 text-center font-bold"
-								placeholder="미선택" disabled value="" />
+							<input id="changeLevelInput" type="text" value="${ levelName }"
+								class="input input-lg input-bordered w-32 text-center font-bold" placeholder="미선택" disabled value="" />
 						</div>
 					</div>
 				</div>
@@ -386,7 +388,7 @@
 					<span class="text-black font-normal">- 알아두면 좋은 점들이나 주의사항을 남길 수 있어요. (선택사항)</span>
 				</div>
 				<textarea type="text" name="tip" class="p-3 mx-4 border border-gray-300 rounded-lg" rows="4"
-					placeholder="예시) 간장을 넣으실땐 달궈진 기름 위로 눌리도록 넣으면 향이 더 강해져요.&#13;&#10;양념을 넣을땐 소금보다 설탕을 먼저 넣어야 잘 스며들어요."></textarea>
+					placeholder="예시) 간장을 넣으실땐 달궈진 기름 위로 눌리도록 넣으면 향이 더 강해져요.&#13;&#10;양념을 넣을땐 소금보다 설탕을 먼저 넣어야 잘 스며들어요.">${ recipe.tip }</textarea>
 			</div>
 			<!-- 팁 / 주의사항 끝 -->
 

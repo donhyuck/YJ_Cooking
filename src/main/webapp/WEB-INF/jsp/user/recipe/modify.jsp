@@ -196,27 +196,26 @@
 <script>
 	const add_rowBox = () => {
 		const rowBox = document.getElementById("rowBox");
-		const newRowP = document.createElement('p');
-		newRowP.innerHTML = "<input name='row' type='text' class='input input-lg input-bordered w-60 text-center mb-5' placeholder='당근'/>"
-		+"<input name='rowValue' type='text' class='input input-lg input-bordered w-48 text-center ml-12 mr-0 mb-5' placeholder='1/2개'/>"
-		+"<div type='button' onclick='removeRow(this)' class='btn btn-circle ml-3 hover:text-red-400'>삭제</div>";
-		rowBox.appendChild(newRowP);
+		const newRowBoxP = document.createElement('p');
+		newRowBoxP.innerHTML = "<input name='row' type='text' class='input input-lg input-bordered w-60 text-center mb-5' placeholder='예) 양파' />"
+		+ "<input name='rowValue' type='text' class='input input-lg input-bordered w-48 text-center ml-12 mr-0 mb-5' placeholder='예) 1개' />"
+		+ "<div type='button' onclick='removeRowBox(this);' class='btn btn-circle ml-3 hover:text-red-400'>삭제</div>";
+		rowBox.appendChild(newRowBoxP);
 	}
 	
-	const removeRow = (obj) => {
+	const removeRowBox = (obj) => {
 	    document.getElementById('rowBox').removeChild(obj.parentNode);
 	}
-	
 	const add_sauceBox = () => {
 		const sauceBox = document.getElementById("sauceBox");
-		const newSauceP = document.createElement('p');
-		newSauceP.innerHTML = "<input name='sauce' type='text' class='input input-lg input-bordered w-60 text-center mb-5' placeholder='소금'/>"
-		+"<input name='sauceValue' type='text' class='input input-lg input-bordered w-48 text-center ml-12 mr-0 mb-5' placeholder='1t'/>"
-		+"<div type='button' onclick='removeSauce(this)' class='btn btn-circle ml-3 hover:text-red-400'>삭제</div>";
-		sauceBox.appendChild(newSauceP);
+		const newSauceBoxP = document.createElement('p');
+		newSauceBoxP.innerHTML = "<input name='sauce' type='text' class='input input-lg input-bordered w-60 text-center mb-5' placeholder='예) 간장' />"
+		+ "<input name='sauceValue' type='text' class='input input-lg input-bordered w-48 text-center ml-12 mr-0 mb-5' placeholder='예) 2T' />"
+		+ "<div type='button' onclick='removeSauceBox(this);' class='btn btn-circle ml-3 hover:text-red-400'>삭제</div>";
+		sauceBox.appendChild(newSauceBoxP);
 	}
 	
-	const removeSauce = (obj) => {
+	const removeSauceBox = (obj) => {
 	    document.getElementById('sauceBox').removeChild(obj.parentNode);
 	}
 </script>
@@ -418,14 +417,21 @@
 			<div class="flex justify-between text-2xl px-5">
 				<div class="w-1/2">
 					<div class="font-bold mb-5">[ 재료 ]</div>
-					<div id="rowBox">
-						<input name="row" type="text" class="input input-lg input-bordered w-60 text-center mb-5" placeholder="양파" />
-						<input name="rowValue" type="text" class="input input-lg input-bordered w-48 text-center ml-10 mr-0 mb-5"
-							placeholder="2개" />
-						<input name="row" type="text" class="input input-lg input-bordered w-60 text-center mb-5" placeholder="돼지고기" />
-						<input name="rowValue" type="text" class="input input-lg input-bordered w-48 text-center ml-10 mr-0 mb-5"
-							placeholder="300g" />
+					<div class="flex">
+						<div class="flex flex-col space-y-5 w-full">
+							<c:forEach var="row" items="${ rows }">
+								<input name="row" type="text" value="${ row }" class="input input-lg input-bordered w-60 text-center"
+									placeholder="재료 이름" />
+							</c:forEach>
+						</div>
+						<div class="flex flex-col space-y-5 w-full text-center">
+							<c:forEach var="rowValue" items="${ rowValues }">
+								<input name="rowValue" type="text" value="${ rowValue }"
+									class="input input-lg input-bordered w-48 text-center ml-3" placeholder="재료 수량" />
+							</c:forEach>
+						</div>
 					</div>
+					<div id="rowBox" class="mt-5"></div>
 					<div type="button" onclick="add_rowBox()" class="btn btn-success btn-wide mt-5">추가</div>
 				</div>
 				<!-- 구분선 -->
@@ -433,14 +439,21 @@
 
 				<div class="w-1/2">
 					<div class="font-bold mb-5">[ 양념 ]</div>
-					<div id="sauceBox">
-						<input name="sauce" type="text" class="input input-lg input-bordered w-60 text-center mb-5" placeholder="간장" />
-						<input name="sauceValue" type="text" class="input input-lg input-bordered w-48 text-center ml-10 mr-0 mb-5"
-							placeholder="2T" />
-						<input name="sauce" type="text" class="input input-lg input-bordered w-60 text-center mb-5" placeholder="고추장" />
-						<input name="sauceValue" type="text" class="input input-lg input-bordered w-48 text-center ml-10 mr-0 mb-5"
-							placeholder="3T" />
+					<div class="flex">
+						<div class="flex flex-col space-y-5 w-full">
+							<c:forEach var="sauce" items="${ sauces }">
+								<input name="sauce" type="text" value="${ sauce }" class="input input-lg input-bordered w-60 text-center"
+									placeholder="양념 이름" />
+							</c:forEach>
+						</div>
+						<div class="flex flex-col space-y-5 w-full text-center">
+							<c:forEach var="sauceValue" items="${ sauceValues }">
+								<input name="sauceValue" type="text" value="${ sauceValue }"
+									class="input input-lg input-bordered w-48 text-center ml-3 mr-0" placeholder="양념 수량" />
+							</c:forEach>
+						</div>
 					</div>
+					<div id="sauceBox" class="mt-5"></div>
 					<div type="button" onclick="add_sauceBox()" class="btn btn-success btn-wide mt-5">추가</div>
 				</div>
 			</div>

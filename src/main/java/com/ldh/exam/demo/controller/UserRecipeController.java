@@ -315,8 +315,15 @@ public class UserRecipeController {
 		// 난이도 이름 넘기기
 		String levelName = recipe.getForPrintLevel();
 
+		// 해당 레시피 페이지의 재료, 양념 목록 가져오기
+		List<List<String>> IngredientList = recipeService.getIngredientById(id);
+
 		model.addAttribute("recipe", recipe);
 		model.addAttribute("levelName", levelName);
+		model.addAttribute("rows", IngredientList.get(0));
+		model.addAttribute("rowValues", IngredientList.get(1));
+		model.addAttribute("sauces", IngredientList.get(2));
+		model.addAttribute("sauceValues", IngredientList.get(3));
 
 		return "user/recipe/modify";
 	}

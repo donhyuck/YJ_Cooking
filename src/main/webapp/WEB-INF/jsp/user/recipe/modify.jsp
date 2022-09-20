@@ -627,16 +627,28 @@
 			<!-- 레시피 조작 영역 끝 -->
 
 			<!-- 스크롤 버튼 -->
-			<div class="fixed right-10 bottom-28 text-4xl text-center hover:text-yellow-400">
+			<div class="fixed right-12 bottom-52 text-4xl text-center hover:text-purple-500 hover:underline">
+				<button type="submit">
+					<i class="fa-solid fa-bookmark"></i>
+					<div class="text-xl font-black">수정</div>
+				</button>
+			</div>
+			<div class="fixed right-12 bottom-28 text-4xl text-center hover:text-red-500">
+				<button type="button" onclick="history.back();">
+					<i class="fa-solid fa-xmark"></i>
+					<div class="text-xl font-black">취소</div>
+				</button>
+			</div>
+			<div class="fixed right-20 bottom-6 text-4xl text-center hover:text-yellow-400">
 				<a href="#topTarget" class="scroll">
 					<i class="fa-solid fa-circle-arrow-up"></i>
-					<div class="text-xl font-black">TOP</div>
+					<div class="text-sm font-black">UP</div>
 				</a>
 			</div>
-			<div class="fixed right-7 bottom-6 text-4xl text-center hover:text-yellow-400">
+			<div class="fixed right-2 bottom-6 text-4xl text-center hover:text-yellow-400">
 				<a href="#downTarget" class="scroll">
 					<i class="fa-solid fa-circle-arrow-down"></i>
-					<div class="text-xl font-black">DOWN</div>
+					<div class="text-sm font-black">DOWN</div>
 				</a>
 			</div>
 		</section>

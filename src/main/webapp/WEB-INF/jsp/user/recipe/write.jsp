@@ -164,7 +164,6 @@
 		rowStr = rowStr.substr(0, rowStr.lastIndexOf(',') );
 		rowValueStr = rowValueStr.substr(0, rowValueStr.lastIndexOf(',') );
 		sauceStr = sauceStr.substr(0, sauceStr.lastIndexOf(',') );
-		
 		sauceValueStr = sauceValueStr.substr(0, sauceValueStr.lastIndexOf(',') );
 
 		// 구성된 문자열을 input테그 값으로

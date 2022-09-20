@@ -883,47 +883,6 @@ COUNT(CASE WHEN boardId=3 THEN 1 END) AS contentId,
 COUNT(CASE WHEN boardId=4 THEN 1 END) AS freeId
 FROM category;
 
-## 대량 데이터 생성 후 업데이트 시작
-## 레시피 guideId 업데이트
-UPDATE recipe
-SET guideId = id
-WHERE guideId = 0;
-
-UPDATE guide
-SET recipeId = id
-WHERE recipeId != id;
-
-## 레시피 제목 설정
-UPDATE recipe R, guide G,category C
-SET R.title = C.name
-WHERE G.sortId = C.relId
-AND C.boardId = 1
-AND G.id = guideId;
-
-UPDATE recipe R, guide G,category C
-SET R.title = CONCAT(R.title,"/",C.name)
-WHERE G.contentId = C.relId
-AND C.boardId = 3
-AND G.id = guideId;
-
-UPDATE recipe R, guide G,category C
-SET R.title = CONCAT(R.title,C.name)
-WHERE G.methodId = C.relId
-AND C.boardId = 2
-AND G.id = guideId;
-
-UPDATE recipe R, guide G,category C
-SET R.title = CONCAT(R.title,"/",C.name)
-WHERE G.freeId = C.relId
-AND C.boardId = 4
-AND G.id = guideId;
-
-## 레시피 내용 설정
-UPDATE recipe
-SET `body` = REPLACE(title, "/","");
-
-## 대량 데이터 생성 후 업데이트 끝
-
 SELECT G.*, C.name
 FROM `guide` AS G
 LEFT JOIN category AS C
@@ -978,17 +937,6 @@ UPDATE recipe
 SET hitCount = 0,
 goodRP = 0,
 scrap = 0;
-
-# 기존 데이터 조회수, 하트수, 스크랩 설정
-UPDATE recipe
-SET goodRP = FLOOR(RAND() * 200)+1,
-scrap = FLOOR(RAND() * 350)+1
-WHERE goodRP = 0
-AND scrap = 0;
-
-UPDATE recipe
-SET hitCount = goodRP + FLOOR(RAND() * 500)+1
-WHERE hitCount = 0;
 
 ## 최다 하트, 조회수 순 레시피 목록 가져오기 (10개)
 ## 랭킹 표시 (x)
@@ -1141,22 +1089,6 @@ SELECT * FROM `member`;
 SELECT * FROM recipe;
 SELECT * FROM guide;
 
-# 레시피 테스트 데이터 재등록
-UPDATE recipe
-SET title = '감자볶음',
-`body` = '손쉽게 만들어요.'
-WHERE id =1;
-
-UPDATE recipe
-SET title = '소갈비찜',
-`body` = '온가족 든든하게 즐겨요.'
-WHERE id = 2;
-
-UPDATE recipe
-SET title = '로제파스타',
-`body` = '한번만 먹어본 사람은 없다.'
-WHERE id = 3;
-
 # ingredient 테이블 생성(rowArr, rowValueArr, sauceArr, sauceValueArr);
 CREATE TABLE ingredient (
     id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -1201,11 +1133,20 @@ SELECT * FROM ingredient;
 SELECT * FROM recipe;
 SELECT * FROM guide;
 SELECT * FROM category;
+SELECT * FROM `member`;
 
 ## 등록된 레시피 번호를 갱신
 UPDATE ingredient
 SET recipeId=id
 WHERE recipeId=0;
+
+## 레시피 테이블에 ingredient 추가
+ALTER TABLE recipe ADD COLUMN ingredientId INT(10) UNSIGNED NOT NULL DEFAULT 0 AFTER `guideId`;
+
+## ingredientId 업데이트
+UPDATE recipe
+SET ingredientId = id
+WHERE ingredientId = 0;
 
 ## 특정 레시피의 분류 정보 가져오기
 SELECT C.*
@@ -1218,3 +1159,6 @@ OR C.boardId = 2 AND G.methodId = C.relId
 OR C.boardId = 3 AND G.contentId = C.relId
 OR C.boardId = 4 AND G.freeId = C.relId
 );
+
+SELECT * FROM recipe;
+SELECT * FROM ingredient;

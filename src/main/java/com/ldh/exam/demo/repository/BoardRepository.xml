@@ -55,21 +55,11 @@
 
 	<update id="updateGuide">
 		UPDATE guide
-		<set>
-			<if test="sortId != null and sortId !=''">
-				sortId = #{sortId},
-			</if>
-			<if test="methodId != null and methodId !=''">
-				`methodId` = #{methodId},
-			</if>
-			<if test="contentId != null and contentId !=''">
-				`contentId` = #{contentId},
-			</if>
-			<if test="freeId != null and freeId !=''">
-				`freeId` = #{freeId},
-			</if>
-			updateDate = NOW()
-		</set>
+		SET updateDate = NOW(),
+		`sortId`=#{sortId},
+		`methodId`=#{methodId},
+		`contentId`=#{contentId},
+		`freeId`=#{freeId}
 		WHERE id = #{id}
 	</update>
 

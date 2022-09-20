@@ -484,7 +484,7 @@
 			<div class="mb-7">
 				<div class="text-3xl font-bold flex items-center">
 					<i class="fa-regular fa-square-check text-blue-400 mr-2"></i>
-					<span>레시피 분류 선택</span>
+					<span>레시피 분류 수정</span>
 					<span class="text-lg font-light ml-2">(선택사항)</span>
 				</div>
 			</div>
@@ -492,20 +492,20 @@
 			<!-- 레시피 분류 이름표시 영역 시작 -->
 			<c:forEach var="category" items="${ categoriesAboutRecipe }">
 				<c:if test="${ category.boardId == 1 }">
-					<c:set var="sortName" value="${ category.name }" />
+					<c:set var="oldSort" value="${ category }" />
 				</c:if>
 				<c:if test="${ category.boardId == 2 }">
-					<c:set var="methodName" value="${ category.name }" />
+					<c:set var="oldMethod" value="${ category }" />
 				</c:if>
 				<c:if test="${ category.boardId == 3 }">
-					<c:set var="contentName" value="${ category.name }" />
+					<c:set var="oldContent" value="${ category }" />
 				</c:if>
 				<c:if test="${ category.boardId == 4 }">
-					<c:set var="freeName" value="${ category.name }" />
+					<c:set var="oldFree" value="${ category }" />
 				</c:if>
 			</c:forEach>
 
-			<div class="flex mb-7 ml-5 text-2xl font-medium text-slate-700 text-center">
+			<div class="flex mb-7 ml-5 text-xl font-medium text-slate-700 text-center">
 				<span class="mr-3">
 					선택하신 분류
 					<i class="fa-solid fa-hand-pointer"></i>
@@ -522,7 +522,7 @@
 						<span class="font-bold">종류</span>
 					</div>
 					<select name="sortId" class="select select-lg select-info select-bordered w-full max-w-xs">
-						<option disabled selected>(${ sortName })</option>
+						<option selected class="text-gray-400" value="${ oldSort.relId }">(${ oldSort.name })</option>
 						<c:forEach var="category" items="${ categories }">
 							<c:if test="${ category.boardId == 1 }">
 								<option class="text-2xl" value="${ category.relId }">${ category.name }</option>
@@ -536,7 +536,7 @@
 						<span class="font-bold">방법</span>
 					</div>
 					<select name="methodId" class="select select-lg select-info select-bordered w-full max-w-xs">
-						<option disabled selected>(${ methodName })</option>
+						<option selected class="text-gray-400" value="${ oldMethod.relId }">(${ oldMethod.name })</option>
 						<c:forEach var="category" items="${ categories }">
 							<c:if test="${ category.boardId == 2 }">
 								<option class="text-2xl" value="${ category.relId }">${ category.name }</option>
@@ -550,7 +550,7 @@
 						<span class="font-bold">재료</span>
 					</div>
 					<select name="contentId" class="select select-lg select-info select-bordered w-full max-w-xs">
-						<option disabled selected>(${ contentName })</option>
+						<option selected class="text-gray-400" value="${ oldContent.relId }">(${ oldContent.name })</option>
 						<c:forEach var="category" items="${ categories }">
 							<c:if test="${ category.boardId == 3 }">
 								<option class="text-2xl" value="${ category.relId }">${ category.name }</option>
@@ -564,7 +564,7 @@
 						<span class="font-bold">상황</span>
 					</div>
 					<select name="freeId" class="select select-lg select-info select-bordered w-full max-w-xs">
-						<option disabled selected>(${ freeName })</option>
+						<option selected class="text-gray-400" value="${ oldFree.relId }">(${ oldFree.name })</option>
 						<c:forEach var="category" items="${ categories }">
 							<c:if test="${ category.boardId == 4 }">
 								<option class="text-2xl" value="${ category.name }">${ category.name }</option>

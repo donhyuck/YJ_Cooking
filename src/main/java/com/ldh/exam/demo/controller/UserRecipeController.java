@@ -364,12 +364,10 @@ public class UserRecipeController {
 		Recipe recipe = recipeService.getRecipeById(id);
 
 		// 레시피 가이드 갱신
-		// boardService.updateGuide(recipe.getGuideId(), sortId, methodId, contentId,
-		// freeId);
+		boardService.updateGuide(recipe.getGuideId(), sortId, methodId, contentId, freeId);
 
 		// 재료, 양념 갱신
-		// recipeService.updateIngredient(recipe.getIngredientId(), rowArr, rowValueArr,
-		// sauceArr, sauceValueArr);
+		recipeService.updateIngredient(recipe.getIngredientId(), rowArr, rowValueArr, sauceArr, sauceValueArr);
 
 		// 레시피 수정하기
 		recipeService.modifyRecipe(id, title, body, amount, time, level, tip);

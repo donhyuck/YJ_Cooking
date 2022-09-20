@@ -471,6 +471,14 @@
 				</div>
 			</div>
 
+			<!-- 레시피 분류 이름표시 영역 시작 -->
+			<div class="flex mt-8 text-2xl m-5 font-medium text-slate-700 text-center">
+				<c:forEach var="category" items="${ categoriesAboutRecipe }">
+					<div class="mr-3">#${ category.name }</div>
+				</c:forEach>
+			</div>
+			<!-- 레시피 분류 이름표시 영역 끝 -->
+
 			<div class="flex justify-around">
 				<div class="w-52">
 					<div class="font-medium text-slate-700 text-2xl text-center mb-3">

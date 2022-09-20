@@ -58,7 +58,7 @@
 		FROM
 		guide AS G
 		INNER JOIN category AS C
-		WHERE G.recipeId=1
+		WHERE G.recipeId=#{recipeId}
 		AND (
 		C.boardId=1
 		AND G.sortId=C.relId

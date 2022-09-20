@@ -318,12 +318,20 @@ public class UserRecipeController {
 		// 해당 레시피 페이지의 재료, 양념 목록 가져오기
 		List<List<String>> IngredientList = recipeService.getIngredientById(id);
 
+		// 특정 레시피에 대한 분류정보 가져오기(기존에 등록된 분류정보)
+		List<Category> categoriesAboutRecipe = boardService.getCategoriesAboutRecipe(id);
+
+		// 분류 선택시 카테고리 목록(새로 선택할 수 있도록 넘기는 분류정보)
+		List<Category> categories = boardService.getCategories();
+
 		model.addAttribute("recipe", recipe);
 		model.addAttribute("levelName", levelName);
 		model.addAttribute("rows", IngredientList.get(0));
 		model.addAttribute("rowValues", IngredientList.get(1));
 		model.addAttribute("sauces", IngredientList.get(2));
 		model.addAttribute("sauceValues", IngredientList.get(3));
+		model.addAttribute("categoriesAboutRecipe", categoriesAboutRecipe);
+		model.addAttribute("categories", categories);
 
 		return "user/recipe/modify";
 	}

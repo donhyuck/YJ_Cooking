@@ -169,10 +169,10 @@
 		sauceValueStr = sauceValueStr.substr(0, sauceValueStr.lastIndexOf(',') );
 
 		// 구성된 문자열을 input테그 값으로
-		document['do-write-recipe-form'].rowArr.value = rowStr;
-		document['do-write-recipe-form'].rowValueArr.value = rowValueStr;
-		document['do-write-recipe-form'].sauceArr.value = sauceStr;
-		document['do-write-recipe-form'].sauceValueArr.value = sauceValueStr;
+		document['do-modify-recipe-form'].rowArr.value = rowStr;
+		document['do-modify-recipe-form'].rowValueArr.value = rowValueStr;
+		document['do-modify-recipe-form'].sauceArr.value = sauceStr;
+		document['do-modify-recipe-form'].sauceValueArr.value = sauceValueStr;
 		
 		form.rowArr.value = form.rowArr.value.trim();
 		form.rowValueArr.value = form.rowValueArr.value.trim();
@@ -474,7 +474,18 @@
 			<!-- 레시피 분류 이름표시 영역 시작 -->
 			<div class="flex mt-8 text-2xl m-5 font-medium text-slate-700 text-center">
 				<c:forEach var="category" items="${ categoriesAboutRecipe }">
-					<div class="mr-3">#${ category.name }</div>
+					<c:if test="${ category.boardId == 1 }">
+						<c:set var="sortName" value="${ category.name }" />
+					</c:if>
+					<c:if test="${ category.boardId == 2 }">
+						<c:set var="methodName" value="${ category.name }" />
+					</c:if>
+					<c:if test="${ category.boardId == 3 }">
+						<c:set var="contentName" value="${ category.name }" />
+					</c:if>
+					<c:if test="${ category.boardId == 4 }">
+						<c:set var="freeName" value="${ category.name }" />
+					</c:if>
 				</c:forEach>
 			</div>
 			<!-- 레시피 분류 이름표시 영역 끝 -->
@@ -485,7 +496,7 @@
 						<span class="font-bold">종류</span>
 					</div>
 					<select name="sortId" class="select select-lg select-info select-bordered w-full max-w-xs">
-						<option disabled selected>(미선택)</option>
+						<option disabled selected>(${ sortName })</option>
 						<c:forEach var="category" items="${ categories }">
 							<c:if test="${ category.boardId == 1 }">
 								<option class="text-2xl" value="${ category.relId }">${ category.name }</option>
@@ -499,7 +510,7 @@
 						<span class="font-bold">방법</span>
 					</div>
 					<select name="methodId" class="select select-lg select-info select-bordered w-full max-w-xs">
-						<option disabled selected>(미선택)</option>
+						<option disabled selected>(${ methodName })</option>
 						<c:forEach var="category" items="${ categories }">
 							<c:if test="${ category.boardId == 2 }">
 								<option class="text-2xl" value="${ category.relId }">${ category.name }</option>
@@ -513,7 +524,7 @@
 						<span class="font-bold">재료</span>
 					</div>
 					<select name="contentId" class="select select-lg select-info select-bordered w-full max-w-xs">
-						<option disabled selected>(미선택)</option>
+						<option disabled selected>(${ contentName })</option>
 						<c:forEach var="category" items="${ categories }">
 							<c:if test="${ category.boardId == 3 }">
 								<option class="text-2xl" value="${ category.relId }">${ category.name }</option>
@@ -527,7 +538,7 @@
 						<span class="font-bold">상황</span>
 					</div>
 					<select name="freeId" class="select select-lg select-info select-bordered w-full max-w-xs">
-						<option disabled selected>(미선택)</option>
+						<option disabled selected>(${ freeName })</option>
 						<c:forEach var="category" items="${ categories }">
 							<c:if test="${ category.boardId == 4 }">
 								<option class="text-2xl" value="${ category.name }">${ category.name }</option>
@@ -585,7 +596,7 @@
 			<!-- 레시피 조작 영역 시작 -->
 			<div class="btns flex justify-end space-x-5" id="downTarget">
 				<button type="button" class="btn btn-lg btn-outline" onclick="history.back();">뒤로가기</button>
-				<button type="submit" class="btn btn-lg btn-primary btn-outline">등록하기</button>
+				<button type="submit" class="btn btn-lg btn-primary btn-outline">수정하기</button>
 			</div>
 			<!-- 레시피 조작 영역 끝 -->
 

@@ -22,7 +22,8 @@
 
 	<select id="getIngredientByRecipeId" resultType="Ingredient">
 		SELECT *
-		FROM ingredient AS IG
+		FROM
+		ingredient AS IG
 		WHERE recipeId = #{recipeId}
 	</select>
 
@@ -244,10 +245,11 @@
 		`time` = #{time},
 		`level` = #{level},
 		`guideId` = #{guideId},
+		`ingredientId` = #{ingredientId},
 		`tip` = #{tip}
 	</insert>
 
-	<insert id="doInsertIngredient">
+	<insert id="insertIngredient">
 		INSERT INTO ingredient
 		SET regDate=NOW(),
 		updateDate=NOW(),

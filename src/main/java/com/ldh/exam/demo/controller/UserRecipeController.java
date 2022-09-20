@@ -214,9 +214,6 @@ public class UserRecipeController {
 
 		Recipe recipe = recipeService.getForPrintRecipe(rq.getLoginedMemberId(), id);
 
-		// 특정 레시피에 대한 분류정보 가져오기
-		List<Category> categoriesAboutRecipe = boardService.getCategoriesAboutRecipe(id);
-
 		// 좋아요 가능여부
 		ResultData actorCanReactionRd = reactionService.actorCanReaction(rq.getLoginedMemberId(), id, "recipe");
 
@@ -236,8 +233,11 @@ public class UserRecipeController {
 		// 해당 레시피 페이지의 댓글 목록 가져오기
 		List<Reply> replies = replyService.getForPrintReplies(rq.getLoginedMemberId(), "recipe", id);
 
+		// 특정 레시피에 대한 분류정보 가져오기
+		List<Category> categoriesAboutRecipe = boardService.getCategoriesAboutRecipe(recipe.getGuideId());
+
 		// 해당 레시피 페이지의 재료, 양념 목록 가져오기
-		List<List<String>> IngredientList = recipeService.getIngredientById(id);
+		List<List<String>> IngredientList = recipeService.getIngredientById(recipe.getIngredientId());
 
 		model.addAttribute("recipe", recipe);
 		model.addAttribute("replies", replies);
@@ -285,10 +285,11 @@ public class UserRecipeController {
 		int guideId = boardService.makeGuideForWriteRecipe(sortId, methodId, contentId, freeId);
 
 		// 재료, 양념 데이터 추가
-		int ingredientId = recipeService.doInsertIngredient(rowArr, rowValueArr, sauceArr, sauceValueArr);
+		int ingredientId = recipeService.insertIngredient(rowArr, rowValueArr, sauceArr, sauceValueArr);
 
 		// 레시피 등록하기
-		int id = recipeService.writeRecipe(rq.getLoginedMemberId(), title, body, amount, time, level, guideId, tip);
+		int id = recipeService.writeRecipe(rq.getLoginedMemberId(), title, body, amount, time, level, guideId,
+				ingredientId, tip);
 
 		// 등록된 레시피 번호를 가이드, 재료양념으로 갱신
 		boardService.updateRecipeId(guideId, id);
@@ -316,10 +317,10 @@ public class UserRecipeController {
 		String levelName = recipe.getForPrintLevel();
 
 		// 해당 레시피 페이지의 재료, 양념 목록 가져오기
-		List<List<String>> IngredientList = recipeService.getIngredientById(id);
+		List<List<String>> IngredientList = recipeService.getIngredientById(recipe.getIngredientId());
 
 		// 특정 레시피에 대한 분류정보 가져오기(기존에 등록된 분류정보)
-		List<Category> categoriesAboutRecipe = boardService.getCategoriesAboutRecipe(id);
+		List<Category> categoriesAboutRecipe = boardService.getCategoriesAboutRecipe(recipe.getGuideId());
 
 		// 분류 선택시 카테고리 목록(새로 선택할 수 있도록 넘기는 분류정보)
 		List<Category> categories = boardService.getCategories();
@@ -339,7 +340,11 @@ public class UserRecipeController {
 	// 레시피 수정하기 메서드
 	@RequestMapping("/user/recipe/doModify")
 	@ResponseBody
-	public String doModify(int id, String title, String body) {
+	public String doModify(int id, String title, String body, int amount, int time, int level, String tip,
+			@RequestParam(defaultValue = "0") int sortId, @RequestParam(defaultValue = "0") int methodId,
+			@RequestParam(defaultValue = "0") int contentId, @RequestParam(defaultValue = "0") int freeId,
+			String rowArr, String rowValueArr, String sauceArr, String sauceValueArr,
+			@RequestParam(defaultValue = "/") String replaceUri) {
 
 		// 입력 데이터 유효성 검사
 		if (Ut.empty(title)) {
@@ -357,8 +362,16 @@ public class UserRecipeController {
 			return rq.jsHistoryBack(actorCanModifyRd.getMsg());
 		}
 
+		Recipe recipe = recipeService.getRecipeById(id);
+
+		// 레시피 가이드 구성
+		boardService.updateGuide(recipe.getGuideId(), sortId, methodId, contentId, freeId);
+
+		// 재료, 양념 데이터 추가
+		recipeService.updateIngredient(recipe.getIngredientId(), rowArr, rowValueArr, sauceArr, sauceValueArr);
+
 		// 레시피 수정하기
-		recipeService.modifyRecipe(id, title, body);
+		recipeService.modifyRecipe(rq.getLoginedMemberId(), title, body, amount, time, level, tip);
 
 		return rq.jsReplace(Ut.f("%s번 레시피가 수정되었습니다.", id), Ut.f("../recipe/detail?id=%d", id));
 	}

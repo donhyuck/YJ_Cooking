@@ -20,6 +20,12 @@ public class RecipeService {
 		this.recipeRepository = recipeRepository;
 	}
 
+	// 레시피 확인
+	public Recipe getRecipeById(int id) {
+
+		return recipeRepository.getRecipeById(id);
+	}
+
 	// 특정 레시피 가져오기
 	public Recipe getForPrintRecipe(int memberId, int id) {
 
@@ -160,17 +166,17 @@ public class RecipeService {
 
 	// 레시피 등록하기
 	public int writeRecipe(int memberId, String title, String body, int amount, int time, int level, int guideId,
-			String tip) {
+			int ingredientId, String tip) {
 
-		recipeRepository.writeRecipe(memberId, title, body, amount, time, level, guideId, tip);
+		recipeRepository.writeRecipe(memberId, title, body, amount, time, level, guideId, ingredientId, tip);
 
 		return recipeRepository.getLastInsertId();
 	}
 
 	// 재료, 양념 데이터 추가
-	public int doInsertIngredient(String rowArr, String rowValueArr, String sauceArr, String sauceValueArr) {
+	public int insertIngredient(String rowArr, String rowValueArr, String sauceArr, String sauceValueArr) {
 
-		recipeRepository.doInsertIngredient(rowArr, rowValueArr, sauceArr, sauceValueArr);
+		recipeRepository.insertIngredient(rowArr, rowValueArr, sauceArr, sauceValueArr);
 
 		return recipeRepository.getLastInsertId();
 	}
@@ -228,12 +234,6 @@ public class RecipeService {
 	public void deleteRecipe(int id) {
 
 		recipeRepository.deleteRecipe(id);
-	}
-
-	// 레시피 확인
-	private Recipe getRecipeById(int id) {
-
-		return recipeRepository.getRecipeById(id);
 	}
 
 	// 수정, 삭제 권한여부 업데이트

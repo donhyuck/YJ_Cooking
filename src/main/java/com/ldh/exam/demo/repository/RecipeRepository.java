@@ -10,6 +10,8 @@ import com.ldh.exam.demo.vo.Recipe;
 @Mapper
 public interface RecipeRepository {
 
+	public Recipe getRecipeById(int id);
+
 	public Recipe getForPrintRecipe(int id);
 
 	public Ingredient getIngredientByRecipeId(int recipeId);
@@ -37,19 +39,17 @@ public interface RecipeRepository {
 	public List<Recipe> getHaveReplyRecipes(int memberId);
 
 	public void writeRecipe(int memberId, String title, String body, int amount, int time, int level, int guideId,
-			String tip);
+			int ingredientId, String tip);
 
-	public int doInsertIngredient(String rowArr, String rowValueArr, String sauceArr, String sauceValueArr);
+	public int insertIngredient(String rowArr, String rowValueArr, String sauceArr, String sauceValueArr);
 
 	public void updateRecipeIdForIngredient(int ingredientId, int recipeId);
-	
+
 	public void modifyRecipe(int id, String title, String body);
 
 	public void deleteRecipe(int id);
 
 	public int getLastInsertId();
-
-	public Recipe getRecipeById(int id);
 
 	public int increaseHitCount(int id);
 

@@ -14,6 +14,7 @@ public class Recipe {
 	private String updateDate;
 	private int memberId;
 	private int guideId;
+	private int ingredientId;
 	private String title;
 	private String body;
 	private int amount;

@@ -3,54 +3,8 @@
 <c:set var="pageTitle" value="레시피 수정페이지" />
 <%@include file="../common/head.jspf"%>
 <%@ include file="../../common/toastUiEditorLib.jspf"%>
+<script src="/recipe/WriteAndModify.js" defer="defer"></script>
 
-<script>
-	window.onload = function () {
-		let valueName = "미선택";
-		
-		if (value == "1") {
-			valueName = "누구나";
-		} else if (value == "2") {
-			valueName = "초급";
-		} else if (value == "3") {
-			valueName = "중급";
-		} else if (value == "4") {
-			valueName = "고급";
-		}
-
-		$("#changeLevelInput").val(valueName);
-	}
-</script>
-
-<!-- 요리정보 입력 스크립트 시작 -->
-<script>
-	var changeAmountBox = function(value) {
-
-		$("#changeAmountInput").val(value);
-	}
-	var changeTimeBox = function(value) {
-
-		$("#changeTimeInput").val(value);
-	}
-	
-	var changeLevelBox = function(value) {
-
-		let valueName = "미선택";
-		
-		if (value == "1") {
-			valueName = "누구나";
-		} else if (value == "2") {
-			valueName = "초급";
-		} else if (value == "3") {
-			valueName = "중급";
-		} else if (value == "4") {
-			valueName = "고급";
-		}
-
-		$("#changeLevelInput").val(valueName);
-	}
-</script>
-<!-- 요리정보 입력 스크립트 끝 -->
 <!-- 입력데이터 검사 스크립트 시작 -->
 <script>
 	let RecipeModify_submitFormDone = false;
@@ -95,7 +49,7 @@
 			form.level.focus();
 			return;
 		}
-		
+
 		// 재료양념 데이터 배열처리 스크립트 시작
 		var rowArrCnt = 0;
 		var rowValueArrCnt = 0;
@@ -108,59 +62,59 @@
 
 		// 재료 항목
 		var param = [];
-		for ( var i = 0; i < rowArr.length; i++ ) {
+		for (var i = 0; i < rowArr.length; i++) {
 			rowArr[i].value = rowArr[i].value.trim();
 			param.push(rowArr[i].value);
 		}
-		
+
 		var rowStr = '';
-		param.map(function(item){
-			if ( item != '' && item.length - 1) {
+		param.map(function(item) {
+			if (item != '' && item.length - 1) {
 				rowStr += item + ',';
 				rowArrCnt++;
 			}
 		});
-		
+
 		// 재료 값
 		param = [];
-		for ( var i = 0; i < rowValueArr.length; i++ ) {
+		for (var i = 0; i < rowValueArr.length; i++) {
 			rowValueArr[i].value = rowValueArr[i].value.trim();
 			param.push(rowValueArr[i].value);
 		}
-		
+
 		var rowValueStr = '';
-		param.map(function(item){
-			if ( item != '' && item.length - 1) {
+		param.map(function(item) {
+			if (item != '' && item.length - 1) {
 				rowValueStr += item + ',';
 				rowValueArrCnt++;
 			}
 		});
-		
+
 		// 양념 항목
 		param = [];
-		for ( var i = 0; i < sauceArr.length; i++ ) {
+		for (var i = 0; i < sauceArr.length; i++) {
 			sauceArr[i].value = sauceArr[i].value.trim();
 			param.push(sauceArr[i].value);
 		}
-		
+
 		var sauceStr = '';
-		param.map(function(item){
-			if ( item != '' && item.length - 1) {
+		param.map(function(item) {
+			if (item != '' && item.length - 1) {
 				sauceStr += item + ',';
 				sauceArrCnt++;
 			}
 		});
-		
+
 		// 양념 값
 		param = [];
-		for ( var i = 0; i < sauceValueArr.length; i++ ) {
+		for (var i = 0; i < sauceValueArr.length; i++) {
 			sauceValueArr[i].value = sauceValueArr[i].value.trim();
 			param.push(sauceValueArr[i].value);
 		}
-		
+
 		var sauceValueStr = '';
-		param.map(function(item){
-			if ( item != '' && item.length - 1) {
+		param.map(function(item) {
+			if (item != '' && item.length - 1) {
 				sauceValueStr += item + ',';
 				sauceValueArrCnt++;
 			}
@@ -169,38 +123,38 @@
 		// 항목과 값 미입력 확인
 		if (rowArrCnt != rowValueArrCnt) {
 			alert('[재료]의 항목 또는 수량을 확인하시고, 빈칸을 채워주세요.');
-		    $("#rowBox").attr("tabindex", -1).focus();
+			$("#rowBox").attr("tabindex", -1).focus();
 			return;
 		}
-		
+
 		if (sauceArrCnt != sauceValueArrCnt) {
 			alert('[양념]의 항목 또는 수량을 확인하시고, 빈칸을 채워주세요.');
-		    $("#rowBox").attr("tabindex", -1).focus();
+			$("#rowBox").attr("tabindex", -1).focus();
 			return;
 		}
 
 		// 마지막 구분자(,)제거
-		rowStr = rowStr.substr(0, rowStr.lastIndexOf(',') );
-		rowValueStr = rowValueStr.substr(0, rowValueStr.lastIndexOf(',') );
-		sauceStr = sauceStr.substr(0, sauceStr.lastIndexOf(',') );
-		
-		sauceValueStr = sauceValueStr.substr(0, sauceValueStr.lastIndexOf(',') );
+		rowStr = rowStr.substr(0, rowStr.lastIndexOf(','));
+		rowValueStr = rowValueStr.substr(0, rowValueStr.lastIndexOf(','));
+		sauceStr = sauceStr.substr(0, sauceStr.lastIndexOf(','));
+
+		sauceValueStr = sauceValueStr.substr(0, sauceValueStr.lastIndexOf(','));
 
 		// 구성된 문자열을 input테그 값으로
 		document['do-modify-recipe-form'].rowArr.value = rowStr;
 		document['do-modify-recipe-form'].rowValueArr.value = rowValueStr;
 		document['do-modify-recipe-form'].sauceArr.value = sauceStr;
 		document['do-modify-recipe-form'].sauceValueArr.value = sauceValueStr;
-		
+
 		form.rowArr.value = form.rowArr.value.trim();
 		form.rowValueArr.value = form.rowValueArr.value.trim();
 		form.sauceArr.value = form.sauceArr.value.trim();
 		form.sauceValueArr.value = form.sauceValueArr.value.trim();
 		// 재료양념 데이터 배열처리 스크립트 끝
-		
+
 		if (form.rowArr.value == 0) {
 			alert('최소 1개 이상의 재료는 입력해주세요.');
-		    $("#rowBox").attr("tabindex", -1).focus();
+			$("#rowBox").attr("tabindex", -1).focus();
 			return;
 		}
 
@@ -209,35 +163,6 @@
 	}
 </script>
 <!-- 입력데이터 검사 스크립트 끝 -->
-
-<!-- 재료양념 입력칸 추가/삭제 스크립트 시작 -->
-<script>
-	const add_rowBox = () => {
-		const rowBox = document.getElementById("rowBox");
-		const newRowBoxP = document.createElement('p');
-		newRowBoxP.innerHTML = "<input name='row' type='text' class='input input-lg input-bordered w-60 text-center mb-5' placeholder='예) 양파' />"
-		+ "<input name='rowValue' type='text' class='input input-lg input-bordered w-48 text-center ml-12 mr-0 mb-5' placeholder='예) 1개' />"
-		+ "<div type='button' onclick='removeRowBox(this);' class='btn btn-circle ml-3 hover:text-red-400'>삭제</div>";
-		rowBox.appendChild(newRowBoxP);
-	}
-	
-	const removeRowBox = (obj) => {
-	    document.getElementById('rowBox').removeChild(obj.parentNode);
-	}
-	const add_sauceBox = () => {
-		const sauceBox = document.getElementById("sauceBox");
-		const newSauceBoxP = document.createElement('p');
-		newSauceBoxP.innerHTML = "<input name='sauce' type='text' class='input input-lg input-bordered w-60 text-center mb-5' placeholder='예) 간장' />"
-		+ "<input name='sauceValue' type='text' class='input input-lg input-bordered w-48 text-center ml-12 mr-0 mb-5' placeholder='예) 2T' />"
-		+ "<div type='button' onclick='removeSauceBox(this);' class='btn btn-circle ml-3 hover:text-red-400'>삭제</div>";
-		sauceBox.appendChild(newSauceBoxP);
-	}
-	
-	const removeSauceBox = (obj) => {
-	    document.getElementById('sauceBox').removeChild(obj.parentNode);
-	}
-</script>
-<!-- 재료양념 입력칸 추가/삭제 스크립트 끝 -->
 
 <form class="bg-gray-200 py-4" action="../recipe/doModify" method="POST" name="do-modify-recipe-form"
 	onsubmit="RecipeModify_submitForm(this); return false;">

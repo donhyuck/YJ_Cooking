@@ -105,6 +105,10 @@
 					<img class="w-full rounded-md" src="https://tse4.mm.bing.net/th?id=OIP.kwt4oKZDd-goVuBezaVQRQHaE7&pid=Api&P=0"
 						alt="" />
 					<div class="text-gray-400 text-lg text-right mt-2 mr-4">
+						<span>등록번호</span>
+						<span>${ recipe.id }</span>
+					</div>
+					<div class="text-gray-400 text-lg text-right mr-4">
 						<span>조회수</span>
 						<span class="recipe-detail__hitCount">${ recipe.hitCount }</span>
 					</div>
@@ -313,7 +317,7 @@
 					<script type="text/x-template">${recipe.body}</script>
 				</div>
 			</td>
-			
+
 			<div class="w-full flex flex-col space-y-8 px-5">
 				<c:forEach var="i" begin="1" end="4" step="1">
 					<div class="flex">

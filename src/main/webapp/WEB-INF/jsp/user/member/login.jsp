@@ -40,13 +40,12 @@
 			<input type="hidden" name="afterLoginUri" value="${ param.afterLoginUri }">
 			<div class="text-3xl font-bold mb-2">로그인</div>
 			<div>
-				<input name="loginId" type="text" class="input input-bordered w-96 max-w-xs member-inputType" placeholder=" 아이디" />
-				<div class="member-msgType text-green-400 mt-1 ml-4">사용가능합니다.</div>
+				<input name="loginId" type="text" class="input input-lg input-bordered w-96 max-w-xs member-inputType"
+					placeholder=" 아이디" />
 			</div>
 			<div>
-				<input name="loginPw" type="password" class="input input-bordered w-96 max-w-xs member-inputType"
+				<input name="loginPw" type="password" class="input input-lg input-bordered w-96 max-w-xs member-inputType"
 					placeholder=" 비밀번호" />
-				<div class="member-msgType text-green-400 mt-1 ml-4">사용가능합니다.</div>
 			</div>
 
 			<div class="flex flex-col pt-5 text-center">

@@ -166,7 +166,7 @@
 <form class="bg-gray-200 py-4" action="../recipe/doWrite" method="POST" name="do-write-recipe-form"
 	onsubmit="RecipeWrite_submitForm(this); return false;">
 
-	<div class="write-box w-10/12 mx-auto" id="topTarget">
+	<div class="write-box w-10/12 mx-auto">
 		<section class="bg-white rounded-md p-12 flex mb-5">
 			<!-- 대표사진 등록 -->
 			<a href="#"
@@ -465,10 +465,6 @@
 						를 해주세요.
 					</li>
 				</ul>
-				<!-- <div>
-					<i class="fa-regular fa-circle-question"></i>
-					<span>어울리는 키워드가 없다면? 자유 카테고리에서 입력해보세요.</span>
-				</div> -->
 			</div>
 		</section>
 		<!-- 레시피 분류 영역 끝 -->

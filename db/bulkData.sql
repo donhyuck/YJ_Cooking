@@ -158,6 +158,28 @@ UPDATE recipe
 SET hitCount = goodRP + FLOOR(RAND() * 500)+1
 WHERE hitCount = 0;
 
+## 재료양념 데이터 구성
+UPDATE ingredient
+SET rowArr='감자,당근,양파',
+rowValueArr='3개,1/3개,1/2개',
+sauceArr='굴소스(선택),소금,후추',
+sauceValueArr='1T,약간,약간'
+WHERE recipeId=1;
+
+UPDATE ingredient
+SET rowArr='갈비대,밤,표고버섯',
+rowValueArr='2kg,1컵,4개',
+sauceArr='간배,간양파,간장,물,설탕,참기름,다진마늘,대파',
+sauceValueArr='1/2개,1/2개,3/4컵,1컵,1/2컵,1/2컵,3큰술,1개'
+WHERE recipeId=2;
+
+UPDATE ingredient
+SET rowArr='파스타면,마늘,베이컨 또는 새우,양파',
+rowValueArr='500원크기,4개,1줌,1/3개',
+sauceArr='토마토소스,생크림,치즈',
+sauceValueArr='120ml,170ml,1장'
+WHERE recipeId=3;
+
 SELECT * FROM recipe;
 SELECT * FROM ingredient;
 SELECT * FROM guide;

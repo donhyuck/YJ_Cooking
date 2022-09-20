@@ -32,7 +32,7 @@
 </head>
 
 <body>
-	<div class="header min-w-fit">
+	<div class="header min-w-fit" id="topTarget">
 		<section class="top-bar flex items-center justify-center mx-auto w-10/12 h-28 text-xl">
 			<!-- 로고박스 영역 시작 -->
 			<div class="logo-box flex items-center justify-center rounded-2xl w-28 h-16">

@@ -47,13 +47,13 @@
 			<!-- 닉네임, 이메일 입력 -->
 			<div>
 				<div class="text-gray-400 p-2">닉네임</div>
-				<input name="nickname" type="text" class="input input-bordered w-96 max-w-xs member-inputType" placeholder=" 닉네임" />
-				<div class="member-msgType text-green-400 mt-1 ml-4">사용가능합니다.</div>
+				<input name="nickname" type="text" autocomplete="off"
+					class="input input-lg input-bordered w-96 max-w-xs member-inputType" placeholder=" 닉네임" />
 			</div>
 			<div>
 				<div class="text-gray-400 p-2">이메일</div>
-				<input name="email" type="email" class="input input-bordered w-96 max-w-xs member-inputType" placeholder=" abc@test.com" />
-				<div class="member-msgType text-green-400 mt-1 ml-4">사용가능합니다.</div>
+				<input name="email" type="email" autocomplete="off"
+					class="input input-lg input-bordered w-96 max-w-xs member-inputType" placeholder=" abc@test.com" />
 			</div>
 
 			<div class="flex flex-col pt-3 text-center">

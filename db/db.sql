@@ -932,12 +932,6 @@ ON R.memberId = M.id
 ORDER BY R.regDate DESC
 LIMIT 10;
 
-# 초기화
-UPDATE recipe
-SET hitCount = 0,
-goodRP = 0,
-scrap = 0;
-
 ## 최다 하트, 조회수 순 레시피 목록 가져오기 (10개)
 ## 랭킹 표시 (x)
 SELECT R.*,
@@ -1162,3 +1156,4 @@ OR C.boardId = 4 AND G.freeId = C.relId
 
 SELECT * FROM recipe;
 SELECT * FROM ingredient;
+SELECT * FROM `member`;

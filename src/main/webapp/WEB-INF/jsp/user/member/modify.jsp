@@ -2,6 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set var="pageTitle" value="회원정보 수정" />
 <%@include file="../common/head.jspf"%>
+<script src="/member/join.js" defer="defer"></script>
 
 <!-- 입력데이터 검사 스크립트 시작 -->
 <script>
@@ -56,8 +57,8 @@
 
 <div class="mt-6">
 	<div class="member-box w-2/5 mx-auto">
-		<form class="flex flex-col space-y-4 items-center" method="POST" action="../member/doModify"
-			onsubmit="MemberModify_submitForm(this); return false;">
+		<form class="flex flex-col space-y-4 items-center" method="POST" enctype="multipart/form-data"
+			action="../member/doModify" onsubmit="MemberModify_submitForm(this); return false;">
 			<!-- 로그인한 회원의 정보 -->
 			<c:set var="member" value="${ rq.loginedMember }" />
 			<!-- 비밀번호 확인 인증코드 -->
@@ -67,37 +68,36 @@
 			<div>
 				<div class="text-gray-400 p-2">아이디</div>
 				<div class="border border-gray-700 rounded-lg w-96 member-inputType flex items-center">
-					<div class="ml-3">${ member.loginId }</div>
+					<div class="ml-3 p-3">${ member.loginId }</div>
 				</div>
 			</div>
 			<div>
 				<div class="text-gray-400 p-2">신규 비밀번호</div>
-				<input name="loginPw" type="password" class="input input-bordered w-96 member-inputType" placeholder="비밀번호" />
-				<div class="member-msgType text-green-400 mt-1 ml-4">사용가능합니다.</div>
+				<input name="loginPw" type="password" class="input input-lg input-bordered w-96 member-inputType" placeholder="비밀번호" />
 			</div>
 			<div>
 				<div class="text-gray-400 p-2">비밀번호 확인</div>
-				<input name="loginPwConfirm" type="password" class="input input-bordered w-96 member-inputType"
+				<input name="loginPwConfirm" type="password" class="input input-lg input-bordered w-96 member-inputType"
 					placeholder="비밀번호 확인" />
-				<div class="member-msgType text-green-400 mt-1 ml-4">사용가능합니다.</div>
 			</div>
-			<div>
-				<div class="text-gray-400 p-2">닉네임</div>
-				<input name="nickname" type="text" value="${ member.nickname }" class="input input-bordered w-96 member-inputType"
-					placeholder="닉네임" />
-				<div class="member-msgType text-green-400 mt-1 ml-4">사용가능합니다.</div>
+
+			<div class="flex flex-col mt-3">
+				<div class="ml-1 mt-2 font-medium text-slate-700">닉네임</div>
+				<input name="nickname" type="text" value="${ member.nickname }" class="input input-lg input-bordered w-96"
+					placeholder="레시피와 댓글에서 사용될 닉네임입니다." autocomplete="off" />
+				<div class="ml-1 mt-2 font-medium text-slate-700">이메일</div>
+				<input name="email" type="text" value="${ member.email }" class="input input-lg input-bordered w-96"
+					placeholder="예) abc@email.com" autocomplete="off" />
+				<div class="message mt-1 ml-4">
+					<div class="text-gray-400">닉네임과 이메일을 입력해주세요.</div>
+				</div>
 			</div>
+
 			<div>
-				<div class="text-gray-400 p-2">연락처</div>
-				<input name="cellphoneNo" type="text" value="${ member.cellphoneNo }"
-					class="input input-bordered w-96 member-inputType" placeholder="연락처 예) 하이픈(-) 제외" />
-				<div class="member-msgType text-green-400 mt-1 ml-4">사용가능합니다.</div>
-			</div>
-			<div>
-				<div class="text-gray-400 p-2">이메일</div>
-				<input name="email" type="email" value="${ member.email }" class="input input-bordered w-96 member-inputType"
-					placeholder="이메일" />
-				<div class="member-msgType text-green-400 mt-1 ml-4">사용가능합니다.</div>
+				<div class="ml-1 mt-2 font-medium text-slate-700">연락처</div>
+				<input name="cellphoneNo" type="text" value="${ member.cellphoneNo }" class="input input-lg input-bordered w-96"
+					oninput="autoHyphenBySplit(this);" maxlength="13" required="required" placeholder="예) 01012341234" />
+				<div class="mt-1 ml-4">하이픈(-)을 제외하고 입력해주세요.</div>
 			</div>
 
 			<div class="btns mt-2">

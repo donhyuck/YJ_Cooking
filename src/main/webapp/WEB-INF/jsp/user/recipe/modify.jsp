@@ -170,7 +170,7 @@
 	<input type="hidden" name="id" value="${ recipe.id }" />
 	<input type="hidden" name="replaceUri" value="${ param.replaceUri }" />
 
-	<div class="modify-box w-10/12 mx-auto" id="topTarget">
+	<div class="modify-box w-10/12 mx-auto">
 		<section class="bg-white rounded-md p-12 flex mb-5">
 			<!-- 대표사진 등록 -->
 			<a href="#"

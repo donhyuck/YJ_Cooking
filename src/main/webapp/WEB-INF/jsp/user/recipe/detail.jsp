@@ -95,7 +95,7 @@
 <!-- 댓글 작성후 스크롤 이동 스크립트 끝 -->
 
 <div class="bg-gray-200 py-4">
-	<div class="detail-box w-10/12 mx-auto" id="topTarget">
+	<div class="detail-box w-10/12 mx-auto">
 
 		<!-- 레시피 기본정보 영역 시작 -->
 		<section class="bg-white rounded-md p-12 pb-8 mb-5">

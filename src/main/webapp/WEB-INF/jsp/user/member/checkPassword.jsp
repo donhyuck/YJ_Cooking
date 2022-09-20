@@ -17,13 +17,13 @@
 			<div>
 				<div class="text-gray-400 p-2">아이디</div>
 				<div class="border border-gray-700 rounded-lg w-96 max-w-xs member-inputType flex items-center">
-					<div class="ml-3">${ rq.loginedMember.loginId }</div>
+					<div class="ml-3 p-3">${ rq.loginedMember.loginId }</div>
 				</div>
 			</div>
 			<div>
 				<div class="text-gray-400 p-2">비밀번호</div>
 				<input name="loginPw" type="password" required="required"
-					class="input input-bordered w-96 max-w-xs member-inputType" placeholder="현재 비밀번호" />
+					class="input input-lg input-bordered w-96 max-w-xs member-inputType" placeholder="현재 비밀번호" />
 			</div>
 
 			<div class="flex flex-col pt-5 text-center">

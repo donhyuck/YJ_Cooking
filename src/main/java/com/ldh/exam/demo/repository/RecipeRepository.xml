@@ -266,6 +266,32 @@
 		id=#{ingredientId}
 	</update>
 
+	<update id="updateIngredient">
+		UPDATE ingredient
+		<set>
+			<if test="rowArr != null and rowArr !=''">
+				rowArr = #{rowArr},
+			</if>
+			<if test="rowValueArr != null and rowValueArr !=''">
+				`rowValueArr` = #{rowValueArr},
+			</if>
+			<if test="sauceArr != null and sauceArr !=''">
+				`sauceArr` = #{sauceArr},
+			</if>
+			<if test="sauceValueArr != null and sauceValueArr !=''">
+				`sauceValueArr` = #{sauceValueArr},
+			</if>
+			<if test="level != null and level !=''">
+				`level` = #{level},
+			</if>
+			<if test="tip != null and tip !=''">
+				`tip` = #{tip},
+			</if>
+			updateDate = NOW()
+		</set>
+		WHERE id=#{id}
+	</update>
+
 	<update id="modifyRecipe">
 		UPDATE recipe
 		<set>
@@ -274,6 +300,18 @@
 			</if>
 			<if test="body != null and body !=''">
 				`body` = #{body},
+			</if>
+			<if test="amount != 0">
+				`amount` = #{amount},
+			</if>
+			<if test="time != 0">
+				`time` = #{time},
+			</if>
+			<if test="level != 0">
+				`level` = #{level},
+			</if>
+			<if test="tip != null and tip !=''">
+				`tip` = #{tip},
 			</if>
 			updateDate = NOW()
 		</set>

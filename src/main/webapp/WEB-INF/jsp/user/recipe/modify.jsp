@@ -4,6 +4,24 @@
 <%@include file="../common/head.jspf"%>
 <%@ include file="../../common/toastUiEditorLib.jspf"%>
 
+<script>
+	window.onload = function () {
+		let valueName = "미선택";
+		
+		if (value == "1") {
+			valueName = "누구나";
+		} else if (value == "2") {
+			valueName = "초급";
+		} else if (value == "3") {
+			valueName = "중급";
+		} else if (value == "4") {
+			valueName = "고급";
+		}
+
+		$("#changeLevelInput").val(valueName);
+	}
+</script>
+
 <!-- 요리정보 입력 스크립트 시작 -->
 <script>
 	var changeAmountBox = function(value) {
@@ -72,7 +90,7 @@
 		}
 
 		form.level.value = form.level.value.trim();
-		if (form.level.value == 0) {
+		if (form.level.value.length == 0) {
 			alert('난이도를 선택해주세요.');
 			form.level.focus();
 			return;
@@ -280,7 +298,7 @@
 								<span class="ml-1">인원</span>
 							</div>
 							<select onchange="changeAmountBox(this.value)" class="select select-lg select-accent w-full max-w-xs mt-4">
-								<option disabled selected>선택</option>
+								<option disabled selected value="${ recipe.amount }">선택</option>
 								<option class="text-xl" value="1">1인분</option>
 								<option class="text-xl" value="2">2인분</option>
 								<option class="text-xl" value="3">3인분</option>
@@ -296,7 +314,7 @@
 								<span class="ml-1">소요시간</span>
 							</div>
 							<select onchange="changeTimeBox(this.value)" class="select select-lg select-accent w-full max-w-xs mt-4">
-								<option disabled selected>선택</option>
+								<option disabled selected value="${ recipe.time }">선택</option>
 								<option class="text-xl" value="5">5분이내</option>
 								<option class="text-xl" value="10">10분이내</option>
 								<option class="text-xl" value="30">30분이내</option>
@@ -371,8 +389,8 @@
 						</div>
 						<div>
 							<div class="ml-2 font-medium text-slate-700 text-lg">난이도</div>
-							<input id="changeLevelInput" type="text" value="${ levelName }"
-								class="input input-lg input-bordered w-32 text-center font-bold" placeholder="미선택" disabled value="" />
+							<input id="changeLevelInput" type="text" class="input input-lg input-bordered w-32 text-center font-bold"
+								placeholder="미선택" disabled value="${ levelName }" />
 						</div>
 					</div>
 				</div>
@@ -472,20 +490,28 @@
 			</div>
 
 			<!-- 레시피 분류 이름표시 영역 시작 -->
-			<div class="flex mt-8 text-2xl m-5 font-medium text-slate-700 text-center">
+			<c:forEach var="category" items="${ categoriesAboutRecipe }">
+				<c:if test="${ category.boardId == 1 }">
+					<c:set var="sortName" value="${ category.name }" />
+				</c:if>
+				<c:if test="${ category.boardId == 2 }">
+					<c:set var="methodName" value="${ category.name }" />
+				</c:if>
+				<c:if test="${ category.boardId == 3 }">
+					<c:set var="contentName" value="${ category.name }" />
+				</c:if>
+				<c:if test="${ category.boardId == 4 }">
+					<c:set var="freeName" value="${ category.name }" />
+				</c:if>
+			</c:forEach>
+
+			<div class="flex mb-7 ml-5 text-2xl font-medium text-slate-700 text-center">
+				<span class="mr-3">
+					선택하신 분류
+					<i class="fa-solid fa-hand-pointer"></i>
+				</span>
 				<c:forEach var="category" items="${ categoriesAboutRecipe }">
-					<c:if test="${ category.boardId == 1 }">
-						<c:set var="sortName" value="${ category.name }" />
-					</c:if>
-					<c:if test="${ category.boardId == 2 }">
-						<c:set var="methodName" value="${ category.name }" />
-					</c:if>
-					<c:if test="${ category.boardId == 3 }">
-						<c:set var="contentName" value="${ category.name }" />
-					</c:if>
-					<c:if test="${ category.boardId == 4 }">
-						<c:set var="freeName" value="${ category.name }" />
-					</c:if>
+					<div class="mr-3">#${ category.name }</div>
 				</c:forEach>
 			</div>
 			<!-- 레시피 분류 이름표시 영역 끝 -->

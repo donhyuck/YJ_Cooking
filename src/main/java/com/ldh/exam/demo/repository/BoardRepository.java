@@ -25,6 +25,8 @@ public interface BoardRepository {
 
 	public void updateRecipeId(int guideId, int recipeId);
 
+	public void updateGuide(int id, int sortId, int methodId, int contentId, int freeId);
+
 	public List<Category> getCategoriesAboutRecipe(int recipeId);
 
 }

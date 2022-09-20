@@ -53,6 +53,26 @@
 		#{guideId}
 	</update>
 
+	<update id="updateGuide">
+		UPDATE guide
+		<set>
+			<if test="sortId != null and sortId !=''">
+				sortId = #{sortId},
+			</if>
+			<if test="methodId != null and methodId !=''">
+				`methodId` = #{methodId},
+			</if>
+			<if test="contentId != null and contentId !=''">
+				`contentId` = #{contentId},
+			</if>
+			<if test="freeId != null and freeId !=''">
+				`freeId` = #{freeId},
+			</if>
+			updateDate = NOW()
+		</set>
+		WHERE id = #{id}
+	</update>
+
 	<select id="getCategoriesAboutRecipe" resultType="Category">
 		SELECT C.*
 		FROM

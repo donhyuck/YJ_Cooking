@@ -45,7 +45,9 @@ public interface RecipeRepository {
 
 	public void updateRecipeIdForIngredient(int ingredientId, int recipeId);
 
-	public void modifyRecipe(int id, String title, String body);
+	public void updateIngredient(int id, String rowArr, String rowValueArr, String sauceArr, String sauceValueArr);
+
+	public void modifyRecipe(int id, String title, String body, int amount, int time, int level, String tip);
 
 	public void deleteRecipe(int id);
 

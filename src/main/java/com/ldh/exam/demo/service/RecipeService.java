@@ -187,47 +187,57 @@ public class RecipeService {
 		recipeRepository.updateRecipeIdForIngredient(ingredientId, recipeId);
 	}
 
+	// 재료, 양념 갱신
+	public void updateIngredient(int id, String rowArr, String rowValueArr, String sauceArr, String sauceValueArr) {
+
+		recipeRepository.updateIngredient(id, rowArr, rowValueArr, sauceArr, sauceValueArr);
+	}
+
 	// 해당 레시피 페이지의 재료, 양념 목록 가져오기
 	public List<List<String>> getIngredientById(int recipeId) {
 
 		List<List<String>> IngredientList = new ArrayList<List<String>>(4);
 		Ingredient ingredient = recipeRepository.getIngredientByRecipeId(recipeId);
 
-		// 재료 항목 리스트 구성
 		List<String> rows = new ArrayList<>();
-		for (String rowStr : ingredient.getRowArr().split(",")) {
-			rows.add(rowStr);
-		}
-		IngredientList.add(rows);
-
-		// 재료 값 리스트 구성
 		List<String> rowValues = new ArrayList<>();
-		for (String rowValueStr : ingredient.getRowValueArr().split(",")) {
-			rowValues.add(rowValueStr);
-		}
-		IngredientList.add(rowValues);
-
-		// 양념 항목 리스트 구성
 		List<String> sauces = new ArrayList<>();
-		for (String sauceStr : ingredient.getSauceArr().split(",")) {
-			sauces.add(sauceStr);
-		}
-		IngredientList.add(sauces);
-
-		// 양념 값 리스트 구성
 		List<String> sauceValues = new ArrayList<>();
-		for (String sauceValueStr : ingredient.getSauceValueArr().split(",")) {
-			sauceValues.add(sauceValueStr);
+
+		if (ingredient != null) {
+			// 재료 항목 리스트 구성
+			for (String rowStr : ingredient.getRowArr().split(",")) {
+				rows.add(rowStr);
+			}
+
+			// 재료 값 리스트 구성
+			for (String rowValueStr : ingredient.getRowValueArr().split(",")) {
+				rowValues.add(rowValueStr);
+			}
+
+			// 양념 항목 리스트 구성
+			for (String sauceStr : ingredient.getSauceArr().split(",")) {
+				sauces.add(sauceStr);
+			}
+
+			// 양념 값 리스트 구성
+			for (String sauceValueStr : ingredient.getSauceValueArr().split(",")) {
+				sauceValues.add(sauceValueStr);
+			}
 		}
+
+		IngredientList.add(rows);
+		IngredientList.add(rowValues);
+		IngredientList.add(sauces);
 		IngredientList.add(sauceValues);
 
 		return IngredientList;
 	}
 
 	// 레시피 수정하기
-	public void modifyRecipe(int id, String title, String body) {
+	public void modifyRecipe(int id, String title, String body, int amount, int time, int level, String tip) {
 
-		recipeRepository.modifyRecipe(id, title, body);
+		recipeRepository.modifyRecipe(id, title, body, amount, time, level, tip);
 	}
 
 	// 레시피 삭제하기

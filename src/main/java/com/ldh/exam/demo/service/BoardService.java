@@ -18,26 +18,31 @@ public class BoardService {
 		this.boardRepository = boardRepository;
 	}
 
+	// 특정 분류 가져오기
 	public Board getBoardByBoardId(int id) {
 
 		return boardRepository.getBoardByBoardId(id);
 	}
 
+	// 분류 목록 가져오기
 	public List<Board> getBoards() {
 
 		return boardRepository.getBoards();
 	}
 
+	// 특정 카테고리 가져오기
 	public Category getCategoryByBoardIdAndRelId(int boardId, int relId) {
 
 		return boardRepository.getCategoryByBoardIdAndRelId(boardId, relId);
 	}
 
+	// 카테고리 목록 가져오기
 	public List<Category> getCategories() {
 
 		return boardRepository.getCategories();
 	}
 
+	// 전체 선택을 고려한 분류이름 가져오기
 	public ResultData getNowBoardName(int boardId) {
 
 		String nowBoardName = "";
@@ -61,6 +66,7 @@ public class BoardService {
 		return ResultData.from("S-2", "선택된 상위분류내역입니다.", "nowBoardName", nowBoardName);
 	}
 
+	// 전체 선택을 고려한 카테고리이름 가져오기
 	public ResultData getNowCategoryName(int boardId, int relId) {
 
 		String nowCategoryName = "";
@@ -88,7 +94,7 @@ public class BoardService {
 		return ResultData.from("S-2", "선택된 카테고리내역입니다.", "nowCategoryName", nowCategoryName);
 	}
 
-	// 등록된 레시피의 가이드 설정
+	// 레시피 등록을 위한 가이드 생성
 	public int makeGuideForWriteRecipe(int sortId, int methodId, int contentId, int freeId) {
 
 		boardRepository.makeGuideForWriteRecipe(sortId, methodId, contentId, freeId);
@@ -96,10 +102,16 @@ public class BoardService {
 		return boardRepository.getLastInsertId();
 	}
 
-	// 등록된 레시피 번호를 가이드로 갱신
+	// 가이드의 레시피 번호를 등록된 레시피로 갱신
 	public void updateRecipeId(int guideId, int recipeId) {
 
 		boardRepository.updateRecipeId(guideId, recipeId);
+	}
+
+	// 등록된 가이드 정보를 갱신
+	public void updateGuide(int id, int sortId, int methodId, int contentId, int freeId) {
+
+		boardRepository.updateGuide(id, sortId, methodId, contentId, freeId);
 	}
 
 	// 특정 레시피에 대한 분류정보 가져오기

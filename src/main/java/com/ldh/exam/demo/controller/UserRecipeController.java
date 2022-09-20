@@ -1,6 +1,5 @@
 package com.ldh.exam.demo.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
@@ -340,11 +339,11 @@ public class UserRecipeController {
 	// 레시피 수정하기 메서드
 	@RequestMapping("/user/recipe/doModify")
 	@ResponseBody
-	public String doModify(int id, String title, String body, int amount, int time, int level, String tip,
-			@RequestParam(defaultValue = "0") int sortId, @RequestParam(defaultValue = "0") int methodId,
-			@RequestParam(defaultValue = "0") int contentId, @RequestParam(defaultValue = "0") int freeId,
-			String rowArr, String rowValueArr, String sauceArr, String sauceValueArr,
-			@RequestParam(defaultValue = "/") String replaceUri) {
+	public String doModify(int id, String title, String body, int amount, int time,
+			@RequestParam(defaultValue = "0") int level, String tip, @RequestParam(defaultValue = "0") int sortId,
+			@RequestParam(defaultValue = "0") int methodId, @RequestParam(defaultValue = "0") int contentId,
+			@RequestParam(defaultValue = "0") int freeId, String rowArr, String rowValueArr, String sauceArr,
+			String sauceValueArr, @RequestParam(defaultValue = "/") String replaceUri) {
 
 		// 입력 데이터 유효성 검사
 		if (Ut.empty(title)) {
@@ -364,16 +363,18 @@ public class UserRecipeController {
 
 		Recipe recipe = recipeService.getRecipeById(id);
 
-		// 레시피 가이드 구성
-		boardService.updateGuide(recipe.getGuideId(), sortId, methodId, contentId, freeId);
+		// 레시피 가이드 갱신
+		// boardService.updateGuide(recipe.getGuideId(), sortId, methodId, contentId,
+		// freeId);
 
-		// 재료, 양념 데이터 추가
-		recipeService.updateIngredient(recipe.getIngredientId(), rowArr, rowValueArr, sauceArr, sauceValueArr);
+		// 재료, 양념 갱신
+		// recipeService.updateIngredient(recipe.getIngredientId(), rowArr, rowValueArr,
+		// sauceArr, sauceValueArr);
 
 		// 레시피 수정하기
-		recipeService.modifyRecipe(rq.getLoginedMemberId(), title, body, amount, time, level, tip);
+		recipeService.modifyRecipe(id, title, body, amount, time, level, tip);
 
-		return rq.jsReplace(Ut.f("%s번 레시피가 수정되었습니다.", id), Ut.f("../recipe/detail?id=%d", id));
+		return rq.jsReplace(Ut.f("%s번 레시피가 수정되었습니다.", id), replaceUri);
 	}
 
 	// 레시피 삭제하기 메서드

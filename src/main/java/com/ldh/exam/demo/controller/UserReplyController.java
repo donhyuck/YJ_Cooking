@@ -48,10 +48,10 @@ public class UserReplyController {
 
 		// 댓글 등록하기
 		int id = replyService.writeReply(rq.getLoginedMemberId(), relTypeCode, relId, body);
-
+		
 		// 등록한 댓글 번호를 URI에 포함
 		replaceUri = Ut.getNewUri(replaceUri, "focusReplyId", id + "");
-
+		
 		return rq.jsReplace(Ut.f("%s번 댓글이 등록되었습니다.", id), replaceUri);
 	}
 
@@ -123,18 +123,6 @@ public class UserReplyController {
 		replyService.deleteReply(id);
 
 		return rq.jsReplace(Ut.f("%s번 댓글이 삭제되었습니다.", id), replaceUri);
-	}
-
-	// 댓글 등록하기 (ajax 적용)
-	@RequestMapping("/user/reply/doWriteAjax")
-	@ResponseBody
-	public ResultData doWriteAjax(String relTypeCode, String relId, String body) {
-
-		System.out.println("relTypeCode" + relTypeCode);
-		System.out.println("relId" + relId);
-		System.out.println("body" + body);
-
-		return null;
 	}
 
 	// 댓글 삭제하기 (ajax 적용)

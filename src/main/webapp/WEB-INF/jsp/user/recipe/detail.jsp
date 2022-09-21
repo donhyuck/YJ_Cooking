@@ -93,17 +93,6 @@
 	}
 </script>
 <!-- 댓글 작성후 스크롤 이동 스크립트 끝 -->
-<!-- 댓글 등록 ajax 시작 -->
-<script>
-	function ReplyWrite__AjaxForm(btn) {
-		
-		const $clicked = $('.reply-write')
-		
-		$clicked.text('등록중...');
-		
-	}
-</script>
-<!-- 댓글 등록 ajax 끝 -->
 <!-- 댓글 삭제 ajax 시작 -->
 <script>
 	function ReplyDelete_AjaxForm(btn) {
@@ -453,10 +442,16 @@
 			<!-- 댓글 목록 영역 끝 -->
 
 			<!-- TOP 버튼 -->
-			<div class="fixed right-10 bottom-20 text-4xl text-center hover:text-yellow-400">
-				<a href="#topTarget" class="scroll">
+			<div class="fixed right-12 bottom-32 text-4xl text-center">
+				<a href="#topTarget" class="scroll hover:text-yellow-400">
 					<i class="fa-solid fa-circle-arrow-up"></i>
 					<div class="text-xl font-black">TOP</div>
+				</a>
+			</div>
+			<div class="fixed right-12 bottom-12 text-4xl text-center">
+				<a href="#replyTarget" class="scroll text-green-500 hover:text-green-700">
+					<i class="fa-solid fa-comment-dots"></i>
+					<div class="text-xl">댓글</div>
 				</a>
 			</div>
 
@@ -475,12 +470,12 @@
 					</c:if>
 				</div>
 				<c:if test="${ rq.logined == true }">
-					<!-- action="../reply/doWrite" -->
-					<form class="flex items-center" onsubmit="ReplyWrite__AjaxForm(this); return false;">
+					<form class="flex items-center" method="POST" action="../reply/doWrite"
+						onsubmit="ReplyWrite__submitForm(this); return false;">
 						<!-- 현재 페이지 정보 -->
-						<input type="hidden" name="relTypeCode"  value="recipe">
-						<input type="hidden" name="relId"  value="${ recipe.id }">
-
+						<input type="hidden" name="relTypeCode" value="recipe">
+						<input type="hidden" name="relId" value="${ recipe.id }">
+						<input type="hidden" name="replaceUri" value="${ rq.currentUri }">
 						<!-- 요리후기 사진 등록 -->
 						<a href="#"
 							class="flex justify-center items-center w-36 h-36 rounded-xl bg-gray-200 hover:bg-gray-300 mr-4 text-4xl">
@@ -490,9 +485,8 @@
 						<div class="border border-gray-300 rounded-xl p-2 w-10/12">
 							<textarea name="body" rows="5" class="w-full" placeholder="요리후기를 사진과 함께 작성해보세요."></textarea>
 						</div>
-
 						<button type="submit" class="w-36 h-36 hover:bg-gray-100 border-double border-4 border-gray-300 rounded-xl ml-3">
-							<div class="text-xl reply-write">등록</div>
+							<div class="text-xl">등록</div>
 						</button>
 					</form>
 				</c:if>

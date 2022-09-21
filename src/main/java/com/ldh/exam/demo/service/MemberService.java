@@ -62,7 +62,6 @@ public class MemberService {
 
 		// 비밀번호 암호화
 		if (loginPw != null) {
-			loginPw = Ut.sha256(loginPw);
 			attrService.remove("member", id, "extra", "useTempPassword");
 		}
 

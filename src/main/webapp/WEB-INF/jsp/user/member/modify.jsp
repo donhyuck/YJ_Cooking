@@ -15,19 +15,24 @@
 		}
 
 		// 비밀번호 변경을 위해 입력한 경우
-		form.loginPw.value = form.loginPw.value.trim();
-		if (form.loginPw.value.length > 0) {
+		form.newLoginPw.value = form.newLoginPw.value.trim();
+		if (form.newLoginPw.value.length > 0) {
 			form.loginPwConfirm.value = form.loginPwConfirm.value.trim();
 			if (form.loginPwConfirm.value.length == 0) {
 				alert('비밀번호확인을 입력해주세요.');
 				form.loginPwConfirm.focus();
 				return;
 			}
-			if (form.loginPw.value != form.loginPwConfirm.value) {
+			if (form.newLoginPw.value != form.loginPwConfirm.value) {
 				alert('비밀번호확인이 일치하지 않습니다.');
 				form.loginPwConfirm.focus();
 				return;
 			}
+
+			// 신규 비밀번호 암호화
+			form.loginPw.value = sha256(form.newLoginPw.value);
+			form.newLoginPw.value = '';
+			form.loginPwConfirm.value = '';
 		}
 
 		form.nickname.value = form.nickname.value.trim();
@@ -63,6 +68,8 @@
 			<c:set var="member" value="${ rq.loginedMember }" />
 			<!-- 비밀번호 확인 인증코드 -->
 			<input type="hidden" name="memberModifyAuthKey" value="${ param.memberModifyAuthKey }">
+			<!-- 암호화된 신규 비밀번호 -->
+			<input type="hidden" name="loginPw">
 
 			<div class="text-3xl font-bold mb-2">회원정보 수정</div>
 			<div>
@@ -73,7 +80,8 @@
 			</div>
 			<div>
 				<div class="text-gray-400 p-2">신규 비밀번호</div>
-				<input name="loginPw" type="password" class="input input-lg input-bordered w-96 member-inputType" placeholder="비밀번호" />
+				<input name="newLoginPw" type="password" class="input input-lg input-bordered w-96 member-inputType"
+					placeholder="비밀번호" />
 			</div>
 			<div>
 				<div class="text-gray-400 p-2">비밀번호 확인</div>

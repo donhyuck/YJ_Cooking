@@ -93,7 +93,17 @@
 	}
 </script>
 <!-- 댓글 작성후 스크롤 이동 스크립트 끝 -->
-
+<!-- 댓글 등록 ajax 시작 -->
+<script>
+	function ReplyWrite__AjaxForm(btn) {
+		
+		const $clicked = $('.reply-write')
+		
+		$clicked.text('등록중...');
+		
+	}
+</script>
+<!-- 댓글 등록 ajax 끝 -->
 <!-- 댓글 삭제 ajax 시작 -->
 <script>
 	function ReplyDelete_AjaxForm(btn) {
@@ -465,12 +475,11 @@
 					</c:if>
 				</div>
 				<c:if test="${ rq.logined == true }">
-					<form class="flex items-center" method="POST" action="../reply/doWrite"
-						onsubmit="ReplyWrite__submitForm(this); return false;">
+					<!-- action="../reply/doWrite" -->
+					<form class="flex items-center" onsubmit="ReplyWrite__AjaxForm(this); return false;">
 						<!-- 현재 페이지 정보 -->
-						<input type="hidden" name="relTypeCode" value="recipe">
-						<input type="hidden" name="relId" value="${ recipe.id }">
-						<input type="hidden" name="replaceUri" value="${ rq.currentUri }">
+						<input type="hidden" name="relTypeCode"  value="recipe">
+						<input type="hidden" name="relId"  value="${ recipe.id }">
 
 						<!-- 요리후기 사진 등록 -->
 						<a href="#"
@@ -483,7 +492,7 @@
 						</div>
 
 						<button type="submit" class="w-36 h-36 hover:bg-gray-100 border-double border-4 border-gray-300 rounded-xl ml-3">
-							<div class="text-xl">등록</div>
+							<div class="text-xl reply-write">등록</div>
 						</button>
 					</form>
 				</c:if>

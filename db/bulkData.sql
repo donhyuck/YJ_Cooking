@@ -159,12 +159,12 @@ SET hitCount = goodRP + FLOOR(RAND() * 500)+1
 WHERE hitCount = 0;
 
 ## 재료양념 데이터 구성
-UPDATE ingredient
+update ingredient
 SET rowArr='감자,당근,양파',
 rowValueArr='3개,1/3개,1/2개',
 sauceArr='굴소스(선택),소금,후추',
 sauceValueArr='1T,약간,약간'
-WHERE recipeId=1;
+where recipeId=1;
 
 UPDATE ingredient
 SET rowArr='갈비대,밤,표고버섯',

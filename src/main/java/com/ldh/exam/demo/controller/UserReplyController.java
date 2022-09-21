@@ -124,4 +124,26 @@ public class UserReplyController {
 
 		return rq.jsReplace(Ut.f("%s번 댓글이 삭제되었습니다.", id), replaceUri);
 	}
+
+	// 댓글 삭제하기 (ajax 적용)
+	@RequestMapping("/user/reply/doDeleteAjax")
+	@ResponseBody
+	public ResultData doDeleteAjax(int id) {
+
+		if (Ut.empty(id)) {
+			return ResultData.from("F-1", "댓글번호가 입력되지 않았습니다.");
+		}
+
+		// 댓글 찾기, 작성자 권한 체크
+		ResultData actorCanDeleteRd = replyService.actorCanDelete(rq.getLoginedMemberId(), id);
+
+		if (actorCanDeleteRd.isFail()) {
+			return ResultData.from(actorCanDeleteRd.getResultCode(), actorCanDeleteRd.getMsg());
+		}
+
+		// 삭제처리
+		ResultData deleteReplyRd = replyService.deleteReply(id);
+
+		return ResultData.from("S-1", deleteReplyRd.getMsg());
+	}
 }

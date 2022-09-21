@@ -56,9 +56,11 @@ public class ReplyService {
 	}
 
 	// 댓글 삭제하기
-	public void deleteReply(int id) {
+	public ResultData deleteReply(int id) {
 
 		replyRepository.deleteReply(id);
+
+		return ResultData.from("S-1", Ut.f("%d번 댓글을 삭제하였습니다.", id));
 	}
 
 	// 수정, 삭제 권한여부 업데이트

@@ -94,6 +94,41 @@
 </script>
 <!-- 댓글 작성후 스크롤 이동 스크립트 끝 -->
 
+<!-- 댓글 삭제 ajax 시작 -->
+<script>
+	function ReplyDelete_AjaxForm(btn) {
+		
+		const $clicked = $(btn);
+		const $target = $clicked.closest('[data-id]');
+		const id = $target.attr('data-id');
+		
+		$clicked.text('삭제중...');
+		
+		$.post(
+			'/user/reply/doDeleteAjax',
+			{
+				id: id
+			},
+			function(data) {
+				
+				if ( data.success ) {
+					$target.remove();
+				}
+				else {
+					if (data.msg) {
+						alert(data.msg);
+					}
+					
+					$clicked.text('삭제중에러발생');
+				}
+				
+			},
+			'json'
+		);
+	}
+</script>
+<!-- 댓글 삭제 ajax 끝 -->
+
 <div class="bg-gray-200 py-4">
 	<div class="detail-box w-10/12 mx-auto">
 
@@ -347,23 +382,21 @@
 			<div class="reply-list flex flex-col border-t">
 				<c:forEach var="reply" items="${ replies }">
 					<div class="flex items-center border-b" data-id="${ reply.id }">
-						<div class="w-44">
-							<!-- 댓글 프로필 -->
-							<div class="actor-photo w-24 mx-auto">
-								<c:if test="${ i == 1 || i == 3 }">
-									<img class="w-full rounded-full" src="https://cdn.pixabay.com/photo/2017/06/16/13/35/chef-2409158_960_720.png"
-										alt="" />
-								</c:if>
-								<!-- 대표사진 미등록 회원 -->
-								<c:if test="${  i != 1 && i != 3 }">
-									<img class="w-full rounded-full border border-gray-400"
-										src="https://t4.ftcdn.net/jpg/00/65/77/27/240_F_65772719_A1UV5kLi5nCEWI0BNLLiFaBPEkUbv5Fv.jpg" alt="" />
-								</c:if>
-							</div>
+						<!-- 댓글 작성자 프로필 -->
+						<div class="actor-photo w-36 mx-auto">
+							<c:if test="${ i == 1 || i == 3 }">
+								<img class="w-full rounded-full" src="https://cdn.pixabay.com/photo/2017/06/16/13/35/chef-2409158_960_720.png"
+									alt="" />
+							</c:if>
+							<!-- 대표사진 미등록 회원 -->
+							<c:if test="${  i != 1 && i != 3 }">
+								<img class="w-full rounded-full border border-gray-400"
+									src="https://t4.ftcdn.net/jpg/00/65/77/27/240_F_65772719_A1UV5kLi5nCEWI0BNLLiFaBPEkUbv5Fv.jpg" alt="" />
+							</c:if>
 						</div>
 
+						<!-- 목록 내용 -->
 						<div class="w-full pt-2 pl-2">
-							<!-- 작성자, 등록(수정)일 -->
 							<div class="flex items-center mb-2 text-gray-400 text-sm">
 								<div class="text-xl font-bold text-black mr-3">${ reply.extra__writerName }</div>
 								<div>
@@ -375,8 +408,6 @@
 									</c:if>
 								</div>
 							</div>
-
-							<!-- 댓글 내용 -->
 							<div class="ml-1 text-xl font-extralight h-20">${ reply.forPrintBody }</div>
 						</div>
 
@@ -398,8 +429,8 @@
 								</a>
 							</c:if>
 							<c:if test="${ reply.extra__actorCanDelete }">
-								<a href="../reply/doDelete?id=${ reply.id }&replaceUri=${rq.encodedCurrentUri}"
-									class="btn btn-secondary btn-outline" onclick="if( confirm('정말 삭제하시겠습니까?') == false ) return false;">
+								<a class="btn btn-secondary btn-outline"
+									onclick="if( confirm('정말 삭제하시겠습니까?')) { ReplyDelete_AjaxForm(this); } return false;">
 									<i class="fas fa-trash"></i>
 									<div class="ml-1">삭제</div>
 								</a>

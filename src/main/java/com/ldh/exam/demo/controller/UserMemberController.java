@@ -108,7 +108,7 @@ public class UserMemberController {
 			return rq.jsReplace("등록되지 않은 회원입니다.", "/user/member/login");
 		}
 
-		if (member.getLoginPw().equals(Ut.sha256(loginPw)) == false) {
+		if (member.getLoginPw().equals(loginPw) == false) {
 			return rq.jsReplace("잘못된 비밀번호입니다.", "/user/member/login");
 		}
 
@@ -173,7 +173,7 @@ public class UserMemberController {
 		}
 
 		// 비밀번호 확인하기
-		if (rq.getLoginedMember().getLoginPw().equals(Ut.sha256(loginPw)) == false) {
+		if (rq.getLoginedMember().getLoginPw().equals(loginPw) == false) {
 			return rq.jsHistoryBack("잘못된 비밀번호 입니다.");
 		}
 

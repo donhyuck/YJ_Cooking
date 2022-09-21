@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<c:set var="pageTitle" value="회원가입" />
+<c:set var="pageTitle" value="로그인" />
 <%@include file="../common/head.jspf"%>
 
 <!-- 입력데이터 검사 스크립트 시작 -->
@@ -20,11 +20,17 @@
 			return;
 		}
 
-		form.loginPw.value = form.loginPw.value.trim();
-		if (form.loginPw.value.length == 0) {
+		form.inputLoginPw.value = form.inputLoginPw.value.trim();
+		if (form.inputLoginPw.value.length == 0) {
 			alert('비밀번호를 입력해주세요.');
-			form.loginPw.focus();
+			form.inputLoginPw.focus();
 			return;
+		}
+
+		// 비밀번호 암호화
+		if (form.inputLoginPw.value.length != 0) {
+			form.loginPw.value = sha256(form.inputLoginPw.value);
+			form.inputLoginPw.value = '';
 		}
 
 		MemberLogin_submitFormDone = true;
@@ -37,14 +43,19 @@
 	<div class="member-box w-2/5 mx-auto">
 		<form class="flex flex-col space-y-4 items-center" method="POST" action="../member/doLogin"
 			onsubmit="MemberLogin_submitForm(this); return false;">
+
+			<!-- 암호화된 비밀번호 -->
+			<input type="hidden" name="loginPw">
+			<!-- 로그인 처리 후 이동경로 -->
 			<input type="hidden" name="afterLoginUri" value="${ param.afterLoginUri }">
+
 			<div class="text-3xl font-bold mb-2">로그인</div>
 			<div>
 				<input name="loginId" type="text" class="input input-lg input-bordered w-96 max-w-xs member-inputType"
 					placeholder=" 아이디" />
 			</div>
 			<div>
-				<input name="loginPw" type="password" class="input input-lg input-bordered w-96 max-w-xs member-inputType"
+				<input name="inputLoginPw" type="password" class="input input-lg input-bordered w-96 max-w-xs member-inputType"
 					placeholder=" 비밀번호" />
 			</div>
 

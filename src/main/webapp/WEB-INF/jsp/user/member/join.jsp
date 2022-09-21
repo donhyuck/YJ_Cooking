@@ -20,10 +20,10 @@
 			return;
 		}
 
-		form.loginPw.value = form.loginPw.value.trim();
-		if (form.loginPw.value.length == 0) {
+		form.inputLoginPw.value = form.inputLoginPw.value.trim();
+		if (form.inputLoginPw.value.length == 0) {
 			alert('비밀번호를 입력해주세요.');
-			form.loginPw.focus();
+			form.inputLoginPw.focus();
 			return;
 		}
 		form.loginPwConfirm.value = form.loginPwConfirm.value.trim();
@@ -32,11 +32,13 @@
 			form.loginPwConfirm.focus();
 			return;
 		}
-		if (form.loginPw.value != form.loginPwConfirm.value) {
+
+		if (form.inputLoginPw.value != form.loginPwConfirm.value) {
 			alert('비밀번호확인이 일치하지 않습니다.');
 			form.loginPwConfirm.focus();
 			return;
 		}
+
 		form.nickname.value = form.nickname.value.trim();
 		if (form.nickname.value.length == 0) {
 			alert('닉네임을 입력해주세요.');
@@ -56,6 +58,14 @@
 			return;
 		}
 
+		// 비밀번호 암호화
+		if (form.inputLoginPw.value.length != 0
+				&& form.inputLoginPw.value == form.loginPwConfirm.value) {
+			form.loginPw.value = sha256(form.inputLoginPw.value);
+			form.inputLoginPw.value = '';
+			form.loginPwConfirm.value = '';
+		}
+
 		MemberJoin_submitFormDone = true;
 		form.submit();
 	}
@@ -69,6 +79,8 @@
 		<form class="flex flex-col space-y-4 items-center" method="POST" enctype="multipart/form-data"
 			action="../member/doJoin" onsubmit="MemberJoin_submitForm(this); return false;">
 			<input type="hidden" name="afterLoginUri" value="${ param.afterLoginUri }" />
+			<!-- 암호화된 비밀번호 -->
+			<input type="hidden" name="loginPw">
 
 			<div class="text-3xl font-bold mb-2">회원가입</div>
 			<div>
@@ -81,7 +93,8 @@
 			</div>
 			<div class="flex flex-col mt-3">
 				<div class="ml-1 mt-2 font-medium text-slate-700">비밀번호</div>
-				<input name="loginPw" type="password" class="input input-lg input-bordered w-96" placeholder="로그인시 사용할 비밀번호입니다." />
+				<input name="inputLoginPw" type="password" class="input input-lg input-bordered w-96"
+					placeholder="로그인시 사용할 비밀번호입니다." />
 				<div class="ml-1 mt-2 font-medium text-slate-700">비밀번호 재입력</div>
 				<input name="loginPwConfirm" type="password" class="input input-lg input-bordered w-96"
 					placeholder="비밀번호를 다시 입력해주세요." />

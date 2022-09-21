@@ -3,6 +3,7 @@
 <c:set var="pageTitle" value="레시피 상세페이지" />
 <%@include file="../common/head.jspf"%>
 <%@ include file="../../common/toastUiEditorLib.jspf"%>
+<script src="/reply/Reply.js" defer="defer"></script>
 
 <!-- 게시글 조회수 스크립트 시작 -->
 <script>
@@ -34,35 +35,14 @@
 	$(function() {
 		// 실전코드
 		// RecipeDetail__increaseHitCount();
+		
 		// 임시코드
 		setTimeout(RecipeDetail__increaseHitCount, 300);
 	})
 </script>
 <!-- 게시글 조회수 스크립트 끝 -->
 
-<!-- 댓글 작성시 유효성 검사 스크립트 시작 -->
-<script>
-	let ReplyWrite__submitFormDone = false;
-	
-	function ReplyWrite__submitForm(form) {
-		if (ReplyWrite__submitFormDone) {
-			return;
-		}
-		
-		form.body.value = form.body.value.trim();
-		if (form.body.value.length < 3) {
-			alert('최소 3글자 이상 입력해주세요.');
-			form.body.focus();
-			return;
-		}
-		ReplyWrite__submitFormDone = true;
-		form.submit();
-	}
-</script>
-<!-- 댓글 작성시 유효성 검사 스크립트 끝 -->
-
-<!-- 댓글 작성후 스크롤 이동 스크립트 시작 -->
-<!-- 포커스 효과 적용 -->
+<!-- 스크롤 이동후 포커스 효과 적용 -->
 <style>
 .reply-list [data-id] {
 	transition: background-color 1s;
@@ -73,60 +53,6 @@
 	transition: background-color 0s;
 }
 </style>
-
-<script>
-	function ReplyList__goToReply(id) {
-		setTimeout(function() {
-			const $target = $('.reply-list [data-id="' + id + '"]');
-			const targetOffset = $target.offset();
-			$(window).scrollTop(targetOffset.top - 50);
-			$target.addClass('focus');
-			
-			setTimeout(function() {
-				$target.removeClass('focus');
-			}, 1000);
-		}, 1000);
-	}
-	
-	if (param.focusReplyId) {
-		ReplyList__goToReply(param.focusReplyId);
-	}
-</script>
-<!-- 댓글 작성후 스크롤 이동 스크립트 끝 -->
-<!-- 댓글 삭제 ajax 시작 -->
-<script>
-	function ReplyDelete_AjaxForm(btn) {
-		
-		const $clicked = $(btn);
-		const $target = $clicked.closest('[data-id]');
-		const id = $target.attr('data-id');
-		
-		$clicked.text('삭제중...');
-		
-		$.post(
-			'/user/reply/doDeleteAjax',
-			{
-				id: id
-			},
-			function(data) {
-				
-				if ( data.success ) {
-					$target.remove();
-				}
-				else {
-					if (data.msg) {
-						alert(data.msg);
-					}
-					
-					$clicked.text('삭제중에러발생');
-				}
-				
-			},
-			'json'
-		);
-	}
-</script>
-<!-- 댓글 삭제 ajax 끝 -->
 
 <div class="bg-gray-200 py-4">
 	<div class="detail-box w-10/12 mx-auto">
@@ -492,6 +418,29 @@
 				</c:if>
 			</div>
 			<!-- 댓글 작성 영역 끝 -->
+
+			<!-- 댓글 수정 모달 시작 -->
+			<div class="reply-modify-modal container mx-auto px-3">
+				<form class="" method="post" action="/user/reply/doModify" onsubmit="ReplyModify__submit(this); return false;">
+					<input type="hidden" name="id" value="" />
+					<input type="hidden" name="replaceUri" value="${ rq.encodedCurrentUri}" />
+
+					<div class="form-control">
+						<label class="label">댓글수정</label>
+						<textarea class="textarea textarea-bordered w-full h-24" name="body" rows="3" maxlength="2000"
+							placeholder="내용을 입력해주세요.">${ reply.body }</textarea>
+					</div>
+
+					<button class="btns btn-sm mb-1">
+						<span>
+							<i class="fas-fa-list"></i>
+							닫기
+						</span>
+						<span>댓글수정</span>
+					</button>
+				</form>
+			</div>
+			<!-- 댓글 수정 모달 끝 -->
 		</section>
 		<!-- 댓글 영역 끝 -->
 	</div>

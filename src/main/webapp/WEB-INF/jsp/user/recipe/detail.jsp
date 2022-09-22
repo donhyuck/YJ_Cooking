@@ -439,15 +439,14 @@
 			<section class="ReplyModify_box hidden">
 				<div class="w-2/5 p-8 py-5 rounded-xl bg-gray-200 ReplyModify_area">
 					<div class="text-lg mb-2">댓글수정</div>
-					<form class="" method="post" action="/user/reply/doModify"
-						onsubmit="ReplyModify__submitForm(this); return false;">
+					<form class="" method="post" action="/user/reply/doModify" onsubmit="ReplyModify__submitForm(this); return false;">
 						<input type="hidden" name="id" value="" />
-						<input type="hidden" name="replaceUri" value="${ rq.currentUri }" />
+						<input type="hidden" name="afterModifyUri" value="${ rq.currentUri }" />
 
 						<textarea class="textarea textarea-bordered w-full ReplyModify_area" name="body" rows="4" maxlength="2000"
 							placeholder="내용을 입력해주세요.">${ reply.body }</textarea>
 
-						<div class="mt-3 text-right mr-3">
+						<div class="text-right mt-3">
 							<button type="button" onclick="ReplyModify__hideModal();" class="btn btn-sm mr-3 area" title="닫기">
 								<i class="fa-solid fa-xmark mr-2"></i>
 								닫기

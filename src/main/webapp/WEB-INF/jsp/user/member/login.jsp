@@ -49,14 +49,24 @@
 			<!-- 로그인 처리 후 이동경로 -->
 			<input type="hidden" name="afterLoginUri" value="${ param.afterLoginUri }">
 
-			<div class="text-3xl font-bold mb-2">로그인</div>
-			<div>
-				<input name="loginId" type="text" class="input input-lg input-bordered w-96 max-w-xs member-inputType"
-					placeholder=" 아이디" />
+			<div class="text-3xl font-bold">로그인</div>
+
+			<div class="pt-5">
+				<label class="input-group">
+					<span class="text-2xl">
+						<i class="fa-solid fa-user"></i>
+					</span>
+					<input name="loginId" type="text" class="input input-lg input-bordered w-80 max-w-xs" placeholder="아이디" />
+				</label>
 			</div>
-			<div>
-				<input name="inputLoginPw" type="password" class="input input-lg input-bordered w-96 max-w-xs member-inputType"
-					placeholder=" 비밀번호" />
+			<div class="pt-5">
+				<label class="input-group">
+					<span class="text-2xl">
+						<i class="fa-solid fa-lock"></i>
+					</span>
+					<input name="inputLoginPw" type="password" class="input input-lg input-bordered w-96 max-w-xs member-inputType"
+						placeholder="비밀번호" />
+				</label>
 			</div>
 
 			<div class="flex flex-col pt-5 text-center">

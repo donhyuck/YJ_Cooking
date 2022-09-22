@@ -72,19 +72,24 @@
 			<input type="hidden" name="loginPw">
 
 			<div class="text-3xl font-bold mb-2">회원정보 수정</div>
+			
+			<!-- 아이디 (고정) -->
 			<div>
-				<div class="text-gray-400 p-2">아이디</div>
-				<div class="border border-gray-700 rounded-lg w-96 member-inputType flex items-center">
-					<div class="ml-3 p-3">${ member.loginId }</div>
-				</div>
+				<label class="input-group">
+					<span class="text-2xl">
+						<i class="fa-solid fa-user"></i>
+					</span>
+					<input type="text" value="${ member.loginId }" class="input input-lg input-bordered w-96 max-w-xs"
+						disabled="disabled" />
+				</label>
 			</div>
 			<div>
-				<div class="text-gray-400 p-2">신규 비밀번호</div>
+				<div class="text-slate-700 p-2">신규 비밀번호</div>
 				<input name="newLoginPw" type="password" class="input input-lg input-bordered w-96 member-inputType"
 					placeholder="비밀번호" />
 			</div>
 			<div>
-				<div class="text-gray-400 p-2">비밀번호 확인</div>
+				<div class="text-slate-700 p-2">비밀번호 확인</div>
 				<input name="loginPwConfirm" type="password" class="input input-lg input-bordered w-96 member-inputType"
 					placeholder="비밀번호 확인" />
 			</div>

@@ -52,7 +52,7 @@ public class UserReplyController {
 		// 등록한 댓글 번호를 URI에 포함
 		replaceUri = Ut.getNewUri(replaceUri, "focusReplyId", id + "");
 
-		return rq.jsReplace(Ut.f("%s번 댓글이 등록되었습니다.", id), replaceUri);
+		return rq.jsReplace("", replaceUri);
 	}
 
 	// 댓글 수정 페이지 메서드
@@ -112,7 +112,7 @@ public class UserReplyController {
 		// 수정후 댓글 번호를 URI에 포함
 		afterModifyUri = Ut.getNewUri(afterModifyUri, "focusReplyId", id + "");
 
-		return rq.jsReplace(Ut.f("%s번 댓글이 수정되었습니다.", id), afterModifyUri);
+		return rq.jsReplace("", afterModifyUri);
 	}
 
 	// 댓글 삭제하기 메서드

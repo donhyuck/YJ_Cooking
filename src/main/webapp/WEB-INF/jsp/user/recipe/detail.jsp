@@ -318,67 +318,69 @@
 			</div>
 
 			<!-- 댓글 목록 영역 시작 -->
-			<div class="reply-list flex flex-col border-t">
-				<c:forEach var="reply" items="${ replies }">
-					<div class="flex items-center border-b" data-id="${ reply.id }">
-						<!-- 댓글 작성자 프로필 -->
-						<div class="actor-photo w-36 mx-auto">
-							<c:if test="${ i == 1 || i == 3 }">
-								<img class="w-full rounded-full" src="https://cdn.pixabay.com/photo/2017/06/16/13/35/chef-2409158_960_720.png"
-									alt="" />
-							</c:if>
-							<!-- 대표사진 미등록 회원 -->
-							<c:if test="${  i != 1 && i != 3 }">
-								<img class="w-full rounded-full border border-gray-400"
-									src="https://t4.ftcdn.net/jpg/00/65/77/27/240_F_65772719_A1UV5kLi5nCEWI0BNLLiFaBPEkUbv5Fv.jpg" alt="" />
-							</c:if>
-						</div>
-
-						<!-- 목록 내용 -->
-						<div class="w-full pt-2 pl-2">
-							<div class="flex items-center mb-2 text-gray-400 text-sm">
-								<div class="text-xl font-bold text-black mr-3">${ reply.extra__writerName }</div>
-								<div>
-									<c:if test="${ reply.regDate == reply.updateDate }">
-										<span>${ reply.forPrintRegDate_Type3 } &nbsp;(등록)</span>
-									</c:if>
-									<c:if test="${ reply.regDate != reply.updateDate }">
-										<span>${ reply.forPrintUpdateDate_Type3 } &nbsp;(수정)</span>
-									</c:if>
-								</div>
+			<div class="w-full h-96 overflow-auto">
+				<div class="reply-list flex flex-col border-t">
+					<c:forEach var="reply" items="${ replies }">
+						<div class="flex items-center border-b" data-id="${ reply.id }">
+							<!-- 댓글 작성자 프로필 -->
+							<div class="actor-photo w-36 mx-auto">
+								<c:if test="${ i == 1 || i == 3 }">
+									<img class="w-full rounded-full" src="https://cdn.pixabay.com/photo/2017/06/16/13/35/chef-2409158_960_720.png"
+										alt="" />
+								</c:if>
+								<!-- 대표사진 미등록 회원 -->
+								<c:if test="${  i != 1 && i != 3 }">
+									<img class="w-full rounded-full border border-gray-400"
+										src="https://t4.ftcdn.net/jpg/00/65/77/27/240_F_65772719_A1UV5kLi5nCEWI0BNLLiFaBPEkUbv5Fv.jpg" alt="" />
+								</c:if>
 							</div>
-							<div class="ml-1 text-xl font-extralight h-20">${ reply.forPrintBody }</div>
-						</div>
 
-						<!-- 요리후기 사진 -->
-						<div class="w-80 p-3">
-							<!-- test="${ reply.regDate == reply.updateDate } -->
-							<c:if test="${ true }">
-								<img class="rounded-md" src="https://tse4.mm.bing.net/th?id=OIP.kwt4oKZDd-goVuBezaVQRQHaE7&pid=Api&P=0" alt="" />
-							</c:if>
-						</div>
+							<!-- 목록 내용 -->
+							<div class="w-full pt-2 pl-2">
+								<div class="flex items-center mb-2 text-gray-400 text-sm">
+									<div class="text-xl font-bold text-black mr-3">${ reply.extra__writerName }</div>
+									<div>
+										<c:if test="${ reply.regDate == reply.updateDate }">
+											<span>${ reply.forPrintRegDate_Type3 } &nbsp;(등록)</span>
+										</c:if>
+										<c:if test="${ reply.regDate != reply.updateDate }">
+											<span>${ reply.forPrintUpdateDate_Type3 } &nbsp;(수정)</span>
+										</c:if>
+									</div>
+								</div>
+								<div class="ml-1 text-xl font-extralight h-20">${ reply.forPrintBody }</div>
+							</div>
 
-						<!-- 댓글 수정, 삭제 영역 시작 -->
-						<script type="text/x-template" class="reply-body hidden">${reply.body}</script>
+							<!-- 요리후기 사진 -->
+							<div class="w-80 p-3">
+								<!-- test="${ reply.regDate == reply.updateDate } -->
+								<c:if test="${ true }">
+									<img class="rounded-md" src="https://tse4.mm.bing.net/th?id=OIP.kwt4oKZDd-goVuBezaVQRQHaE7&pid=Api&P=0" alt="" />
+								</c:if>
+							</div>
 
-						<div class="btns flex flex-col w-32 justify-center items-center space-y-5">
-							<c:if test="${ reply.extra__actorCanModify }">
-								<a class="btn btn-primary btn-outline" onclick="ReplyModify__showModal(this);">
-									<i class="fas fa-edit"></i>
-									<div class="ml-1">수정</div>
-								</a>
-							</c:if>
-							<c:if test="${ reply.extra__actorCanDelete }">
-								<a class="btn btn-secondary btn-outline"
-									onclick="if( confirm('정말 삭제하시겠습니까?')) { ReplyDelete_AjaxForm(this); } return false;">
-									<i class="fas fa-trash"></i>
-									<div class="ml-1">삭제</div>
-								</a>
-							</c:if>
+							<!-- 댓글 수정, 삭제 영역 시작 -->
+							<script type="text/x-template" class="reply-body hidden">${reply.body}</script>
+
+							<div class="btns flex flex-col w-32 justify-center items-center space-y-5">
+								<c:if test="${ reply.extra__actorCanModify }">
+									<a class="btn btn-primary btn-outline" onclick="ReplyModify__showModal(this);">
+										<i class="fas fa-edit"></i>
+										<div class="ml-1">수정</div>
+									</a>
+								</c:if>
+								<c:if test="${ reply.extra__actorCanDelete }">
+									<a class="btn btn-secondary btn-outline"
+										onclick="if( confirm('정말 삭제하시겠습니까?')) { ReplyDelete_AjaxForm(this); } return false;">
+										<i class="fas fa-trash"></i>
+										<div class="ml-1">삭제</div>
+									</a>
+								</c:if>
+							</div>
+							<!-- 댓글 수정, 삭제 영역 영역 끝 -->
 						</div>
-						<!-- 댓글 수정, 삭제 영역 영역 끝 -->
-					</div>
-				</c:forEach>
+					</c:forEach>
+				</div>
 			</div>
 			<!-- 댓글 목록 영역 끝 -->
 

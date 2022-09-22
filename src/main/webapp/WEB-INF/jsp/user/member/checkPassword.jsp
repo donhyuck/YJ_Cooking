@@ -47,17 +47,26 @@
 			<div class="text-3xl font-bold mb-2">비밀번호 재확인</div>
 			<div class="text-lg text-gray-500">본인확인을 위해 비밀번호를 다시 한 번 입력해주세요.</div>
 
-			<!-- 비밀번호 입력 -->
-			<div>
-				<div class="text-gray-400 p-2">아이디</div>
-				<div class="border border-gray-700 rounded-lg w-96 max-w-xs member-inputType flex items-center">
-					<div class="ml-3 p-3">${ rq.loginedMember.loginId }</div>
-				</div>
+			<!-- 아이디 (고정) -->
+			<div class="pt-5">
+				<label class="input-group">
+					<span class="text-2xl">
+						<i class="fa-solid fa-user"></i>
+					</span>
+					<input type="text" value="${ rq.loginedMember.loginId }" class="input input-lg input-bordered w-96 max-w-xs"
+						disabled="disabled" />
+				</label>
 			</div>
-			<div>
-				<div class="text-gray-400 p-2">비밀번호</div>
-				<input name="inputLoginPw" type="password" required="required"
-					class="input input-lg input-bordered w-96 max-w-xs member-inputType" placeholder="현재 비밀번호" />
+			
+			<!-- 비밀번호 입력 -->
+			<div class="pt-5">
+				<label class="input-group">
+					<span class="text-2xl">
+						<i class="fa-solid fa-lock"></i>
+					</span>
+					<input name="inputLoginPw" type="password" class="input input-lg input-bordered w-96 max-w-xs"
+						placeholder="현재 비밀번호" />
+				</label>
 			</div>
 
 			<div class="flex flex-col pt-5 text-center">

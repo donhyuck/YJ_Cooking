@@ -63,8 +63,8 @@
 	background-color: rgba(0, 0, 0, 0.3);
 	z-index: 10;
 	display: none;
-	align-items: center;
 	justify-content: center;
+	align-items: center;
 }
 </style>
 
@@ -363,7 +363,6 @@
 
 						<div class="btns flex flex-col w-32 justify-center items-center space-y-5">
 							<c:if test="${ reply.extra__actorCanModify }">
-								<!-- href="../reply/modify?id=${ reply.id }&replaceUri=${rq.encodedCurrentUri}" -->
 								<a class="btn btn-primary btn-outline" onclick="ReplyModify__showModal(this);">
 									<i class="fas fa-edit"></i>
 									<div class="ml-1">수정</div>
@@ -437,24 +436,26 @@
 			<!-- 댓글 작성 영역 끝 -->
 
 			<!-- 댓글 수정 모달 시작 -->
-			<section class="ReplyModify_box">
-				<div class="w-2/5 p-8 py-5 rounded-xl bg-gray-200">
+			<section class="ReplyModify_box hidden">
+				<div class="w-2/5 p-8 py-5 rounded-xl bg-gray-200 ReplyModify_area">
 					<div class="text-lg mb-2">댓글수정</div>
-					<form class="" method="post" action="/user/reply/doModify" onsubmit="ReplyModify__submitForm(this); return false;">
+					<form class="" method="post" action="/user/reply/doModify"
+						onsubmit="ReplyModify__submitForm(this); return false;">
 						<input type="hidden" name="id" value="" />
-						<input type="hidden" name="replaceUri" value="${ rq.encodedCurrentUri}" />
+						<input type="hidden" name="replaceUri" value="${ rq.currentUri }" />
 
-						<textarea class="textarea textarea-bordered w-full" name="body" rows="4" maxlength="2000"
+						<textarea class="textarea textarea-bordered w-full ReplyModify_area" name="body" rows="4" maxlength="2000"
 							placeholder="내용을 입력해주세요.">${ reply.body }</textarea>
 
 						<div class="mt-3 text-right mr-3">
-							<div class="btn btn-sm mr-3">
+							<button type="button" onclick="ReplyModify__hideModal();" class="btn btn-sm mr-3 area" title="닫기">
 								<i class="fa-solid fa-xmark mr-2"></i>
 								닫기
-							</div>
-							<div class="btn btn-sm btn-primary btn-outline">
+							</button>
+
+							<button type="submit" class="btn btn-sm btn-primary btn-outline">
 								<span>댓글수정</span>
-							</div>
+							</button>
 						</div>
 					</form>
 				</div>

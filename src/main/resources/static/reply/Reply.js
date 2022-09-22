@@ -40,17 +40,34 @@ function ReplyModify__submitForm(form) {
 }
 // 댓글 수정시 유효성 검사 스크립트 끝
 
-// 댓글 수정 모달 활성화 스크립트 시작
+// 댓글 수정 모달 활성화/비활성화 스크립트 시작
+// 수정 클릭시 활성화
 function ReplyModify__showModal(el) {
 
 	const $target = $(el).closest('[data-id]');
 	const replyId = $target.attr('data-id');
 	const replyBody = $target.find('.reply-body').html();
 
-	alert(replyId);
-	alert(replyBody);
+	$('.ReplyModify_box [name="id"]').val(replyId);
+	$('.ReplyModify_box [name="body"]').val(replyBody);
+
+	$('.ReplyModify_box').css('display', 'flex');
 }
-// 댓글 수정 모달 활성화 스크립트 끝
+
+// 닫기 클릭시 비활성화
+function ReplyModify__hideModal() {
+
+	$('.ReplyModify_box').hide();
+}
+
+// 외부영역 클릭시 비활성화	
+$('.ReplyModify_box').click(function(e) {
+	if (!$(e.target).hasClass("ReplyModify_area")) {
+		$('.ReplyModify_box').hide();
+	}
+});
+
+// 댓글 수정 모달 활성화/비활성화 스크립트 끝
 
 // 댓글 작성후 스크롤 이동 스크립트 시작
 function ReplyList__goToReply(id) {

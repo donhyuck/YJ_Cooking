@@ -20,25 +20,37 @@ function ReplyWrite__submitForm(form) {
 // 댓글 작성시 유효성 검사 스크립트 끝
 
 // 댓글 수정시 유효성 검사 스크립트 시작
-let ReplyModify__submitDone = false;
+let ReplyModify__submitFormDone = false;
 
-function ReplyModify__submit(form) {
+function ReplyModify__submitForm(form) {
 
-	if (ReplyModify__submitDone) {
+	if (ReplyModify__submitFormDone) {
 		return;
 	}
 
 	form.body.value = form.body.value.trim();
 	if (form.body.value.length == 0) {
-		alert('수정내용을 입력해주세요.')
+		alert('수정내용을 입력해주세요.');
 		form.body.focus();
 		return;
 	}
 
-	ReplyModify__submitDone = true;
+	ReplyModify__submitFormDone = true;
 	form.submit();
 }
 // 댓글 수정시 유효성 검사 스크립트 끝
+
+// 댓글 수정 모달 활성화 스크립트 시작
+function ReplyModify__showModal(el) {
+
+	const $target = $(el).closest('[data-id]');
+	const replyId = $target.attr('data-id');
+	const replyBody = $target.find('.reply-body').html();
+
+	alert(replyId);
+	alert(replyBody);
+}
+// 댓글 수정 모달 활성화 스크립트 끝
 
 // 댓글 작성후 스크롤 이동 스크립트 시작
 function ReplyList__goToReply(id) {

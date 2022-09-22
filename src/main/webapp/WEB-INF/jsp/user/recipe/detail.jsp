@@ -9,9 +9,7 @@
 <script>
 	const params = {};
 	params.id = parseInt('${param.id}');
-</script>
-
-<script>
+	
 	function RecipeDetail__increaseHitCount() {
 		<!-- 이미 읽은 레시피는 조회수 증가 요청이 없도록 -->
 		/*
@@ -51,6 +49,22 @@
 .reply-list [data-id].focus {
 	background-color: #efefef;
 	transition: background-color 0s;
+}
+</style>
+
+<!-- 댓글 수정 모달 활성화시 효과 적용 -->
+<style>
+.ReplyModify_box {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.3);
+	z-index: 10;
+	display: none;
+	align-items: center;
+	justify-content: center;
 }
 </style>
 
@@ -345,10 +359,12 @@
 						</div>
 
 						<!-- 댓글 수정, 삭제 영역 시작 -->
+						<script type="text/x-template" class="reply-body hidden">${reply.body}</script>
+
 						<div class="btns flex flex-col w-32 justify-center items-center space-y-5">
 							<c:if test="${ reply.extra__actorCanModify }">
-								<a href="../reply/modify?id=${ reply.id }&replaceUri=${rq.encodedCurrentUri}"
-									class="btn btn-primary btn-outline" onclick="if( confirm('수정하시겠습니까?') == false ) return false;">
+								<!-- href="../reply/modify?id=${ reply.id }&replaceUri=${rq.encodedCurrentUri}" -->
+								<a class="btn btn-primary btn-outline" onclick="ReplyModify__showModal(this);">
 									<i class="fas fa-edit"></i>
 									<div class="ml-1">수정</div>
 								</a>
@@ -374,6 +390,7 @@
 					<div class="text-xl font-black">TOP</div>
 				</a>
 			</div>
+			<!-- 댓글보기 버튼 -->
 			<div class="fixed right-12 bottom-12 text-4xl text-center">
 				<a href="#replyTarget" class="scroll text-green-500 hover:text-green-700">
 					<i class="fa-solid fa-comment-dots"></i>
@@ -420,26 +437,28 @@
 			<!-- 댓글 작성 영역 끝 -->
 
 			<!-- 댓글 수정 모달 시작 -->
-			<div class="reply-modify-modal container mx-auto px-3">
-				<form class="" method="post" action="/user/reply/doModify" onsubmit="ReplyModify__submit(this); return false;">
-					<input type="hidden" name="id" value="" />
-					<input type="hidden" name="replaceUri" value="${ rq.encodedCurrentUri}" />
+			<section class="ReplyModify_box">
+				<div class="w-2/5 p-8 py-5 rounded-xl bg-gray-200">
+					<div class="text-lg mb-2">댓글수정</div>
+					<form class="" method="post" action="/user/reply/doModify" onsubmit="ReplyModify__submitForm(this); return false;">
+						<input type="hidden" name="id" value="" />
+						<input type="hidden" name="replaceUri" value="${ rq.encodedCurrentUri}" />
 
-					<div class="form-control">
-						<label class="label">댓글수정</label>
-						<textarea class="textarea textarea-bordered w-full h-24" name="body" rows="3" maxlength="2000"
+						<textarea class="textarea textarea-bordered w-full" name="body" rows="4" maxlength="2000"
 							placeholder="내용을 입력해주세요.">${ reply.body }</textarea>
-					</div>
 
-					<button class="btns btn-sm mb-1">
-						<span>
-							<i class="fas-fa-list"></i>
-							닫기
-						</span>
-						<span>댓글수정</span>
-					</button>
-				</form>
-			</div>
+						<div class="mt-3 text-right mr-3">
+							<div class="btn btn-sm mr-3">
+								<i class="fa-solid fa-xmark mr-2"></i>
+								닫기
+							</div>
+							<div class="btn btn-sm btn-primary btn-outline">
+								<span>댓글수정</span>
+							</div>
+						</div>
+					</form>
+				</div>
+			</section>
 			<!-- 댓글 수정 모달 끝 -->
 		</section>
 		<!-- 댓글 영역 끝 -->

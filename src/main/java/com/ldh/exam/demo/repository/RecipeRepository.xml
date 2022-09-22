@@ -229,7 +229,7 @@
 		) AS RE
 		ON R.id = RE.relId
 		WHERE
-		RE.memberId = 3
+		RE.memberId = #{memberId}
 		ORDER BY R.id DESC
 	</select>
 

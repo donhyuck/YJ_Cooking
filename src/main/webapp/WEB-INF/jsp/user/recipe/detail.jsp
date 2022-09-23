@@ -4,6 +4,8 @@
 <%@include file="../common/head.jspf"%>
 <%@ include file="../../common/toastUiEditorLib.jspf"%>
 <script src="/reply/Reply.js" defer="defer"></script>
+<script src="/reply/Reaction.js" defer="defer"></script>
+
 
 <!-- 게시글 조회수 스크립트 시작 -->
 <script>
@@ -148,18 +150,19 @@
 
 			<!-- 리액션 영역 -->
 			<div class="rection-box p-3 w-full flex flex-col">
-				<div class="upper-area flex items-center justify-around text-4xl text-center">
+				<div class="upper-area flex items-center justify-around text-4xl text-center" reaction-code="recipe"
+					reaction-id="${ recipe.id }">
 
 					<!-- 스크랩 -->
 					<div class="text-yellow-400 hover:text-yellow-700">
 						<c:if test="${ actorCanMakeScrap || rq.loginedMemberId == 0 }">
-							<a href="/user/reaction/doMakeScrap?relTypeCode=recipe&relId=${ param.id }&replaceUri=${rq.currentUri}">
+							<a action="make" onclick="Scrap_AjaxForm(this);">
 								<i class="fa-solid fa-file"></i>
 								<div class="text-lg font-bold mt-2">스크랩 ${ recipe.scrap }</div>
 							</a>
 						</c:if>
 						<c:if test="${ actorCanCancelScrap }">
-							<a href="/user/reaction/doCancelScrap?relTypeCode=recipe&relId=${ param.id }&replaceUri=${rq.currentUri}">
+							<a action="cancel" onclick="Scrap_AjaxForm(this);">
 								<i class="fa-solid fa-file-circle-check"></i>
 								<div class="text-lg font-bold mt-2">스크랩 ${ recipe.scrap }</div>
 							</a>

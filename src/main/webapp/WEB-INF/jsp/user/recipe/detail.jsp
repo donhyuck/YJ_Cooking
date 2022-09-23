@@ -149,16 +149,17 @@
 			<!-- 리액션 영역 -->
 			<div class="rection-box p-3 w-full flex flex-col">
 				<div class="upper-area flex items-center justify-around text-4xl text-center">
+
 					<!-- 스크랩 -->
 					<div class="text-yellow-400 hover:text-yellow-700">
 						<c:if test="${ actorCanMakeScrap || rq.loginedMemberId == 0 }">
-							<a href="/user/reaction/doMakeScrap?relTypeCode=recipe&relId=${ param.id }&replaceUri=${rq.encodedCurrentUri}">
+							<a href="/user/reaction/doMakeScrap?relTypeCode=recipe&relId=${ param.id }&replaceUri=${rq.currentUri}">
 								<i class="fa-solid fa-file"></i>
 								<div class="text-lg font-bold mt-2">스크랩 ${ recipe.scrap }</div>
 							</a>
 						</c:if>
 						<c:if test="${ actorCanCancelScrap }">
-							<a href="/user/reaction/doCancelScrap?relTypeCode=recipe&relId=${ param.id }&replaceUri=${rq.encodedCurrentUri}">
+							<a href="/user/reaction/doCancelScrap?relTypeCode=recipe&relId=${ param.id }&replaceUri=${rq.currentUri}">
 								<i class="fa-solid fa-file-circle-check"></i>
 								<div class="text-lg font-bold mt-2">스크랩 ${ recipe.scrap }</div>
 							</a>
@@ -167,13 +168,13 @@
 					<!-- 하트 -->
 					<div class="text-red-400 hover:text-red-700">
 						<c:if test="${ actorCanMakeRP || rq.loginedMemberId == 0 }">
-							<a href="/user/reaction/doMakeLike?relTypeCode=recipe&relId=${ param.id }&replaceUri=${ rq.encodedCurrentUri }">
+							<a href="/user/reaction/doMakeLike?relTypeCode=recipe&relId=${ param.id }&replaceUri=${rq.currentUri}">
 								<i class="fa-solid fa-heart"></i>
 								<div class="text-lg font-bold mt-2">좋아요 ${ recipe.goodRP }</div>
 							</a>
 						</c:if>
 						<c:if test="${ actorCanCancelRP }">
-							<a href="/user/reaction/doCancelLike?relTypeCode=recipe&relId=${ param.id }&replaceUri=${ rq.encodedCurrentUri }">
+							<a href="/user/reaction/doCancelLike?relTypeCode=recipe&relId=${ param.id }&replaceUri=${rq.currentUri}">
 								<i class="fa-solid fa-heart-circle-check"></i>
 								<div class="text-lg font-bold mt-2">좋아요 ${ recipe.goodRP }</div>
 							</a>

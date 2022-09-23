@@ -2,6 +2,7 @@ package com.ldh.exam.demo.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ldh.exam.demo.service.ReactionService;
@@ -23,7 +24,7 @@ public class UserReactionController {
 	// 좋아요 처리 메서드
 	@RequestMapping("/user/reaction/doMakeLike")
 	@ResponseBody
-	public String doMakeLike(String relTypeCode, int relId, String replaceUri) {
+	public String doMakeLike(String relTypeCode, int relId, @RequestParam(defaultValue = "/") String replaceUri) {
 
 		// 사용자가 리액션 가능여부 확인
 		ResultData isActorCanReactionRd = reactionService.actorCanReaction(rq.getLoginedMemberId(), relId, relTypeCode);
@@ -35,16 +36,13 @@ public class UserReactionController {
 		// 좋아요 처리
 		ResultData doMakeLikeRd = reactionService.doMakeLike(rq.getLoginedMemberId(), relId, relTypeCode);
 
-		// 기존 레시피 페이지로 이동
-		replaceUri = Ut.f("/user/recipe/detail?id=%d", relId);
-
 		return rq.jsReplace(doMakeLikeRd.getMsg(), replaceUri);
 	}
 
 	// 좋아요 취소 메서드
 	@RequestMapping("/user/reaction/doCancelLike")
 	@ResponseBody
-	public String doCancelLike(String relTypeCode, int relId, String replaceUri) {
+	public String doCancelLike(String relTypeCode, int relId, @RequestParam(defaultValue = "/") String replaceUri) {
 
 		// 사용자가 리액션 가능여부 확인
 		ResultData isActorCanReactionRd = reactionService.actorCanReaction(rq.getLoginedMemberId(), relId, relTypeCode);
@@ -56,16 +54,13 @@ public class UserReactionController {
 		// 좋아요 취소
 		ResultData doCancelLikeRd = reactionService.doCancelLike(rq.getLoginedMemberId(), relId, relTypeCode);
 
-		// 기존 레시피 페이지로 이동
-		replaceUri = Ut.f("/user/recipe/detail?id=%d", relId);
-
 		return rq.jsReplace(doCancelLikeRd.getMsg(), replaceUri);
 	}
 
 	// 스크랩 처리 메서드
 	@RequestMapping("/user/reaction/doMakeScrap")
 	@ResponseBody
-	public String doMakeScrap(String relTypeCode, int relId, String replaceUri) {
+	public String doMakeScrap(String relTypeCode, int relId, @RequestParam(defaultValue = "/") String replaceUri) {
 
 		// 사용자가 스크랩 가능여부 확인
 		ResultData isActorCanScrapRd = reactionService.actorCanScrap(rq.getLoginedMemberId(), relId, relTypeCode);
@@ -77,16 +72,13 @@ public class UserReactionController {
 		// 스크랩 처리
 		ResultData doMakeScrapRd = reactionService.doMakeScrap(rq.getLoginedMemberId(), relId, relTypeCode);
 
-		// 기존 레시피 페이지로 이동
-		replaceUri = Ut.f("/user/recipe/detail?id=%d", relId);
-
 		return rq.jsReplace(doMakeScrapRd.getMsg(), replaceUri);
 	}
 
 	// 스크랩 취소 메서드
 	@RequestMapping("/user/reaction/doCancelScrap")
 	@ResponseBody
-	public String doCancelScrap(String relTypeCode, int relId, String replaceUri) {
+	public String doCancelScrap(String relTypeCode, int relId, @RequestParam(defaultValue = "/") String replaceUri) {
 
 		// 사용자가 스크랩 가능여부 확인
 		ResultData isActorCanScrapRd = reactionService.actorCanScrap(rq.getLoginedMemberId(), relId, relTypeCode);
@@ -97,9 +89,6 @@ public class UserReactionController {
 
 		// 스크랩 취소
 		ResultData doCancelScrapRd = reactionService.doCancelScrap(rq.getLoginedMemberId(), relId, relTypeCode);
-
-		// 기존 레시피 페이지로 이동
-		replaceUri = Ut.f("/user/recipe/detail?id=%d", relId);
 
 		return rq.jsReplace(doCancelScrapRd.getMsg(), replaceUri);
 	}

@@ -195,6 +195,7 @@ public class Rq {
 	public String getAfterLoginUri() {
 
 		String requestUri = req.getRequestURI();
+		String getAfterLoginUri = "";
 
 		// 로그인 후 다시 돌아가는 url 반복되지 않도록
 		switch (requestUri) {
@@ -203,6 +204,15 @@ public class Rq {
 		case "/user/member/findLoginId":
 		case "/user/member/findLoginPw":
 			return Ut.getUriEncoded(Ut.getStrAttr(paramMap, "afterLoginUri", ""));
+		}
+
+		// 로그인 후 자동으로 리액션 처리가 되지 않도록
+		switch (requestUri) {
+		case "/user/reaction/doMakeLike":
+		case "/user/reaction/doCancelLike":
+		case "/user/reaction/doMakeScrap":
+		case "/user/reaction/doCancelScrap":
+			return "/user/recipe/detail?id=" + req.getParameter("relId");
 		}
 
 		return getEncodedCurrentUri();
@@ -215,6 +225,7 @@ public class Rq {
 		// 로그아웃 후 다시 돌아가는 url 반복되지 않도록
 		switch (requestUri) {
 		case "/user/member/doLogout":
+		case "/user/member/myPage":
 			return "";
 		}
 

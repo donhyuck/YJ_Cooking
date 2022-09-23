@@ -18,7 +18,7 @@ public class ReactionService {
 	}
 
 	// 좋아요가 없으면 리액션 가능
-	public ResultData actorCanReaction(int memberId, int relId, String relTypeCode) {
+	public ResultData actorCanLike(int memberId, int relId, String relTypeCode) {
 
 		if (memberId == 0) {
 			return ResultData.from("F-A", "로그인 후 이용해주세요.");

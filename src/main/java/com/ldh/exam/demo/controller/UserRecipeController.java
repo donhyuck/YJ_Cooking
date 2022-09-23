@@ -214,10 +214,10 @@ public class UserRecipeController {
 		Recipe recipe = recipeService.getForPrintRecipe(rq.getLoginedMemberId(), id);
 
 		// 좋아요 가능여부
-		ResultData actorCanReactionRd = reactionService.actorCanReaction(rq.getLoginedMemberId(), id, "recipe");
+		ResultData actorCanLikeRd = reactionService.actorCanLike(rq.getLoginedMemberId(), id, "recipe");
 
 		// 이미 리액션한 경우(F-1) 리액션 취소가능
-		if (actorCanReactionRd.getResultCode().equals("F-1")) {
+		if (actorCanLikeRd.getResultCode().equals("F-1")) {
 			model.addAttribute("actorCanCancelRP", true);
 		}
 
@@ -245,7 +245,7 @@ public class UserRecipeController {
 		model.addAttribute("rowValues", IngredientList.get(1));
 		model.addAttribute("sauces", IngredientList.get(2));
 		model.addAttribute("sauceValues", IngredientList.get(3));
-		model.addAttribute("actorCanMakeRP", actorCanReactionRd.isSuccess());
+		model.addAttribute("actorCanMakeRP", actorCanLikeRd.isSuccess());
 		model.addAttribute("actorCanMakeScrap", actorCanScrapRd.isSuccess());
 
 		return "user/recipe/detail";

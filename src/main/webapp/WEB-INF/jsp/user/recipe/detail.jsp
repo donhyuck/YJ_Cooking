@@ -171,13 +171,13 @@
 					<!-- 하트 -->
 					<div class="text-red-400 hover:text-red-700">
 						<c:if test="${ actorCanMakeRP || rq.loginedMemberId == 0 }">
-							<a href="/user/reaction/doMakeLike?relTypeCode=recipe&relId=${ param.id }&replaceUri=${rq.currentUri}">
+							<a action="make" onclick="Like_AjaxForm(this);">
 								<i class="fa-solid fa-heart"></i>
 								<div class="text-lg font-bold mt-2">좋아요 ${ recipe.goodRP }</div>
 							</a>
 						</c:if>
 						<c:if test="${ actorCanCancelRP }">
-							<a href="/user/reaction/doCancelLike?relTypeCode=recipe&relId=${ param.id }&replaceUri=${rq.currentUri}">
+							<a action="cancel" onclick="Like_AjaxForm(this);">
 								<i class="fa-solid fa-heart-circle-check"></i>
 								<div class="text-lg font-bold mt-2">좋아요 ${ recipe.goodRP }</div>
 							</a>

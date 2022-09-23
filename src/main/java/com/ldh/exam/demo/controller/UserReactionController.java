@@ -113,10 +113,10 @@ public class UserReactionController {
 	public String doMakeLike(String relTypeCode, int relId, @RequestParam(defaultValue = "/") String replaceUri) {
 
 		// 사용자가 리액션 가능여부 확인
-		ResultData isActorCanReactionRd = reactionService.actorCanReaction(rq.getLoginedMemberId(), relId, relTypeCode);
+		ResultData isActorCanLikeRd = reactionService.actorCanLike(rq.getLoginedMemberId(), relId, relTypeCode);
 
-		if (isActorCanReactionRd.isFail()) {
-			return rq.jsHistoryBack(isActorCanReactionRd.getMsg());
+		if (isActorCanLikeRd.isFail()) {
+			return rq.jsHistoryBack(isActorCanLikeRd.getMsg());
 		}
 
 		// 좋아요 처리
@@ -131,9 +131,9 @@ public class UserReactionController {
 	public String doCancelLike(String relTypeCode, int relId, @RequestParam(defaultValue = "/") String replaceUri) {
 
 		// 사용자가 리액션 가능여부 확인
-		ResultData isActorCanReactionRd = reactionService.actorCanReaction(rq.getLoginedMemberId(), relId, relTypeCode);
+		ResultData isActorCanLikeRd = reactionService.actorCanLike(rq.getLoginedMemberId(), relId, relTypeCode);
 
-		if (isActorCanReactionRd.isSuccess()) {
+		if (isActorCanLikeRd.isSuccess()) {
 			return rq.jsHistoryBack("이미 취소되었습니다.");
 		}
 
@@ -141,5 +141,49 @@ public class UserReactionController {
 		ResultData doCancelLikeRd = reactionService.doCancelLike(rq.getLoginedMemberId(), relId, relTypeCode);
 
 		return rq.jsReplace(doCancelLikeRd.getMsg(), replaceUri);
+	}
+
+	// 좋아요 처리 메서드 (ajax 적용)
+	@RequestMapping("/user/reaction/doMakeLikeAjax")
+	@ResponseBody
+	public ResultData doMakeLikeAjax(String relTypeCode, int relId) {
+
+		if (Ut.empty(relId)) {
+			return ResultData.from("F-1", "레시피를 찾을 수 없습니다..");
+		}
+
+		// 사용자가 좋아요 가능여부 확인
+		ResultData isActorCanLikeRd = reactionService.actorCanLike(rq.getLoginedMemberId(), relId, relTypeCode);
+
+		if (isActorCanLikeRd.isFail()) {
+			return ResultData.from(isActorCanLikeRd.getResultCode(), isActorCanLikeRd.getMsg());
+		}
+
+		// 좋아요 처리
+		ResultData doMakeLikeRd = reactionService.doMakeLike(rq.getLoginedMemberId(), relId, relTypeCode);
+
+		return ResultData.from("S-1", doMakeLikeRd.getMsg());
+	}
+
+	// 좋아요 취소 메서드 (ajax 적용)
+	@RequestMapping("/user/reaction/doCancelLikeAjax")
+	@ResponseBody
+	public ResultData doCancelLikeAjax(String relTypeCode, int relId) {
+
+		if (Ut.empty(relId)) {
+			return ResultData.from("F-1", "레시피를 찾을 수 없습니다..");
+		}
+
+		// 사용자가 좋아요 가능여부 확인
+		ResultData isActorCanLikeRd = reactionService.actorCanLike(rq.getLoginedMemberId(), relId, relTypeCode);
+
+		if (isActorCanLikeRd.isSuccess()) {
+			return ResultData.from("F-B", "이미 취소되었습니다.");
+		}
+
+		// 좋아요 취소
+		ResultData doCancelLikeRd = reactionService.doCancelLike(rq.getLoginedMemberId(), relId, relTypeCode);
+
+		return ResultData.from("S-2", doCancelLikeRd.getMsg());
 	}
 }

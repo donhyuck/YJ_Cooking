@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ldh.exam.demo.service.ReactionService;
+import com.ldh.exam.demo.service.RecipeService;
 import com.ldh.exam.demo.util.Ut;
 import com.ldh.exam.demo.vo.ResultData;
 import com.ldh.exam.demo.vo.Rq;
@@ -14,10 +15,12 @@ import com.ldh.exam.demo.vo.Rq;
 public class UserReactionController {
 
 	private ReactionService reactionService;
+	private RecipeService recipeService;
 	private Rq rq;
 
-	public UserReactionController(ReactionService reactionService, Rq rq) {
+	public UserReactionController(ReactionService reactionService, RecipeService recipeService, Rq rq) {
 		this.reactionService = reactionService;
+		this.recipeService = recipeService;
 		this.rq = rq;
 	}
 
@@ -82,7 +85,10 @@ public class UserReactionController {
 		// 스크랩 처리
 		ResultData doMakeScrapRd = reactionService.doMakeScrap(rq.getLoginedMemberId(), relId, relTypeCode);
 
-		return ResultData.from("S-1", doMakeScrapRd.getMsg());
+		// 현재 스크랩 수 가져오기
+		int scrapCnt = recipeService.getRecipeById(relId).getScrap();
+
+		return ResultData.from("S-1", doMakeScrapRd.getMsg(), "scrapCnt", scrapCnt);
 	}
 
 	// 스크랩 취소 메서드 (ajax 적용)
@@ -104,7 +110,10 @@ public class UserReactionController {
 		// 스크랩 취소
 		ResultData doCancelScrapRd = reactionService.doCancelScrap(rq.getLoginedMemberId(), relId, relTypeCode);
 
-		return ResultData.from("S-2", doCancelScrapRd.getMsg());
+		// 현재 스크랩 수 가져오기
+		int scrapCnt = recipeService.getRecipeById(relId).getScrap();
+
+		return ResultData.from("S-2", doCancelScrapRd.getMsg(), "scrapCnt", scrapCnt);
 	}
 
 	// 좋아요 처리 메서드
@@ -162,7 +171,10 @@ public class UserReactionController {
 		// 좋아요 처리
 		ResultData doMakeLikeRd = reactionService.doMakeLike(rq.getLoginedMemberId(), relId, relTypeCode);
 
-		return ResultData.from("S-1", doMakeLikeRd.getMsg());
+		// 현재 좋아요 수 가져오기
+		int likeCnt = recipeService.getRecipeById(relId).getGoodRP();
+
+		return ResultData.from("S-1", doMakeLikeRd.getMsg(), "likeCnt", likeCnt);
 	}
 
 	// 좋아요 취소 메서드 (ajax 적용)
@@ -184,6 +196,9 @@ public class UserReactionController {
 		// 좋아요 취소
 		ResultData doCancelLikeRd = reactionService.doCancelLike(rq.getLoginedMemberId(), relId, relTypeCode);
 
-		return ResultData.from("S-2", doCancelLikeRd.getMsg());
+		// 현재 좋아요 수 가져오기
+		int likeCnt = recipeService.getRecipeById(relId).getGoodRP();
+
+		return ResultData.from("S-2", doCancelLikeRd.getMsg(), "likeCnt", likeCnt);
 	}
 }

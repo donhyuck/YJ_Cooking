@@ -156,13 +156,13 @@
 					<!-- 스크랩 -->
 					<div class="text-yellow-400 hover:text-yellow-700">
 						<c:if test="${ actorCanMakeScrap || rq.loginedMemberId == 0 }">
-							<a action="make" onclick="Scrap_AjaxForm(this);">
+							<a action="make" id="scrapIcon" onclick="Scrap_AjaxForm(this);">
 								<i class="fa-solid fa-file"></i>
 								<div class="text-lg font-bold mt-2">스크랩 ${ recipe.scrap }</div>
 							</a>
 						</c:if>
 						<c:if test="${ actorCanCancelScrap }">
-							<a action="cancel" onclick="Scrap_AjaxForm(this);">
+							<a action="cancel" id="scrapIcon" onclick="Scrap_AjaxForm(this);">
 								<i class="fa-solid fa-file-circle-check"></i>
 								<div class="text-lg font-bold mt-2">스크랩 ${ recipe.scrap }</div>
 							</a>
@@ -171,13 +171,13 @@
 					<!-- 하트 -->
 					<div class="text-red-400 hover:text-red-700">
 						<c:if test="${ actorCanMakeRP || rq.loginedMemberId == 0 }">
-							<a action="make" onclick="Like_AjaxForm(this);">
+							<a action="make" id="likeIcon" onclick="Like_AjaxForm(this);">
 								<i class="fa-solid fa-heart"></i>
 								<div class="text-lg font-bold mt-2">좋아요 ${ recipe.goodRP }</div>
 							</a>
 						</c:if>
 						<c:if test="${ actorCanCancelRP }">
-							<a action="cancel" onclick="Like_AjaxForm(this);">
+							<a action="cancel" id="likeIcon" onclick="Like_AjaxForm(this);">
 								<i class="fa-solid fa-heart-circle-check"></i>
 								<div class="text-lg font-bold mt-2">좋아요 ${ recipe.goodRP }</div>
 							</a>

@@ -36,6 +36,14 @@
 		WHERE id = #{id}
 	</update>
 
+	<update id="doLeave">
+		UPDATE `member`
+		SET delStatus=1,
+		delDate=NOW()
+		WHERE
+		id=#{id}
+	</update>
+
 	<select id="getMemberById" resultType="Member">
 		SELECT *
 		FROM `member` AS M

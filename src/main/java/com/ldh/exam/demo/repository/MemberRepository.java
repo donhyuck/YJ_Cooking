@@ -12,6 +12,8 @@ public interface MemberRepository {
 
 	public void doModify(int id, String loginPw, String nickname, String cellphoneNo, String email);
 
+	public void doLeave(int id);
+
 	@Select("SELECT LAST_INSERT_ID()")
 	public int getLastInsertId();
 

@@ -111,6 +111,10 @@ public class UserMemberController {
 		if (member.getLoginPw().equals(loginPw) == false) {
 			return rq.jsReplace("잘못된 비밀번호입니다.", "/user/member/login");
 		}
+		
+		if (member.isDelStatus() == true) {
+			return rq.jsReplace("탈퇴회원입니다. 재등록이 필요합니다.", "/user/member/join");
+		}
 
 		// 로그인 하기
 		rq.login(member);
@@ -294,7 +298,7 @@ public class UserMemberController {
 		}
 
 		// 회원 탈퇴하기
-		// memberService.doLeave(rq.getLoginedMemberId());
+		memberService.doLeave(rq.getLoginedMemberId());
 
 		// 로그아웃
 		rq.logout();

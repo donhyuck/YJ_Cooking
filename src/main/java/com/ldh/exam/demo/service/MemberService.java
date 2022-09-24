@@ -65,6 +65,12 @@ public class MemberService {
 		memberRepository.doModify(id, loginPw, nickname, cellphoneNo, email);
 	}
 
+	// 회원 탈퇴하기
+	public void doLeave(int memberId) {
+
+		memberRepository.doLeave(memberId);
+	}
+
 	// 등록번호로 회원 가져오기
 	public Member getMemberById(int id) {
 

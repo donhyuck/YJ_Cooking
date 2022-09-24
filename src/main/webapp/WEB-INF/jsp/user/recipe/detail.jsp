@@ -318,12 +318,53 @@
 		<section class="bg-white rounded-md p-12 mb-5 relative" id="replyTarget">
 			<div class="text-3xl font-bold mb-8">
 				<span>요리후기/댓글</span>
-				<span class="text-green-500 text-xl ml-3">${ replies.size() }</span>
+				<span class="text-green-500 text-2xl ml-3">${ replies.size() }</span>
+			</div>
+
+			<div class="border-t border-gray-300 p-5">
+				<!-- 안내문구 -->
+				<div class="text-lg text-gray-500">
+					<div class="mb-5">
+						<span class="font-bold text-xl text-yellow-500">댓글등록</span>
+						<span>${ recipe.extra__writerName }님 에게 궁금한점들을남겨주세요.</span>
+					</div>
+					<c:if test="${ rq.logined == false }">
+						<a href="${ rq.loginUri }" class="link link-primary">로그인</a>
+						<span>후 댓글을 남길 수 있습니다.</span>
+					</c:if>
+				</div>
+
+				<!-- 댓글 작성 영역 시작 -->
+				<c:if test="${ rq.logined == true }">
+					<form class="flex items-center" method="POST" action="../reply/doWrite"
+						onsubmit="ReplyWrite__submitForm(this); return false;">
+						<!-- 현재 페이지 정보 -->
+						<input type="hidden" name="relTypeCode" value="recipe">
+						<input type="hidden" name="relId" value="${ recipe.id }">
+						<input type="hidden" name="replaceUri" value="${ rq.currentUri }">
+
+						<!-- 요리후기 사진 등록 -->
+						<a href="#"
+							class="flex justify-center items-center w-36 h-36 rounded-xl bg-gray-200 hover:bg-gray-300 mr-4 text-4xl">
+							<i class="fa-solid fa-plus"></i>
+						</a>
+						<!-- 댓글 작성 -->
+						<div class="border border-gray-300 rounded-xl p-2 w-10/12">
+							<textarea name="body" rows="5" class="w-full textarea textarea-warning" placeholder="요리후기를 사진과 함께 작성해보세요."></textarea>
+						</div>
+						<button type="submit"
+							class="w-36 h-36 border-double border-4 border-gray-300 rounded-xl ml-3 hover:bg-gray-100 text-xl">등록</button>
+					</form>
+				</c:if>
+				<!-- 댓글 작성 영역 끝 -->
 			</div>
 
 			<!-- 댓글 목록 영역 시작 -->
-			<div class="w-full h-96 overflow-auto">
+			<div class="w-full overflow-y-auto" style="height: 70vh;">
 				<div class="reply-list flex flex-col border-t">
+					<c:if test="${ replies.size() == 0 }">
+						<div class="text-2xl text-gray-400 mt-5 ml-3">등록된 댓글이 없습니다.</div>
+					</c:if>
 					<c:forEach var="reply" items="${ replies }">
 						<div class="flex items-center border-b" data-id="${ reply.id }">
 							<!-- 댓글 작성자 프로필 -->
@@ -402,44 +443,6 @@
 					<div class="text-xl">댓글</div>
 				</a>
 			</div>
-
-			<!-- 댓글 작성 영역 시작 -->
-			<div class="mt-10">
-				<div class="border-b border-gray-300 pl-3 pb-2 mb-3 font-bold text-xl text-yellow-500">
-					<span>후기등록</span>
-				</div>
-				<div class="text-lg text-gray-500 tracking-wide mb-2 ml-3">
-					<div>
-						<span>${ recipe.extra__writerName }님</span>
-						에게 궁금한점들을남겨주세요.
-					</div>
-					<c:if test="${ rq.logined == false }">
-						<a href="${ rq.loginUri }" class="link link-primary">로그인</a> 후 댓글을 남길 수 있습니다.
-					</c:if>
-				</div>
-				<c:if test="${ rq.logined == true }">
-					<form class="flex items-center" method="POST" action="../reply/doWrite"
-						onsubmit="ReplyWrite__submitForm(this); return false;">
-						<!-- 현재 페이지 정보 -->
-						<input type="hidden" name="relTypeCode" value="recipe">
-						<input type="hidden" name="relId" value="${ recipe.id }">
-						<input type="hidden" name="replaceUri" value="${ rq.currentUri }">
-						<!-- 요리후기 사진 등록 -->
-						<a href="#"
-							class="flex justify-center items-center w-36 h-36 rounded-xl bg-gray-200 hover:bg-gray-300 mr-4 text-4xl">
-							<i class="fa-solid fa-plus"></i>
-						</a>
-						<!-- 댓글 작성 -->
-						<div class="border border-gray-300 rounded-xl p-2 w-10/12">
-							<textarea name="body" rows="5" class="w-full" placeholder="요리후기를 사진과 함께 작성해보세요."></textarea>
-						</div>
-						<button type="submit" class="w-36 h-36 hover:bg-gray-100 border-double border-4 border-gray-300 rounded-xl ml-3">
-							<div class="text-xl">등록</div>
-						</button>
-					</form>
-				</c:if>
-			</div>
-			<!-- 댓글 작성 영역 끝 -->
 
 			<!-- 댓글 수정 모달 시작 -->
 			<section class="ReplyModify_box hidden">

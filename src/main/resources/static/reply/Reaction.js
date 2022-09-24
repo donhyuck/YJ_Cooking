@@ -20,13 +20,11 @@ function Scrap_AjaxForm(btn) {
 
 				if (data.success) {
 					const scrapCnt = data.data1;
-					const scrapIcon = document.getElementById("scrapIcon");
-					const newScrapIcon = document.createElement('p');
 
-					newScrapIcon.innerHTML = "<a action='cancel' onclick='Scrap_AjaxForm(this);'>"
+					var newScrapIcon = "<a action='cancel' id='scrapIcon' class='scrapIcon' onclick='Scrap_AjaxForm(this);'>"
 						+ "<i class='fa-solid fa-file-circle-check'></i>"
 						+ "<div class='text-lg font-bold mt-2'>스크랩" + scrapCnt + "</div></a>";
-					scrapIcon.appendChild(newScrapIcon);
+					$('#scrapIcon').replaceWith(newScrapIcon);
 				}
 				else {
 					if (data.msg) {
@@ -49,13 +47,11 @@ function Scrap_AjaxForm(btn) {
 
 				if (data.success) {
 					const scrapCnt = data.data1;
-					const scrapIcon = document.getElementById("scrapIcon");
-					const newScrapIcon = document.createElement('p');
 
-					newScrapIcon.innerHTML = "<a action='make' onclick='Scrap_AjaxForm(this);'>"
+					var newScrapIcon = "<a action='make' id='scrapIcon' onclick='Scrap_AjaxForm(this);'>"
 						+ "<i class='fa-solid fa-file'></i>"
 						+ "<div class='text-lg font-bold mt-2'>스크랩" + scrapCnt + "</div></a>";
-					scrapIcon.appendChild(newScrapIcon);
+					$('#scrapIcon').replaceWith(newScrapIcon);
 				}
 				else {
 					if (data.msg) {
@@ -92,13 +88,11 @@ function Like_AjaxForm(btn) {
 
 				if (data.success) {
 					const likeCnt = data.data1;
-					const likeIcon = document.getElementById("likeIcon");
-					const newLikeIcon = document.createElement('p');
 
-					newLikeIcon.innerHTML = "<a action='cancel' onclick='Like_AjaxForm(this);'>"
+					var newLikeIcon = "<a action='cancel' id='likeIcon' onclick='Like_AjaxForm(this);'>"
 						+ "<i class='fa-solid fa-heart-circle-check'></i>"
 						+ "<div class='text-lg font-bold mt-2'>좋아요" + likeCnt + "</div></a>";
-					likeIcon.appendChild(newLikeIcon);
+					$('#likeIcon').replaceWith(newLikeIcon);
 				}
 				else {
 					if (data.msg) {
@@ -121,13 +115,11 @@ function Like_AjaxForm(btn) {
 
 				if (data.success) {
 					const likeCnt = data.data1;
-					const likeIcon = document.getElementById("likeIcon");
-					const newLikeIcon = document.createElement('p');
 
-					newLikeIcon.innerHTML = "<a action='make' onclick='Like_AjaxForm(this);'>"
+					var newLikeIcon = "<a action='make' id='likeIcon' onclick='Like_AjaxForm(this);'>"
 						+ "<i class='fa-solid fa-heart'></i>"
 						+ "<div class='text-lg font-bold mt-2'>좋아요" + likeCnt + "</div></a>";
-					likeIcon.appendChild(newLikeIcon);
+					$('#likeIcon').replaceWith(newLikeIcon);
 				}
 				else {
 					if (data.msg) {

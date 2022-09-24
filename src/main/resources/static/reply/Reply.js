@@ -105,6 +105,10 @@ function ReplyDelete_AjaxForm(btn) {
 		function(data) {
 
 			if (data.success) {
+				const replyCnt = data.data1;
+
+				var newReplyCnt = "<span class='replyCnt'>" + replyCnt + "</span>";
+				$('span.replyCnt').replaceWith(newReplyCnt);
 				$target.remove();
 			}
 			else {

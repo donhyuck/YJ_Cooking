@@ -64,4 +64,11 @@
 		WHERE id = #{id}
 	</delete>
 
+	<select id="getReplyCntByRelId" resultType="int">
+		SELECT COUNT(*)
+		FROM
+		reply
+		WHERE relId = #{relId}
+	</select>
+
 </mapper> 

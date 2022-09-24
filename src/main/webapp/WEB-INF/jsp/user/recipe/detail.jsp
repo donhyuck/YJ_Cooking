@@ -186,7 +186,10 @@
 					<!-- 댓글 -->
 					<a href="#replyTarget" class="scroll text-green-500 hover:text-green-700">
 						<i class="fa-solid fa-comment-dots"></i>
-						<div class="text-lg font-bold mt-2">댓글로 이동 ${replies.size()}</div>
+						<div class="text-lg font-bold mt-2">
+							댓글로 이동
+							<span class='replyCnt'>${ replies.size() }</span>
+						</div>
 					</a>
 				</div>
 
@@ -318,7 +321,9 @@
 		<section class="bg-white rounded-md p-12 mb-5 relative" id="replyTarget">
 			<div class="text-3xl font-bold mb-8">
 				<span>요리후기/댓글</span>
-				<span class="text-green-500 text-2xl ml-3">${ replies.size() }</span>
+				<span class="text-green-500 text-2xl ml-3">
+					<span class='replyCnt'>${ replies.size() }</span>
+				</span>
 			</div>
 
 			<div class="border-t border-gray-300 p-5">

@@ -23,4 +23,6 @@ public interface ReplyRepository {
 
 	public void deleteReply(int id);
 
+	public int getReplyCntByRelId(int id);
+
 }

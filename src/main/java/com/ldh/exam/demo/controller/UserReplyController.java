@@ -149,9 +149,17 @@ public class UserReplyController {
 			return ResultData.from(actorCanDeleteRd.getResultCode(), actorCanDeleteRd.getMsg());
 		}
 
+		// 삭제전 등록된 레시피 번호 확인
+		int relId = replyService.getReplyById(id).getRelId();
+
 		// 삭제처리
 		ResultData deleteReplyRd = replyService.deleteReply(id);
 
-		return ResultData.from("S-1", deleteReplyRd.getMsg());
+		// 삭제 후 해당 레시피의 댓글 갯수 확인
+		int replyCnt = replyService.getReplyCntByRelId(relId);
+		
+		System.out.println(replyCnt);
+
+		return ResultData.from("S-1", deleteReplyRd.getMsg(), "replyCnt", replyCnt);
 	}
 }

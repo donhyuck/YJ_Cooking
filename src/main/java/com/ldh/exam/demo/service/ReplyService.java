@@ -112,8 +112,14 @@ public class ReplyService {
 	}
 
 	// 댓글 확인
-	private Reply getReplyById(int id) {
+	public Reply getReplyById(int id) {
 
 		return replyRepository.getReplyById(id);
+	}
+
+	// 삭제 후 해당 레시피의 댓글 갯수 확인
+	public int getReplyCntByRelId(int id) {
+
+		return replyRepository.getReplyCntByRelId(id);
 	}
 }

@@ -31,7 +31,7 @@
 						</div>
 						<div>
 							<div class="badge badge-lg badge-outline mb-2">연락처</div>
-							<div>${ member.forPrintCellphoneNo }</div>
+							<div>${ member.cellphoneNo }</div>
 						</div>
 						<div>
 							<div class="badge badge-lg badge-outline mb-2">닉네임</div>
@@ -42,8 +42,8 @@
 						<a href="/user/member/changePhoto" class="btn btn-outline">프로필 사진 변경</a>
 						<a href="/user/member/checkPassword?replaceUri=${ Ut.getUriEncoded('../member/modify') }"
 							class="btn btn-outline btn-primary">회원정보 수정</a>
-						<a href="/user/member/doLeave" class="btn btn-outline btn-secondary"
-							onclick="if (confirm('회원 탈퇴를 하시겠습니까?') == false) return false;">회원탈퇴</a>
+						<a href="/user/member/checkPassword?replaceUri=${ Ut.getUriEncoded('../member/doLeave') }"
+							onclick="if (confirm('회원 탈퇴를 하시겠습니까?\n본인확인을 진행해주세요.') == false) return false;" class="btn btn-outline btn-secondary">회원탈퇴</a>
 					</div>
 				</div>
 			</div>

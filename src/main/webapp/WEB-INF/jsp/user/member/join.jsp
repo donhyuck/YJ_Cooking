@@ -112,8 +112,8 @@
 			</div>
 			<div>
 				<div class="ml-1 mt-2 font-medium text-slate-700">연락처</div>
-				<input name="cellphoneNo" type="text" class="input input-lg input-bordered w-96" oninput="autoHyphenBySplit(this);"
-					maxlength="13" required="required" placeholder="예) 01012341234" />
+				<input id="phoneNum" name="cellphoneNo" type="text" class="input input-lg input-bordered w-96" maxlength="13"
+					required="required" placeholder="예) 01012341234" />
 				<div class="mt-1 ml-4">하이픈(-)을 제외하고 입력해주세요.</div>
 			</div>
 			<div>

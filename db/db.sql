@@ -59,7 +59,7 @@ loginId = 'admin',
 loginPw = 'admin',
 authLevel = 7,
 nickname = '관리자',
-cellphoneNo = '01012341234',
+cellphoneNo = '010-1234-1234',
 email = 'admin@gmail.com';
 
 INSERT INTO `member`
@@ -68,7 +68,7 @@ updateDate = NOW(),
 loginId = 'test1',
 loginPw = 'test1',
 nickname = '몽룡',
-cellphoneNo = '01078907890',
+cellphoneNo = '010-7890-7890',
 email = 'test1@gmail.com';
 
 INSERT INTO `member`
@@ -77,7 +77,7 @@ updateDate = NOW(),
 loginId = 'test2',
 loginPw = 'test2',
 nickname = '춘향',
-cellphoneNo = '01096319631',
+cellphoneNo = '010-9631-9631',
 email = 'test2@gmail.com';
 
 INSERT INTO `member`
@@ -86,7 +86,7 @@ updateDate = NOW(),
 loginId = 'test3',
 loginPw = 'test3',
 nickname = '임꺽정',
-cellphoneNo = '01034343434',
+cellphoneNo = '010-3434-3434',
 email = 'test3@gmail.com';
 
 INSERT INTO `member`
@@ -95,7 +95,7 @@ updateDate = NOW(),
 loginId = 'test4',
 loginPw = 'test4',
 nickname = '홍길동',
-cellphoneNo = '01089895656',
+cellphoneNo = '010-8989-5656',
 email = 'test4@gmail.com';
 
 SELECT * FROM `member`;
@@ -1153,6 +1153,3 @@ OR C.boardId = 2 AND G.methodId = C.relId
 OR C.boardId = 3 AND G.contentId = C.relId
 OR C.boardId = 4 AND G.freeId = C.relId
 );
-
-SELECT * FROM recipe;
-SELECT * FROM ingredient;

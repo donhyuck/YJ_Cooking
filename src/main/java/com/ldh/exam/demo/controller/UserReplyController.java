@@ -157,8 +157,6 @@ public class UserReplyController {
 
 		// 삭제 후 해당 레시피의 댓글 갯수 확인
 		int replyCnt = replyService.getReplyCntByRelId(relId);
-		
-		System.out.println(replyCnt);
 
 		return ResultData.from("S-1", deleteReplyRd.getMsg(), "replyCnt", replyCnt);
 	}

@@ -182,6 +182,11 @@ public class UserMemberController {
 			String authKeyForModify = memberService.genAuthKey(rq.getLoginedMemberId());
 
 			replaceUri += "?memberModifyAuthKey=" + authKeyForModify;
+
+		} else if (replaceUri.equals("../member/leave")) {
+			String authKeyForLeave = memberService.genAuthKey(rq.getLoginedMemberId());
+
+			replaceUri += "?memberLeaveAuthKey=" + authKeyForLeave;
 		}
 
 		return rq.jsReplace("", replaceUri);
@@ -205,6 +210,25 @@ public class UserMemberController {
 		}
 
 		return "user/member/modify";
+	}
+
+	// 회원 탈퇴 페이지 메서드
+	@RequestMapping("/user/member/leave")
+	public String showLeave(String memberLeaveAuthKey) {
+
+		// 인증코드가 없으면 재접근 요청
+		if (Ut.empty(memberLeaveAuthKey)) {
+			return rq.historyBackOnView("비밀번호 확인이 안되었습니다. 다시 시도해주세요.");
+		}
+
+		// 인증코드 확인
+		ResultData checkMemberLeaveAuthKeyRd = memberService.checkAuthKey(rq.getLoginedMemberId(), memberLeaveAuthKey);
+
+		if (checkMemberLeaveAuthKeyRd.isFail()) {
+			return rq.historyBackOnView(checkMemberLeaveAuthKeyRd.getMsg());
+		}
+
+		return "user/member/leave";
 	}
 
 	// 회원 수정하기 메서드
@@ -250,6 +274,32 @@ public class UserMemberController {
 		rq.logout();
 
 		return rq.jsReplace(Ut.f("%s 님의 회원정보가 수정되었습니다. 다시 로그인해주세요.", nickname), "/user/member/login");
+	}
+
+	// 회원 탈퇴하기 메서드
+	@RequestMapping("/user/member/doLeave")
+	@ResponseBody
+	public String doLeave(String memberLeaveAuthKey) {
+
+		// 인증코드가 없으면 재접근 요청
+		if (Ut.empty(memberLeaveAuthKey)) {
+			return rq.jsHistoryBack("비밀번호 확인이 안되었습니다. 다시 시도해주세요.");
+		}
+
+		// 인증코드 확인
+		ResultData checkMemberLeaveAuthKeyRd = memberService.checkAuthKey(rq.getLoginedMemberId(), memberLeaveAuthKey);
+
+		if (checkMemberLeaveAuthKeyRd.isFail()) {
+			return rq.jsHistoryBack(checkMemberLeaveAuthKeyRd.getMsg());
+		}
+
+		// 회원 탈퇴하기
+		// memberService.doLeave(rq.getLoginedMemberId());
+
+		// 로그아웃
+		rq.logout();
+
+		return rq.jsReplace("회원탈퇴가 완료되었습니다.", "/");
 	}
 
 	// 아이디 찾기 페이지 메서드
@@ -335,6 +385,7 @@ public class UserMemberController {
 		return rq.jsReplace(notifyTempLoginPwByEmailRs.getMsg(), afterFindLoginPwUri);
 	}
 
+	// 입력아이디 사용중인지 확인
 	@RequestMapping("/user/member/getLoginIdDup")
 	@ResponseBody
 	public ResultData getLoginIdDup(String loginId) {
@@ -352,6 +403,7 @@ public class UserMemberController {
 		return ResultData.from("S-A", "사용가능한 로그인아이디 입니다.", "loginId", loginId);
 	}
 
+	// 입력 닉네임과 이메일 사용중인지 확인
 	@RequestMapping("/user/member/getNicknameAndEmailDup")
 	@ResponseBody
 	public ResultData getNicknameAndEmailDup(String nickname, String email) {

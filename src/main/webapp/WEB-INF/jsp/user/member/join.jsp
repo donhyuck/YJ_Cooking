@@ -118,7 +118,8 @@
 			</div>
 			<div>
 				<div class="ml-1 mt-2 font-medium text-slate-700">프로필 사진</div>
-				<input name="profileImg" type="file" class="input input-lg input-bordered w-96" placeholder="프로필 이미지를 선택해주세요." />
+				<input name="file__member__0__extra__profileImg__1" type="file" class="input input-lg input-bordered w-96"
+					placeholder="프로필 이미지를 선택해주세요." />
 				<div class="text-green-400 mt-1 ml-4">사용가능합니다.</div>
 			</div>
 

@@ -295,4 +295,12 @@ public class Rq {
 
 		return getEncodedCurrentUri();
 	}
+
+	public boolean isLeaved(Member member) {
+
+		if (member.isDelStatus()) {
+			return true;
+		}
+		return false;
+	}
 }

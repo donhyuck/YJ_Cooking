@@ -12,11 +12,13 @@
 	<select id="getForPrintRecipe" resultType="Recipe">
 		SELECT R.*,
 		M.nickname
-		AS extra__writerName
+		AS extra__writerName,
+		M.delStatus AS extra__writerLeaved
 		FROM recipe AS R
 		LEFT JOIN `member` AS M
 		ON
-		R.memberId = M.id
+		R.memberId =
+		M.id
 		WHERE R.id = #{id}
 	</select>
 

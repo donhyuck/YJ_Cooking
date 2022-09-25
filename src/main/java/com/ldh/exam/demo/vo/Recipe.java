@@ -27,6 +27,7 @@ public class Recipe {
 
 	private int extra__rank;
 	private String extra__writerName;
+	private boolean extra__writerLeaved;
 	private String extra__replyWriteName;
 	private String extra__replyBody;
 	private boolean extra__actorCanModify;

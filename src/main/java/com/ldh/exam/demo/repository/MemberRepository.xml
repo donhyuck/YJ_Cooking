@@ -48,6 +48,7 @@
 		SELECT *
 		FROM `member` AS M
 		WHERE M.id = #{id}
+		AND delStatus = 0
 	</select>
 
 	<select id="getMemberByLoginId" resultType="Member">
@@ -55,6 +56,7 @@
 		FROM `member`
 		AS M
 		WHERE M.loginId = #{loginId}
+		AND delStatus = 0
 	</select>
 
 	<select id="getMemberByNicknameAndEmail" resultType="Member">
@@ -62,6 +64,7 @@
 		FROM `member` AS M
 		WHERE M.nickname = #{nickname}
 		AND M.email = #{email}
+		AND delStatus = 0
 	</select>
 
 </mapper> 

@@ -144,7 +144,14 @@
 				<img class="w-full rounded-full" src="https://cdn.pixabay.com/photo/2017/06/16/13/35/chef-2409158_960_720.png"
 					alt="" />
 				<div class="text-center text-xl mx-auto mt-2">
-					<span class="py-3 px-5">${ recipe.extra__writerName }</span>
+					<span class="py-3 px-5">
+						<span>${ recipe.extra__writerName }</span>
+					</span>
+					<div>
+						<c:if test="${ recipe.extra__writerLeaved }">
+							<span class="text-red-500">(탈퇴회원)</span>
+						</c:if>
+					</div>
 				</div>
 			</div>
 

@@ -14,7 +14,8 @@
 		M.nickname
 		AS extra__writerName,
 		M.delStatus AS extra__writerLeaved
-		FROM recipe AS R
+		FROM recipe AS
+		R
 		LEFT JOIN `member` AS M
 		ON
 		R.memberId =
@@ -107,29 +108,41 @@
 		AS G
 		WHERE 1
 		<choose>
+			<when test="boardId == 0">
+				AND 1
+			</when>
 			<when test="boardId == 1">
-				AND G.sortId
-				<if test="relId != 0">=#{relId}</if>
-				<if test="relId == 0">IS NOT NULL</if>
+				<if test="relId != 0">
+					AND G.sortId = #{relId}
+				</if>
+				<if test="relId == 0">
+					AND G.sortId != 0
+				</if>
 			</when>
 			<when test="boardId == 2">
-				AND G.methodId
-				<if test="relId != 0">=#{relId}</if>
-				<if test="relId == 0">IS NOT NULL</if>
+				<if test="relId != 0">
+					AND G.methodId = #{relId}
+				</if>
+				<if test="relId == 0">
+					AND G.methodId != 0
+				</if>
 			</when>
 			<when test="boardId == 3">
-				AND G.contentId
-				<if test="relId != 0">=#{relId}</if>
-				<if test="relId == 0">IS NOT NULL</if>
+				<if test="relId != 0">
+					AND G.contentId = #{relId}
+				</if>
+				<if test="relId == 0">
+					AND G.contentId != 0
+				</if>
 			</when>
 			<when test="boardId == 4">
-				AND G.freeId
-				<if test="relId != 0">=#{relId}</if>
-				<if test="relId == 0">IS NOT NULL</if>
+				<if test="relId != 0">
+					AND G.freeId = #{relId}
+				</if>
+				<if test="relId == 0">
+					AND G.freeId != 0
+				</if>
 			</when>
-			<otherwise>
-				AND 1
-			</otherwise>
 		</choose>
 		) AS G
 		LEFT JOIN `recipe`

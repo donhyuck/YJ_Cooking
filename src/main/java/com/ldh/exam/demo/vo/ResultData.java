@@ -1,22 +1,30 @@
 package com.ldh.exam.demo.vo;
 
-import lombok.Getter;
-import lombok.ToString;
+import java.util.Map;
 
-@ToString
+import com.ldh.exam.demo.util.Ut;
+
+import lombok.Data;
+
+@Data
 public class ResultData<DT> {
 
 	// 처리결과 성공 S-xx, 실패 F-xx
-	@Getter
 	private String resultCode;
-	@Getter
 	private String msg;
-	@Getter
 	private String data1Name;
-	@Getter
 	private DT data1;
-	@Getter
 	private Object data2;
+	private Map<String, Object> body;
+
+	public ResultData() {
+	}
+
+	public ResultData(String resultCode, String msg, Object... args) {
+		this.resultCode = resultCode;
+		this.msg = msg;
+		this.body = Ut.mapOf(args);
+	}
 
 	public static ResultData from(String resultCode, String msg) {
 

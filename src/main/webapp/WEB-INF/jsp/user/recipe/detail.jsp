@@ -141,8 +141,11 @@
 
 			<!-- 등록한 회원정보 -->
 			<div class="actor-photo w-60 mr-12">
-				<img class="w-full rounded-full" src="https://cdn.pixabay.com/photo/2017/06/16/13/35/chef-2409158_960_720.png"
-					alt="" />
+				<!-- 작성자 프로필 -->
+				<div>
+					<img class="w-full rounded-full" src="${rq.getProfileImgUri(recipe.memberId)}"
+						onerror="${rq.profileFallbackImgOnErrorHtml}" alt="" />
+				</div>
 				<div class="text-center text-xl mx-auto mt-2">
 					<span class="py-3 px-5">
 						<span>${ recipe.extra__writerName }</span>

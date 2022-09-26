@@ -39,6 +39,7 @@ public class GenFileService {
 		genFileRepository.saveMeta(param);
 
 		int id = Ut.getAsInt(param.get("id"), 0);
+		
 		return new ResultData("S-1", "성공하였습니다.", "id", id);
 	}
 

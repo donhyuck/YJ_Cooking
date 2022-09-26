@@ -12,10 +12,14 @@
 		<section class="myPage-box bg-white rounded-md p-4 mb-5">
 			<div class="text-2xl mb-1">회원정보</div>
 			<div class="myInfo-box flex p-3">
-				<div class="w-80">
-					<img class="w-full rounded-lg" src="https://cdn.pixabay.com/photo/2017/06/16/13/35/chef-2409158_960_720.png" alt="" />
+
+				<!-- 회원 프로필 -->
+				<div class="w-80 border rounded-xl border-gray-300">
+					<img class="w-full rounded-xl" src="${rq.getProfileImgUri(rq.loginedMemberId)}"
+						onerror="${rq.profileFallbackImgOnErrorHtml}" alt="" />
 				</div>
-				<div class="p-5 w-3/5 relative text-xl">
+
+				<div class="p-5 pl-10 w-3/5 relative text-xl">
 					<div class="grid grid-cols-3 gap-7 absolute top-8 w-full">
 						<div>
 							<div class="badge badge-lg badge-outline mb-2">최초 가입일</div>
@@ -43,7 +47,8 @@
 						<a href="/user/member/checkPassword?replaceUri=${ Ut.getUriEncoded('../member/modify') }"
 							class="btn btn-outline btn-primary">회원정보 수정</a>
 						<a href="/user/member/checkPassword?replaceUri=${ Ut.getUriEncoded('../member/leave') }"
-							onclick="if (confirm('회원 탈퇴를 하시겠습니까?\n본인확인을 진행해주세요.') == false) return false;" class="btn btn-outline btn-secondary">회원탈퇴</a>
+							onclick="if (confirm('회원 탈퇴를 하시겠습니까?\n본인확인을 진행해주세요.') == false) return false;"
+							class="btn btn-outline btn-secondary">회원탈퇴</a>
 					</div>
 				</div>
 			</div>

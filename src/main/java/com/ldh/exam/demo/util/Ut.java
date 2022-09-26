@@ -20,9 +20,63 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class Ut {
+	public static Map<String, Object> mapOf(Object... args) {
+		if (args.length % 2 != 0) {
+			throw new IllegalArgumentException("인자를 짝수개 입력해주세요.");
+		}
+
+		int size = args.length / 2;
+
+		Map<String, Object> map = new LinkedHashMap<>();
+
+		for (int i = 0; i < size; i++) {
+			int keyIndex = i * 2;
+			int valueIndex = keyIndex + 1;
+
+			String key;
+			Object value;
+
+			try {
+				key = (String) args[keyIndex];
+			} catch (ClassCastException e) {
+				throw new IllegalArgumentException("키는 String으로 입력해야 합니다. " + e.getMessage());
+			}
+
+			value = args[valueIndex];
+
+			map.put(key, value);
+		}
+
+		return map;
+	}
+
+	public static int getAsInt(Object object, int defaultValue) {
+		if (object instanceof BigInteger) {
+			return ((BigInteger) object).intValue();
+		} else if (object instanceof Double) {
+			return (int) Math.floor((double) object);
+		} else if (object instanceof Float) {
+			return (int) Math.floor((float) object);
+		} else if (object instanceof Long) {
+			return (int) object;
+		} else if (object instanceof Integer) {
+			return (int) object;
+		} else if (object instanceof String) {
+			return Integer.parseInt((String) object);
+		}
+
+		return defaultValue;
+	}
+
+	public static <T> T ifNull(T data, T defaultValue) {
+		return data != null ? data : defaultValue;
+	}
+
+	public static <T> T reqAttr(HttpServletRequest req, String attrName, T defaultValue) {
+		return (T) ifNull(req.getAttribute(attrName), defaultValue);
+	}
 
 	public static boolean empty(Object obj) {
-
 		if (obj == null) {
 			return true;
 		}
@@ -44,8 +98,30 @@ public class Ut {
 		return str.trim().length() == 0;
 	}
 
-	public static String f(String msg, Object... args) {
-		return String.format(msg, args);
+	public static boolean isEmpty(Object data) {
+		if (data == null) {
+			return true;
+		}
+
+		if (data instanceof String) {
+			String strData = (String) data;
+
+			return strData.trim().length() == 0;
+		} else if (data instanceof List) {
+			List listData = (List) data;
+
+			return listData.isEmpty();
+		} else if (data instanceof Map) {
+			Map mapData = (Map) data;
+
+			return mapData.isEmpty();
+		}
+
+		return false;
+	}
+
+	public static String f(String format, Object... args) {
+		return String.format(format, args);
 	}
 
 	public static String jsHistoryBack(String msg) {
@@ -119,7 +195,6 @@ public class Ut {
 	}
 
 	public static String getUriEncoded(String str) {
-
 		try {
 			return URLEncoder.encode(str, "UTF-8");
 		} catch (Exception e) {
@@ -128,7 +203,6 @@ public class Ut {
 	}
 
 	public static String getDateStrLater(long seconds) {
-
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
 		String dateStr = format.format(System.currentTimeMillis() + seconds * 1000);
@@ -137,7 +211,6 @@ public class Ut {
 	}
 
 	public static String getTempPassword(int length) {
-
 		int index = 0;
 		char[] charArr = new char[] { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f',
 				'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z' };
@@ -150,105 +223,6 @@ public class Ut {
 		}
 
 		return sb.toString();
-	}
-
-	public static Map<String, String> getParamMap(HttpServletRequest req) {
-
-		Map<String, String> param = new HashMap<>();
-
-		Enumeration<String> parameterNames = req.getParameterNames();
-
-		while (parameterNames.hasMoreElements()) {
-			String paramName = parameterNames.nextElement();
-			String paramValue = req.getParameter(paramName);
-
-			param.put(paramName, paramValue);
-		}
-
-		return param;
-	}
-
-	public static String getStrAttr(Map map, String attrName, String defaultValue) {
-
-		if (map.containsKey(attrName)) {
-			return (String) map.get(attrName);
-		}
-
-		return defaultValue;
-	}
-
-	public static String toJsonStr(Object obj) {
-		ObjectMapper mapper = new ObjectMapper();
-		try {
-			return mapper.writeValueAsString(obj);
-		} catch (JsonProcessingException e) {
-			e.printStackTrace();
-		}
-		return "";
-	}
-
-	public static String toJsonStr(Map<String, Object> param) {
-		ObjectMapper mapper = new ObjectMapper();
-		try {
-			return mapper.writeValueAsString(param);
-		} catch (JsonProcessingException e) {
-			e.printStackTrace();
-		}
-		return "";
-	}
-
-	public static <T> T fromJsonStr(String jsonStr, Class<T> cls) {
-		ObjectMapper om = new ObjectMapper();
-		try {
-			return (T) om.readValue(jsonStr, cls);
-		} catch (JsonProcessingException e) {
-			e.printStackTrace();
-			return null;
-		}
-	}
-
-	public static String getNewUriRemoved(String uri, String paramName) {
-		String deleteStrStarts = paramName + "=";
-		int delStartPos = uri.indexOf(deleteStrStarts);
-
-		if (delStartPos != -1) {
-			int delEndPos = uri.indexOf("&", delStartPos);
-
-			if (delEndPos != -1) {
-				delEndPos++;
-				uri = uri.substring(0, delStartPos) + uri.substring(delEndPos, uri.length());
-			} else {
-				uri = uri.substring(0, delStartPos);
-			}
-		}
-
-		if (uri.charAt(uri.length() - 1) == '?') {
-			uri = uri.substring(0, uri.length() - 1);
-		}
-
-		if (uri.charAt(uri.length() - 1) == '&') {
-			uri = uri.substring(0, uri.length() - 1);
-		}
-
-		return uri;
-	}
-
-	public static String getNewUri(String uri, String paramName, String paramValue) {
-		uri = getNewUriRemoved(uri, paramName);
-
-		if (uri.contains("?")) {
-			uri += "&" + paramName + "=" + paramValue;
-		} else {
-			uri += "?" + paramName + "=" + paramValue;
-		}
-
-		uri = uri.replace("?&", "?");
-
-		return uri;
-	}
-
-	public static String getNewUriAndEncoded(String uri, String paramName, String pramValue) {
-		return getUriEncoded(getNewUri(uri, paramName, pramValue));
 	}
 
 	public static String sha256(String base) {
@@ -271,83 +245,49 @@ public class Ut {
 		}
 	}
 
-	public static boolean isEmpty(Object data) {
-		if (data == null) {
-			return true;
+	public static String toJsonStr(Object obj) {
+		ObjectMapper mapper = new ObjectMapper();
+		try {
+			return mapper.writeValueAsString(obj);
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
 		}
 
-		if (data instanceof String) {
-			String strData = (String) data;
-
-			return strData.trim().length() == 0;
-		} else if (data instanceof List) {
-			List listData = (List) data;
-
-			return listData.isEmpty();
-		} else if (data instanceof Map) {
-			Map mapData = (Map) data;
-
-			return mapData.isEmpty();
-		}
-
-		return false;
+		return "";
 	}
 
-	// 이미지 업로드 관련
-	public static Map<String, Object> mapOf(Object... args) {
-		if (args.length % 2 != 0) {
-			throw new IllegalArgumentException("인자를 짝수개 입력해주세요.");
+	public static String toJsonStr(Map<String, Object> param) {
+		ObjectMapper mapper = new ObjectMapper();
+		try {
+			return mapper.writeValueAsString(param);
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
 		}
 
-		int size = args.length / 2;
-
-		Map<String, Object> map = new LinkedHashMap<>();
-
-		for (int i = 0; i < size; i++) {
-			int keyIndex = i * 2;
-			int valueIndex = keyIndex + 1;
-
-			String key;
-			Object value;
-
-			try {
-				key = (String) args[keyIndex];
-			} catch (ClassCastException e) {
-				throw new IllegalArgumentException("키는 String으로 입력해야 합니다. " + e.getMessage());
-			}
-
-			value = args[valueIndex];
-
-			map.put(key, value);
-		}
-
-		return map;
+		return "";
 	}
 
-	public static int getAsInt(Object object, int defaultValue) {
-		if (object instanceof BigInteger) {
-			return ((BigInteger) object).intValue();
-		} else if (object instanceof Double) {
-			return (int) Math.floor((double) object);
-		} else if (object instanceof Float) {
-			return (int) Math.floor((float) object);
-		} else if (object instanceof Long) {
-			return (int) object;
-		} else if (object instanceof Integer) {
-			return (int) object;
-		} else if (object instanceof String) {
-			return Integer.parseInt((String) object);
+	public static Map<String, String> getParamMap(HttpServletRequest request) {
+		Map<String, String> param = new HashMap<>();
+
+		Enumeration<String> parameterNames = request.getParameterNames();
+
+		while (parameterNames.hasMoreElements()) {
+			String paramName = parameterNames.nextElement();
+			String paramValue = request.getParameter(paramName);
+
+			param.put(paramName, paramValue);
+		}
+
+		return param;
+	}
+
+	public static String getStrAttr(Map map, String attrName, String defaultValue) {
+		if (map.containsKey(attrName)) {
+			return (String) map.get(attrName);
 		}
 
 		return defaultValue;
-	}
-
-	public static <T> T ifNull(T data, T defaultValue) {
-		return data != null ? data : defaultValue;
-	}
-
-	public static <T> T reqAttr(HttpServletRequest req, String attrName, T defaultValue) {
-		return (T) ifNull(req.getAttribute(attrName), defaultValue);
 	}
 
 	public static String getFileExtTypeCodeFromFileName(String fileName) {
@@ -477,6 +417,60 @@ public class Ut {
 		// 숫자로 시작 금지
 		// _, 알파벳, 숫자로만 구성
 		return Pattern.matches("^[a-zA-Z]{1}[a-zA-Z0-9_]{4,19}$", str);
+	}
+
+	public static String getNewUriRemoved(String uri, String paramName) {
+		String deleteStrStarts = paramName + "=";
+		int delStartPos = uri.indexOf(deleteStrStarts);
+
+		if (delStartPos != -1) {
+			int delEndPos = uri.indexOf("&", delStartPos);
+
+			if (delEndPos != -1) {
+				delEndPos++;
+				uri = uri.substring(0, delStartPos) + uri.substring(delEndPos, uri.length());
+			} else {
+				uri = uri.substring(0, delStartPos);
+			}
+		}
+
+		if (uri.charAt(uri.length() - 1) == '?') {
+			uri = uri.substring(0, uri.length() - 1);
+		}
+
+		if (uri.charAt(uri.length() - 1) == '&') {
+			uri = uri.substring(0, uri.length() - 1);
+		}
+
+		return uri;
+	}
+
+	public static String getNewUri(String uri, String paramName, String paramValue) {
+		uri = getNewUriRemoved(uri, paramName);
+
+		if (uri.contains("?")) {
+			uri += "&" + paramName + "=" + paramValue;
+		} else {
+			uri += "?" + paramName + "=" + paramValue;
+		}
+
+		uri = uri.replace("?&", "?");
+
+		return uri;
+	}
+
+	public static String getNewUriAndEncoded(String uri, String paramName, String pramValue) {
+		return getUriEncoded(getNewUri(uri, paramName, pramValue));
+	}
+
+	public static <T> T fromJsonStr(String jsonStr, Class<T> cls) {
+		ObjectMapper om = new ObjectMapper();
+		try {
+			return (T) om.readValue(jsonStr, cls);
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	public static <T> T ifEmpty(T data, T defaultValue) {

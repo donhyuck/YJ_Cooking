@@ -58,6 +58,21 @@
 			return;
 		}
 
+		// 프로필 이미지 용량 제한
+		const maxSizeMb = 10;
+		const maxSize = maxSizeMb * 1204 * 1204;
+		
+		const profileImgFileInput = form["file__member__0__extra__profileImg__1"];
+		
+		if( profileImgFileInput.value ) {
+			if ( profileImgFileInput.files[0].size > maxSize ) {
+				alert(maxSizeMb + "MB 이하의 파일을 업로드 해주세요.");
+				profileImgFileInput.focus();
+				
+				return;
+			}
+		}
+
 		// 비밀번호 암호화
 		if (form.inputLoginPw.value.length != 0
 				&& form.inputLoginPw.value == form.loginPwConfirm.value) {
@@ -118,8 +133,8 @@
 			</div>
 			<div>
 				<div class="ml-1 mt-2 font-medium text-slate-700">프로필 사진</div>
-				<input name="file__member__0__extra__profileImg__1" type="file" class="input input-lg input-bordered w-96"
-					placeholder="프로필 이미지를 선택해주세요." />
+				<input type="file" accept="image/gif, image/jpeg, image/png" name="file__member__0__extra__profileImg__1"
+					class="input input-lg input-bordered w-96" placeholder="프로필 이미지를 선택해주세요." />
 				<div class="text-green-400 mt-1 ml-4">사용가능합니다.</div>
 			</div>
 

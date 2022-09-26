@@ -14,7 +14,7 @@
 			<div class="myInfo-box flex p-3">
 
 				<!-- 회원 프로필 -->
-				<div class="w-80 border rounded-xl border-gray-300">
+				<div class="w-80 h-80 flex flex-col justify-center bg-gray-200 border rounded-xl border-gray-300">
 					<img class="w-full rounded-xl" src="${rq.getProfileImgUri(rq.loginedMemberId)}"
 						onerror="${rq.profileFallbackImgOnErrorHtml}" alt="" />
 				</div>

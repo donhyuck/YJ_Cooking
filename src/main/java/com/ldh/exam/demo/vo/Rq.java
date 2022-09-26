@@ -310,7 +310,7 @@ public class Rq {
 
 	public String getProfileFallbackImgUri() {
 		// return "https://via.placeholder.com/300/?text=*^_^*";
-		return "https://cdn.pixabay.com/photo/2017/06/16/13/35/chef-2409158_960_720.png";
+		return "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png";
 	}
 
 	public String getProfileFallbackImgOnErrorHtml() {

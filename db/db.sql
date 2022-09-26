@@ -538,27 +538,34 @@ SET regDate=NOW(),
 updateDate=NOW(),
 boardId = 1,
 relId = 10,
-`name`='양식';
+`name`='일식';
 
 INSERT INTO category
 SET regDate=NOW(),
 updateDate=NOW(),
 boardId = 1,
 relId = 11,
-`name`='동남아식';
+`name`='양식';
 
 INSERT INTO category
 SET regDate=NOW(),
 updateDate=NOW(),
 boardId = 1,
 relId = 12,
-`name`='베이커리';
+`name`='동남아식';
 
 INSERT INTO category
 SET regDate=NOW(),
 updateDate=NOW(),
 boardId = 1,
 relId = 13,
+`name`='베이커리';
+
+INSERT INTO category
+SET regDate=NOW(),
+updateDate=NOW(),
+boardId = 1,
+relId = 14,
 `name`='음료/차';
 
 INSERT INTO category
@@ -875,13 +882,6 @@ AND IF( 1 = 4, G.sortId = 5, 1)
 AND IF( 2 = 4, G.methodId = 1, 1)
 AND IF( 3 = 4, G.contentId = 12, 1)
 AND IF( 4 = 4, G.freeId = 5, 1);
-
-## 각 board별 갯수
-SELECT COUNT(CASE WHEN boardId=1 THEN 1 END) AS sortId,
-COUNT(CASE WHEN boardId=2 THEN 1 END) AS methodId,
-COUNT(CASE WHEN boardId=3 THEN 1 END) AS contentId,
-COUNT(CASE WHEN boardId=4 THEN 1 END) AS freeId
-FROM category;
 
 SELECT G.*, C.name
 FROM `guide` AS G
@@ -1206,3 +1206,4 @@ SET authLevel = 7
 WHERE id = 1;
 
 SELECT * FROM `member`;
+SELECT * FROM `genFile`;

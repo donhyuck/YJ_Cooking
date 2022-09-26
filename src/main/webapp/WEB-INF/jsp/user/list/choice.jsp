@@ -31,10 +31,11 @@
 			$('#relId').append("<option value='7' class='text-lg'>소스/양념</option>'");
 			$('#relId').append("<option value='8' class='text-lg'>한식</option>'");
 			$('#relId').append("<option value='9' class='text-lg'>중식</option>'");
-			$('#relId').append("<option value='10' class='text-lg'>양식</option>'");
-			$('#relId').append("<option value='11' class='text-lg'>동남아식</option>'");
-			$('#relId').append("<option value='12' class='text-lg'>베이커리</option>'");
-			$('#relId').append("<option value='13' class='text-lg'>음료/차</option>'");
+			$('#relId').append("<option value='10' class='text-lg'>일식</option>'");
+			$('#relId').append("<option value='11' class='text-lg'>양식</option>'");
+			$('#relId').append("<option value='12' class='text-lg'>동남아식</option>'");
+			$('#relId').append("<option value='13' class='text-lg'>베이커리</option>'");
+			$('#relId').append("<option value='14' class='text-lg'>음료/차</option>'");
 		} else if (type == '2') {
 			$('#relId').append("<option value='0' class='text-lg'>전체</option>'");
 			$('#relId').append("<option value='1' class='text-lg'>볶기</option>'");

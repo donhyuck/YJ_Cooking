@@ -140,14 +140,15 @@
 		<section class="bg-white rounded-md p-12 flex mb-5">
 
 			<!-- 등록한 회원정보 -->
-			<div class="actor-photo w-60 mr-12">
-				<!-- 작성자 프로필 -->
-				<div>
-					<img class="w-full rounded-full" src="${rq.getProfileImgUri(recipe.memberId)}"
+			<div class="actor-photo w-60">
+				<!-- 회원 프로필 -->
+				<div class="flex flex-col justify-center">
+					<img class="w-full rounded-3xl" src="${rq.getProfileImgUri(recipe.memberId)}"
 						onerror="${rq.profileFallbackImgOnErrorHtml}" alt="" />
 				</div>
+
 				<div class="text-center text-xl mx-auto mt-2">
-					<span class="py-3 px-5">
+					<span class="py-3 px-5 font-bold">
 						<span>${ recipe.extra__writerName }</span>
 					</span>
 					<div>

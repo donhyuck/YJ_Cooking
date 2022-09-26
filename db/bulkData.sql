@@ -19,10 +19,17 @@ CALL dataRecipeInsert(); $$
 ## 대량 데이터 생성
 INSERT INTO guide ( regDate, updateDate, sortId, methodId, contentId, freeId )
 SELECT NOW(), NOW(),
-FLOOR(RAND() * 14),
+FLOOR(RAND() * 15),
 FLOOR(RAND() * 11),
 FLOOR(RAND() * 16),
 FLOOR(RAND() * 10);
+
+## 각 board별 갯수
+SELECT COUNT(CASE WHEN boardId=1 THEN 1 END) AS sortId,
+COUNT(CASE WHEN boardId=2 THEN 1 END) AS methodId,
+COUNT(CASE WHEN boardId=3 THEN 1 END) AS contentId,
+COUNT(CASE WHEN boardId=4 THEN 1 END) AS freeId
+FROM category;
 
 DELIMITER $$
 DROP PROCEDURE IF EXISTS dataGuideInsert$$
@@ -31,7 +38,7 @@ BEGIN ## 시작
 DECLARE i INT DEFAULT 1; ## 시작값        
 WHILE(i<=300) DO ## 반복문         
 INSERT INTO guide ( regDate, updateDate, sortId, methodId, contentId, freeId )
-VALUE (NOW(), NOW(), FLOOR(RAND() * 14), FLOOR(RAND() * 11), FLOOR(RAND() * 16), FLOOR(RAND() * 10));       
+VALUE (NOW(), NOW(), FLOOR(RAND() * 15), FLOOR(RAND() * 11), FLOOR(RAND() * 16), FLOOR(RAND() * 10));       
 SET i=i+1;        
 END WHILE; ## 반복 종료         
 END $$
@@ -159,12 +166,12 @@ SET hitCount = goodRP + FLOOR(RAND() * 500)+1
 WHERE hitCount = 0;
 
 ## 재료양념 데이터 구성
-update ingredient
+UPDATE ingredient
 SET rowArr='감자,당근,양파',
 rowValueArr='3개,1/3개,1/2개',
 sauceArr='굴소스(선택),소금,후추',
 sauceValueArr='1T,약간,약간'
-where recipeId=1;
+WHERE recipeId=1;
 
 UPDATE ingredient
 SET rowArr='갈비대,밤,표고버섯',

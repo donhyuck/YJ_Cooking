@@ -57,14 +57,14 @@
 		// 프로필 이미지 용량 제한
 		const maxSizeMb = 10;
 		const maxSize = maxSizeMb * 1204 * 1204;
-		
+
 		const profileImgFileInput = form["file__member__0__extra__profileImg__1"];
-		
-		if( profileImgFileInput.value ) {
-			if ( profileImgFileInput.files[0].size > maxSize ) {
+
+		if (profileImgFileInput.value) {
+			if (profileImgFileInput.files[0].size > maxSize) {
 				alert(maxSizeMb + "MB 이하의 파일을 업로드 해주세요.");
 				profileImgFileInput.focus();
-				
+
 				return;
 			}
 		}
@@ -126,6 +126,18 @@
 				<input id="phoneNum" name="cellphoneNo" type="text" value="${ member.cellphoneNo }"
 					class="input input-lg input-bordered w-96" maxlength="13" required="required" placeholder="예) 01012341234" />
 				<div class="mt-1 ml-4">하이픈(-)을 제외하고 입력해주세요.</div>
+			</div>
+
+			<div>
+				<div class="ml-1 mt-2 font-medium text-slate-700">프로필 사진</div>
+
+				<!-- 회원 프로필 -->
+				<div class="w-80 h-80 flex flex-col justify-center bg-gray-200 border rounded-xl border-gray-300 mx-auto my-3">
+					<img class="w-full rounded-xl" src="${rq.getProfileImgUri(rq.loginedMemberId)}"
+						onerror="${rq.removeProfileImgIfNotExistsOnErrorHtmlAttr}" alt="" />
+				</div>
+				<input type="file"  accept="image/gif, image/jpeg, image/png" name="file__member__0__extra__profileImg__1"
+					class="input input-lg input-bordered w-96" placeholder="프로필 이미지를 선택해주세요." />
 			</div>
 
 			<div class="btns mt-2">

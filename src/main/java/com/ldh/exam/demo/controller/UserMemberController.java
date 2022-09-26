@@ -255,7 +255,7 @@ public class UserMemberController {
 	@RequestMapping("/user/member/doModify")
 	@ResponseBody
 	public String doModify(String memberModifyAuthKey, String loginPw, String nickname, String cellphoneNo,
-			String email) {
+			String email, MultipartRequest multipartRequest) {
 
 		// 인증코드가 없으면 재접근 요청
 		if (Ut.empty(memberModifyAuthKey)) {
@@ -285,6 +285,17 @@ public class UserMemberController {
 
 		if (Ut.empty(email)) {
 			return rq.jsHistoryBack("이메일(을)를 입력해주세요.");
+		}
+
+		// 정보수정시 프로필 이미지 변경
+		Map<String, MultipartFile> fileMap = multipartRequest.getFileMap();
+
+		for (String fileInputName : fileMap.keySet()) {
+			MultipartFile multipartFile = fileMap.get(fileInputName);
+
+			if (multipartFile.isEmpty() == false) {
+				genFileService.save(multipartFile, rq.getLoginedMemberId());
+			}
 		}
 
 		// 회원 수정하기

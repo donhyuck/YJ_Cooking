@@ -316,4 +316,8 @@ public class Rq {
 	public String getProfileFallbackImgOnErrorHtml() {
 		return "this.src = '" + getProfileFallbackImgUri() + "'";
 	}
+
+	public String getRemoveProfileImgIfNotExistsOnErrorHtmlAttr() {
+		return "$(this).remove();";
+	}
 }

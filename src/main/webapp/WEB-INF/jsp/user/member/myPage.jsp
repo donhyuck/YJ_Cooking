@@ -114,8 +114,6 @@
 				</div>
 			</div>
 
-
-
 			<!-- 프로필 사진 변경 -->
 			<form class="changePhoto hidden flex ml-3" method="POST" enctype="multipart/form-data"
 				action="/user/member/changeProfile" onsubmit="ProfileChange_submitForm(this); return false;">

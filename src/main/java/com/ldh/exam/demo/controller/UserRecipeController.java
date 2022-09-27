@@ -1,14 +1,18 @@
 package com.ldh.exam.demo.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartRequest;
 
 import com.ldh.exam.demo.service.BoardService;
+import com.ldh.exam.demo.service.GenFileService;
 import com.ldh.exam.demo.service.MemberService;
 import com.ldh.exam.demo.service.ReactionService;
 import com.ldh.exam.demo.service.RecipeService;
@@ -29,15 +33,17 @@ public class UserRecipeController {
 	private MemberService memberService;
 	private ReplyService replyService;
 	private ReactionService reactionService;
+	private GenFileService genFileService;
 	private Rq rq;
 
 	public UserRecipeController(RecipeService recipeService, BoardService boardService, MemberService memberService,
-			ReplyService replyService, ReactionService reactionService, Rq rq) {
+			ReplyService replyService, ReactionService reactionService, GenFileService genFileService, Rq rq) {
 		this.recipeService = recipeService;
 		this.boardService = boardService;
 		this.memberService = memberService;
 		this.replyService = replyService;
 		this.reactionService = reactionService;
+		this.genFileService = genFileService;
 		this.rq = rq;
 	}
 
@@ -268,7 +274,7 @@ public class UserRecipeController {
 	public String doWrite(String title, String body, int amount, int time, int level, String tip,
 			@RequestParam(defaultValue = "0") int sortId, @RequestParam(defaultValue = "0") int methodId,
 			@RequestParam(defaultValue = "0") int contentId, @RequestParam(defaultValue = "0") int freeId,
-			String rowArr, String rowValueArr, String sauceArr, String sauceValueArr,
+			String rowArr, String rowValueArr, String sauceArr, String sauceValueArr, MultipartRequest multipartRequest,
 			@RequestParam(defaultValue = "/") String replaceUri) {
 
 		// 입력 데이터 유효성 검사
@@ -293,6 +299,17 @@ public class UserRecipeController {
 		// 등록된 레시피 번호를 가이드, 재료양념으로 갱신
 		boardService.updateRecipeId(guideId, id);
 		recipeService.updateRecipeIdForIngredient(ingredientId, id);
+
+		// 레시피 등록시 대표 이미지 등록
+		Map<String, MultipartFile> fileMap = multipartRequest.getFileMap();
+
+		for (String fileInputName : fileMap.keySet()) {
+			MultipartFile multipartFile = fileMap.get(fileInputName);
+
+			if (multipartFile.isEmpty() == false) {
+				genFileService.save(multipartFile, id);
+			}
+		}
 
 		// 레시피 등록 후 이동
 		return rq.jsReplace(Ut.f("%s번 레시피가 등록되었습니다.", id), Ut.f("../recipe/detail?id=%d", id));
@@ -343,7 +360,8 @@ public class UserRecipeController {
 			@RequestParam(defaultValue = "0") int level, String tip, @RequestParam(defaultValue = "0") int sortId,
 			@RequestParam(defaultValue = "0") int methodId, @RequestParam(defaultValue = "0") int contentId,
 			@RequestParam(defaultValue = "0") int freeId, String rowArr, String rowValueArr, String sauceArr,
-			String sauceValueArr, @RequestParam(defaultValue = "/") String replaceUri) {
+			String sauceValueArr, MultipartRequest multipartRequest,
+			@RequestParam(defaultValue = "/") String replaceUri) {
 
 		// 입력 데이터 유효성 검사
 		if (Ut.empty(title)) {
@@ -368,6 +386,17 @@ public class UserRecipeController {
 
 		// 재료, 양념 갱신
 		recipeService.updateIngredient(recipe.getIngredientId(), rowArr, rowValueArr, sauceArr, sauceValueArr);
+
+		// 레시피 등록시 대표 이미지 등록
+		Map<String, MultipartFile> fileMap = multipartRequest.getFileMap();
+
+		for (String fileInputName : fileMap.keySet()) {
+			MultipartFile multipartFile = fileMap.get(fileInputName);
+
+			if (multipartFile.isEmpty() == false) {
+				genFileService.save(multipartFile, id);
+			}
+		}
 
 		// 레시피 수정하기
 		recipeService.modifyRecipe(id, title, body, amount, time, level, tip);

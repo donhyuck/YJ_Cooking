@@ -13,6 +13,37 @@
 	});
 </script>
 
+<!-- 프로필 변경 검사 스크립트 시작 -->
+<script>
+	let ProfileChange_submitFormDone = false;
+
+	function ProfileChange_submitForm(form) {
+		if (ProfileChange_submitFormDone) {
+			alert('처리중입니다.');
+			return;
+		}
+
+		// 프로필 이미지 용량 제한
+		const maxSizeMb = 10;
+		const maxSize = maxSizeMb * 1204 * 1204;
+
+		const profileImgFileInput = form["file__member__0__extra__profileImg__1"];
+
+		if (profileImgFileInput.value) {
+			if (profileImgFileInput.files[0].size > maxSize) {
+				alert(maxSizeMb + "MB 이하의 파일을 업로드 해주세요.");
+				profileImgFileInput.focus();
+
+				return;
+			}
+		}
+
+		ProfileChange_submitFormDone = true;
+		form.submit();
+	}
+</script>
+<!-- 프로필 변경 검사 스크립트 끝 -->
+
 <div class="bg-gray-200 py-4">
 	<div class="list-box w-10/12 mx-auto">
 		<!-- 로그인한 회원의 정보 -->
@@ -62,10 +93,13 @@
 				</div>
 			</div>
 			<!-- 프로필 사진 변경 -->
-			<div class="changePhoto flex justify-center mr-40">
+			<form class="changePhoto hidden flex justify-center mr-40" method="POST" enctype="multipart/form-data"
+				action="/user/member/changeProfile" onsubmit="ProfileChange_submitForm(this); return false;">
+				
 				<input type="file" accept="image/gif, image/jpeg, image/png" name="file__member__0__extra__profileImg__1"
-					class="" />
-			</div>
+					class="w-60" />
+				<button type="submit" class="btn btn-sm">변경</button>
+			</form>
 		</section>
 
 		<section class="bg-white rounded-md p-4">

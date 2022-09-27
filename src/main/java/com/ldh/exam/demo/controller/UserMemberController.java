@@ -307,6 +307,24 @@ public class UserMemberController {
 		return rq.jsReplace(Ut.f("%s 님의 회원정보가 수정되었습니다. 다시 로그인해주세요.", nickname), "/user/member/login");
 	}
 
+	// 프로필 변경 메서드
+	@RequestMapping("/user/member/changeProfile")
+	@ResponseBody
+	public String changeProfile(MultipartRequest multipartRequest) {
+
+		Map<String, MultipartFile> fileMap = multipartRequest.getFileMap();
+
+		for (String fileInputName : fileMap.keySet()) {
+			MultipartFile multipartFile = fileMap.get(fileInputName);
+
+			if (multipartFile.isEmpty() == false) {
+				genFileService.save(multipartFile, rq.getLoginedMemberId());
+			}
+		}
+
+		return rq.jsReplace("", "/user/member/myPage");
+	}
+
 	// 회원 탈퇴하기 메서드
 	@RequestMapping("/user/member/doLeave")
 	@ResponseBody

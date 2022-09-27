@@ -383,17 +383,12 @@
 					</c:if>
 					<c:forEach var="reply" items="${ replies }">
 						<div class="flex items-center border-b" data-id="${ reply.id }">
-							<!-- 댓글 작성자 프로필 -->
-							<div class="actor-photo w-36 mx-auto">
-								<c:if test="${ i == 1 || i == 3 }">
-									<img class="w-full rounded-full" src="https://cdn.pixabay.com/photo/2017/06/16/13/35/chef-2409158_960_720.png"
-										alt="" />
-								</c:if>
-								<!-- 대표사진 미등록 회원 -->
-								<c:if test="${  i != 1 && i != 3 }">
-									<img class="w-full rounded-full border border-gray-400"
-										src="https://t4.ftcdn.net/jpg/00/65/77/27/240_F_65772719_A1UV5kLi5nCEWI0BNLLiFaBPEkUbv5Fv.jpg" alt="" />
-								</c:if>
+							<!-- 회원 프로필 -->
+							<div class="w-36">
+								<div class="w-32 h-32 flex flex-col justify-center items-center bg-gray-200 border border-gray-200 rounded-full">
+									<img class="max-h-32 rounded-full" src="${rq.getProfileImgUri(reply.memberId)}"
+										onerror="${rq.profileFallbackImgOnErrorHtml}" alt="" />
+								</div>
 							</div>
 
 							<!-- 목록 내용 -->

@@ -130,11 +130,11 @@
 
 			<div>
 				<div class="ml-1 mt-2 font-medium text-slate-700">프로필 사진</div>
-
-				<!-- 회원 프로필 -->
-				<div class="w-80 h-80 flex flex-col justify-center bg-gray-200 border rounded-xl border-gray-300 mx-auto my-3">
-					<img class="w-full rounded-xl" src="${rq.getProfileImgUri(rq.loginedMemberId)}"
-						onerror="${rq.removeProfileImgIfNotExistsOnErrorHtmlAttr}" alt="" />
+		
+				<!-- 현재 프로필 -->
+				<div class="w-80 h-80 flex flex-col justify-center items-center bg-gray-200 border rounded-xl border-gray-300">
+					<img class="max-h-80 rounded-xl" src="${rq.getProfileImgUri(rq.loginedMemberId)}"
+						onerror="${rq.profileFallbackImgOnErrorHtml}" alt="" />
 				</div>
 				<input type="file"  accept="image/gif, image/jpeg, image/png" name="file__member__0__extra__profileImg__1"
 					class="input input-lg input-bordered w-96" placeholder="프로필 이미지를 선택해주세요." />

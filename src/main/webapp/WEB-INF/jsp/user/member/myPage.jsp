@@ -4,6 +4,15 @@
 <c:set var="pageTitle" value="My홈" />
 <%@include file="../common/head.jspf"%>
 
+<!-- 프로필 변경 박스 토글 스크립트 -->
+<script type="text/javascript">
+	$(document).ready(function() {
+		$(".toggleChangePhotoBox").click(function() {
+			$(".changePhoto").toggleClass("hidden");
+		});
+	});
+</script>
+
 <div class="bg-gray-200 py-4">
 	<div class="list-box w-10/12 mx-auto">
 		<!-- 로그인한 회원의 정보 -->
@@ -14,8 +23,8 @@
 			<div class="myInfo-box flex p-3">
 
 				<!-- 회원 프로필 -->
-				<div class="w-80 h-80 flex flex-col justify-center bg-gray-200 border rounded-xl border-gray-300">
-					<img class="w-full rounded-xl" src="${rq.getProfileImgUri(rq.loginedMemberId)}"
+				<div class="w-80 h-80 flex flex-col justify-center items-center bg-gray-200 border rounded-xl border-gray-300">
+					<img class="max-h-80 rounded-xl" src="${rq.getProfileImgUri(rq.loginedMemberId)}"
 						onerror="${rq.profileFallbackImgOnErrorHtml}" alt="" />
 				</div>
 
@@ -43,7 +52,7 @@
 						</div>
 					</div>
 					<div class="flex space-x-4 absolute bottom-8">
-						<a href="/user/member/changePhoto" class="btn btn-outline">프로필 사진 변경</a>
+						<div class="toggleChangePhotoBox btn btn-outline">프로필 사진 변경</div>
 						<a href="/user/member/checkPassword?replaceUri=${ Ut.getUriEncoded('../member/modify') }"
 							class="btn btn-outline btn-primary">회원정보 수정</a>
 						<a href="/user/member/checkPassword?replaceUri=${ Ut.getUriEncoded('../member/leave') }"
@@ -51,6 +60,11 @@
 							class="btn btn-outline btn-secondary">회원탈퇴</a>
 					</div>
 				</div>
+			</div>
+			<!-- 프로필 사진 변경 -->
+			<div class="changePhoto flex justify-center mr-40">
+				<input type="file" accept="image/gif, image/jpeg, image/png" name="file__member__0__extra__profileImg__1"
+					class="" />
 			</div>
 		</section>
 

@@ -142,8 +142,8 @@
 			<!-- 등록한 회원정보 -->
 			<div class="actor-photo w-60">
 				<!-- 회원 프로필 -->
-				<div class="flex flex-col justify-center">
-					<img class="w-full rounded-3xl" src="${rq.getProfileImgUri(recipe.memberId)}"
+				<div class="w-60 h-60 flex flex-col justify-center items-center bg-gray-200 border rounded-xl border-gray-300">
+					<img class="max-h-60 rounded-3xl" src="${rq.getProfileImgUri(recipe.memberId)}"
 						onerror="${rq.profileFallbackImgOnErrorHtml}" alt="" />
 				</div>
 

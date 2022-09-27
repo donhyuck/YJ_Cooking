@@ -53,3 +53,14 @@ const removeSauce = (obj) => {
 	document.getElementById('sauceBox').removeChild(obj.parentNode);
 }
 // 재료양념 입력칸 추가/삭제 스크립트 끝
+
+// 페이지 시작시 스크롤 상단에 위치
+$(document).ready(function() {
+	$(function() {
+		window.scrollTo({
+			top: 0,
+			left: 0,
+			behavior: 'auto'
+		});
+	});
+});

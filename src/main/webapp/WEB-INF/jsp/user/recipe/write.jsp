@@ -157,7 +157,7 @@
 			return;
 		}
 
-		// 프로필 이미지 용량 제한
+		// 대표사진 용량 제한
 		const maxSizeMb = 10;
 		const maxSize = maxSizeMb * 1204 * 1204;
 

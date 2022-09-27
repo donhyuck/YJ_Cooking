@@ -158,7 +158,7 @@
 			return;
 		}
 
-		// 프로필 이미지 용량 제한
+		// 대표사진 용량 제한
 		const maxSizeMb = 10;
 		const maxSize = maxSizeMb * 1204 * 1204;
 
@@ -186,38 +186,55 @@
 	<input type="hidden" name="replaceUri" value="${ param.replaceUri }" />
 
 	<div class="modify-box w-10/12 mx-auto">
-		<section class="bg-white rounded-md p-12 flex mb-5">
-			<!-- 레시피 대표사진 -->
-			<div class="main-photo w-2/6 flex flex-col justify-between bg-gray-100 rounded-xl">
-				<div class="mt-2 text-center text-md">완성된 요리사진을 등록해주세요.</div>
-
-				<!-- 레시피 대표사진 미리보기 -->
-				<img class="object-contain mainRecipe max-h-80 rounded-md" id="preview-mainRecipe"
-					src="https://cdn.pixabay.com/photo/2018/05/21/12/37/restaurant-3418134_960_720.png" />
-				<!-- 레시피 대표사진 등록 -->
-				<div class="p-2">
-					<input type="file" id="input-mainRecipe" accept="image/gif, image/jpeg, image/png"
-						oninput="readImage(this); return false;" name="file__recipe__0__extra__profileImg__1"
-						class="hover:bg-gray-300 w-full mainRecipeBox" />
-				</div>
-			</div>
-
-			<!-- 레시피 기본정보 입력 -->
-			<div class="flex flex-col space-y-4 w-3/5 h-80 m-auto mb-8">
-				<!-- 제목 -->
-				<div>
-					<div class="ml-1 mb-2 font-medium text-slate-700 text-2xl">레시피 제목</div>
-					<input name="title" type="text" value="${ recipe.title }" class="input input-lg input-bordered w-full"
-						placeholder="예) 돼지듬뿍 김치찌게" />
-				</div>
-				<!-- 내용 -->
-				<div>
-					<div class="ml-1 mb-2 font-medium text-slate-700 text-2xl">
-						<div>레시피 소개</div>
-						<div class="text-base text-gray-400">> "어떻게 만들게 되었나요?" "직접 먹어보니 어떠셨나요?" 자유롭게 소개해보세요</div>
+		<section class="bg-white rounded-md px-12 p-7 pb-12 mb-5">
+			<div class="flex w-full">
+				<!-- 레시피 대표사진 -->
+				<div class="main-photo w-2/6">
+					<!-- 현재 레시피 대표사진 -->
+					<div class="bg-gray-100 rounded-xl">
+						<div class="my-2 text-center text-md">완성된 요리사진을 등록해주세요.</div>
+						<div class=" flex flex-col justify-center items-center bg-gray-100 border rounded-xl border-gray-300">
+							<img class="object-contain w-80 h-80 rounded-md" src="${rq.getMainRecipeImgUri(recipe.id)}"
+								onerror="${rq.mainRecipeFallbackImgOnErrorHtml}" alt="" />
+						</div>
 					</div>
-					<textarea rows="5" name="body" type="text" class="w-full text-lg p-5 border border-gray-300 rounded-lg"
-						placeholder="예) 아빠표 특제 레시피를 소개합니다. 저녁 한끼로도 안주로도 딱이에요.&#13;&#10;밥솥으로 조리를 하여 푹 끓인 맛이 나요.">${ recipe.body }</textarea>
+
+					<!-- 레시피 대표사진 변경 박스 -->
+					<div class="toggleChangePhotoBox btn btn-sm btn-outline mt-3 w-full">대표 사진 변경</div>
+					<div class="changePhoto rounded-xl mt-10">
+						<!-- 회원 프로필 미리보기 -->
+						<div class="rounded-xl border border-gray-300">
+							<img class="object-contain w-80 h-80 rounded-xl mx-auto bg-gray-100 my-3" id="preview-mainRecipe"
+								src="https://cdn.pixabay.com/photo/2018/05/21/12/37/restaurant-3418134_960_720.png" />
+							<div class="text-center mb-1">* 미리보기 사진입니다.*</div>
+						</div>
+
+						<!-- 레시피 대표사진 변경 -->
+						<div class="p-2 mt-3">
+							<input type="file" id="input-mainRecipe" accept="image/gif, image/jpeg, image/png"
+								oninput="readImage(this); return false;" name="file__recipe__0__extra__profileImg__1"
+								class="w-full mainRecipeBox" />
+						</div>
+					</div>
+				</div>
+				
+				<!-- 레시피 기본정보 입력 -->
+				<div class="flex flex-col space-y-4 w-3/5 h-80 ml-10">
+					<!-- 제목 -->
+					<div>
+						<div class="ml-1 mb-2 font-medium text-slate-700 text-2xl">레시피 제목</div>
+						<input name="title" type="text" value="${ recipe.title }" class="input input-lg input-bordered w-full"
+							placeholder="예) 돼지듬뿍 김치찌게" />
+					</div>
+					<!-- 내용 -->
+					<div>
+						<div class="ml-1 mb-2 font-medium text-slate-700 text-2xl">
+							<div>레시피 소개</div>
+							<div class="text-base text-gray-400">> "어떻게 만들게 되었나요?" "직접 먹어보니 어떠셨나요?" 자유롭게 소개해보세요</div>
+						</div>
+						<textarea rows="5" name="body" type="text" class="w-full text-lg p-5 border border-gray-300 rounded-lg"
+							placeholder="예) 아빠표 특제 레시피를 소개합니다. 저녁 한끼로도 안주로도 딱이에요.&#13;&#10;밥솥으로 조리를 하여 푹 끓인 맛이 나요.">${ recipe.body }</textarea>
+					</div>
 				</div>
 			</div>
 		</section>

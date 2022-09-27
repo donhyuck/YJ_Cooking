@@ -6,7 +6,6 @@
 <script src="/reply/Reply.js" defer="defer"></script>
 <script src="/reply/Reaction.js" defer="defer"></script>
 
-
 <!-- 게시글 조회수 스크립트 시작 -->
 <script>
 	const params = {};
@@ -76,10 +75,12 @@
 		<!-- 레시피 기본정보 영역 시작 -->
 		<section class="bg-white rounded-md p-12 pb-8 mb-5">
 			<div class="flex">
-				<!-- 대표사진-->
 				<div class="main-photo w-3/6">
-					<img class="w-full rounded-md" src="https://tse4.mm.bing.net/th?id=OIP.kwt4oKZDd-goVuBezaVQRQHaE7&pid=Api&P=0"
-						alt="" />
+					<!-- 대표사진 -->
+					<div class=" flex flex-col justify-center items-center bg-gray-200 border rounded-xl border-gray-300">
+						<img class="object-contain w-80 h-80 rounded-md" src="${rq.getMainRecipeImgUri(recipe.id)}"
+							onerror="${rq.mainRecipeFallbackImgOnErrorHtml}" alt="" />
+					</div>
 					<div class="text-gray-400 text-lg text-right mt-2 mr-4">
 						<span>등록번호</span>
 						<span>${ recipe.id }</span>

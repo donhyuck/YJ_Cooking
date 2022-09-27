@@ -2,6 +2,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set var="pageTitle" value="회원가입" />
 <%@include file="../common/head.jspf"%>
+<!-- ajax 메세지 스크립트 -->
+<script src="/member/join.js" defer="defer"></script>
 
 <!-- 입력데이터 검사 스크립트 시작 -->
 <script>
@@ -61,14 +63,14 @@
 		// 프로필 이미지 용량 제한
 		const maxSizeMb = 10;
 		const maxSize = maxSizeMb * 1204 * 1204;
-		
+
 		const profileImgFileInput = form["file__member__0__extra__profileImg__1"];
-		
-		if( profileImgFileInput.value ) {
-			if ( profileImgFileInput.files[0].size > maxSize ) {
+
+		if (profileImgFileInput.value) {
+			if (profileImgFileInput.files[0].size > maxSize) {
 				alert(maxSizeMb + "MB 이하의 파일을 업로드 해주세요.");
 				profileImgFileInput.focus();
-				
+
 				return;
 			}
 		}
@@ -86,10 +88,8 @@
 	}
 </script>
 <!-- 입력데이터 검사 스크립트 끝 -->
-<!-- ajax 메세지 스크립트 -->
-<script src="/member/join.js" defer="defer"></script>
 
-<div class="mt-6">
+<div class="my-6">
 	<div class="member-box w-2/5 mx-auto">
 		<form class="flex flex-col space-y-4 items-center" method="POST" enctype="multipart/form-data"
 			action="../member/doJoin" onsubmit="MemberJoin_submitForm(this); return false;">
@@ -133,8 +133,19 @@
 			</div>
 			<div>
 				<div class="ml-1 mt-2 font-medium text-slate-700">프로필 사진</div>
-				<input type="file" accept="image/gif, image/jpeg, image/png" name="file__member__0__extra__profileImg__1"
-					class="input input-lg input-bordered w-96" placeholder="프로필 이미지를 선택해주세요." />
+
+				<!-- 회원 프로필 미리보기 -->
+				<div class="border border-gray-300 rounded-xl">
+					<img class="object-contain w-80 h-80 rounded-xl mx-auto" id="preview-profile"
+						src="https://dummyimage.com/300x300/ffffff/000000.png&text=preview+image" />
+				</div>
+				<div class="text-center mb-5">* 미리보기 사진입니다.*</div>
+
+				<!-- 회원 프로필 등록 -->
+				<div class="border border-gray-300 rounded-xl">
+					<input type="file" id="input-profile" accept="image/gif, image/jpeg, image/png"
+						oninput="readImage(this); return false;" name="file__member__0__extra__profileImg__1" class="p-3 w-96" />
+				</div>
 			</div>
 
 			<div class="btns mt-2">
@@ -142,7 +153,6 @@
 				<button type="submit" class="btn btn-primary btn-outline">회원가입</button>
 			</div>
 		</form>
-
 	</div>
 </div>
 

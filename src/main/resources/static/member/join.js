@@ -46,7 +46,7 @@ function checkLoginIdDup(el) {
 		}
 
 	}, 'json');
-}
+};
 
 const checkLoginIdDupAsDebounce = _.debounce(checkLoginIdDup, 300);
 // 로그인 아이디 확인 스크립트 끝
@@ -111,7 +111,7 @@ function checkNicknameAndEmailDup(el) {
 		}
 
 	}, 'json');
-}
+};
 const checkNicknameAndEmailDupAsDebounce = _.debounce(checkNicknameAndEmailDup, 300);
 
 // 닉네임, 이메일 확인 스크립트 끝
@@ -142,13 +142,38 @@ var autoHypenPhone = function(str) {
 	}
 
 	return str;
-}
+};
 
 
 var phoneNum = document.getElementById('phoneNum');
 
 phoneNum.onkeyup = function() {
 	this.value = autoHypenPhone(this.value);
-}
+};
 
 // 연락처 입력시 자동 하이픈(-) 삽입 스크립트 끝
+
+// 프로필 미리보기 스크립트 시작
+function readImage(input) {
+	// 인풋 태그에 파일이 있는 경우
+	if (input.files && input.files[0]) {
+
+		// FileReader 인스턴스 생성
+		const reader = new FileReader();
+		// 이미지가 로드가 된 경우
+		reader.onload = e => {
+			const previewImage = document.getElementById("preview-profile");
+			previewImage.src = e.target.result;
+		}
+		// reader가 이미지 읽도록 하기
+		reader.readAsDataURL(input.files[0]);
+	}
+};
+
+// input file에 change 이벤트 부여
+const inputImage = document.getElementById("input-profile");
+
+inputImage.addEventListener("change", e => {
+	readImage(e.target);
+});
+// 프로필 미리보기 스크립트 끝

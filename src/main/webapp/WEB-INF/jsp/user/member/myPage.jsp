@@ -10,10 +10,31 @@
 		$(".toggleChangePhotoBox").click(function() {
 			$(".changePhoto").toggleClass("hidden");
 		});
+		
+		// 프로필 미리보기 스크립트 시작
+		function readImage(input) {
+			if (input.files && input.files[0]) {
+
+				const reader = new FileReader();
+				reader.onload = e => {
+					const previewImage = document.getElementById("preview-profile");
+					previewImage.src = e.target.result;
+				}
+				reader.readAsDataURL(input.files[0]);
+			}
+		};
+		
+		// input file에 change 이벤트 부여
+		const inputImage = document.getElementById("input-profile");
+
+		inputImage.addEventListener("change", e => {
+			readImage(e.target);
+		});
+		// 프로필 미리보기 스크립트 끝
 	});
 </script>
-
 <!-- 프로필 변경 검사 스크립트 시작 -->
+
 <script>
 	let ProfileChange_submitFormDone = false;
 
@@ -92,13 +113,24 @@
 					</div>
 				</div>
 			</div>
+
+
+
 			<!-- 프로필 사진 변경 -->
-			<form class="changePhoto hidden flex justify-center mr-40" method="POST" enctype="multipart/form-data"
+			<form class="changePhoto hidden flex ml-3" method="POST" enctype="multipart/form-data"
 				action="/user/member/changeProfile" onsubmit="ProfileChange_submitForm(this); return false;">
-				
-				<input type="file" accept="image/gif, image/jpeg, image/png" name="file__member__0__extra__profileImg__1"
-					class="w-60" />
-				<button type="submit" class="btn btn-sm">변경</button>
+
+				<!-- 회원 프로필 미리보기 -->
+				<div class="border border-gray-300 rounded-xl">
+					<img class="object-contain w-80 h-80 rounded-xl" id="preview-profile"
+						src="https://dummyimage.com/300x300/ffffff/000000.png&text=preview+image" />
+				</div>
+
+				<div class="ml-10 mt-5">
+					<input type="file" id="input-profile" accept="image/gif, image/jpeg, image/png"
+						name="file__member__0__extra__profileImg__1" class="w-60" />
+					<button type="submit" class="btn btn-sm">변경</button>
+				</div>
 			</form>
 		</section>
 

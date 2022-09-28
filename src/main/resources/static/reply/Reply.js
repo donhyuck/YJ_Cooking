@@ -124,3 +124,27 @@ function ReplyDelete_AjaxForm(btn) {
 	);
 }
 // 댓글 삭제 ajax 끝
+
+// 요리후기 미리보기 스크립트 시작
+$(document).ready(function() {
+
+	function readImage(input) {
+		if (input.files && input.files[0]) {
+
+			const reader = new FileReader();
+			reader.onload = e => {
+				const previewImage = document.getElementById("preview-reply");
+				previewImage.src = e.target.result;
+			}
+			reader.readAsDataURL(input.files[0]);
+		}
+	};
+
+	// input file에 change 이벤트 부여
+	const inputImage = document.getElementById("input-reply");
+
+	inputImage.addEventListener("change", e => {
+		readImage(e.target);
+	});
+});
+// 요리후기 미리보기 스크립트 끝

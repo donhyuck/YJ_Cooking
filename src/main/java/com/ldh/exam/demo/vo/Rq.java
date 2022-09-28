@@ -322,7 +322,7 @@ public class Rq {
 	}
 
 	public String getMainRecipeImgUri(int recipeId) {
-		return "/common/genFile/file/recipe/" + recipeId + "/extra/profileImg/1";
+		return "/common/genFile/file/recipe/" + recipeId + "/extra/mainRecipeImg/1";
 	}
 
 	public String getMainRecipeFallbackImgUri() {

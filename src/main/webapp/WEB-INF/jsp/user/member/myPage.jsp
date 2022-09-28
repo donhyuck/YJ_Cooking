@@ -4,9 +4,10 @@
 <c:set var="pageTitle" value="My홈" />
 <%@include file="../common/head.jspf"%>
 
-<!-- 프로필 변경 박스 토글 스크립트 -->
+<!-- 프로필 박스 스크립트 시작-->
 <script type="text/javascript">
 	$(document).ready(function() {
+		// 변경버튼으로 박스토글
 		$(".toggleChangePhotoBox").click(function() {
 			$(".changePhoto").toggleClass("hidden");
 		});
@@ -33,7 +34,7 @@
 		// 프로필 미리보기 스크립트 끝
 	});
 </script>
-<!-- 프로필 변경 검사 스크립트 시작 -->
+<!-- 프로필 박스 스크립트 끝-->
 
 <script>
 	let ProfileChange_submitFormDone = false;

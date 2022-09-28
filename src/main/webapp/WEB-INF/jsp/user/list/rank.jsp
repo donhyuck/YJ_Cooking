@@ -33,7 +33,7 @@
 							</a>
 
 							<!-- 제목 -->
-							<div class="recipe-title text-lg font-bold mt-3 mx-2">
+							<div class="recipe-title text-lg font-bold mt-3 mx-2 truncate ...">
 								<span>${ recipe.title }</span>
 							</div>
 						</div>

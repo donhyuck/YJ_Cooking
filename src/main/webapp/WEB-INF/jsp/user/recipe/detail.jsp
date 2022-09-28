@@ -77,8 +77,8 @@
 			<div class="flex">
 				<div class="main-photo w-3/6">
 					<!-- 대표사진 -->
-					<div class=" flex flex-col justify-center items-center bg-gray-200 border rounded-xl border-gray-300">
-						<img class="object-contain w-80 h-80 rounded-md" src="${rq.getMainRecipeImgUri(recipe.id)}"
+					<div class="flex flex-col justify-center items-center bg-gray-200 border rounded-xl border-gray-300">
+						<img class="object-cover w-full h-80 rounded-md" src="${rq.getMainRecipeImgUri(recipe.id)}"
 							onerror="${rq.mainRecipeFallbackImgOnErrorHtml}" alt="" />
 					</div>
 					<div class="text-gray-400 text-lg text-right mt-2 mr-4">
@@ -341,7 +341,7 @@
 			<div class="border-t border-gray-300 p-5">
 				<!-- 안내문구 -->
 				<div class="text-lg text-gray-500">
-					<div class="mb-5">
+					<div class="">
 						<span class="font-bold text-xl text-yellow-500">댓글등록</span>
 						<span>${ recipe.extra__writerName }님 에게 궁금한점들을남겨주세요.</span>
 					</div>
@@ -353,7 +353,7 @@
 
 				<!-- 댓글 작성 영역 시작 -->
 				<c:if test="${ rq.logined == true }">
-					<form class="flex items-center" method="POST" action="../reply/doWrite"
+					<form class="flex items-end w-full h-38" method="POST" action="../reply/doWrite"
 						onsubmit="ReplyWrite__submitForm(this); return false;">
 						<!-- 현재 페이지 정보 -->
 						<input type="hidden" name="relTypeCode" value="recipe">
@@ -361,16 +361,34 @@
 						<input type="hidden" name="replaceUri" value="${ rq.currentUri }">
 
 						<!-- 요리후기 사진 등록 -->
-						<a href="#"
-							class="flex justify-center items-center w-36 h-36 rounded-xl bg-gray-200 hover:bg-gray-300 mr-4 text-4xl">
-							<i class="fa-solid fa-plus"></i>
-						</a>
-						<!-- 댓글 작성 -->
-						<div class="border border-gray-300 rounded-xl p-2 w-10/12">
-							<textarea name="body" rows="5" class="w-full textarea textarea-warning" placeholder="요리후기를 사진과 함께 작성해보세요."></textarea>
+						<div class="w-72 my-2">
+							<div id="replyButtonForPreview" class="w-full h-full">
+								<img id="preview-reply" class="object-cover rounded-xl w-full h-36"
+									src="https://via.placeholder.com/300/?text=...">
+							</div>
+							<input type="file" id="input-reply" accept="image/gif, image/jpeg, image/png" onchange="previewFile();"
+								oninput="readImage(this); return false;" name="file__reply__0__extra__reviewImg__1" class="hidden replyBox" />
 						</div>
-						<button type="submit"
-							class="w-36 h-36 border-double border-4 border-gray-300 rounded-xl ml-3 hover:bg-gray-100 text-xl">등록</button>
+
+						<!-- 댓글 작성 -->
+						<div class="w-full mx-4 mb-2">
+							<textarea style="font-size: 1.2rem;" name="body" rows="3" class="w-full textarea textarea-warning"
+								placeholder="요리후기를 사진과 함께 작성해보세요."></textarea>
+						</div>
+
+						<!-- 댓글 등록 버튼 -->
+						<div class="w-44 flex flex-col items-center justify-between mb-4">
+							<div class="text-black mb-5">
+								<label for="input-reply" id="replyButtonForEmpty"
+									class="flex justify-center items-center rounded-lg bg-gray-200 hover:bg-gray-400 py-1 px-3">
+									<i class="fa-solid fa-plus mr-3 font-bold"></i>
+									<span>사진등록</span>
+								</label>
+							</div>
+							<div class="text-xl font-bold">
+								<button type="submit" class="w-32 h-32 border-double border-4 border-gray-300 rounded-xl hover:bg-yellow-200">등록</button>
+							</div>
+						</div>
 					</form>
 				</c:if>
 				<!-- 댓글 작성 영역 끝 -->
@@ -410,7 +428,6 @@
 
 							<!-- 요리후기 사진 -->
 							<div class="w-80 p-3">
-								<!-- test="${ reply.regDate == reply.updateDate } -->
 								<c:if test="${ true }">
 									<img class="rounded-md" src="https://tse4.mm.bing.net/th?id=OIP.kwt4oKZDd-goVuBezaVQRQHaE7&pid=Api&P=0" alt="" />
 								</c:if>

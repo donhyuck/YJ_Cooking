@@ -161,12 +161,12 @@
 		const maxSizeMb = 10;
 		const maxSize = maxSizeMb * 1204 * 1204;
 
-		const profileImgFileInput = form["file__recipe__0__extra__profileImg__1"];
+		const mainRecipeImgFileInput = form["file__recipe__0__extra__mainRecipeImg__1"];
 
-		if (profileImgFileInput.value) {
-			if (profileImgFileInput.files[0].size > maxSize) {
+		if (mainRecipeImgFileInput.value) {
+			if (mainRecipeImgFileInput.files[0].size > maxSize) {
 				alert(maxSizeMb + "MB 이하의 파일을 업로드 해주세요.");
-				profileImgFileInput.focus();
+				mainRecipeImgFileInput.focus();
 
 				return;
 			}
@@ -187,14 +187,14 @@
 			<!-- 레시피 대표사진 -->
 			<div class="main-photo w-2/6 flex flex-col justify-between bg-gray-100 rounded-xl">
 				<div class="mt-2 text-center text-md">완성된 요리사진을 등록해주세요.</div>
-				
+
 				<!-- 레시피 대표사진 미리보기 -->
 				<img class="object-contain mainRecipe max-h-80 rounded-md" id="preview-mainRecipe"
 					src="https://cdn.pixabay.com/photo/2018/05/21/12/37/restaurant-3418134_960_720.png" />
 				<!-- 레시피 대표사진 등록 -->
 				<div class="p-2">
 					<input type="file" id="input-mainRecipe" accept="image/gif, image/jpeg, image/png"
-						oninput="readImage(this); return false;" name="file__recipe__0__extra__profileImg__1"
+						oninput="readImage(this); return false;" name="file__recipe__0__extra__mainRecipeImg__1"
 						class="hover:bg-gray-300 w-full mainRecipeBox" />
 				</div>
 			</div>

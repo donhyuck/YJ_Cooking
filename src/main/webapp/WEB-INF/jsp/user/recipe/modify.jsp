@@ -162,12 +162,12 @@
 		const maxSizeMb = 10;
 		const maxSize = maxSizeMb * 1204 * 1204;
 
-		const profileImgFileInput = form["file__recipe__0__extra__profileImg__1"];
+		const mainRecipeImgFileInput = form["file__recipe__0__extra__mainRecipeImg__1"];
 
-		if (profileImgFileInput.value) {
-			if (profileImgFileInput.files[0].size > maxSize) {
+		if (mainRecipeImgFileInput.value) {
+			if (mainRecipeImgFileInput.files[0].size > maxSize) {
 				alert(maxSizeMb + "MB 이하의 파일을 업로드 해주세요.");
-				profileImgFileInput.focus();
+				mainRecipeImgFileInput.focus();
 
 				return;
 			}
@@ -212,7 +212,7 @@
 						<!-- 레시피 대표사진 변경 -->
 						<div class="p-2 mt-3">
 							<input type="file" id="input-mainRecipe" accept="image/gif, image/jpeg, image/png"
-								oninput="readImage(this); return false;" name="file__recipe__0__extra__profileImg__1"
+								oninput="readImage(this); return false;" name="file__recipe__0__extra__mainRecipeImg__1"
 								class="w-full mainRecipeBox" />
 						</div>
 					</div>

@@ -62,7 +62,6 @@
 	width: 100%;
 	height: 100%;
 	background-color: rgba(0, 0, 0, 0.3);
-	z-index: 10;
 	display: none;
 	justify-content: center;
 	align-items: center;
@@ -353,41 +352,39 @@
 
 				<!-- 댓글 작성 영역 시작 -->
 				<c:if test="${ rq.logined == true }">
-					<form class="flex items-end w-full h-38" method="POST" enctype="multipart/form-data" action="/user/reply/doWrite"
-						onsubmit="ReplyWrite__submitForm(this); return false;">
+					<form class="flex items-center space-x-4 w-full" method="POST" enctype="multipart/form-data"
+						action="/user/reply/doWrite" onsubmit="ReplyWrite__submitForm(this); return false;">
 						<!-- 현재 페이지 정보 -->
 						<input type="hidden" name="relTypeCode" value="recipe">
 						<input type="hidden" name="relId" value="${ recipe.id }">
 						<input type="hidden" name="replaceUri" value="${ rq.currentUri }">
 
 						<!-- 요리후기 사진 등록 -->
-						<div class="w-72 my-2">
-							<div id="replyButtonForPreview" class="w-full h-full">
+						<div class="w-60 mt-10">
+							<div id="replyButtonForPreview" class="w-full">
 								<img id="preview-reply" class="object-cover rounded-xl w-full h-36"
 									src="https://via.placeholder.com/300/?text=...">
 							</div>
-							<input type="file" id="input-reply" accept="image/gif, image/jpeg, image/png" onchange="previewFile();"
-								oninput="readImage(this); return false;" name="file__reply__0__extra__reviewImg__1" class="hidden replyBox" />
-						</div>
-
-						<!-- 댓글 작성 -->
-						<div class="w-full mx-4 mb-2">
-							<textarea style="font-size: 1.2rem;" name="body" rows="3" class="w-full textarea textarea-warning"
-								placeholder="요리후기를 사진과 함께 작성해보세요."></textarea>
-						</div>
-
-						<!-- 댓글 등록 버튼 -->
-						<div class="w-44 flex flex-col items-center justify-between mb-4">
-							<div class="text-black mb-5">
+							<div class="px-3 mt-3">
 								<label for="input-reply" id="replyButtonForEmpty"
 									class="flex justify-center items-center rounded-lg bg-gray-200 hover:bg-gray-400 py-1 px-3">
 									<i class="fa-solid fa-plus mr-3 font-bold"></i>
 									<span>사진등록</span>
 								</label>
 							</div>
-							<div class="text-xl font-bold">
-								<button type="submit" class="w-32 h-32 border-double border-4 border-gray-300 rounded-xl hover:bg-yellow-200">등록</button>
-							</div>
+							<input type="file" id="input-reply" accept="image/gif, image/jpeg, image/png" onchange="previewFile();"
+								oninput="readImage(this); return false;" name="file__reply__0__extra__reviewImg__1" class="hidden replyBox" />
+						</div>
+
+						<!-- 댓글 작성란 -->
+						<div class="w-full">
+							<textarea style="font-size: 1.2rem;" name="body" rows="3" class="w-full textarea textarea-warning"
+								placeholder="요리후기를 사진과 함께 작성해보세요."></textarea>
+						</div>
+
+						<!-- 댓글 등록 버튼 -->
+						<div class="text-xl font-bold">
+							<button type="submit" class="w-32 h-32 border-double border-4 border-gray-300 rounded-xl hover:bg-yellow-200">등록</button>
 						</div>
 					</form>
 				</c:if>
@@ -428,7 +425,7 @@
 
 							<!-- 요리후기 사진 -->
 							<div class="w-80 p-3">
-								<img class="rounded-md" src="${rq.getReviewImgUri(reply.id)}" alt="" />
+								<img id="replyImg" class="rounded-md" src="${rq.getReviewImgUri(reply.id)}" alt="" />
 							</div>
 
 							<!-- 댓글 수정, 삭제 영역 시작 -->
@@ -472,15 +469,36 @@
 			</div>
 
 			<!-- 댓글 수정 모달 시작 -->
-			<section class="ReplyModify_box hidden">
-				<div class="w-2/5 p-8 py-5 rounded-xl bg-gray-200 ReplyModify_area">
+			<div id="ReplyModify_box" class="ReplyModify_box hidden">
+				<div class="w-3/6 p-8 py-5 rounded-xl bg-gray-200">
 					<div class="text-lg mb-2">댓글수정</div>
-					<form class="" method="post" action="/user/reply/doModify" onsubmit="ReplyModify__submitForm(this); return false;">
+					<form class="" method="post" enctype="multipart/form-data" action="/user/reply/doModify"
+						onsubmit="ReplyModify__submitForm(this); return false;">
 						<input type="hidden" name="id" value="" />
 						<input type="hidden" name="afterModifyUri" value="${ rq.currentUri }" />
 
-						<textarea class="textarea textarea-bordered w-full ReplyModify_area" name="body" rows="4" maxlength="2000"
-							placeholder="내용을 입력해주세요.">${ reply.body }</textarea>
+						<div class="flex">
+							<!-- 요리후기 사진 등록 -->
+							<div class="w-60 my-2 mr-3">
+								<div id="replyButtonForPreview" class="w-full">
+									<img id="preview-modifyReply" class="object-cover rounded-xl w-full h-36"
+										src="https://via.placeholder.com/300/?text=...">
+								</div>
+								<div class="px-3 mt-3">
+									<label for="input-modifyReply" id="replyButtonForEmpty"
+										class="flex justify-center items-center rounded-lg border border-gray-400 hover:bg-gray-400 py-1 px-3">
+										<i class="fa-solid fa-plus font-bold"></i>
+										<span>사진변경</span>
+									</label>
+								</div>
+								<input type="file" id="input-modifyReply" accept="image/gif, image/jpeg, image/png" onchange="previewFile();"
+									oninput="readImage(this); return false;" name="file__reply__0__extra__reviewImg__1" class="hidden replyBox" />
+							</div>
+
+							<!-- 입력창 -->
+							<textarea style="font-size: 1.1rem;" class="textarea textarea-bordered w-full" name="body" rows="3"
+								maxlength="2000" placeholder="내용을 입력해주세요.">${ reply.body }</textarea>
+						</div>
 
 						<div class="text-right mt-3">
 							<button type="button" onclick="ReplyModify__hideModal();" class="btn btn-sm mr-3 area" title="닫기">
@@ -494,7 +512,7 @@
 						</div>
 					</form>
 				</div>
-			</section>
+			</div>
 			<!-- 댓글 수정 모달 끝 -->
 		</section>
 		<!-- 댓글 영역 끝 -->

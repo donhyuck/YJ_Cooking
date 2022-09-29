@@ -100,7 +100,8 @@ public class UserReplyController {
 	// 댓글 수정하기 메서드
 	@RequestMapping("/user/reply/doModify")
 	@ResponseBody
-	public String doModify(int id, String body, @RequestParam(defaultValue = "/") String afterModifyUri) {
+	public String doModify(int id, String body, MultipartRequest multipartRequest,
+			@RequestParam(defaultValue = "/") String afterModifyUri) {
 
 		// 입력 데이터 유효성 검사
 		if (Ut.empty(body)) {
@@ -116,6 +117,17 @@ public class UserReplyController {
 
 		// 댓글 수정하기
 		replyService.modifyReply(id, body);
+
+		// 댓글 수정시 요리후기 이미지 수정
+		Map<String, MultipartFile> fileMap = multipartRequest.getFileMap();
+
+		for (String fileInputName : fileMap.keySet()) {
+			MultipartFile multipartFile = fileMap.get(fileInputName);
+
+			if (multipartFile.isEmpty() == false) {
+				genFileService.save(multipartFile, id);
+			}
+		}
 
 		Reply reply = (Reply) actorCanModifyRd.getData1();
 

@@ -201,7 +201,7 @@
 
 					<!-- 레시피 대표사진 변경 박스 -->
 					<div class="toggleChangePhotoBox btn btn-sm btn-outline mt-3 w-full">대표 사진 변경</div>
-					<div class="changePhoto rounded-xl mt-10">
+					<div class="changePhoto rounded-xl mt-10 hidden">
 						<!-- 회원 프로필 미리보기 -->
 						<div class="rounded-xl border border-gray-300">
 							<img class="object-contain w-80 h-80 rounded-xl mx-auto bg-gray-100 my-3" id="preview-mainRecipe"

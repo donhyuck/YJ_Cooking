@@ -50,6 +50,21 @@ function ReplyModify__submitForm(form) {
 		return;
 	}
 
+	// 요리후기 사진 용량 제한
+	const maxSizeMb = 10;
+	const maxSize = maxSizeMb * 1204 * 1204;
+
+	const reviewImgFileInput = form["file__reply__0__extra__reviewImg__1"];
+
+	if (reviewImgFileInput.value) {
+		if (reviewImgFileInput.files[0].size > maxSize) {
+			alert(maxSizeMb + "MB 이하의 파일을 업로드 해주세요.");
+			reviewImgFileInput.focus();
+
+			return;
+		}
+	}
+
 	ReplyModify__submitFormDone = true;
 	form.submit();
 }
@@ -62,11 +77,12 @@ function ReplyModify__showModal(el) {
 	const $target = $(el).closest('[data-id]');
 	const replyId = $target.attr('data-id');
 	const replyBody = $target.find('.reply-body').html();
+	const replyImgSrc = jQuery('#replyImg').attr("src");
 
 	$('.ReplyModify_box [name="id"]').val(replyId);
 	$('.ReplyModify_box [name="body"]').val(replyBody);
-
 	$('.ReplyModify_box').css('display', 'flex');
+	document.getElementById("preview-modifyReply").src = replyImgSrc;
 }
 
 // 닫기 클릭시 비활성화
@@ -76,12 +92,11 @@ function ReplyModify__hideModal() {
 }
 
 // 외부영역 클릭시 비활성화	
-$('.ReplyModify_box').click(function(e) {
-	if (!$(e.target).hasClass("ReplyModify_area")) {
+document.addEventListener('click', function(e) {
+	if (e.target.id == 'ReplyModify_box') {
 		$('.ReplyModify_box').hide();
 	}
 });
-
 // 댓글 수정 모달 활성화/비활성화 스크립트 끝
 
 // 댓글 작성후 스크롤 이동 스크립트 시작
@@ -140,7 +155,7 @@ function ReplyDelete_AjaxForm(btn) {
 }
 // 댓글 삭제 ajax 끝
 
-// 요리후기 미리보기 스크립트 시작
+// 작성시 요리후기 미리보기 스크립트 시작
 $(document).ready(function() {
 
 	function readImage(input) {
@@ -162,4 +177,28 @@ $(document).ready(function() {
 		readImage(e.target);
 	});
 });
-// 요리후기 미리보기 스크립트 끝
+// 작성시 요리후기 미리보기 스크립트 끝
+
+// 수정시 요리후기 미리보기 스크립트 시작
+$(document).ready(function() {
+
+	function readImage(input) {
+		if (input.files && input.files[0]) {
+
+			const reader = new FileReader();
+			reader.onload = e => {
+				const previewImage = document.getElementById("preview-modifyReply");
+				previewImage.src = e.target.result;
+			}
+			reader.readAsDataURL(input.files[0]);
+		}
+	};
+
+	// input file에 change 이벤트 부여
+	const inputImage = document.getElementById("input-modifyReply");
+
+	inputImage.addEventListener("change", e => {
+		readImage(e.target);
+	});
+});
+// 수정시 요리후기 미리보기 스크립트 끝

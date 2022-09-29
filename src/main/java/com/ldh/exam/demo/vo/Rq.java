@@ -326,11 +326,22 @@ public class Rq {
 	}
 
 	public String getMainRecipeFallbackImgUri() {
-		// return "https://via.placeholder.com/300/?text=*^_^*";
 		return "https://cdn.pixabay.com/photo/2018/05/21/12/37/restaurant-3418134_960_720.png";
 	}
 
 	public String getMainRecipeFallbackImgOnErrorHtml() {
 		return "this.src = '" + getMainRecipeFallbackImgUri() + "'";
+	}
+
+	public String getReviewImgUri(int replyId) {
+		return "/common/genFile/file/reply/" + replyId + "/extra/reviewImg/1";
+	}
+
+	public String getReviewFallbackImgUri() {
+		return "https://via.placeholder.com/300/?text=*^_^*";
+	}
+
+	public String getReviewFallbackImgOnErrorHtml() {
+		return "this.src = '" + getReviewFallbackImgUri() + "'";
 	}
 }

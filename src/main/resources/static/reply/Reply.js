@@ -14,6 +14,21 @@ function ReplyWrite__submitForm(form) {
 		return;
 	}
 
+	// 요리후기 사진 용량 제한
+	const maxSizeMb = 10;
+	const maxSize = maxSizeMb * 1204 * 1204;
+
+	const reviewImgFileInput = form["file__reply__0__extra__reviewImg__1"];
+
+	if (reviewImgFileInput.value) {
+		if (reviewImgFileInput.files[0].size > maxSize) {
+			alert(maxSizeMb + "MB 이하의 파일을 업로드 해주세요.");
+			reviewImgFileInput.focus();
+
+			return;
+		}
+	}
+
 	ReplyWrite__submitFormDone = true;
 	form.submit();
 }

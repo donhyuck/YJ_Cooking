@@ -353,7 +353,7 @@
 
 				<!-- 댓글 작성 영역 시작 -->
 				<c:if test="${ rq.logined == true }">
-					<form class="flex items-end w-full h-38" method="POST" action="../reply/doWrite"
+					<form class="flex items-end w-full h-38" method="POST" enctype="multipart/form-data" action="/user/reply/doWrite"
 						onsubmit="ReplyWrite__submitForm(this); return false;">
 						<!-- 현재 페이지 정보 -->
 						<input type="hidden" name="relTypeCode" value="recipe">
@@ -401,7 +401,7 @@
 						<div class="text-2xl text-gray-400 mt-5 ml-3">등록된 댓글이 없습니다.</div>
 					</c:if>
 					<c:forEach var="reply" items="${ replies }">
-						<div class="flex items-center border-b" data-id="${ reply.id }">
+						<div class="flex items-center border-b py-3" data-id="${ reply.id }">
 							<!-- 회원 프로필 -->
 							<div class="w-36">
 								<div class="w-32 h-32 flex flex-col justify-center items-center bg-gray-200 border border-gray-200 rounded-full">
@@ -428,9 +428,7 @@
 
 							<!-- 요리후기 사진 -->
 							<div class="w-80 p-3">
-								<c:if test="${ true }">
-									<img class="rounded-md" src="https://tse4.mm.bing.net/th?id=OIP.kwt4oKZDd-goVuBezaVQRQHaE7&pid=Api&P=0" alt="" />
-								</c:if>
+								<img class="rounded-md" src="${rq.getReviewImgUri(reply.id)}" alt="" />
 							</div>
 
 							<!-- 댓글 수정, 삭제 영역 시작 -->

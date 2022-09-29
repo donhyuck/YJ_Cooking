@@ -1,11 +1,16 @@
 package com.ldh.exam.demo.controller;
 
+import java.util.Map;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartRequest;
 
+import com.ldh.exam.demo.service.GenFileService;
 import com.ldh.exam.demo.service.RecipeService;
 import com.ldh.exam.demo.service.ReplyService;
 import com.ldh.exam.demo.util.Ut;
@@ -19,18 +24,21 @@ public class UserReplyController {
 
 	private ReplyService replyService;
 	private RecipeService recipeService;
+	private GenFileService genFileService;
 	private Rq rq;
 
-	public UserReplyController(ReplyService replyService, RecipeService recipeService, Rq rq) {
+	public UserReplyController(ReplyService replyService, RecipeService recipeService, GenFileService genFileService,
+			Rq rq) {
 		this.replyService = replyService;
 		this.recipeService = recipeService;
+		this.genFileService = genFileService;
 		this.rq = rq;
 	}
 
 	// 댓글 등록하기 메서드
 	@RequestMapping("/user/reply/doWrite")
 	@ResponseBody
-	public String doWrite(String relTypeCode, String relId, String body,
+	public String doWrite(String relTypeCode, String relId, String body, MultipartRequest multipartRequest,
 			@RequestParam(defaultValue = "/") String replaceUri) {
 
 		// 입력 데이터 유효성 검사
@@ -48,6 +56,17 @@ public class UserReplyController {
 
 		// 댓글 등록하기
 		int id = replyService.writeReply(rq.getLoginedMemberId(), relTypeCode, relId, body);
+
+		// 댓글 등록시 요리후기 이미지 등록
+		Map<String, MultipartFile> fileMap = multipartRequest.getFileMap();
+
+		for (String fileInputName : fileMap.keySet()) {
+			MultipartFile multipartFile = fileMap.get(fileInputName);
+
+			if (multipartFile.isEmpty() == false) {
+				genFileService.save(multipartFile, id);
+			}
+		}
 
 		// 등록한 댓글 번호를 URI에 포함
 		replaceUri = Ut.getNewUri(replaceUri, "focusReplyId", id + "");

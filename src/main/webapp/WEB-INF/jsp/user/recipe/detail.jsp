@@ -226,7 +226,7 @@
 							<button type="button" class="btn btn-outline" onclick="history.back();">뒤로가기</button>
 						</c:if>
 						<c:if test="${not empty listUri}">
-							<a class="btn btn-outline" href="${param.listUri}">뒤로가기</a>
+							<a class="btn btn-outline" href="${ param.listUri }">뒤로가기</a>
 						</c:if>
 						<div class="mt-3">
 							<c:if test="${ recipe.extra__actorCanModify }">

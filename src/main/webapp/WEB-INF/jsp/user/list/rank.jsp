@@ -26,7 +26,7 @@
 							</div>
 
 							<!-- 레시피 대표 사진 -->
-							<a href="/user/recipe/detail?id=${ recipe.id }"
+							<a href="/user/recipe/detail?id=${ recipe.id }&listUri=${ Ut.getUriEncoded('/user/list/rank')"
 								class=" flex flex-col justify-center items-center bg-gray-200 border rounded-xl border-gray-300">
 								<img class="object-contain w-64 h-44 rounded-md" src="${rq.getMainRecipeImgUri(recipe.id)}"
 									onerror="${rq.mainRecipeFallbackImgOnErrorHtml}" alt="" />
@@ -99,7 +99,7 @@
 							</div>
 
 							<!-- 레시피 대표 사진 -->
-							<a href="/user/recipe/detail?id=${ recipe.id }"
+							<a href="/user/recipe/detail?id=${ recipe.id }&listUri=${ Ut.getUriEncoded('/user/list/rank')"
 								class=" flex flex-col justify-center items-center bg-gray-200 border rounded-xl border-gray-300">
 								<img class="object-contain w-64 h-44 rounded-md" src="${rq.getMainRecipeImgUri(recipe.id)}"
 									onerror="${rq.mainRecipeFallbackImgOnErrorHtml}" alt="" />

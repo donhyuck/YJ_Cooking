@@ -37,7 +37,7 @@
 	<div class="header min-w-fit" id="topTarget">
 		<section class="top-bar flex items-center justify-center mx-auto w-10/12 h-28 text-xl">
 			<!-- 로고박스 영역 시작 -->
-			<div class="logo-box flex items-center justify-center rounded-2xl w-28 h-16">
+			<div class="logo-box flex items-center justify-center rounded-2xl w-28 h-16 ml-20">
 				<a href="/" class="text-center">
 					<div class="font-bold text-green-500">
 						<i class="fa-solid fa-utensils"></i>
@@ -52,7 +52,7 @@
 			<div class="search-box ml-20 mr-16">
 				<form class="flex">
 					<input name="searchKeyword" value="${ param.searchKeyword }" class="input input-bordered input-accent w-96"
-						type="text" maxlength="20" placeholder="검색어" />
+						type="text" maxlength="30" placeholder="검색어" />
 
 					<button type="submit" class="btn ml-1">검색</button>
 				</form>

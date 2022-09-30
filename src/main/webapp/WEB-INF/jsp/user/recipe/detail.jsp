@@ -70,7 +70,6 @@
 
 <div class="bg-gray-200 py-4">
 	<div class="detail-box w-10/12 mx-auto">
-
 		<!-- 레시피 기본정보 영역 시작 -->
 		<section class="bg-white rounded-md p-12 pb-8 mb-5">
 			<div class="flex">
@@ -137,7 +136,7 @@
 		<!-- 레시피 기본정보 영역 끝 -->
 
 		<!-- 회원 프로필, 리액션 영역 시작 -->
-		<section class="bg-white rounded-md p-12 flex mb-5">
+		<section class="bg-white rounded-md p-12 pb-8 flex mb-5">
 
 			<!-- 등록한 회원정보 -->
 			<div class="actor-photo w-60">
@@ -161,8 +160,8 @@
 
 			<!-- 리액션 영역 -->
 			<div class="rection-box p-3 w-full flex flex-col">
-				<div class="upper-area flex items-center justify-around text-4xl text-center" reaction-code="recipe"
-					reaction-id="${ recipe.id }">
+				<div reaction-id="${ recipe.id }" reaction-code="recipe"
+					class="upper-area flex items-center justify-around text-4xl text-center">
 
 					<!-- 스크랩 -->
 					<div class="text-yellow-400 hover:text-yellow-700">
@@ -179,6 +178,7 @@
 							</a>
 						</c:if>
 					</div>
+
 					<!-- 하트 -->
 					<div class="text-red-400 hover:text-red-700">
 						<c:if test="${ actorCanMakeRP || rq.loginedMemberId == 0 }">
@@ -194,6 +194,7 @@
 							</a>
 						</c:if>
 					</div>
+
 					<!-- 댓글 -->
 					<a href="#replyTarget" class="scroll text-green-500 hover:text-green-700">
 						<i class="fa-solid fa-comment-dots"></i>
@@ -214,17 +215,17 @@
 						<c:if test="${ recipe.tip != null }">
 							<div class="ml-4">${ recipe.tip }</div>
 						</c:if>
-						<c:if test="${ recipe.tip == null }">
+						<c:if test="${ recipe.tip == '' || recipe.tip == null }">
 							<div class="ml-4 text-gray-400">오늘도 맛있게! 잘 챙겨드세요.</div>
 						</c:if>
 					</div>
 
 					<!-- 레시피 조작 영역 시작 -->
 					<div class="btns text-center">
-						<c:if test="${ empty param.listUri }">
+						<c:if test="${ empty listUri }">
 							<button type="button" class="btn btn-outline" onclick="history.back();">뒤로가기</button>
 						</c:if>
-						<c:if test="${not empty param.listUri}">
+						<c:if test="${not empty listUri}">
 							<a class="btn btn-outline" href="${param.listUri}">뒤로가기</a>
 						</c:if>
 						<div class="mt-3">
@@ -234,13 +235,33 @@
 							</c:if>
 							<c:if test="${ recipe.extra__actorCanDelete }">
 								<a class="btn btn-secondary btn-outline ml-1"
-									href="../recipe/doDelete?id=${ recipe.id }&replaceUri=${rq.encodedCurrentUri}"
+									href="../recipe/doDelete?id=${ recipe.id }&replaceUri=${param.listUri}"
 									onclick="if ( confirm('정말 삭제하시겠습니까?') == false) return false;">삭제</a>
 							</c:if>
 						</div>
 					</div>
 					<!-- 레시피 조작 영역 끝 -->
 				</div>
+
+				<!-- 안내문구 -->
+				<ul class="list-disc text-lg flex flex-col space-y-5 ml-14 mt-14">
+					<li>
+						<span class="text-yellow-400">스크랩</span>
+						하여
+						<span class="link link-neutral">레시피 노트</span>
+						에서 모아볼 수 있어요.
+					</li>
+					<li>
+						이 레시피가 마음에 드신다면
+						<span class="text-red-400">좋아요</span>
+						를 눌러보세요.
+					</li>
+					<li>
+						어떤 댓글이 있는지 궁금하시다면 바로
+						<span class="text-green-500">댓글로 이동</span>
+						할 수 있어요.
+					</li>
+				</ul>
 			</div>
 		</section>
 		<!-- 회원 프로필, 리액션 영역 끝 -->

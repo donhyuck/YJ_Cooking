@@ -15,7 +15,7 @@
 		$('#relId').empty();
 
 		<!-- 현재 선택사항 -->
-		$('#relId').append("<option select disabled value='-1' class='text-lg bg-green-100'>${ nowCategoryName }</option>'");
+		$('#relId').append("<option selected disabled value='-1' class='text-lg bg-green-100'>${ nowCategoryName }</option>'");
 
 		<!-- 대분류 선택에 따라 변동 -->
 		if (type == '0') {
@@ -120,17 +120,17 @@
 					<form class="flex w-full max-w-xs space-x-4">
 
 						<!-- 대분류 선택 -->
-						<select id="selectBoard" name="boardId" class="select select-bordered w-3/5" onChange="choiceCategory(this.value)">
-							<option select disabled value="-1" class="text-lg bg-green-100">${ nowBoardName }</option>
+						<select id="selectBoard" name="boardId" class="select select-lg select-bordered w-3/5" onChange="choiceCategory(this.value)">
+							<option selected disabled value="-1" class="text-lg bg-green-100">${ nowBoardName }</option>
 							<option value="0" class="text-lg">전체</option>
 							<c:forEach var="board" items="${ boards }">
 								<option value="${ board.id }" class="text-lg">${ board.boardName }</option>
 							</c:forEach>
 						</select>
 						<!-- 소분류 선택 -->
-						<select id="relId" name="relId" class="select select-bordered w-3/5 text-lg"></select>
+						<select id="relId" name="relId" class="select select-lg select-bordered w-3/5 text-lg"></select>
 
-						<button type="submit" class="btn btn-success">찾기</button>
+						<button type="submit" class="btn my-auto btn-success">찾기</button>
 					</form>
 				</div>
 				<!-- 추가 선택영역 끝-->

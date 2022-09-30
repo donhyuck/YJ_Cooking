@@ -16,6 +16,7 @@ import com.ldh.exam.demo.vo.ResultData;
 import com.ldh.exam.demo.vo.Rq;
 
 @Controller
+@RequestMapping("/user/list")
 public class UserListController {
 
 	private RecipeService recipeService;
@@ -29,7 +30,7 @@ public class UserListController {
 	}
 
 	// 레시피 추천목록 페이지 메서드
-	@RequestMapping("/user/list/suggest")
+	@RequestMapping("/suggest")
 	public String showSuggestList(Model model, @RequestParam(defaultValue = "1") int page) {
 
 		// 최근 등록된 레시피 목록 가져오기
@@ -58,7 +59,7 @@ public class UserListController {
 	}
 
 	// 레시피 추천 전체목록 페이지 메서드
-	@RequestMapping("/user/list/moreSuggest")
+	@RequestMapping("/moreSuggest")
 	public String showMoreSuggest(Model model, @RequestParam(defaultValue = "1") int tabCode) {
 
 		// 램덤 레시피 전체목록 가져오기
@@ -73,7 +74,7 @@ public class UserListController {
 	}
 
 	// 레시피 분류목록 페이지 메서드
-	@RequestMapping("/user/list/category")
+	@RequestMapping("/category")
 	public String showCategoryList(Model model) {
 
 		// 대분류 가져오기, 종류, 재료, 방법..
@@ -89,7 +90,7 @@ public class UserListController {
 	}
 
 	// 분류페이지에서 선택한 레시피 목록 보기
-	@RequestMapping("/user/list/choice")
+	@RequestMapping("/choice")
 	public String showChoice(Model model, @RequestParam(defaultValue = "-1") int boardId,
 			@RequestParam(defaultValue = "-1") int relId) {
 
@@ -152,7 +153,7 @@ public class UserListController {
 	}
 
 	// 레시피 랭킹목록 페이지 메서드
-	@RequestMapping("/user/list/rank")
+	@RequestMapping("/rank")
 	public String showRankList(Model model) {
 
 		// 최다 하트, 조회수, 스크랩 수를 받은 레시피 목록 가져오기
@@ -170,7 +171,7 @@ public class UserListController {
 	}
 
 	// 레시피 노트목록 페이지 메서드
-	@RequestMapping("/user/list/note")
+	@RequestMapping("/note")
 	public String showNoteList(Model model, @RequestParam(defaultValue = "1") int page) {
 
 		// 내가 등록한 레시피 목록
@@ -192,5 +193,21 @@ public class UserListController {
 		model.addAttribute("scrapRecipes", scrapRecipes);
 
 		return "user/list/note";
+	}
+
+	// 검색결과 페이지
+	@RequestMapping("/search")
+	public String showSearch(Model model, @RequestParam(defaultValue = "") String searchKeyword) {
+
+		searchKeyword = "검색어";
+
+		// List<Recipe> searchRecipes = recipeService.getForPrintRecipes(rq.getLoginedMemberId());
+
+		List<Recipe> searchRecipes = null;
+
+		model.addAttribute("searchKeyword", searchKeyword);
+		model.addAttribute("searchRecipes", searchRecipes);
+
+		return "user/list/search";
 	}
 }

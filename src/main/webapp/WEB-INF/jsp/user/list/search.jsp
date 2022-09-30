@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<c:set var="pageTitle" value="검색 페이지" />
+<c:set var="pageTitle" value="검색결과 페이지" />
 <%@include file="../common/head.jspf"%>
 
 <div class="bg-gray-200 py-4">
@@ -17,44 +17,56 @@
 		<section class="bg-white rounded-md px-4 mb-5">
 
 			<!-- 안내영역 시작 -->
-			<div class="flex border-b border-gray-400 p-5 mx-4 mb-8">
+			<div class="border-b border-gray-400 p-5 mx-2 mb-8">
 				<!-- 선택 상황 보기 -->
-				<div class="flex space-x-4 items-center">
-					<span class="text-3xl">${ nowBoardName }</span>
-					<span class="text-2xl font-bold">
+				<div class="flex space-x-4 items-center mt-4 pb-7 border-b border-dashed border-gray-300">
+					<span class="text-2xl">검색결과</span>
+					<span class="text-xl font-bold">
 						<i class="fa-solid fa-angle-right"></i>
 					</span>
-					<span class="text-2xl">${ nowCategoryName }</span>
-					<!-- 레시피 갯수 -->
-					<div class="text-xl text-gray-400 mt-2 text-center">(${ choicedRecipes.size() }건)</div>
+					<span class="text-xl">${ searchKeyword }</span>
 				</div>
 
-				<!-- 추가 선택영역 시작-->
-				<div class="ml-auto mr-20 w-5/12">
-					<div class="text-gray-400 ml-2 mb-2">다른 레시피를 찾아보세요.</div>
-					<form class="flex w-full max-w-xs space-x-4">
+				<!-- 추가 검색영역 시작-->
+				<div class="my-2">
+					<div class="text-gray-400 ml-2 mb-2">다른 레시피를 검색해보세요.</div>
+					<form class="flex justify-between w-full max-w-xs space-x-4">
 
-						<!-- 대분류 선택 -->
-						<select id="selectBoard" name="boardId" class="select select-bordered w-3/5" onChange="choiceCategory(this.value)">
-							<option select disabled value="-1" class="text-lg bg-green-100">${ nowBoardName }</option>
-							<option value="0" class="text-lg">전체</option>
-							<c:forEach var="board" items="${ boards }">
-								<option value="${ board.id }" class="text-lg">${ board.boardName }</option>
-							</c:forEach>
+						<!-- 검색분류 선택 -->
+						<select id="keywordType" name="keywordType" class="select select-lg select-bordered w-3/5">
+							<option selected disabled class="text-lg bg-green-100">검색타입</option>
+							<option value="titleAndBody" class="text-lg">제목,내용</option>
+							<option value="recipeTitle" class="text-lg">제목만</option>
+							<option value="recipeBody" class="text-lg">내용만</option>
 						</select>
-						<!-- 소분류 선택 -->
-						<select id="relId" name="relId" class="select select-bordered w-3/5 text-lg"></select>
 
-						<button type="submit" class="btn btn-success">찾기</button>
+						<input type="text" name="keywordType" class="input input-lg input-bordered">
+
+						<!-- 검색분류 선택 -->
+						<select id="keywordType" name="recipeType" class="select select-lg select-bordered w-3/5">
+							<option selected disabled class="text-lg bg-green-100">분류타입</option>
+							<option value="total" class="text-lg">전체</option>
+							<option value="sort" class="text-lg">종류</option>
+							<option value="method" class="text-lg">요리방법</option>
+							<option value="ingredient" class="text-lg">재료,양념</option>
+							<option value="free" class="text-lg">상황</option>
+						</select>
+
+						<input type="text" name="keywordType" class="input input-lg input-bordered">
+
+						<button type="submit" class="btn btn-lg btn-success">검색</button>
 					</form>
 				</div>
 				<!-- 추가 선택영역 끝-->
 			</div>
 			<!-- 안내영역 끝-->
 
-			<!-- 선택한 레시피 영역 시작 -->
+			<!-- 검색한 레시피 영역 시작 -->
 			<div class="grid grid-cols-4">
-				<c:forEach var="recipe" items="${ choicedRecipes }">
+				<c:forEach var="recipe" items="${ searchRecipes }">
+					<c:if test="${ searchRecipes == null }">
+						<div>검색결과를 찾을 수 없습니다.</div>
+					</c:if>
 					<c:if test="${ recipe != null }">
 						<div
 							class="w-64 h-80 mx-auto mb-10 flex flex-col justify-between rounded-2xl shadow-xl border-2 border-white hover:border-yellow-500">
@@ -103,7 +115,7 @@
 					</c:if>
 				</c:forEach>
 			</div>
-			<!-- 선택한 레시피 영역 끝 -->
+			<!-- 검색한 레시피 영역 끝 -->
 		</section>
 	</div>
 </div>

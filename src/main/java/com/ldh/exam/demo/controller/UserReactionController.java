@@ -12,6 +12,7 @@ import com.ldh.exam.demo.vo.ResultData;
 import com.ldh.exam.demo.vo.Rq;
 
 @Controller
+@RequestMapping("/user/reaction")
 public class UserReactionController {
 
 	private ReactionService reactionService;
@@ -25,7 +26,7 @@ public class UserReactionController {
 	}
 
 	// 스크랩 처리 메서드
-	@RequestMapping("/user/reaction/doMakeScrap")
+	@RequestMapping("/doMakeScrap")
 	@ResponseBody
 	public String doMakeScrap(String relTypeCode, int relId, String replaceUri) {
 
@@ -46,7 +47,7 @@ public class UserReactionController {
 	}
 
 	// 스크랩 취소 메서드
-	@RequestMapping("/user/reaction/doCancelScrap")
+	@RequestMapping("/doCancelScrap")
 	@ResponseBody
 	public String doCancelScrap(String relTypeCode, int relId, String replaceUri) {
 
@@ -67,7 +68,7 @@ public class UserReactionController {
 	}
 
 	// 스크랩 처리 메서드 (ajax 적용)
-	@RequestMapping("/user/reaction/doMakeScrapAjax")
+	@RequestMapping("/doMakeScrapAjax")
 	@ResponseBody
 	public ResultData doMakeScrapAjax(String relTypeCode, int relId) {
 
@@ -92,7 +93,7 @@ public class UserReactionController {
 	}
 
 	// 스크랩 취소 메서드 (ajax 적용)
-	@RequestMapping("/user/reaction/doCancelScrapAjax")
+	@RequestMapping("/doCancelScrapAjax")
 	@ResponseBody
 	public ResultData doCancelScrapAjax(String relTypeCode, int relId) {
 
@@ -117,7 +118,7 @@ public class UserReactionController {
 	}
 
 	// 좋아요 처리 메서드
-	@RequestMapping("/user/reaction/doMakeLike")
+	@RequestMapping("/doMakeLike")
 	@ResponseBody
 	public String doMakeLike(String relTypeCode, int relId, @RequestParam(defaultValue = "/") String replaceUri) {
 
@@ -135,7 +136,7 @@ public class UserReactionController {
 	}
 
 	// 좋아요 취소 메서드
-	@RequestMapping("/user/reaction/doCancelLike")
+	@RequestMapping("/doCancelLike")
 	@ResponseBody
 	public String doCancelLike(String relTypeCode, int relId, @RequestParam(defaultValue = "/") String replaceUri) {
 
@@ -153,7 +154,7 @@ public class UserReactionController {
 	}
 
 	// 좋아요 처리 메서드 (ajax 적용)
-	@RequestMapping("/user/reaction/doMakeLikeAjax")
+	@RequestMapping("/doMakeLikeAjax")
 	@ResponseBody
 	public ResultData doMakeLikeAjax(String relTypeCode, int relId) {
 
@@ -178,7 +179,7 @@ public class UserReactionController {
 	}
 
 	// 좋아요 취소 메서드 (ajax 적용)
-	@RequestMapping("/user/reaction/doCancelLikeAjax")
+	@RequestMapping("/doCancelLikeAjax")
 	@ResponseBody
 	public ResultData doCancelLikeAjax(String relTypeCode, int relId) {
 

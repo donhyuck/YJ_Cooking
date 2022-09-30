@@ -20,6 +20,7 @@ import com.ldh.exam.demo.vo.ResultData;
 import com.ldh.exam.demo.vo.Rq;
 
 @Controller
+@RequestMapping("/user/reply")
 public class UserReplyController {
 
 	private ReplyService replyService;
@@ -36,7 +37,7 @@ public class UserReplyController {
 	}
 
 	// 댓글 등록하기 메서드
-	@RequestMapping("/user/reply/doWrite")
+	@RequestMapping("/doWrite")
 	@ResponseBody
 	public String doWrite(String relTypeCode, String relId, String body, MultipartRequest multipartRequest,
 			@RequestParam(defaultValue = "/") String replaceUri) {
@@ -75,7 +76,7 @@ public class UserReplyController {
 	}
 
 	// 댓글 수정 페이지 메서드
-	@RequestMapping("/user/reply/modify")
+	@RequestMapping("/modify")
 	public String showModify(Model model, int id) {
 
 		// 댓글 찾기, 작성자 권한 체크
@@ -98,7 +99,7 @@ public class UserReplyController {
 	}
 
 	// 댓글 수정하기 메서드
-	@RequestMapping("/user/reply/doModify")
+	@RequestMapping("/doModify")
 	@ResponseBody
 	public String doModify(int id, String body, MultipartRequest multipartRequest,
 			@RequestParam(defaultValue = "/") String afterModifyUri) {
@@ -147,7 +148,7 @@ public class UserReplyController {
 	}
 
 	// 댓글 삭제하기 메서드
-	@RequestMapping("/user/reply/doDelete")
+	@RequestMapping("/doDelete")
 	@ResponseBody
 	public String doDelete(int id, @RequestParam(defaultValue = "/") String replaceUri) {
 
@@ -165,7 +166,7 @@ public class UserReplyController {
 	}
 
 	// 댓글 삭제하기 (ajax 적용)
-	@RequestMapping("/user/reply/doDeleteAjax")
+	@RequestMapping("/doDeleteAjax")
 	@ResponseBody
 	public ResultData doDeleteAjax(int id) {
 

@@ -21,6 +21,7 @@ import com.ldh.exam.demo.vo.ResultData;
 import com.ldh.exam.demo.vo.Rq;
 
 @Controller
+@RequestMapping("/user/member")
 public class UserMemberController {
 
 	private MemberService memberService;
@@ -37,13 +38,13 @@ public class UserMemberController {
 	}
 
 	// 회원등록 페이지 보기 메서드
-	@RequestMapping("/user/member/join")
+	@RequestMapping("/join")
 	public String showJoin() {
 		return "user/member/join";
 	}
 
 	// 회원 등록하기 메서드
-	@RequestMapping("/user/member/doJoin")
+	@RequestMapping("/doJoin")
 	@ResponseBody
 	public String doJoin(String loginId, String loginPw, String nickname, String cellphoneNo, String email,
 			@RequestParam(defaultValue = "/") String afterLoginUri, MultipartRequest multipartRequest) {
@@ -96,14 +97,14 @@ public class UserMemberController {
 	}
 
 	// 회원 로그인 페이지 메서드
-	@RequestMapping("/user/member/login")
+	@RequestMapping("/login")
 	public String showLogin() {
 
 		return "user/member/login";
 	}
 
 	// 회원 로그인 메서드
-	@RequestMapping("/user/member/doLogin")
+	@RequestMapping("/doLogin")
 	@ResponseBody
 	public String doLogin(String loginId, String loginPw, @RequestParam(defaultValue = "/") String afterLoginUri) {
 
@@ -149,7 +150,7 @@ public class UserMemberController {
 	}
 
 	// 회원 로그아웃 메서드
-	@RequestMapping("/user/member/doLogout")
+	@RequestMapping("/doLogout")
 	@ResponseBody
 	public String doLogout(@RequestParam(defaultValue = "/") String afterLogoutUri) {
 
@@ -165,7 +166,7 @@ public class UserMemberController {
 	}
 
 	// My홈 페이지 메서드
-	@RequestMapping("/user/member/myPage")
+	@RequestMapping("/myPage")
 	public String showMyPage(Model model) {
 
 		List<Recipe> haveReplyRecipes = recipeService.getHaveReplyRecipes(rq.getLoginedMemberId());
@@ -176,14 +177,14 @@ public class UserMemberController {
 	}
 
 	// 비밀번호 확인 페이지 메서드
-	@RequestMapping("/user/member/checkPassword")
+	@RequestMapping("/checkPassword")
 	public String showCheckPW() {
 
 		return "user/member/checkPassword";
 	}
 
 	// 비밀번호 확인 메서드
-	@RequestMapping("/user/member/doCheckPassword")
+	@RequestMapping("/doCheckPassword")
 	@ResponseBody
 	public String doCheckPassword(String loginPw, String replaceUri) {
 
@@ -213,7 +214,7 @@ public class UserMemberController {
 	}
 
 	// 회원정보 수정 페이지 메서드
-	@RequestMapping("/user/member/modify")
+	@RequestMapping("/modify")
 	public String showModify(String memberModifyAuthKey) {
 
 		// 인증코드가 없으면 재접근 요청
@@ -233,7 +234,7 @@ public class UserMemberController {
 	}
 
 	// 회원 탈퇴 페이지 메서드
-	@RequestMapping("/user/member/leave")
+	@RequestMapping("/leave")
 	public String showLeave(String memberLeaveAuthKey) {
 
 		// 인증코드가 없으면 재접근 요청
@@ -252,7 +253,7 @@ public class UserMemberController {
 	}
 
 	// 회원 수정하기 메서드
-	@RequestMapping("/user/member/doModify")
+	@RequestMapping("/doModify")
 	@ResponseBody
 	public String doModify(String memberModifyAuthKey, String loginPw, String nickname, String cellphoneNo,
 			String email, MultipartRequest multipartRequest) {
@@ -308,7 +309,7 @@ public class UserMemberController {
 	}
 
 	// 프로필 변경 메서드
-	@RequestMapping("/user/member/changeProfile")
+	@RequestMapping("/changeProfile")
 	@ResponseBody
 	public String changeProfile(MultipartRequest multipartRequest) {
 
@@ -326,7 +327,7 @@ public class UserMemberController {
 	}
 
 	// 회원 탈퇴하기 메서드
-	@RequestMapping("/user/member/doLeave")
+	@RequestMapping("/doLeave")
 	@ResponseBody
 	public String doLeave(String memberLeaveAuthKey) {
 
@@ -352,14 +353,14 @@ public class UserMemberController {
 	}
 
 	// 아이디 찾기 페이지 메서드
-	@RequestMapping("/user/member/findLoginId")
+	@RequestMapping("/findLoginId")
 	public String showFindLoginId() {
 
 		return "user/member/findLoginId";
 	}
 
 	// 아이디 찾기 메서드
-	@RequestMapping("/user/member/doFindLoginId")
+	@RequestMapping("/doFindLoginId")
 	@ResponseBody
 	public String doFindLoginId(String nickname, String email,
 			@RequestParam(defaultValue = "/") String afterFindLoginIdUri) {
@@ -390,14 +391,14 @@ public class UserMemberController {
 	}
 
 	// 비밀번호 찾기 페이지 메서드
-	@RequestMapping("/user/member/findLoginPw")
+	@RequestMapping("/findLoginPw")
 	public String showFindLoginPw() {
 
 		return "user/member/findLoginPw";
 	}
 
 	// 비밀번호 찾기 메서드
-	@RequestMapping("/user/member/doFindLoginPw")
+	@RequestMapping("/doFindLoginPw")
 	@ResponseBody
 	public String doFindLoginPw(String loginId, String nickname, String email,
 			@RequestParam(defaultValue = "/") String afterFindLoginPwUri) {
@@ -435,7 +436,7 @@ public class UserMemberController {
 	}
 
 	// 입력아이디 사용중인지 확인
-	@RequestMapping("/user/member/getLoginIdDup")
+	@RequestMapping("/getLoginIdDup")
 	@ResponseBody
 	public ResultData getLoginIdDup(String loginId) {
 
@@ -453,7 +454,7 @@ public class UserMemberController {
 	}
 
 	// 입력 닉네임과 이메일 사용중인지 확인
-	@RequestMapping("/user/member/getNicknameAndEmailDup")
+	@RequestMapping("/getNicknameAndEmailDup")
 	@ResponseBody
 	public ResultData getNicknameAndEmailDup(String nickname, String email) {
 

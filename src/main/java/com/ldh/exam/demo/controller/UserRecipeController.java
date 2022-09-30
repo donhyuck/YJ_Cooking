@@ -25,6 +25,7 @@ import com.ldh.exam.demo.vo.ResultData;
 import com.ldh.exam.demo.vo.Rq;
 
 @Controller
+@RequestMapping("/user/recipe")
 public class UserRecipeController {
 
 	private RecipeService recipeService;
@@ -47,7 +48,7 @@ public class UserRecipeController {
 	}
 
 	// 레시피 상세페이지 메서드
-	@RequestMapping("/user/recipe/detail")
+	@RequestMapping("/detail")
 	public String showDetail(Model model, int id) {
 
 		Recipe recipe = recipeService.getForPrintRecipe(rq.getLoginedMemberId(), id);
@@ -91,7 +92,7 @@ public class UserRecipeController {
 	}
 
 	// 레시피 등록 페이지 메서드
-	@RequestMapping("/user/recipe/write")
+	@RequestMapping("/write")
 	public String showWrite(Model model) {
 
 		// 분류 선택시 카테고리 목록
@@ -102,7 +103,7 @@ public class UserRecipeController {
 	}
 
 	// 레시피 등록하기 메서드
-	@RequestMapping("/user/recipe/doWrite")
+	@RequestMapping("/doWrite")
 	@ResponseBody
 	public String doWrite(String title, String body, int amount, int time, int level, String tip,
 			@RequestParam(defaultValue = "0") int sortId, @RequestParam(defaultValue = "0") int methodId,
@@ -149,7 +150,7 @@ public class UserRecipeController {
 	}
 
 	// 레시피 수정 페이지 메서드
-	@RequestMapping("/user/recipe/modify")
+	@RequestMapping("/modify")
 	public String showModify(Model model, int id) {
 
 		// 레시피 찾기, 작성자 권한 체크
@@ -187,7 +188,7 @@ public class UserRecipeController {
 	}
 
 	// 레시피 수정하기 메서드
-	@RequestMapping("/user/recipe/doModify")
+	@RequestMapping("/doModify")
 	@ResponseBody
 	public String doModify(int id, String title, String body, int amount, int time,
 			@RequestParam(defaultValue = "0") int level, String tip, @RequestParam(defaultValue = "0") int sortId,
@@ -238,7 +239,7 @@ public class UserRecipeController {
 	}
 
 	// 레시피 삭제하기 메서드
-	@RequestMapping("/user/recipe/doDelete")
+	@RequestMapping("/doDelete")
 	@ResponseBody
 	public String doDelete(int id, @RequestParam(defaultValue = "/") String replaceUri) {
 
@@ -256,7 +257,7 @@ public class UserRecipeController {
 	}
 
 	// 레시피 상세보기시 조회수 증가
-	@RequestMapping("/user/recipe/doIncreaseHitCount")
+	@RequestMapping("/doIncreaseHitCount")
 	@ResponseBody
 	public ResultData<Integer> doIncreaseHitCount(int id) {
 

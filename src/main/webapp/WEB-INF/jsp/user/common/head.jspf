@@ -15,7 +15,10 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/js-sha256/0.9.0/sha256.min.js"></script>
 
 <script>
-	const param = ${rq.paramJsonStr};
+	const param = $
+	{
+		rq.paramJsonStr
+	};
 </script>
 
 <!-- 테일윈드 불러오기 -->
@@ -51,7 +54,7 @@
 
 			<!-- 검색박스 영역 시작 -->
 			<div class="search-box ml-20 mr-16">
-				<form class="flex">
+				<form class="flex" action="/user/list/search">
 					<input name="searchKeyword" value="${ param.searchKeyword }" class="input input-bordered input-accent w-96"
 						type="text" maxlength="30" placeholder="검색어" />
 

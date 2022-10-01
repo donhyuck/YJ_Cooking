@@ -24,35 +24,36 @@
 					<span class="text-xl font-bold">
 						<i class="fa-solid fa-angle-right"></i>
 					</span>
-					<span class="text-xl">${ searchKeyword }</span>
+					<span class="text-xl">"${ searchKeyword }"</span>
 				</div>
 
 				<!-- 추가 검색영역 시작-->
 				<div class="my-2">
 					<div class="text-gray-400 ml-2 mb-2">다른 레시피를 검색해보세요.</div>
-					<form class="flex justify-between w-full max-w-xs space-x-4">
-
-						<!-- 검색분류 선택 -->
-						<select id="keywordType" name="keywordType" class="select select-lg select-bordered w-3/5">
+					<form class="flex space-x-4 w-full">
+						<!-- 검색타입 -->
+						<select id="keywordType" name="keywordType" class="select select-lg select-bordered">
 							<option selected disabled class="text-lg bg-green-100">검색타입</option>
+							<option disabled value="${ keywordType }" class="text-lg bg-yellow-100">${ keywordType }</option>
 							<option value="titleAndBody" class="text-lg">제목,내용</option>
 							<option value="recipeTitle" class="text-lg">제목만</option>
 							<option value="recipeBody" class="text-lg">내용만</option>
 						</select>
+						<input type="text" name="searchKeyword" value="${ searchKeyword }" class="input input-lg input-bordered"
+							placeholder="레시피의 제목 또는 내용">
 
-						<input type="text" name="keywordType" class="input input-lg input-bordered">
-
-						<!-- 검색분류 선택 -->
-						<select id="keywordType" name="recipeType" class="select select-lg select-bordered w-3/5">
+						<!-- 검색분류 -->
+						<select id="rangeType" name="rangeType" class="select select-lg select-bordered">
 							<option selected disabled class="text-lg bg-green-100">분류타입</option>
+							<option disabled value="${ rangeType }" class="text-lg bg-yellow-100">${ rangeType }</option>
 							<option value="total" class="text-lg">전체</option>
-							<option value="sort" class="text-lg">종류</option>
+							<option value="sort" class="text-lg">레시피종류</option>
 							<option value="method" class="text-lg">요리방법</option>
 							<option value="ingredient" class="text-lg">재료,양념</option>
 							<option value="free" class="text-lg">상황</option>
 						</select>
-
-						<input type="text" name="keywordType" class="input input-lg input-bordered">
+						<input type="text" name="searchRange" value="${ searchRange }" class="input input-lg input-bordered"
+							placeholder="검색조건을 설정해보세요.">
 
 						<button type="submit" class="btn btn-lg btn-success">검색</button>
 					</form>

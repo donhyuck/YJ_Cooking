@@ -323,6 +323,16 @@
 		WHERE id = #{id}
 	</delete>
 
+	<select id="getSearchRecipes" resultType="Recipe">
+		SELECT R.*,
+		M.nickname
+		AS extra__writerName
+		FROM recipe AS R
+		LEFT JOIN `member` AS M
+		ON R.memberId = M.id
+		ORDER BY R.regDate DESC
+	</select>
+
 	<select id="getLastInsertId" resultType="int">
 		SELECT
 		LAST_INSERT_ID()

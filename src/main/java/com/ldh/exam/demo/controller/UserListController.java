@@ -197,15 +197,20 @@ public class UserListController {
 
 	// 검색결과 페이지
 	@RequestMapping("/search")
-	public String showSearch(Model model, @RequestParam(defaultValue = "") String searchKeyword) {
+	public String showSearch(Model model, @RequestParam(defaultValue = "") String searchKeyword,
+			@RequestParam(defaultValue = "titleAndBody") String keywordType,
+			@RequestParam(defaultValue = "") String searchRange,
+			@RequestParam(defaultValue = "total") String rangeType) {
 
-		searchKeyword = "검색어";
-
-		// List<Recipe> searchRecipes = recipeService.getForPrintRecipes(rq.getLoginedMemberId());
-
-		List<Recipe> searchRecipes = null;
-
+		// 검색조건 넘기기
 		model.addAttribute("searchKeyword", searchKeyword);
+		model.addAttribute("keywordType", keywordType);
+		model.addAttribute("searchRange", searchRange);
+		model.addAttribute("rangeType", rangeType);
+
+		// 제목,내용으로 레시피 검색
+		List<Recipe> searchRecipes = recipeService.getSearchRecipes(searchKeyword, keywordType, searchRange, rangeType);
+
 		model.addAttribute("searchRecipes", searchRecipes);
 
 		return "user/list/search";

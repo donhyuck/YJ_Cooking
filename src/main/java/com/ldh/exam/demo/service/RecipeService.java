@@ -296,6 +296,13 @@ public class RecipeService {
 		return ResultData.from("S-1", "삭제가능합니다.");
 	}
 
+	// 키워드로 레시피 검색
+	public List<Recipe> getSearchRecipes(String searchKeyword, String keywordType, String searchRange,
+			String rangeType) {
+
+		return recipeRepository.getSearchRecipes(searchKeyword, keywordType, searchRange, rangeType);
+	}
+
 	// 조회수 증가
 	public ResultData increaseHitCount(int id) {
 

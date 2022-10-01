@@ -20,11 +20,21 @@
 			<div class="border-b border-gray-400 p-5 mx-2 mb-8">
 				<!-- 선택 상황 보기 -->
 				<div class="flex space-x-4 items-center mt-4 pb-7 border-b border-dashed border-gray-300">
-					<span class="text-2xl">검색결과</span>
+					<span class="text-2xl">
+						검색결과
+						<span class="text-gray-400 font-bold text-xl">( ${ searchRecipes.size() }건 )</span>
+					</span>
 					<span class="text-xl font-bold">
 						<i class="fa-solid fa-angle-right"></i>
 					</span>
-					<span class="text-xl">"${ searchKeyword }"</span>
+					<span class="text-xl">
+						<c:if test="${ searchKeyword != '' }">
+							<span>"${ searchKeyword }"</span>
+						</c:if>
+						<c:if test="${ searchRange != '' }">
+							<span> + "${ searchRange }"</span>
+						</c:if>
+					</span>
 				</div>
 
 				<!-- 추가 검색영역 시작-->

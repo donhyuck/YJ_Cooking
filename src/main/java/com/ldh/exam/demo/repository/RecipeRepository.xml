@@ -328,8 +328,27 @@
 		M.nickname
 		AS extra__writerName
 		FROM recipe AS R
-		LEFT JOIN `member` AS M
+		LEFT JOIN
+		`member` AS M
 		ON R.memberId = M.id
+		WHERE 1
+		<if test="searchKeyword != ''">
+			<choose>
+				<when test="keywordType == 'recipeTitle'">
+					AND R.title LIKE CONCAT('%', #{searchKeyword}, '%')
+				</when>
+				<when test="keywordType == 'recipeBody'">
+					AND R.body LIKE CONCAT('%', #{searchKeyword}, '%')
+				</when>
+				<otherwise>
+					AND(
+					R.title LIKE CONCAT('%', #{searchKeyword}, '%')
+					OR
+					R.body LIKE CONCAT('%', #{searchKeyword}, '%')
+					)
+				</otherwise>
+			</choose>
+		</if>
 		ORDER BY R.regDate DESC
 	</select>
 

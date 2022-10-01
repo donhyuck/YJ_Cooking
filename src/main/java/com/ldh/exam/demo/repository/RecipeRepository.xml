@@ -325,12 +325,42 @@
 
 	<select id="getSearchRecipes" resultType="Recipe">
 		SELECT R.*,
-		M.nickname
-		AS extra__writerName
+		M.nickname AS extra__writerName
+		<if test="searchRange != ''">,G.*</if>
 		FROM recipe AS R
-		LEFT JOIN
+		LEFT
+		JOIN
 		`member` AS M
 		ON R.memberId = M.id
+		<if test="searchRange != ''">
+			LEFT JOIN (
+			SELECT G.*,
+			IF(C.boardId=1 AND G.sortId=C.relId,
+			c.name, '') AS sortName,
+			IF(C.boardId=2 AND G.methodId=C.relId,
+			c.name, '') AS methodName,
+			IF(C.boardId=3 AND G.contentId=C.relId,
+			c.name, '') AS contentName,
+			IF(C.boardId=4 AND G.freeId=C.relId,
+			c.name, '') AS freeName
+			FROM guide AS G
+			INNER JOIN category AS C
+			WHERE 1
+			AND (
+			C.boardId=1 AND G.sortId=C.relId
+			OR
+			C.boardId=2 AND
+			G.methodId=C.relId
+			OR
+			C.boardId=3 AND G.contentId=C.relId
+			OR
+			C.boardId=4
+			AND G.freeId=C.relId)
+			GROUP BY C.id
+			ORDER BY G.id ASC, C.id ASC
+			) AS G
+			ON R.id = G.recipeId
+		</if>
 		WHERE 1
 		<if test="searchKeyword != ''">
 			<choose>

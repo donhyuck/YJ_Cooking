@@ -1178,6 +1178,8 @@ SELECT COUNT(*)
 FROM `guide` AS G
 WHERE G.sortId = 3;
 
+DROP TABLE genFile;
+
 # 파일 테이블 추가
 CREATE TABLE genFile (
   id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT, # 번호
@@ -1200,10 +1202,47 @@ CREATE TABLE genFile (
   KEY relId (relTypeCode,relId,typeCode,type2Code,fileNo)
 );
 
-# 1번 회원을 관리자로 지정
+## 1번 회원을 관리자로 지정
 UPDATE `member`
 SET authLevel = 7
 WHERE id = 1;
 
 SELECT * FROM `member`;
 SELECT * FROM `genFile`;
+SELECT * FROM category;
+SELECT * FROM recipe;
+SELECT * FROM guide;
+
+## 검색하여 레시피 찾기
+SELECT R.*,
+M.nickname AS extra__writerName,
+G.*
+FROM recipe AS R
+LEFT JOIN
+`member` AS M
+ON R.memberId = M.id
+LEFT JOIN (
+    SELECT G.*,
+    IF(C.boardId=1 AND G.sortId=C.relId, c.name, '') AS sortName,
+    IF(C.boardId=2 AND G.methodId=C.relId, c.name, '') AS methodName,
+    IF(C.boardId=3 AND G.contentId=C.relId, c.name, '') AS contentName,
+    IF(C.boardId=4 AND G.freeId=C.relId, c.name, '') AS freeName
+    FROM guide AS G
+    INNER JOIN category AS C
+    WHERE 1
+    AND (
+    C.boardId=1 AND G.sortId=C.relId
+    OR
+    C.boardId=2 AND G.methodId=C.relId
+    OR
+    C.boardId=3 AND G.contentId=C.relId
+    OR
+    C.boardId=4 AND G.freeId=C.relId)
+    GROUP BY C.id
+    ORDER BY G.id ASC, C.id ASC
+) AS G
+ON R.id = G.recipeId
+WHERE 1
+AND( R.title LIKE CONCAT('%', '돼지고기', '%')
+OR R.body LIKE CONCAT('%', '돼지고기', '%') )
+ORDER BY R.regDate DESC;

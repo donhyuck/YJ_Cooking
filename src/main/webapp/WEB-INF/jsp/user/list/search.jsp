@@ -3,6 +3,26 @@
 <c:set var="pageTitle" value="검색결과 페이지" />
 <%@include file="../common/head.jspf"%>
 
+<!-- 입력데이터 검사 스크립트 시작 -->
+<script>
+	let RecipeSearch_submitFormDone = false;
+
+	function RecipeSearch_submitForm(form) {
+
+		if (RecipeSearch_submitFormDone) {
+			alert('처리중입니다.');
+			return;
+		}
+
+		form.searchKeyword.value = form.searchKeyword.value.trim();
+		form.searchRange.value = form.searchRange.value.trim();
+
+		RecipeSearch_submitFormDone = true;
+		form.submit();
+	}
+</script>
+<!-- 입력데이터 검사 스크립트 끝 -->
+
 <div class="bg-gray-200 py-4">
 	<div class="list-box w-10/12 mx-auto">
 
@@ -54,7 +74,7 @@
 				<!-- 추가 검색영역 시작-->
 				<div class="my-2">
 					<div class="text-gray-400 ml-2 mb-2">다른 레시피를 검색해보세요.</div>
-					<form class="flex space-x-4 w-full">
+					<form class="flex space-x-4 w-full" onsubmit="RecipeSearch_submitForm(this); return false;">
 						<!-- 검색타입 -->
 						<select id="keywordType" name="keywordType" class="select select-lg select-bordered">
 							<c:if test="${ keywordTypeName == '미선택' }">
@@ -83,7 +103,7 @@
 							<option value="total" class="text-lg">전체</option>
 							<option value="sort" class="text-lg">레시피종류</option>
 							<option value="method" class="text-lg">요리방법</option>
-							<option value="ingredient" class="text-lg">재료</option>
+							<option value="ingredient" class="text-lg">재료, 양념</option>
 							<option value="free" class="text-lg">상황</option>
 						</select>
 						<input type="text" name="searchRange" value="${ param.searchRange }" class="input input-lg input-bordered"

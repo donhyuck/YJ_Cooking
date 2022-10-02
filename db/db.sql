@@ -1225,12 +1225,12 @@ AND (
 GROUP BY G.recipeId;
 
 ## 검색하여 레시피 찾기
-SELECT R.*,
-M.nickname AS extra__writerName,
-G.*
+SELECT R.*
+, M.nickname AS extra__writerName
+, G.*
+, I.*
 FROM recipe AS R
-LEFT JOIN
-`member` AS M
+LEFT JOIN `member` AS M
 ON R.memberId = M.id
 LEFT JOIN (
     SELECT G.*,
@@ -1247,15 +1247,23 @@ LEFT JOIN (
     GROUP BY G.recipeId
 ) AS G
 ON R.id = G.recipeId
-WHERE 1
+LEFT JOIN ingredient AS I
+ON R.id = I.recipeId
+WHERE 1 
+AND (   
+    R.title LIKE CONCAT('%', '소스', '%')
+    OR R.body LIKE CONCAT('%', '소스', '%')
+) AND G.categoryNameArr LIKE CONCAT('%', '', '%')
 AND (
-    R.title LIKE CONCAT('%', '돼지고기', '%')
-    OR R.body LIKE CONCAT('%', '돼지고기', '%')
-) AND G.categoryNameArr LIKE CONCAT('%', '집들이', '%')
-ORDER BY R.id ASC;
+    I.rowArr LIKE CONCAT('%', '닭', '%')
+    OR I.rowValueArr LIKE CONCAT('%', '닭', '%')
+    OR I.sauceArr LIKE CONCAT('%', '닭', '%')
+    OR I.sauceValueArr LIKE CONCAT('%', '닭', '%')
+) ORDER BY R.id DESC;
 
 SELECT * FROM `member`;
 SELECT * FROM `genFile`;
 SELECT * FROM category;
 SELECT * FROM recipe;
 SELECT * FROM guide;
+SELECT * FROM ingredient;

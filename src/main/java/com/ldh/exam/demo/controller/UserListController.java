@@ -239,7 +239,7 @@ public class UserListController {
 			rangeTypeName = "요리방법";
 			break;
 		case "ingredient":
-			rangeTypeName = "재료";
+			rangeTypeName = "재료, 양념";
 			break;
 		case "free":
 			rangeTypeName = "상황";

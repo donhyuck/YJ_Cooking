@@ -297,6 +297,9 @@
 		M.nickname AS extra__writerName
 		<if test="searchRange != ''">
 			,G.*
+			<if test="rangeType == 'ingredient' or rangeType == 'total'">
+				, I.*
+			</if>
 		</if>
 		FROM recipe AS R
 		LEFT JOIN `member` AS M
@@ -323,6 +326,10 @@
 				) GROUP BY G.recipeId
 				) AS G
 			ON R.id = G.recipeId
+			<if test="rangeType == 'ingredient' or rangeType == 'total'">
+				LEFT JOIN ingredient AS I
+				ON R.id = I.recipeId
+			</if>
 		</if>
 		WHERE 1
 		<if test="searchKeyword == '' and searchRange == ''">
@@ -360,6 +367,14 @@
 		</if>
 		<if test="searchRange != ''">
 			AND G.categoryNameArr LIKE CONCAT('%', #{searchRange}, '%')
+			<if test="rangeType == 'ingredient' or rangeType == 'total'">
+				OR (
+			    I.rowArr LIKE CONCAT('%', #{searchRange}, '%')
+			    OR I.rowValueArr LIKE CONCAT('%', #{searchRange}, '%')
+			    OR I.sauceArr LIKE CONCAT('%', #{searchRange}, '%')
+			    OR I.sauceValueArr LIKE CONCAT('%', #{searchRange}, '%')
+				)
+			</if>
 		</if>
 		ORDER BY R.id DESC
 	</select>

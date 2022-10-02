@@ -6,12 +6,10 @@
 	<insert id="doJoin">
 		INSERT INTO `member`
 		SET regDate = NOW(),
-		updateDate =
-		NOW(),
+		updateDate = NOW(),
 		loginId = #{loginId},
 		loginPw = #{loginPw},
-		nickname =
-		#{nickname},
+		nickname = #{nickname},
 		cellphoneNo = #{cellphoneNo},
 		email = #{email}
 	</insert>
@@ -38,10 +36,9 @@
 
 	<update id="doLeave">
 		UPDATE `member`
-		SET delStatus=1,
-		delDate=NOW()
-		WHERE
-		id=#{id}
+		SET delStatus = 1,
+		delDate = NOW()
+		WHERE id = #{id}
 	</update>
 
 	<select id="getMemberById" resultType="Member">
@@ -53,8 +50,7 @@
 
 	<select id="getMemberByLoginId" resultType="Member">
 		SELECT *
-		FROM `member`
-		AS M
+		FROM `member` AS M
 		WHERE M.loginId = #{loginId}
 		AND delStatus = 0
 	</select>

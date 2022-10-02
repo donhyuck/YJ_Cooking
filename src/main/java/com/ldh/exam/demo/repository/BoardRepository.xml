@@ -5,8 +5,7 @@
 
 	<select id="getBoardByBoardId" resultType="Board">
 		SELECT B.*
-		FROM board
-		AS B
+		FROM board AS B
 		WHERE B.id = #{ id }
 	</select>
 
@@ -17,28 +16,24 @@
 
 	<select id="getCategoryByBoardIdAndRelId" resultType="Category">
 		SELECT C.*
-		FROM
-		category AS C
+		FROM category AS C
 		WHERE C.boardId = #{boardId}
 		AND C.relId = #{relId}
 	</select>
 
 	<select id="getCategories" resultType="Category">
 		SELECT C.*
-		FROM
-		category
-		AS C
+		FROM category AS C
 	</select>
 
 	<insert id="makeGuideForWriteRecipe">
-		INSERT INTO
-		guide
-		SET regDate=NOW(),
-		updateDate=NOW(),
-		sortId=#{sortId},
-		methodId=#{methodId},
-		contentId=#{contentId},
-		freeId=#{freeId}
+		INSERT INTO guide
+		SET regDate = NOW(),
+		updateDate = NOW(),
+		sortId = #{sortId},
+		methodId = #{methodId},
+		contentId = #{contentId},
+		freeId = #{freeId}
 	</insert>
 
 	<select id="getLastInsertId" resultType="int">
@@ -49,37 +44,29 @@
 	<update id="updateRecipeId">
 		UPDATE guide
 		SET recipeId = #{recipeId}
-		WHERE id =
-		#{guideId}
+		WHERE id = #{guideId}
 	</update>
 
 	<update id="updateGuide">
 		UPDATE guide
 		SET updateDate = NOW(),
-		`sortId`=#{sortId},
-		`methodId`=#{methodId},
-		`contentId`=#{contentId},
-		`freeId`=#{freeId}
+		`sortId` = #{sortId},
+		`methodId` = #{methodId},
+		`contentId` = #{contentId},
+		`freeId` = #{freeId}
 		WHERE id = #{id}
 	</update>
 
 	<select id="getCategoriesAboutRecipe" resultType="Category">
 		SELECT C.*
-		FROM
-		guide AS G
+		FROM guide AS G
 		INNER JOIN category AS C
-		WHERE G.recipeId=#{recipeId}
+		WHERE G.recipeId = #{recipeId}
 		AND (
-		C.boardId=1
-		AND G.sortId=C.relId
-		OR
-		C.boardId=2
-		AND G.methodId=C.relId
-		OR
-		C.boardId=3
-		AND G.contentId=C.relId
-		OR
-		C.boardId=4 AND G.freeId=C.relId)
+		C.boardId = 1 AND G.sortId = C.relId
+		OR C.boardId = 2 AND G.methodId = C.relId
+		OR C.boardId = 3 AND G.contentId = C.relId
+		OR C.boardId = 4 AND G.freeId = C.relId)
 	</select>
 
 </mapper> 

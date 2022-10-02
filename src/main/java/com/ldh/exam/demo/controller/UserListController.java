@@ -239,7 +239,7 @@ public class UserListController {
 			rangeTypeName = "요리방법";
 			break;
 		case "ingredient":
-			rangeTypeName = "재료,양념";
+			rangeTypeName = "재료";
 			break;
 		case "free":
 			rangeTypeName = "상황";
@@ -250,6 +250,10 @@ public class UserListController {
 
 		// 제목,내용으로 레시피 검색
 		List<Recipe> searchRecipes = recipeService.getSearchRecipes(searchKeyword, keywordType, searchRange, rangeType);
+
+		if (searchRecipes.size() == 0) {
+			searchRecipes = null;
+		}
 
 		model.addAttribute("searchRecipes", searchRecipes);
 

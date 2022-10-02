@@ -41,7 +41,12 @@
 							<span>"${ searchKeyword }"</span>
 						</c:if>
 						<c:if test="${ searchRange != '' }">
-							<span> + "${ searchRange }"</span>
+							<c:if test="${ searchKeyword == '' }">
+								<span>"${ searchRange }"</span>
+							</c:if>
+							<c:if test="${ searchKeyword != '' }">
+								<span> + "${ searchRange }"</span>
+							</c:if>
 						</c:if>
 					</span>
 				</div>
@@ -65,7 +70,7 @@
 							<option value="recipeWriter" class="text-lg">회원닉네임</option>
 						</select>
 						<input type="text" name="searchKeyword" value="${ param.searchKeyword }" class="input input-lg input-bordered"
-							placeholder="레시피의 제목 또는 내용">
+							placeholder="레시피 기본정보">
 
 						<!-- 검색분류 -->
 						<select id="rangeType" name="rangeType" class="select select-lg select-bordered">
@@ -78,7 +83,7 @@
 							<option value="total" class="text-lg">전체</option>
 							<option value="sort" class="text-lg">레시피종류</option>
 							<option value="method" class="text-lg">요리방법</option>
-							<option value="ingredient" class="text-lg">재료,양념</option>
+							<option value="ingredient" class="text-lg">재료</option>
 							<option value="free" class="text-lg">상황</option>
 						</select>
 						<input type="text" name="searchRange" value="${ param.searchRange }" class="input input-lg input-bordered"

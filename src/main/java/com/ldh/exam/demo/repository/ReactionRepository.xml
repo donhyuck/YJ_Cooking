@@ -8,11 +8,9 @@
 		SELECT
 		IFNULL(SUM(RP.point), 0) AS sum
 		FROM reactionPoint AS RP
-		WHERE
-		RP.relTypeCode = #{relTypeCode}
+		WHERE RP.relTypeCode = #{relTypeCode}
 		AND RP.relId = #{relId}
-		AND RP.memberId
-		= #{memberId}
+		AND RP.memberId = #{memberId}
 	</select>
 
 	<insert id="doMakeLike">
@@ -20,8 +18,7 @@
 		SET regDate = NOW(),
 		updateDate = NOW(),
 		memberId = #{memberId},
-		relTypeCode =
-		#{relTypeCode},
+		relTypeCode = #{relTypeCode},
 		relId = #{relId},
 		`point` = 1
 	</insert>
@@ -29,9 +26,7 @@
 	<delete id="doCancelLike">
 		DELETE FROM reactionPoint
 		WHERE memberId = #{memberId}
-		AND
-		relTypeCode =
-		#{relTypeCode}
+		AND relTypeCode = #{relTypeCode}
 		AND relId = #{relId}
 	</delete>
 
@@ -39,32 +34,25 @@
 		SELECT
 		IFNULL(SUM(SP.point), 0) AS sum
 		FROM scrapPoint AS SP
-		WHERE
-		SP.relTypeCode = #{relTypeCode}
+		WHERE SP.relTypeCode = #{relTypeCode}
 		AND SP.relId = #{relId}
-		AND SP.memberId
-		= #{memberId}
+		AND SP.memberId = #{memberId}
 	</select>
 
 	<insert id="doMakeScrap">
 		INSERT INTO scrapPoint
 		SET regDate = NOW(),
-		updateDate
-		= NOW(),
+		updateDate = NOW(),
 		memberId = #{memberId},
-		relTypeCode =
-		#{relTypeCode},
-		relId =
-		#{relId},
+		relTypeCode = #{relTypeCode},
+		relId = #{relId},
 		`point` = 1
 	</insert>
 
 	<delete id="doCancelScrap">
 		DELETE FROM scrapPoint
 		WHERE memberId = #{memberId}
-		AND
-		relTypeCode =
-		#{relTypeCode}
+		AND relTypeCode = #{relTypeCode}
 		AND relId = #{relId}
 	</delete>
 </mapper> 

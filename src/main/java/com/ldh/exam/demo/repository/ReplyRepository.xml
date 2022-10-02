@@ -11,15 +11,12 @@
 
 	<select id="getForPrintReply" resultType="Reply">
 		SELECT RE.*,
-		M.nickname
-		AS extra__writerName
+		M.nickname AS extra__writerName
 		FROM reply AS RE
 		LEFT JOIN `member` AS M
-		ON
-		RE.memberId = M.id
+		ON RE.memberId = M.id
 		WHERE RE.relTypeCode = #{relTypeCode}
-		AND RE.id =
-		#{id}
+		AND RE.id = #{id}
 	</select>
 
 	<select id="getForPrintReplies" resultType="Reply">
@@ -29,20 +26,17 @@
 		LEFT JOIN `member` AS M
 		ON RE.memberId = M.id
 		WHERE RE.relTypeCode = #{relTypeCode}
-		AND RE.relId
-		= #{relId}
+		AND RE.relId = #{relId}
 		ORDER BY RE.id DESC
 	</select>
 
 	<insert id="writeReply">
 		INSERT INTO reply
 		SET regDate = NOW(),
-		updateDate =
-		NOW(),
+		updateDate = NOW(),
 		memberId = #{memberId},
 		relTypeCode = #{relTypeCode},
-		relId =
-		#{relId},
+		relId = #{relId},
 		`body` = #{body}
 	</insert>
 
@@ -54,8 +48,7 @@
 	<update id="modifyReply">
 		UPDATE reply AS RE
 		SET RE.updateDate = NOW(),
-		RE.body =
-		#{body}
+		RE.body = #{body}
 		WHERE RE.id = #{id}
 	</update>
 
@@ -66,9 +59,8 @@
 
 	<select id="getReplyCntByRelId" resultType="int">
 		SELECT COUNT(*)
-		FROM
-		reply
-		WHERE relId = #{relId}
+		FROM reply AS RE
+		WHERE RE.relId = #{relId}
 	</select>
 
 </mapper> 

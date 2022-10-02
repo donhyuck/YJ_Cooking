@@ -43,8 +43,12 @@
 					<form class="flex space-x-4 w-full">
 						<!-- 검색타입 -->
 						<select id="keywordType" name="keywordType" class="select select-lg select-bordered">
-							<option selected disabled class="text-lg bg-green-100">검색타입</option>
-							<option disabled value="${ keywordType }" class="text-lg bg-yellow-100">${ keywordType }</option>
+							<c:if test="${ keywordTypeName == '미선택' }">
+								<option selected disabled class="text-lg bg-green-100">검색타입</option>
+							</c:if>
+							<c:if test="${ keywordTypeName != '미선택' }">
+								<option selected disabled value="${ keywordType }" class="text-lg bg-yellow-100">${ keywordTypeName }</option>
+							</c:if>
 							<option value="titleAndBody" class="text-lg">제목,내용</option>
 							<option value="recipeTitle" class="text-lg">제목만</option>
 							<option value="recipeBody" class="text-lg">내용만</option>
@@ -54,8 +58,12 @@
 
 						<!-- 검색분류 -->
 						<select id="rangeType" name="rangeType" class="select select-lg select-bordered">
-							<option selected disabled class="text-lg bg-green-100">분류타입</option>
-							<option disabled value="${ rangeType }" class="text-lg bg-yellow-100">${ rangeType }</option>
+							<c:if test="${ rangeTypeName == '미선택' }">
+								<option selected disabled class="text-lg bg-green-100">분류타입</option>
+							</c:if>
+							<c:if test="${ rangeTypeName != '미선택' }">
+								<option selected disabled value="${ rangeType }" class="text-lg bg-yellow-100">${ rangeTypeName }</option>
+							</c:if>
 							<option value="total" class="text-lg">전체</option>
 							<option value="sort" class="text-lg">레시피종류</option>
 							<option value="method" class="text-lg">요리방법</option>
@@ -70,14 +78,16 @@
 				</div>
 				<!-- 추가 선택영역 끝-->
 			</div>
+
+			<!-- 미검색 -->
+			<c:if test="${ searchRecipes.size() == 0 || searchRecipes == null }">
+				<div class="text-yellow-500 text-2xl ml-8 mb-10">검색결과를 찾을 수 없습니다.</div>
+			</c:if>
 			<!-- 안내영역 끝-->
 
 			<!-- 검색한 레시피 영역 시작 -->
 			<div class="grid grid-cols-4">
 				<c:forEach var="recipe" items="${ searchRecipes }">
-					<c:if test="${ searchRecipes == null }">
-						<div>검색결과를 찾을 수 없습니다.</div>
-					</c:if>
 					<c:if test="${ recipe != null }">
 						<div
 							class="w-64 h-80 mx-auto mb-10 flex flex-col justify-between rounded-2xl shadow-xl border-2 border-white hover:border-yellow-500">

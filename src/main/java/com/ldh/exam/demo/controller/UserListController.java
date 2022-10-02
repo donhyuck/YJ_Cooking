@@ -91,8 +91,8 @@ public class UserListController {
 
 	// 분류페이지에서 선택한 레시피 목록 보기
 	@RequestMapping("/choice")
-	public String showChoice(Model model, @RequestParam(defaultValue = "-1") int boardId,
-			@RequestParam(defaultValue = "-1") int relId) {
+	public String showChoice(Model model, @RequestParam(defaultValue = "0") int boardId,
+			@RequestParam(defaultValue = "0") int relId) {
 
 		// 해당 레시피 목록 확인
 		if (boardId == -1 || relId == -1) {
@@ -202,14 +202,62 @@ public class UserListController {
 			@RequestParam(defaultValue = "") String searchRange,
 			@RequestParam(defaultValue = "total") String rangeType) {
 
+		// 검색타입 이름
+		String keywordTypeName = "";
+
+		switch (keywordType) {
+		case "titleAndBody":
+			keywordTypeName = "제목,내용";
+			break;
+		case "recipeTitle":
+			keywordTypeName = "제목만";
+			break;
+		case "recipeBody":
+			keywordTypeName = "내용만";
+			break;
+		default:
+			keywordTypeName = "미선택";
+			break;
+		}
+
+		// 검색분류 이름
+		String rangeTypeName = "";
+
+		switch (rangeType) {
+		case "total":
+			rangeTypeName = "전체";
+			break;
+		case "sort":
+			rangeTypeName = "레시피종류";
+			break;
+		case "method":
+			rangeTypeName = "요리방법";
+			break;
+		case "ingredient":
+			rangeTypeName = "재료,양념";
+			break;
+		case "free":
+			rangeTypeName = "상황";
+			break;
+		default:
+			rangeTypeName = "미선택";
+			break;
+		}
+
 		// 검색조건 넘기기
 		model.addAttribute("searchKeyword", searchKeyword);
 		model.addAttribute("keywordType", keywordType);
+		model.addAttribute("keywordTypeName", keywordTypeName);
 		model.addAttribute("searchRange", searchRange);
 		model.addAttribute("rangeType", rangeType);
+		model.addAttribute("rangeTypeName", rangeTypeName);
 
 		// 제목,내용으로 레시피 검색
-		List<Recipe> searchRecipes = recipeService.getSearchRecipes(searchKeyword, keywordType, searchRange, rangeType);
+		List<Recipe> searchRecipes = null;
+
+		if (searchKeyword == "" || searchRange == "") {
+			searchRecipes = recipeService.getSearchRecipes(searchKeyword, keywordType, searchRange, rangeType);
+		}
 
 		model.addAttribute("searchRecipes", searchRecipes);
 

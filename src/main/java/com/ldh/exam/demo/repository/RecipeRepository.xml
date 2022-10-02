@@ -335,29 +335,18 @@
 		<if test="searchRange != ''">
 			LEFT JOIN (
 			SELECT G.*,
-			IF(C.boardId=1 AND G.sortId=C.relId,
-			c.name, '') AS sortName,
-			IF(C.boardId=2 AND G.methodId=C.relId,
-			c.name, '') AS methodName,
-			IF(C.boardId=3 AND G.contentId=C.relId,
-			c.name, '') AS contentName,
-			IF(C.boardId=4 AND G.freeId=C.relId,
-			c.name, '') AS freeName
-			FROM guide AS G
-			INNER JOIN category AS C
+			GROUP_CONCAT(C.name) AS
+			categoryNameArr
+			FROM category AS C
+			INNER JOIN guide AS G
 			WHERE 1
 			AND (
 			C.boardId=1 AND G.sortId=C.relId
-			OR
-			C.boardId=2 AND
-			G.methodId=C.relId
-			OR
-			C.boardId=3 AND G.contentId=C.relId
-			OR
-			C.boardId=4
-			AND G.freeId=C.relId)
-			GROUP BY C.id
-			ORDER BY G.id ASC, C.id ASC
+			OR C.boardId=2 AND G.methodId=C.relId
+			OR C.boardId=3 AND G.contentId=C.relId
+			OR C.boardId=4 AND
+			G.freeId=C.relId )
+			GROUP BY G.recipeId
 			) AS G
 			ON R.id = G.recipeId
 		</if>
@@ -378,6 +367,9 @@
 					)
 				</otherwise>
 			</choose>
+		</if>
+		<if test="searchRange != ''">
+			AND G.categoryNameArr LIKE CONCAT('%',#{searchRange},'%')
 		</if>
 		ORDER BY R.regDate DESC
 	</select>

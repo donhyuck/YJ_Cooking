@@ -1178,8 +1178,6 @@ SELECT COUNT(*)
 FROM `guide` AS G
 WHERE G.sortId = 3;
 
-DROP TABLE genFile;
-
 # 파일 테이블 추가
 CREATE TABLE genFile (
   id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT, # 번호
@@ -1207,11 +1205,24 @@ UPDATE `member`
 SET authLevel = 7
 WHERE id = 1;
 
-SELECT * FROM `member`;
-SELECT * FROM `genFile`;
-SELECT * FROM category;
-SELECT * FROM recipe;
-SELECT * FROM guide;
+## boardId 별 카테고리 나열
+SELECT C.boardId,
+GROUP_CONCAT(C.name)
+FROM category AS C
+GROUP BY C.boardId;
+
+## 레시피별 카테고리 나열
+SELECT G.*,
+GROUP_CONCAT(C.name) AS categoryNameArr
+FROM category AS C
+INNER JOIN guide AS G
+WHERE 1
+AND (
+    C.boardId=1 AND G.sortId=C.relId
+    OR C.boardId=2 AND G.methodId=C.relId
+    OR C.boardId=3 AND G.contentId=C.relId
+    OR C.boardId=4 AND G.freeId=C.relId)
+GROUP BY G.recipeId;
 
 ## 검색하여 레시피 찾기
 SELECT R.*,
@@ -1223,26 +1234,28 @@ LEFT JOIN
 ON R.memberId = M.id
 LEFT JOIN (
     SELECT G.*,
-    IF(C.boardId=1 AND G.sortId=C.relId, c.name, '') AS sortName,
-    IF(C.boardId=2 AND G.methodId=C.relId, c.name, '') AS methodName,
-    IF(C.boardId=3 AND G.contentId=C.relId, c.name, '') AS contentName,
-    IF(C.boardId=4 AND G.freeId=C.relId, c.name, '') AS freeName
-    FROM guide AS G
-    INNER JOIN category AS C
+    GROUP_CONCAT(C.name) AS categoryNameArr
+    FROM category AS C
+    INNER JOIN guide AS G
     WHERE 1
     AND (
-    C.boardId=1 AND G.sortId=C.relId
-    OR
-    C.boardId=2 AND G.methodId=C.relId
-    OR
-    C.boardId=3 AND G.contentId=C.relId
-    OR
-    C.boardId=4 AND G.freeId=C.relId)
-    GROUP BY C.id
-    ORDER BY G.id ASC, C.id ASC
+        C.boardId=1 AND G.sortId=C.relId
+        OR C.boardId=2 AND G.methodId=C.relId
+        OR C.boardId=3 AND G.contentId=C.relId
+        OR C.boardId=4 AND G.freeId=C.relId
+    )
+    GROUP BY G.recipeId
 ) AS G
 ON R.id = G.recipeId
 WHERE 1
-AND( R.title LIKE CONCAT('%', '돼지고기', '%')
-OR R.body LIKE CONCAT('%', '돼지고기', '%') )
-ORDER BY R.regDate DESC;
+AND (
+    R.title LIKE CONCAT('%', '돼지고기', '%')
+    OR R.body LIKE CONCAT('%', '돼지고기', '%')
+) AND G.categoryNameArr LIKE CONCAT('%', '집들이', '%')
+ORDER BY R.id ASC;
+
+SELECT * FROM `member`;
+SELECT * FROM `genFile`;
+SELECT * FROM category;
+SELECT * FROM recipe;
+SELECT * FROM guide;

@@ -107,7 +107,7 @@
 
 		<section class="bg-white rounded-md p-4 mb-5">
 			<!-- 안내문구 -->
-			<div class="p-3 mx-4">
+			<div class="p-3 mx-4 mb-3">
 				<div class="text-3xl">스크랩한 레시피</div>
 				<c:if test="${ rq.logined == false }">
 					<div class="text-xl text-gray-500 mt-2">
@@ -118,7 +118,7 @@
 			</div>
 
 			<!-- 스크랩한 레시피 영역 시작 -->
-			<div class="grid grid-cols-4">
+			<div class="grid grid-cols-4 mx-6">
 				<c:forEach var="recipe" items="${ scrapRecipes }">
 					<div
 						class="w-64 h-80 mx-auto mb-10 flex flex-col justify-between rounded-2xl shadow-xl border-2 border-white hover:border-yellow-500">

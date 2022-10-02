@@ -22,11 +22,20 @@
 				<div class="flex space-x-4 items-center mt-4 pb-7 border-b border-dashed border-gray-300">
 					<span class="text-2xl">
 						검색결과
-						<span class="text-gray-400 font-bold text-xl">( ${ searchRecipes.size() }건 )</span>
+						<c:if test="${ searchRecipes.size() == 0 || searchRecipes == null }">
+							<span class="text-gray-400 font-bold text-xl">( 0건 )</span>
+						</c:if>
+						<c:if test="${ searchRecipes.size() != 0 && searchRecipes != null }">
+							<c:if test="${ searchKeyword != '' || searchRange != '' }">
+								<span class="text-gray-400 font-bold text-xl">( ${ searchRecipes.size() }건 )</span>
+							</c:if>
+						</c:if>
 					</span>
-					<span class="text-xl font-bold">
-						<i class="fa-solid fa-angle-right"></i>
-					</span>
+					<c:if test="${ searchKeyword != '' || searchRange != '' }">
+						<span class="text-xl font-bold">
+							<i class="fa-solid fa-angle-right"></i>
+						</span>
+					</c:if>
 					<span class="text-xl">
 						<c:if test="${ searchKeyword != '' }">
 							<span>"${ searchKeyword }"</span>
@@ -47,13 +56,15 @@
 								<option selected disabled class="text-lg bg-green-100">검색타입</option>
 							</c:if>
 							<c:if test="${ keywordTypeName != '미선택' }">
-								<option selected disabled value="${ keywordType }" class="text-lg bg-yellow-100">${ keywordTypeName }</option>
+								<option selected disabled value="${ param.keywordType }" class="text-lg bg-yellow-100">${ keywordTypeName }</option>
 							</c:if>
-							<option value="titleAndBody" class="text-lg">제목,내용</option>
+							<option value="keywordTotal" class="text-lg">전체</option>
 							<option value="recipeTitle" class="text-lg">제목만</option>
-							<option value="recipeBody" class="text-lg">내용만</option>
+							<option value="titleAndBody" class="text-lg">제목과 내용</option>
+							<option value="recipeId" class="text-lg">등록번호</option>
+							<option value="recipeWriter" class="text-lg">회원닉네임</option>
 						</select>
-						<input type="text" name="searchKeyword" value="${ searchKeyword }" class="input input-lg input-bordered"
+						<input type="text" name="searchKeyword" value="${ param.searchKeyword }" class="input input-lg input-bordered"
 							placeholder="레시피의 제목 또는 내용">
 
 						<!-- 검색분류 -->
@@ -62,7 +73,7 @@
 								<option selected disabled class="text-lg bg-green-100">분류타입</option>
 							</c:if>
 							<c:if test="${ rangeTypeName != '미선택' }">
-								<option selected disabled value="${ rangeType }" class="text-lg bg-yellow-100">${ rangeTypeName }</option>
+								<option selected disabled value="${ param.rangeType }" class="text-lg bg-yellow-100">${ rangeTypeName }</option>
 							</c:if>
 							<option value="total" class="text-lg">전체</option>
 							<option value="sort" class="text-lg">레시피종류</option>
@@ -70,7 +81,7 @@
 							<option value="ingredient" class="text-lg">재료,양념</option>
 							<option value="free" class="text-lg">상황</option>
 						</select>
-						<input type="text" name="searchRange" value="${ searchRange }" class="input input-lg input-bordered"
+						<input type="text" name="searchRange" value="${ param.searchRange }" class="input input-lg input-bordered"
 							placeholder="검색조건을 설정해보세요.">
 
 						<button type="submit" class="btn btn-lg btn-success">검색</button>

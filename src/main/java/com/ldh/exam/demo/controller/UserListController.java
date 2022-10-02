@@ -198,7 +198,7 @@ public class UserListController {
 	// 검색결과 페이지
 	@RequestMapping("/search")
 	public String showSearch(Model model, @RequestParam(defaultValue = "") String searchKeyword,
-			@RequestParam(defaultValue = "titleAndBody") String keywordType,
+			@RequestParam(defaultValue = "keywordTotal") String keywordType,
 			@RequestParam(defaultValue = "") String searchRange,
 			@RequestParam(defaultValue = "total") String rangeType) {
 
@@ -206,18 +206,23 @@ public class UserListController {
 		String keywordTypeName = "";
 
 		switch (keywordType) {
-		case "titleAndBody":
-			keywordTypeName = "제목,내용";
+		case "keywordTotal":
+			keywordTypeName = "전체";
 			break;
 		case "recipeTitle":
 			keywordTypeName = "제목만";
 			break;
-		case "recipeBody":
-			keywordTypeName = "내용만";
+		case "titleAndBody":
+			keywordTypeName = "제목과 내용";
+			break;
+		case "recipeId":
+			keywordTypeName = "등록번호";
+			break;
+		case "recipeWriter":
+			keywordTypeName = "회원닉네임";
 			break;
 		default:
 			keywordTypeName = "미선택";
-			break;
 		}
 
 		// 검색분류 이름
@@ -241,8 +246,12 @@ public class UserListController {
 			break;
 		default:
 			rangeTypeName = "미선택";
-			break;
 		}
+
+		// 제목,내용으로 레시피 검색
+		List<Recipe> searchRecipes = recipeService.getSearchRecipes(searchKeyword, keywordType, searchRange, rangeType);
+
+		model.addAttribute("searchRecipes", searchRecipes);
 
 		// 검색조건 넘기기
 		model.addAttribute("searchKeyword", searchKeyword);
@@ -251,15 +260,6 @@ public class UserListController {
 		model.addAttribute("searchRange", searchRange);
 		model.addAttribute("rangeType", rangeType);
 		model.addAttribute("rangeTypeName", rangeTypeName);
-
-		// 제목,내용으로 레시피 검색
-		List<Recipe> searchRecipes = null;
-
-		if (searchKeyword == "" || searchRange == "") {
-			searchRecipes = recipeService.getSearchRecipes(searchKeyword, keywordType, searchRange, rangeType);
-		}
-
-		model.addAttribute("searchRecipes", searchRecipes);
 
 		return "user/list/search";
 	}

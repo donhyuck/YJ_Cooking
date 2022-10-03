@@ -297,10 +297,16 @@ public class RecipeService {
 	}
 
 	// 키워드로 레시피 검색
-	public List<Recipe> getSearchRecipes(String searchKeyword, String keywordType, String searchRange,
-			String rangeType, String includeOption) {
+	public List<Recipe> getSearchRecipes(String searchKeyword, String keywordType, String searchRange, String rangeType,
+			String includeOption) {
 
 		return recipeRepository.getSearchRecipes(searchKeyword, keywordType, searchRange, rangeType, includeOption);
+	}
+
+	// 조리순서 가져오기
+	public String getCookingOrderByRecipeId(int recipeId) {
+		
+		return recipeRepository.getCookingOrderByRecipeId(recipeId);
 	}
 
 	// 조회수 증가

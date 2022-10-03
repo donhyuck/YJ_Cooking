@@ -393,6 +393,12 @@
 		</where>
 		ORDER BY R.id DESC
 	</select>
+	
+	<select id="getCookingOrderByRecipeId" resultType="CookingOrder">
+		SELECT CO.*
+		FROM cookingOrder AS CO
+		WHERE CO.recipeId = #{recipeId}
+	</select>
 
 	<select id="getLastInsertId" resultType="int">
 		SELECT

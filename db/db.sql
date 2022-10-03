@@ -1261,9 +1261,18 @@ AND (
     OR I.sauceValueArr LIKE CONCAT('%', '닭', '%')
 ) ORDER BY R.id DESC;
 
+# 조리순서 테이블 생성
+CREATE TABLE cookingOrder (
+    id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    regDate DATETIME NOT NULL,
+    updateDate DATETIME NOT NULL,
+    recipeId INT(10) UNSIGNED NOT NULL,
+    `body` TEXT NOT NULL
+);
+
 SELECT * FROM `member`;
 SELECT * FROM `genFile`;
 SELECT * FROM category;
 SELECT * FROM recipe;
 SELECT * FROM guide;
-SELECT * FROM ingredient;
+SELECT * FROM cookingOrder;

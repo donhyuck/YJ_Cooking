@@ -51,8 +51,10 @@ public interface RecipeRepository {
 
 	public void deleteRecipe(int id);
 
-	public List<Recipe> getSearchRecipes(String searchKeyword, String keywordType, String searchRange,
-			String rangeType, String includeOption);
+	public List<Recipe> getSearchRecipes(String searchKeyword, String keywordType, String searchRange, String rangeType,
+			String includeOption);
+
+	public String getCookingOrderByRecipeId(int recipeId);
 
 	public int getLastInsertId();
 

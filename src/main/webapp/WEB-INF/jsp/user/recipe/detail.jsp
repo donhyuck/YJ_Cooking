@@ -325,14 +325,14 @@
 			<div class="text-3xl font-bold mb-8">조리순서</div>
 
 			<!-- 토스트 에디터 적용 -->
-			<td>
+			<div class="bg-red-400">
 				<div class="toast-ui-viewer">
-					<script type="text/x-template">${recipe.body}</script>
+					<script type="text/x-template">${cookingOrder.body}</script>
 				</div>
-			</td>
+			</div>
 
 			<div class="w-full flex flex-col space-y-8 px-5">
-				<c:forEach var="i" begin="1" end="4" step="1">
+				<c:forEach var="i" begin="1" end="1" step="1">
 					<div class="flex">
 						<div class="w-1/2 mr-5">
 							<img class="rounded-md" src="https://tse4.mm.bing.net/th?id=OIP.kwt4oKZDd-goVuBezaVQRQHaE7&pid=Api&P=0" alt="" />

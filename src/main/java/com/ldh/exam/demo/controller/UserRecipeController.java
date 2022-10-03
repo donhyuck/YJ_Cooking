@@ -78,6 +78,9 @@ public class UserRecipeController {
 		// 해당 레시피 페이지의 재료, 양념 목록 가져오기
 		List<List<String>> IngredientList = recipeService.getIngredientById(recipe.getIngredientId());
 
+		// 조리순서
+		String cookingOrder = recipeService.getCookingOrderByRecipeId(id);
+
 		model.addAttribute("recipe", recipe);
 		model.addAttribute("replies", replies);
 		model.addAttribute("categoriesAboutRecipe", categoriesAboutRecipe);
@@ -85,6 +88,7 @@ public class UserRecipeController {
 		model.addAttribute("rowValues", IngredientList.get(1));
 		model.addAttribute("sauces", IngredientList.get(2));
 		model.addAttribute("sauceValues", IngredientList.get(3));
+		model.addAttribute("cookingOrder", cookingOrder);
 		model.addAttribute("actorCanMakeRP", actorCanLikeRd.isSuccess());
 		model.addAttribute("actorCanMakeScrap", actorCanScrapRd.isSuccess());
 

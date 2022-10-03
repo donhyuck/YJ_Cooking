@@ -11,9 +11,11 @@
 
 	<select id="getForPrintRecipe" resultType="Recipe">
 		SELECT R.*,
-		M.nickname AS extra__writerName,
+		M.nickname
+		AS extra__writerName,
 		M.delStatus AS extra__writerLeaved
-		FROM recipe AS R
+		FROM recipe AS
+		R
 		LEFT JOIN `member` AS M
 		ON R.memberId = M.id
 		WHERE R.id = #{id}
@@ -21,7 +23,8 @@
 
 	<select id="getIngredientByRecipeId" resultType="Ingredient">
 		SELECT I.*
-		FROM ingredient AS I
+		FROM
+		ingredient AS I
 		WHERE I.recipeId = #{recipeId}
 	</select>
 
@@ -36,16 +39,18 @@
 
 	<select id="getRandomRecipes" resultType="Recipe">
 		SELECT R.*,
-		M.nickname AS extra__writerName
+		M.nickname
+		AS extra__writerName
 		FROM (
-			SELECT * FROM recipe
-			ORDER BY
-			(goodRP+hitCount+scrap) DESC
-			LIMIT #{randomCount}
+		SELECT * FROM recipe
+		ORDER BY
+		(goodRP+hitCount+scrap) DESC
+		LIMIT #{randomCount}
 		) AS R
 		LEFT JOIN `member` AS M
 		ON R.memberId = M.id
-		ORDER BY RAND() DESC
+		ORDER
+		BY RAND() DESC
 		LIMIT #{randomCountInAPage}
 	</select>
 
@@ -53,7 +58,8 @@
 		SELECT R.*,
 		M.nickname AS extra__writerName
 		FROM recipe AS R
-		LEFT JOIN `member` AS M
+		LEFT JOIN
+		`member` AS M
 		ON R.memberId = M.id
 		<choose>
 			<when test="tabCode == 1">
@@ -76,7 +82,8 @@
 		SELECT R.*,
 		M.nickname AS extra__writerName
 		FROM recipe AS R
-		LEFT JOIN `member` AS M
+		LEFT JOIN
+		`member` AS M
 		ON R.memberId = M.id
 		ORDER BY R.regDate DESC
 		<if test="limitStart != -1">
@@ -88,84 +95,88 @@
 		SELECT R.*,
 		M.nickname AS extra__writerName
 		FROM (
-			SELECT G.*
-			FROM `guide` AS G
-			WHERE 1
-			<choose>
-				<when test="boardId == 0">
-					AND 1
-				</when>
-				<when test="boardId == 1">
-					<if test="relId != 0">
-						AND G.sortId = #{relId}
-					</if>
-					<if test="relId == 0">
-						AND G.sortId != 0
-					</if>
-				</when>
-				<when test="boardId == 2">
-					<if test="relId != 0">
-						AND G.methodId = #{relId}
-					</if>
-					<if test="relId == 0">
-						AND G.methodId != 0
-					</if>
-				</when>
-				<when test="boardId == 3">
-					<if test="relId != 0">
-						AND G.contentId = #{relId}
-					</if>
-					<if test="relId == 0">
-						AND G.contentId != 0
-					</if>
-				</when>
-				<when test="boardId == 4">
-					<if test="relId != 0">
-						AND G.freeId = #{relId}
-					</if>
-					<if test="relId == 0">
-						AND G.freeId != 0
-					</if>
-				</when>
-			</choose>
-			) AS G
+		SELECT G.*
+		FROM `guide` AS G
+		WHERE 1
+		<choose>
+			<when test="boardId == 0">
+				AND 1
+			</when>
+			<when test="boardId == 1">
+				<if test="relId != 0">
+					AND G.sortId = #{relId}
+				</if>
+				<if test="relId == 0">
+					AND G.sortId != 0
+				</if>
+			</when>
+			<when test="boardId == 2">
+				<if test="relId != 0">
+					AND G.methodId = #{relId}
+				</if>
+				<if test="relId == 0">
+					AND G.methodId != 0
+				</if>
+			</when>
+			<when test="boardId == 3">
+				<if test="relId != 0">
+					AND G.contentId = #{relId}
+				</if>
+				<if test="relId == 0">
+					AND G.contentId != 0
+				</if>
+			</when>
+			<when test="boardId == 4">
+				<if test="relId != 0">
+					AND G.freeId = #{relId}
+				</if>
+				<if test="relId == 0">
+					AND G.freeId != 0
+				</if>
+			</when>
+		</choose>
+		) AS G
 		LEFT JOIN `recipe` AS R
 		ON G.recipeId = R.id
-		LEFT JOIN `member` AS M
+		LEFT JOIN `member` AS
+		M
 		ON R.memberId = M.id
 	</select>
 
 	<select id="getRankRecipes" resultType="Recipe">
-		SELECT 
+		SELECT
 		(@num:=@num+1) AS extra__rank,
-		R.*, 
+		R.*,
 		M.nickname AS extra__writerName
 		FROM (SELECT @num:=0) AS rankTable,
 		recipe AS R
 		LEFT JOIN `member` AS M
 		ON R.memberId = M.id
-		ORDER BY (R.goodRP + R.hitCount + R.scrap) DESC
+		ORDER BY (R.goodRP +
+		R.hitCount + R.scrap) DESC
 		LIMIT #{rankCount}
 	</select>
 
 	<select id="getManyScrapRecipes" resultType="Recipe">
 		SELECT
 		(@num:=@num+1) AS extra__rank,
-		R.*, 
+		R.*,
 		M.nickname AS extra__writerName
 		FROM (SELECT @num:=0) AS rankTable,
 		recipe AS R
 		LEFT JOIN `member` AS M
 		ON R.memberId = M.id
 		ORDER BY R.scrap DESC
-		LIMIT #{manyScrapCount}
+		LIMIT
+		#{manyScrapCount}
 	</select>
 
 	<select id="getRegisteredRecipes" resultType="Recipe">
 		SELECT R.*,
 		M.nickname AS extra__writerName
 		FROM recipe AS R
-		LEFT JOIN `member` AS M
+		LEFT JOIN
+		`member` AS M
 		ON R.memberId = M.id
 		WHERE R.memberId = #{ memberId }
 		ORDER BY R.id DESC
@@ -175,7 +186,8 @@
 	</select>
 
 	<select id="getRegisteredRecipesCount" resultType="int">
-		SELECT COUNT(*)
+		SELECT
+		COUNT(*)
 		FROM recipe AS R
 		WHERE R.memberId = #{ memberId }
 	</select>
@@ -183,11 +195,11 @@
 	<select id="getScrapRecipes" resultType="Recipe">
 		SELECT R.*
 		FROM (
-			SELECT R.*,
-			M.nickname AS extra__writerName
-			FROM recipe AS R
-			LEFT JOIN `member` AS M
-			ON R.memberId = M.id
+		SELECT R.*,
+		M.nickname AS extra__writerName
+		FROM recipe AS R
+		LEFT JOIN `member` AS M
+		ON R.memberId = M.id
 		) AS R
 		LEFT JOIN scrapPoint AS SP
 		ON R.id = SP.relId
@@ -199,38 +211,42 @@
 	<select id="getHaveReplyRecipes" resultType="Recipe">
 		SELECT R.*,
 		RE.extra__replyWriteName AS extra__replyWriteName,
-		RE.body AS extra__replyBody
+		RE.body AS
+		extra__replyBody
 		FROM (
-			SELECT R.*,
-			M.nickname AS extra__writerName
-			FROM
-			recipe AS R
-			LEFT JOIN `member` AS M
-			ON R.memberId = M.id
+		SELECT R.*,
+		M.nickname AS extra__writerName
+		FROM
+		recipe AS R
+		LEFT JOIN `member` AS M
+		ON R.memberId = M.id
 		) AS R
 		LEFT JOIN (
-			SELECT RE.*,
-			M.nickname AS extra__replyWriteName
-			FROM reply AS RE
-			LEFT JOIN `member` AS M
-			ON RE.memberId = M.id
+		SELECT RE.*,
+		M.nickname AS extra__replyWriteName
+		FROM reply AS RE
+		LEFT JOIN `member` AS M
+		ON RE.memberId = M.id
 		) AS RE
 		ON R.id = RE.relId
-		WHERE RE.memberId = #{memberId}
+		WHERE RE.memberId =
+		#{memberId}
 		ORDER BY R.id DESC
 	</select>
 
 	<insert id="writeRecipe">
 		INSERT INTO recipe
 		SET regDate = NOW(),
-		updateDate = NOW(),
+		updateDate =
+		NOW(),
 		memberId = #{memberId},
 		`title` = #{title},
 		`body` = #{body},
 		`amount` = #{amount},
 		`time` = #{time},
 		`level` = #{level},
-		`guideId` = #{guideId},
+		`guideId` =
+		#{guideId},
 		`ingredientId` = #{ingredientId},
 		`tip` = #{tip}
 	</insert>
@@ -238,23 +254,27 @@
 	<insert id="insertIngredient">
 		INSERT INTO ingredient
 		SET regDate = NOW(),
-		updateDate = NOW(),
+		updateDate
+		= NOW(),
 		rowArr = #{rowArr},
 		rowValueArr = #{rowValueArr},
-		sauceArr = #{sauceArr},
+		sauceArr =
+		#{sauceArr},
 		sauceValueArr = #{sauceValueArr}
 	</insert>
 
 	<update id="updateRecipeIdForIngredient">
 		UPDATE ingredient
 		SET recipeId = #{recipeId}
-		WHERE id = #{ingredientId}
+		WHERE id =
+		#{ingredientId}
 	</update>
 
 	<update id="updateIngredient">
 		UPDATE ingredient
 		SET updateDate = NOW(),
-		rowArr = #{rowArr},
+		rowArr =
+		#{rowArr},
 		rowValueArr = #{rowValueArr},
 		sauceArr = #{sauceArr},
 		sauceValueArr = #{sauceValueArr}
@@ -306,25 +326,25 @@
 		ON R.memberId = M.id
 		<if test="searchRange != ''">
 			LEFT JOIN (
-				SELECT G.*,
-				GROUP_CONCAT(C.name) AS categoryNameArr
-				FROM category AS C
-				INNER JOIN guide AS G
-				WHERE 1 AND ( 
-				C.boardId = 1 AND G.sortId = C.relId
-				<if test="rangeType == 'sort' or rangeType == 'total'"> AND 1</if>
-				<if test="rangeType != 'sort' and rangeType != 'total'"> AND 0</if>
-				OR C.boardId = 2 AND G.methodId = C.relId
-				<if test="rangeType == 'method' or rangeType == 'total'"> AND 1</if>
-				<if test="rangeType != 'method' and rangeType != 'total'"> AND 0</if>
-				OR C.boardId = 3 AND G.contentId = C.relId
-				<if test="rangeType == 'ingredient' or rangeType == 'total'"> AND 1</if>
-				<if test="rangeType != 'ingredient' and rangeType != 'total'"> AND 0</if>
-				OR C.boardId = 4 AND G.freeId = C.relId
-				<if test="rangeType == 'free' or rangeType == 'total'"> AND 1</if>
-				<if test="rangeType != 'free' and rangeType != 'total'"> AND 0</if> 
-				) GROUP BY G.recipeId
-				) AS G
+			SELECT G.*,
+			GROUP_CONCAT(C.name) AS categoryNameArr
+			FROM category AS C
+			INNER JOIN guide AS G
+			WHERE 1 AND (
+			C.boardId = 1 AND G.sortId = C.relId
+			<if test="rangeType == 'sort' or rangeType == 'total'"> AND 1</if>
+			<if test="rangeType != 'sort' and rangeType != 'total'"> AND 0</if>
+			OR C.boardId = 2 AND G.methodId = C.relId
+			<if test="rangeType == 'method' or rangeType == 'total'"> AND 1</if>
+			<if test="rangeType != 'method' and rangeType != 'total'"> AND 0</if>
+			OR C.boardId = 3 AND G.contentId = C.relId
+			<if test="rangeType == 'ingredient' or rangeType == 'total'"> AND 1</if>
+			<if test="rangeType != 'ingredient' and rangeType != 'total'"> AND 0</if>
+			OR C.boardId = 4 AND G.freeId = C.relId
+			<if test="rangeType == 'free' or rangeType == 'total'"> AND 1</if>
+			<if test="rangeType != 'free' and rangeType != 'total'"> AND 0</if>
+			) GROUP BY G.recipeId
+			) AS G
 			ON R.id = G.recipeId
 			<if test="rangeType == 'ingredient' or rangeType == 'total'">
 				LEFT JOIN ingredient AS I
@@ -338,62 +358,73 @@
 			<if test="searchKeyword != ''">
 				<choose>
 					<when test="keywordType == 'keywordTotal'">
-						<if test="includeOption == 'selectAll'" >AND</if>
-						<if test="includeOption == 'atLeastOne'" >OR</if>
+						<if test="includeOption == 'selectAll'">AND</if>
+						<if test="includeOption == 'atLeastOne'">OR</if>
 						(
 						R.title LIKE CONCAT('%', #{searchKeyword}, '%')
-						OR R.body LIKE CONCAT('%', #{searchKeyword}, '%')
+						OR R.body LIKE
+						CONCAT('%', #{searchKeyword}, '%')
 						OR R.id LIKE #{searchKeyword}
-						OR M.nickname LIKE CONCAT('%', #{searchKeyword},'%')
+						OR
+						M.nickname LIKE CONCAT('%', #{searchKeyword},'%')
 						)
 					</when>
 					<when test="keywordType == 'recipeTitle'">
-						<if test="includeOption == 'selectAll'" >AND</if>
-						<if test="includeOption == 'atLeastOne'" >OR</if>
+						<if test="includeOption == 'selectAll'">AND</if>
+						<if test="includeOption == 'atLeastOne'">OR</if>
 						R.title LIKE CONCAT('%', #{searchKeyword}, '%')
 					</when>
 					<when test="keywordType == 'titleAndBody'">
-						<if test="includeOption == 'selectAll'" >AND</if>
-						<if test="includeOption == 'atLeastOne'" >OR</if>
+						<if test="includeOption == 'selectAll'">AND</if>
+						<if test="includeOption == 'atLeastOne'">OR</if>
 						(
 						R.title LIKE CONCAT('%', #{searchKeyword}, '%')
-						OR R.body LIKE CONCAT('%', #{searchKeyword}, '%')
+						OR R.body LIKE
+						CONCAT('%', #{searchKeyword}, '%')
 						)
 					</when>
 					<when test="keywordType == 'recipeId'">
-						<if test="includeOption == 'selectAll'" >AND</if>
-						<if test="includeOption == 'atLeastOne'" >OR</if>
+						<if test="includeOption == 'selectAll'">AND</if>
+						<if test="includeOption == 'atLeastOne'">OR</if>
 						R.id LIKE #{searchKeyword}
 					</when>
 					<when test="keywordType == 'recipeWriter'">
-						<if test="includeOption == 'selectAll'" >AND</if>
-						<if test="includeOption == 'atLeastOne'" >OR</if>
+						<if test="includeOption == 'selectAll'">AND</if>
+						<if test="includeOption == 'atLeastOne'">OR</if>
 						M.nickname LIKE CONCAT('%', #{searchKeyword}, '%')
 					</when>
 					<otherwise>
-						<if test="includeOption == 'selectAll'" >AND</if>
-						<if test="includeOption == 'atLeastOne'" >OR</if>
+						<if test="includeOption == 'selectAll'">AND</if>
+						<if test="includeOption == 'atLeastOne'">OR</if>
 						R.id IS NULL
 					</otherwise>
 				</choose>
 			</if>
 			<if test="searchRange != ''">
-				<if test="includeOption == 'selectAll'" >AND</if>
-				<if test="includeOption == 'atLeastOne'" >OR</if>
+				<if test="includeOption == 'selectAll'">AND</if>
+				<if test="includeOption == 'atLeastOne'">OR</if>
 				G.categoryNameArr LIKE CONCAT('%', #{searchRange}, '%')
 				<if test="rangeType == 'ingredient' or rangeType == 'total'">
 					OR (
-				    I.rowArr LIKE CONCAT('%', #{searchRange}, '%')
-				    OR I.rowValueArr LIKE CONCAT('%', #{searchRange}, '%')
-				    OR I.sauceArr LIKE CONCAT('%', #{searchRange}, '%')
-				    OR I.sauceValueArr LIKE CONCAT('%', #{searchRange}, '%')
+					I.rowArr LIKE CONCAT('%', #{searchRange}, '%')
+					OR I.rowValueArr LIKE CONCAT('%', #{searchRange}, '%')
+					OR I.sauceArr LIKE CONCAT('%', #{searchRange}, '%')
+					OR I.sauceValueArr LIKE CONCAT('%', #{searchRange}, '%')
 					)
 				</if>
 			</if>
 		</where>
 		ORDER BY R.id DESC
 	</select>
-	
+
+	<insert id="insertOrderAboutRecipe">
+		INSERT INTO cookingOrder
+		SET regDate = NOW(),
+		updateDate = NOW(),
+		recipeId = #{recipeId},
+		`orderBody` = #{orderBody}
+	</insert>
+
 	<select id="getCookingOrderByRecipeId" resultType="CookingOrder">
 		SELECT CO.*
 		FROM cookingOrder AS CO
@@ -408,12 +439,14 @@
 	<update id="increaseHitCount">
 		UPDATE recipe
 		SET hitCount = hitCount + 1
-		WHERE id = #{id}
+		WHERE id =
+		#{id}
 	</update>
 
 	<select id="getRecipeHitCount" resultType="int">
 		SELECT hitCount
-		FROM recipe
+		FROM
+		recipe
 		WHERE id = #{id}
 	</select>
 

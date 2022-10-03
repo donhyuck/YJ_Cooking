@@ -4,195 +4,25 @@
 <%@include file="../common/head.jspf"%>
 <%@ include file="../../common/toastUiEditorLib.jspf"%>
 <script src="/recipe/WriteAndModify.js" defer="defer"></script>
-
-<!-- 입력데이터 검사 스크립트 시작 -->
-<script>
-	let RecipeWrite_submitFormDone = false;
-
-	function RecipeWrite_submitForm(form) {
-		if (RecipeWrite_submitFormDone) {
-			alert('처리중입니다.');
-			return;
-		}
-
-		form.title.value = form.title.value.trim();
-		if (form.title.value.length == 0) {
-			alert('제목을 입력해주세요.');
-			form.title.focus();
-			return;
-		}
-
-		form.body.value = form.body.value.trim();
-		if (form.body.value.length == 0) {
-			alert('요리소개를 입력해주세요.');
-			form.body.focus();
-			return;
-		}
-
-		form.amount.value = form.amount.value.trim();
-		if (form.amount.value.length == 0) {
-			alert('인원을 선택 또는 입력해주세요.');
-			form.amount.focus();
-			return;
-		}
-
-		form.time.value = form.time.value.trim();
-		if (form.time.value.length == 0) {
-			alert('소요시간을 선택 또는 입력해주세요.');
-			form.time.focus();
-			return;
-		}
-
-		form.level.value = form.level.value.trim();
-		if (form.level.value == 0) {
-			alert('난이도를 선택해주세요.');
-			form.level.focus();
-			return;
-		}
-
-		// 재료양념 데이터 배열처리 스크립트 시작
-		var rowArrCnt = 0;
-		var rowValueArrCnt = 0;
-		var sauceArrCnt = 0;
-		var sauceValueArrCnt = 0;
-		var rowArr = $('[name="row"]');
-		var rowValueArr = $('[name="rowValue"]');
-		var sauceArr = $('[name="sauce"]');
-		var sauceValueArr = $('[name="sauceValue"]');
-
-		// 재료 항목
-		var param = [];
-		for (var i = 0; i < rowArr.length; i++) {
-			rowArr[i].value = rowArr[i].value.trim();
-			param.push(rowArr[i].value);
-		}
-
-		var rowStr = '';
-		param.map(function(item) {
-			if (item != '' && item.length - 1) {
-				rowStr += item + ',';
-				rowArrCnt++;
-			}
-		});
-
-		// 재료 값
-		param = [];
-		for (var i = 0; i < rowValueArr.length; i++) {
-			rowValueArr[i].value = rowValueArr[i].value.trim();
-			param.push(rowValueArr[i].value);
-		}
-
-		var rowValueStr = '';
-		param.map(function(item) {
-			if (item != '' && item.length - 1) {
-				rowValueStr += item + ',';
-				rowValueArrCnt++;
-			}
-		});
-
-		// 양념 항목
-		param = [];
-		for (var i = 0; i < sauceArr.length; i++) {
-			sauceArr[i].value = sauceArr[i].value.trim();
-			param.push(sauceArr[i].value);
-		}
-
-		var sauceStr = '';
-		param.map(function(item) {
-			if (item != '' && item.length - 1) {
-				sauceStr += item + ',';
-				sauceArrCnt++;
-			}
-		});
-
-		// 양념 값
-		param = [];
-		for (var i = 0; i < sauceValueArr.length; i++) {
-			sauceValueArr[i].value = sauceValueArr[i].value.trim();
-			param.push(sauceValueArr[i].value);
-		}
-
-		var sauceValueStr = '';
-		param.map(function(item) {
-			if (item != '' && item.length - 1) {
-				sauceValueStr += item + ',';
-				sauceValueArrCnt++;
-			}
-		});
-
-		// 항목과 값 미입력 확인
-		if (rowArrCnt != rowValueArrCnt) {
-			alert('[재료]의 항목 또는 수량을 확인하시고, 빈칸을 채워주세요.');
-			$("#rowBox").attr("tabindex", -1).focus();
-			return;
-		}
-
-		if (sauceArrCnt != sauceValueArrCnt) {
-			alert('[양념]의 항목 또는 수량을 확인하시고, 빈칸을 채워주세요.');
-			$("#rowBox").attr("tabindex", -1).focus();
-			return;
-		}
-
-		// 마지막 구분자(,)제거
-		rowStr = rowStr.substr(0, rowStr.lastIndexOf(','));
-		rowValueStr = rowValueStr.substr(0, rowValueStr.lastIndexOf(','));
-		sauceStr = sauceStr.substr(0, sauceStr.lastIndexOf(','));
-		sauceValueStr = sauceValueStr.substr(0, sauceValueStr.lastIndexOf(','));
-
-		// 구성된 문자열을 input테그 값으로
-		document['do-write-recipe-form'].rowArr.value = rowStr;
-		document['do-write-recipe-form'].rowValueArr.value = rowValueStr;
-		document['do-write-recipe-form'].sauceArr.value = sauceStr;
-		document['do-write-recipe-form'].sauceValueArr.value = sauceValueStr;
-
-		form.rowArr.value = form.rowArr.value.trim();
-		form.rowValueArr.value = form.rowValueArr.value.trim();
-		form.sauceArr.value = form.sauceArr.value.trim();
-		form.sauceValueArr.value = form.sauceValueArr.value.trim();
-		// 재료양념 데이터 배열처리 스크립트 끝
-
-		if (form.rowArr.value == 0) {
-			alert('최소 1개 이상의 재료는 입력해주세요.');
-			$("#rowBox").attr("tabindex", -1).focus();
-			return;
-		}
-
-		// 대표사진 용량 제한
-		const maxSizeMb = 10;
-		const maxSize = maxSizeMb * 1204 * 1204;
-
-		const mainRecipeImgFileInput = form["file__recipe__0__extra__mainRecipeImg__1"];
-
-		if (mainRecipeImgFileInput.value) {
-			if (mainRecipeImgFileInput.files[0].size > maxSize) {
-				alert(maxSizeMb + "MB 이하의 파일을 업로드 해주세요.");
-				mainRecipeImgFileInput.focus();
-
-				return;
-			}
-		}
-
-		RecipeWrite_submitFormDone = true;
-		form.submit();
-	}
-</script>
-<!-- 입력데이터 검사 스크립트 끝 -->
+<script src="/recipe/Write.js" defer="defer"></script>
 
 <form class="bg-gray-200 py-4" action="../recipe/doWrite" method="POST" enctype="multipart/form-data"
 	name="do-write-recipe-form" onsubmit="RecipeWrite_submitForm(this); return false;">
+	<!-- 조리순서 데이터 -->
+	<input type="hidden" name="orderBody" />
 
 	<div class="write-box w-10/12 mx-auto">
+
+		<!-- 대표사진, 기본정보 -->
 		<section class="bg-white rounded-md p-12 flex mb-5">
-
-			<!-- 레시피 대표사진 -->
+			<!-- 레시피 대표사진 등록 -->
 			<div class="main-photo w-2/6 flex flex-col justify-between bg-gray-100 rounded-xl">
-				<div class="mt-2 text-center text-md">완성된 요리사진을 등록해주세요.</div>
-
 				<!-- 레시피 대표사진 미리보기 -->
+				<div class="mt-2 text-center text-md">완성된 요리사진을 등록해주세요.</div>
 				<img class="object-contain mainRecipe max-h-80 rounded-md" id="preview-mainRecipe"
 					src="https://cdn.pixabay.com/photo/2018/05/21/12/37/restaurant-3418134_960_720.png" />
-				<!-- 레시피 대표사진 등록 -->
 				<div class="p-2">
+					<!-- 사진등록 -->
 					<input type="file" id="input-mainRecipe" accept="image/gif, image/jpeg, image/png"
 						oninput="readImage(this); return false;" name="file__recipe__0__extra__mainRecipeImg__1"
 						class="hover:bg-gray-300 w-full mainRecipeBox" />
@@ -201,12 +31,10 @@
 
 			<!-- 레시피 기본정보 입력 -->
 			<div class="flex flex-col space-y-4 w-3/5 h-80 m-auto mb-8">
-				<!-- 제목 -->
 				<div>
 					<div class="ml-1 mb-2 font-medium text-slate-700 text-2xl">레시피 제목</div>
 					<input name="title" type="text" class="input input-lg input-bordered w-full" placeholder="예) 돼지듬뿍 김치찌게" />
 				</div>
-				<!-- 내용 -->
 				<div>
 					<div class="ml-1 mb-2 font-medium text-slate-700 text-2xl">
 						<div>레시피 소개</div>
@@ -220,7 +48,6 @@
 
 		<!-- 요리정보 입력 영역 시작(인원, 소요시간, 난이도) -->
 		<section class="bg-white rounded-md p-12 pt-8 mb-5">
-
 			<div class="flex justify-between">
 				<div class="select-box w-full">
 					<!-- 안내문구 -->
@@ -308,6 +135,7 @@
 						</div>
 						<div class="text-sm">(숫자만 입력, 최대 세자리까지 가능)</div>
 					</div>
+					<!-- 선택값 표시, 직접 입력영역 -->
 					<div class="px-10 flex flex-col space-y-4">
 						<div>
 							<div class="ml-2 font-medium text-slate-700 text-lg">
@@ -350,7 +178,6 @@
 					placeholder="예시) 간장을 넣으실땐 달궈진 기름 위로 눌리도록 넣으면 향이 더 강해져요.&#13;&#10;양념을 넣을땐 소금보다 설탕을 먼저 넣어야 잘 스며들어요."></textarea>
 			</div>
 			<!-- 팁 / 주의사항 끝 -->
-
 		</section>
 		<!-- 요리정보 입력 영역 끝(인원, 소요시간, 난이도) -->
 
@@ -418,6 +245,7 @@
 			</div>
 
 			<div class="flex justify-around">
+				<!-- 종류선택 -->
 				<div class="w-52">
 					<div class="font-medium text-slate-700 text-2xl text-center mb-3">
 						<span class="font-bold">종류</span>
@@ -432,6 +260,7 @@
 						<option class="text-xl text-red-600" value="0">(선택취소)</option>
 					</select>
 				</div>
+				<!-- 방법선택 -->
 				<div class="w-52">
 					<div class="font-medium text-slate-700 text-2xl text-center mb-3">
 						<span class="font-bold">방법</span>
@@ -446,6 +275,7 @@
 						<option class="text-xl text-red-600" value="0">(선택취소)</option>
 					</select>
 				</div>
+				<!-- 재료선택 -->
 				<div class="w-52">
 					<div class="font-medium text-slate-700 text-2xl text-center mb-3">
 						<span class="font-bold">재료</span>
@@ -460,6 +290,7 @@
 						<option class="text-xl text-red-600" value="0">(선택취소)</option>
 					</select>
 				</div>
+				<!-- 상황선택 -->
 				<div class="w-52">
 					<div class="font-medium text-slate-700 text-2xl text-center mb-3">
 						<span class="font-bold">상황</span>
@@ -537,7 +368,7 @@
 			</div>
 
 			<!-- 토스트 에디터 적용 -->
-			<div class="toast-ui-editor hidden">
+			<div class="toast-ui-editor mt-8">
 				<script type="text/x-template"></script>
 			</div>
 

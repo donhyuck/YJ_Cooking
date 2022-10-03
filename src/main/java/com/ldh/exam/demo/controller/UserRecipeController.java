@@ -19,6 +19,7 @@ import com.ldh.exam.demo.service.RecipeService;
 import com.ldh.exam.demo.service.ReplyService;
 import com.ldh.exam.demo.util.Ut;
 import com.ldh.exam.demo.vo.Category;
+import com.ldh.exam.demo.vo.CookingOrder;
 import com.ldh.exam.demo.vo.Recipe;
 import com.ldh.exam.demo.vo.Reply;
 import com.ldh.exam.demo.vo.ResultData;
@@ -79,7 +80,12 @@ public class UserRecipeController {
 		List<List<String>> IngredientList = recipeService.getIngredientById(recipe.getIngredientId());
 
 		// 조리순서
-		String cookingOrder = recipeService.getCookingOrderByRecipeId(id);
+		String orderBody = "";
+		CookingOrder cookingOrder = recipeService.getCookingOrderByRecipeId(id);
+
+		if (cookingOrder != null) {
+			orderBody = cookingOrder.getOrderBody();
+		}
 
 		model.addAttribute("recipe", recipe);
 		model.addAttribute("replies", replies);
@@ -88,7 +94,7 @@ public class UserRecipeController {
 		model.addAttribute("rowValues", IngredientList.get(1));
 		model.addAttribute("sauces", IngredientList.get(2));
 		model.addAttribute("sauceValues", IngredientList.get(3));
-		model.addAttribute("cookingOrder", cookingOrder);
+		model.addAttribute("orderBody", orderBody);
 		model.addAttribute("actorCanMakeRP", actorCanLikeRd.isSuccess());
 		model.addAttribute("actorCanMakeScrap", actorCanScrapRd.isSuccess());
 
@@ -112,8 +118,8 @@ public class UserRecipeController {
 	public String doWrite(String title, String body, int amount, int time, int level, String tip,
 			@RequestParam(defaultValue = "0") int sortId, @RequestParam(defaultValue = "0") int methodId,
 			@RequestParam(defaultValue = "0") int contentId, @RequestParam(defaultValue = "0") int freeId,
-			String rowArr, String rowValueArr, String sauceArr, String sauceValueArr, MultipartRequest multipartRequest,
-			@RequestParam(defaultValue = "/") String replaceUri) {
+			String rowArr, String rowValueArr, String sauceArr, String sauceValueArr, String orderBody,
+			MultipartRequest multipartRequest, @RequestParam(defaultValue = "/") String replaceUri) {
 
 		// 입력 데이터 유효성 검사
 		if (Ut.empty(title)) {
@@ -137,6 +143,9 @@ public class UserRecipeController {
 		// 등록된 레시피 번호를 가이드, 재료양념으로 갱신
 		boardService.updateRecipeId(guideId, id);
 		recipeService.updateRecipeIdForIngredient(ingredientId, id);
+
+		// 조리순서 등록
+		recipeService.insertOrderAboutRecipe(id, orderBody);
 
 		// 레시피 등록시 대표 이미지 등록
 		Map<String, MultipartFile> fileMap = multipartRequest.getFileMap();

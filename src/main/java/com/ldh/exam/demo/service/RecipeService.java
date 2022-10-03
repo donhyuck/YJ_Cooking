@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.ldh.exam.demo.repository.RecipeRepository;
 import com.ldh.exam.demo.util.Ut;
+import com.ldh.exam.demo.vo.CookingOrder;
 import com.ldh.exam.demo.vo.Ingredient;
 import com.ldh.exam.demo.vo.Recipe;
 import com.ldh.exam.demo.vo.ResultData;
@@ -303,9 +304,15 @@ public class RecipeService {
 		return recipeRepository.getSearchRecipes(searchKeyword, keywordType, searchRange, rangeType, includeOption);
 	}
 
+	// 조리순서 입력하기
+	public void insertOrderAboutRecipe(int recipeId, String orderBody) {
+
+		recipeRepository.insertOrderAboutRecipe(recipeId, orderBody);
+	}
+
 	// 조리순서 가져오기
-	public String getCookingOrderByRecipeId(int recipeId) {
-		
+	public CookingOrder getCookingOrderByRecipeId(int recipeId) {
+
 		return recipeRepository.getCookingOrderByRecipeId(recipeId);
 	}
 

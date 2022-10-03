@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.ldh.exam.demo.vo.CookingOrder;
 import com.ldh.exam.demo.vo.Ingredient;
 import com.ldh.exam.demo.vo.Recipe;
 
@@ -54,7 +55,9 @@ public interface RecipeRepository {
 	public List<Recipe> getSearchRecipes(String searchKeyword, String keywordType, String searchRange, String rangeType,
 			String includeOption);
 
-	public String getCookingOrderByRecipeId(int recipeId);
+	public void insertOrderAboutRecipe(int recipeId, String orderBody);
+
+	public CookingOrder getCookingOrderByRecipeId(int recipeId);
 
 	public int getLastInsertId();
 

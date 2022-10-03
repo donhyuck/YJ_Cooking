@@ -13,6 +13,6 @@ public class CookingOrder {
 	private String regDate;
 	private String updateDate;
 	private int recipeId;
-	private String body;
+	private String orderBody;
 
 }

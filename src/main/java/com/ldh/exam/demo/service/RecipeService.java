@@ -310,6 +310,12 @@ public class RecipeService {
 		recipeRepository.insertOrderAboutRecipe(recipeId, orderBody);
 	}
 
+	// 조리순서 수정하기
+	public void updateOrderAboutRecipe(int recipeId, String orderBody) {
+
+		recipeRepository.updateOrderAboutRecipe(recipeId, orderBody);
+	}
+
 	// 조리순서 가져오기
 	public CookingOrder getCookingOrderByRecipeId(int recipeId) {
 

@@ -57,6 +57,8 @@ public interface RecipeRepository {
 
 	public void insertOrderAboutRecipe(int recipeId, String orderBody);
 
+	public void updateOrderAboutRecipe(int recipeId, String orderBody);
+
 	public CookingOrder getCookingOrderByRecipeId(int recipeId);
 
 	public int getLastInsertId();

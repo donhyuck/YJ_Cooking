@@ -4,186 +4,15 @@
 <%@include file="../common/head.jspf"%>
 <%@ include file="../../common/toastUiEditorLib.jspf"%>
 <script src="/recipe/WriteAndModify.js" defer="defer"></script>
-
-<!-- 입력데이터 검사 스크립트 시작 -->
-<script>
-	let RecipeModify_submitFormDone = false;
-
-	function RecipeModify_submitForm(form) {
-		if (RecipeModify_submitFormDone) {
-			alert('처리중입니다.');
-			return;
-		}
-
-		form.title.value = form.title.value.trim();
-		if (form.title.value.length == 0) {
-			alert('제목을 입력해주세요.');
-			form.title.focus();
-			return;
-		}
-
-		form.body.value = form.body.value.trim();
-		if (form.body.value.length == 0) {
-			alert('요리소개를 입력해주세요.');
-			form.body.focus();
-			return;
-		}
-
-		form.amount.value = form.amount.value.trim();
-		if (form.amount.value.length == 0) {
-			alert('인원을 선택 또는 입력해주세요.');
-			form.amount.focus();
-			return;
-		}
-
-		form.time.value = form.time.value.trim();
-		if (form.time.value.length == 0) {
-			alert('소요시간을 선택 또는 입력해주세요.');
-			form.time.focus();
-			return;
-		}
-
-		form.level.value = form.level.value.trim();
-		if (form.level.value.length == 0) {
-			alert('난이도를 선택해주세요.');
-			form.level.focus();
-			return;
-		}
-
-		// 재료양념 데이터 배열처리 스크립트 시작
-		var rowArrCnt = 0;
-		var rowValueArrCnt = 0;
-		var sauceArrCnt = 0;
-		var sauceValueArrCnt = 0;
-		var rowArr = $('[name="row"]');
-		var rowValueArr = $('[name="rowValue"]');
-		var sauceArr = $('[name="sauce"]');
-		var sauceValueArr = $('[name="sauceValue"]');
-
-		// 재료 항목
-		var param = [];
-		for (var i = 0; i < rowArr.length; i++) {
-			rowArr[i].value = rowArr[i].value.trim();
-			param.push(rowArr[i].value);
-		}
-
-		var rowStr = '';
-		param.map(function(item) {
-			if (item != '' && item.length - 1) {
-				rowStr += item + ',';
-				rowArrCnt++;
-			}
-		});
-
-		// 재료 값
-		param = [];
-		for (var i = 0; i < rowValueArr.length; i++) {
-			rowValueArr[i].value = rowValueArr[i].value.trim();
-			param.push(rowValueArr[i].value);
-		}
-
-		var rowValueStr = '';
-		param.map(function(item) {
-			if (item != '' && item.length - 1) {
-				rowValueStr += item + ',';
-				rowValueArrCnt++;
-			}
-		});
-
-		// 양념 항목
-		param = [];
-		for (var i = 0; i < sauceArr.length; i++) {
-			sauceArr[i].value = sauceArr[i].value.trim();
-			param.push(sauceArr[i].value);
-		}
-
-		var sauceStr = '';
-		param.map(function(item) {
-			if (item != '' && item.length - 1) {
-				sauceStr += item + ',';
-				sauceArrCnt++;
-			}
-		});
-
-		// 양념 값
-		param = [];
-		for (var i = 0; i < sauceValueArr.length; i++) {
-			sauceValueArr[i].value = sauceValueArr[i].value.trim();
-			param.push(sauceValueArr[i].value);
-		}
-
-		var sauceValueStr = '';
-		param.map(function(item) {
-			if (item != '' && item.length - 1) {
-				sauceValueStr += item + ',';
-				sauceValueArrCnt++;
-			}
-		});
-
-		// 항목과 값 미입력 확인
-		if (rowArrCnt != rowValueArrCnt) {
-			alert('[재료]의 항목 또는 수량을 확인하시고, 빈칸을 채워주세요.');
-			$("#rowBox").attr("tabindex", -1).focus();
-			return;
-		}
-
-		if (sauceArrCnt != sauceValueArrCnt) {
-			alert('[양념]의 항목 또는 수량을 확인하시고, 빈칸을 채워주세요.');
-			$("#rowBox").attr("tabindex", -1).focus();
-			return;
-		}
-
-		// 마지막 구분자(,)제거
-		rowStr = rowStr.substr(0, rowStr.lastIndexOf(','));
-		rowValueStr = rowValueStr.substr(0, rowValueStr.lastIndexOf(','));
-		sauceStr = sauceStr.substr(0, sauceStr.lastIndexOf(','));
-
-		sauceValueStr = sauceValueStr.substr(0, sauceValueStr.lastIndexOf(','));
-
-		// 구성된 문자열을 input테그 값으로
-		document['do-modify-recipe-form'].rowArr.value = rowStr;
-		document['do-modify-recipe-form'].rowValueArr.value = rowValueStr;
-		document['do-modify-recipe-form'].sauceArr.value = sauceStr;
-		document['do-modify-recipe-form'].sauceValueArr.value = sauceValueStr;
-
-		form.rowArr.value = form.rowArr.value.trim();
-		form.rowValueArr.value = form.rowValueArr.value.trim();
-		form.sauceArr.value = form.sauceArr.value.trim();
-		form.sauceValueArr.value = form.sauceValueArr.value.trim();
-		// 재료양념 데이터 배열처리 스크립트 끝
-
-		if (form.rowArr.value == 0) {
-			alert('최소 1개 이상의 재료는 입력해주세요.');
-			$("#rowBox").attr("tabindex", -1).focus();
-			return;
-		}
-
-		// 대표사진 용량 제한
-		const maxSizeMb = 10;
-		const maxSize = maxSizeMb * 1204 * 1204;
-
-		const mainRecipeImgFileInput = form["file__recipe__0__extra__mainRecipeImg__1"];
-
-		if (mainRecipeImgFileInput.value) {
-			if (mainRecipeImgFileInput.files[0].size > maxSize) {
-				alert(maxSizeMb + "MB 이하의 파일을 업로드 해주세요.");
-				mainRecipeImgFileInput.focus();
-
-				return;
-			}
-		}
-
-		RecipeModify_submitFormDone = true;
-		form.submit();
-	}
-</script>
-<!-- 입력데이터 검사 스크립트 끝 -->
+<script src="/recipe/Modify.js" defer="defer"></script>
 
 <form class="bg-gray-200 py-4" action="../recipe/doModify" method="POST" enctype="multipart/form-data"
 	name="do-modify-recipe-form" onsubmit="RecipeModify_submitForm(this); return false;">
 
 	<input type="hidden" name="id" value="${ recipe.id }" />
 	<input type="hidden" name="replaceUri" value="${ param.replaceUri }" />
+	<!-- 조리순서 데이터 -->
+	<input type="hidden" name="orderBody" />
 
 	<div class="modify-box w-10/12 mx-auto">
 		<section class="bg-white rounded-md px-12 p-7 pb-12 mb-5">
@@ -217,7 +46,7 @@
 						</div>
 					</div>
 				</div>
-				
+
 				<!-- 레시피 기본정보 입력 -->
 				<div class="flex flex-col space-y-4 w-3/5 h-80 ml-10">
 					<!-- 제목 -->
@@ -559,27 +388,52 @@
 
 		<!-- 조리순서 영역 시작 -->
 		<section class="bg-white rounded-md p-12 mb-5">
-			<div class="text-3xl font-bold mb-8">조리순서</div>
+			<div class="text-3xl font-bold">조리순서</div>
 
-			<!-- 토스트 에디터 적용 -->
-			<div class="toast-ui-editor">
-				<script type="text/x-template"></script>
-			</div>
-
-			<div class="w-full flex flex-col space-y-8 px-5">
-				<c:forEach var="i" begin="1" end="4" step="1">
-					<div class="flex">
-						<div class="w-1/2 mr-5">
-							<img class="rounded-md" src="https://tse4.mm.bing.net/th?id=OIP.kwt4oKZDd-goVuBezaVQRQHaE7&pid=Api&P=0" alt="" />
+			<!-- 안내문구 -->
+			<div class="indicator w-full px-8 mt-6">
+				<div class="indicator-item indicator-top indicator-start badge badge-lg badge-warning ml-20">
+					<span class="p-4 text-xl text-white">작성예시</span>
+				</div>
+				<div class="w-full border border-yellow-500 rounded-xl py-5">
+					<ul class="flex flex-col space-y-1 list-disc text-lg text-gray-500 mx-10 mb-5">
+						<li>불조절, 시간 등 조리과정을 자세히 적어주세요.</li>
+						<span>
+							예 1) 10분간 익혀주세요 ▷ 10분간
+							<span class="text-red-500">약한불</span>
+							로 익혀주세요.
+						</span>
+						<span>
+							예 2) 팬에 기름을 두르고 고기를 볶아주세요. ▷ 팬에
+							<span class="text-red-500">미리 달군 뒤</span>
+							기름을 두르고
+							<span class="text-red-500">겉면이 갈색이 될때까지</span>
+							고기를 볶아주세요.
+						</span>
+						<li>조리과정 중 대체 가능한 재료가 있다면 알려주세요,</li>
+						<span>예) 꿀을 조금 넣어주세요 ▷ 꿀이 없는 경우, 설탕 1스푼으로 대체 가능합니다.</span>
+					</ul>
+					<div class="flex mx-10 mt-5">
+						<div class="w-1/3 mr-5">
+							<img class="rounded-md"
+								src="https://recipe1.ezmember.co.kr/cache/recipe/2022/05/21/47b48d0be053ddc35afc03b87e98ac3b1.jpg" alt="" />
 						</div>
-						<div class="w-5/6 p-5 flex">
+						<div class="flex w-full p-5">
 							<div class="w-10 h-10 bg-green-500 rounded-full">
-								<div class="font-bold text-center text-white pt-2">${ i }</div>
+								<div class="font-bold text-center text-white pt-2">1</div>
 							</div>
-							<div class="text-2xl text-gray-600 ml-5 mt-1 w-5/6">양파를 썬다. 일정하게 1cm간격이 되도록 썬다.</div>
+							<div class="text-xl text-gray-600 ml-5 mt-1 w-5/6">
+								<div>채소들을 썰어 준비해주세요.</div>
+								<div>이때, 서로 비슷한 크기, 모양으로 썰어주셔야 골고루 볶아져요.</div>
+							</div>
 						</div>
 					</div>
-				</c:forEach>
+				</div>
+			</div>
+
+			<!-- 토스트 에디터 적용 -->
+			<div class="toast-ui-editor mt-8">
+				<script type="text/x-template">${orderBody}</script>
 			</div>
 
 			<!-- 레시피 조작 영역 시작 -->

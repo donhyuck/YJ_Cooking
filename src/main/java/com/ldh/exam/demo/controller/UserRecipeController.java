@@ -188,12 +188,21 @@ public class UserRecipeController {
 		// 분류 선택시 카테고리 목록(새로 선택할 수 있도록 넘기는 분류정보)
 		List<Category> categories = boardService.getCategories();
 
+		// 조리순서
+		String orderBody = "";
+		CookingOrder cookingOrder = recipeService.getCookingOrderByRecipeId(id);
+
+		if (cookingOrder != null) {
+			orderBody = cookingOrder.getOrderBody();
+		}
+
 		model.addAttribute("recipe", recipe);
 		model.addAttribute("levelName", levelName);
 		model.addAttribute("rows", IngredientList.get(0));
 		model.addAttribute("rowValues", IngredientList.get(1));
 		model.addAttribute("sauces", IngredientList.get(2));
 		model.addAttribute("sauceValues", IngredientList.get(3));
+		model.addAttribute("orderBody", orderBody);
 		model.addAttribute("categoriesAboutRecipe", categoriesAboutRecipe);
 		model.addAttribute("categories", categories);
 
@@ -207,7 +216,7 @@ public class UserRecipeController {
 			@RequestParam(defaultValue = "0") int level, String tip, @RequestParam(defaultValue = "0") int sortId,
 			@RequestParam(defaultValue = "0") int methodId, @RequestParam(defaultValue = "0") int contentId,
 			@RequestParam(defaultValue = "0") int freeId, String rowArr, String rowValueArr, String sauceArr,
-			String sauceValueArr, MultipartRequest multipartRequest,
+			String sauceValueArr, String orderBody, MultipartRequest multipartRequest,
 			@RequestParam(defaultValue = "/") String replaceUri) {
 
 		// 입력 데이터 유효성 검사
@@ -233,6 +242,9 @@ public class UserRecipeController {
 
 		// 재료, 양념 갱신
 		recipeService.updateIngredient(recipe.getIngredientId(), rowArr, rowValueArr, sauceArr, sauceValueArr);
+
+		// 조리순서 갱신
+		recipeService.updateOrderAboutRecipe(id, orderBody);
 
 		// 레시피 등록시 대표 이미지 등록
 		Map<String, MultipartFile> fileMap = multipartRequest.getFileMap();

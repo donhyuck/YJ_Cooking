@@ -493,27 +493,52 @@
 
 		<!-- 조리순서 영역 시작 -->
 		<section class="bg-white rounded-md p-12 mb-5">
-			<div class="text-3xl font-bold mb-8">조리순서</div>
+			<div class="text-3xl font-bold">조리순서</div>
 
-			<!-- 토스트 에디터 적용 -->
-			<div class="toast-ui-editor">
-				<script type="text/x-template"></script>
-			</div>
-
-			<div class="w-full flex flex-col space-y-8 px-5">
-				<c:forEach var="i" begin="1" end="4" step="1">
-					<div class="flex">
-						<div class="w-1/2 mr-5">
-							<img class="rounded-md" src="https://tse4.mm.bing.net/th?id=OIP.kwt4oKZDd-goVuBezaVQRQHaE7&pid=Api&P=0" alt="" />
+			<!-- 안내문구 -->
+			<div class="indicator w-full px-8 mt-6">
+				<div class="indicator-item indicator-top indicator-start badge badge-lg badge-warning ml-20">
+					<span class="p-4 text-xl text-white">작성예시</span>
+				</div>
+				<div class="w-full border border-yellow-500 rounded-xl py-5">
+					<ul class="flex flex-col space-y-1 list-disc text-lg text-gray-500 mx-10 mb-5">
+						<li>불조절, 시간 등 조리과정을 자세히 적어주세요.</li>
+						<span>
+							예 1) 10분간 익혀주세요 ▷ 10분간
+							<span class="text-red-500">약한불</span>
+							로 익혀주세요.
+						</span>
+						<span>
+							예 2) 팬에 기름을 두르고 고기를 볶아주세요. ▷ 팬에
+							<span class="text-red-500">미리 달군 뒤</span>
+							기름을 두르고
+							<span class="text-red-500">겉면이 갈색이 될때까지</span>
+							고기를 볶아주세요.
+						</span>
+						<li>조리과정 중 대체 가능한 재료가 있다면 알려주세요,</li>
+						<span>예) 꿀을 조금 넣어주세요 ▷ 꿀이 없는 경우, 설탕 1스푼으로 대체 가능합니다.</span>
+					</ul>
+					<div class="flex mx-10 mt-5">
+						<div class="w-1/3 mr-5">
+							<img class="rounded-md"
+								src="https://recipe1.ezmember.co.kr/cache/recipe/2022/05/21/47b48d0be053ddc35afc03b87e98ac3b1.jpg" alt="" />
 						</div>
-						<div class="w-5/6 p-5 flex">
+						<div class="flex w-full p-5">
 							<div class="w-10 h-10 bg-green-500 rounded-full">
-								<div class="font-bold text-center text-white pt-2">${ i }</div>
+								<div class="font-bold text-center text-white pt-2">1</div>
 							</div>
-							<div class="text-2xl text-gray-600 ml-5 mt-1 w-5/6">양파를 썬다. 일정하게 1cm간격이 되도록 썬다.</div>
+							<div class="text-xl text-gray-600 ml-5 mt-1 w-5/6">
+								<div>채소들을 썰어 준비해주세요.</div>
+								<div>이때, 서로 비슷한 크기, 모양으로 썰어주셔야 골고루 볶아져요.</div>
+							</div>
 						</div>
 					</div>
-				</c:forEach>
+				</div>
+			</div>
+
+			<!-- 토스트 에디터 적용 -->
+			<div class="toast-ui-editor hidden">
+				<script type="text/x-template"></script>
 			</div>
 
 			<!-- 레시피 조작 영역 시작 -->

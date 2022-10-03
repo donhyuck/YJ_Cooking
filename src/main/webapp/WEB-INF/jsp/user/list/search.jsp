@@ -72,44 +72,62 @@
 				</div>
 
 				<!-- 추가 검색영역 시작-->
-				<div class="my-2">
-					<div class="text-gray-400 ml-2 mb-2">다른 레시피를 검색해보세요.</div>
-					<form class="flex space-x-4 w-full" onsubmit="RecipeSearch_submitForm(this); return false;">
-						<!-- 검색타입 -->
-						<select id="keywordType" name="keywordType" class="select select-lg select-bordered">
-							<c:if test="${ keywordTypeName == '미선택' }">
-								<option selected disabled class="text-lg bg-green-100">검색타입</option>
-							</c:if>
-							<c:if test="${ keywordTypeName != '미선택' }">
-								<option selected disabled value="${ param.keywordType }" class="text-lg bg-yellow-100">${ keywordTypeName }</option>
-							</c:if>
-							<option value="keywordTotal" class="text-lg">전체</option>
-							<option value="recipeTitle" class="text-lg">제목만</option>
-							<option value="titleAndBody" class="text-lg">제목과 내용</option>
-							<option value="recipeId" class="text-lg">등록번호</option>
-							<option value="recipeWriter" class="text-lg">회원닉네임</option>
-						</select>
-						<input type="text" name="searchKeyword" value="${ param.searchKeyword }" class="input input-lg input-bordered"
-							placeholder="레시피 기본정보">
+				<div class="flex justify-between w-full my-2">
+					<form class="flex space-x-4 w-full items-center mt-3" onsubmit="RecipeSearch_submitForm(this); return false;">
 
-						<!-- 검색분류 -->
-						<select id="rangeType" name="rangeType" class="select select-lg select-bordered">
-							<c:if test="${ rangeTypeName == '미선택' }">
-								<option selected disabled class="text-lg bg-green-100">분류타입</option>
-							</c:if>
-							<c:if test="${ rangeTypeName != '미선택' }">
-								<option selected disabled value="${ param.rangeType }" class="text-lg bg-yellow-100">${ rangeTypeName }</option>
-							</c:if>
-							<option value="total" class="text-lg">전체</option>
-							<option value="sort" class="text-lg">레시피종류</option>
-							<option value="method" class="text-lg">요리방법</option>
-							<option value="ingredient" class="text-lg">재료, 양념</option>
-							<option value="free" class="text-lg">상황</option>
-						</select>
-						<input type="text" name="searchRange" value="${ param.searchRange }" class="input input-lg input-bordered"
-							placeholder="검색조건을 설정해보세요.">
+						<!-- 검색영역 시작 -->
+						<div class="w-full">
+							<!-- 검색타입 -->
+							<select id="keywordType" name="keywordType" class="select select-lg select-bordered">
+								<c:if test="${ keywordTypeName == '미선택' }">
+									<option selected disabled class="text-lg bg-green-100">검색타입</option>
+								</c:if>
+								<c:if test="${ keywordTypeName != '미선택' }">
+									<option selected disabled value="${ param.keywordType }" class="text-lg bg-yellow-100">${ keywordTypeName }</option>
+								</c:if>
+								<option value="keywordTotal" class="text-lg">전체</option>
+								<option value="recipeTitle" class="text-lg">제목만</option>
+								<option value="titleAndBody" class="text-lg">제목과 내용</option>
+								<option value="recipeId" class="text-lg">등록번호</option>
+								<option value="recipeWriter" class="text-lg">회원닉네임</option>
+							</select>
+							<input type="text" name="searchKeyword" value="${ param.searchKeyword }" class="input input-lg input-bordered"
+								placeholder="레시피 기본정보">
 
-						<button type="submit" class="btn btn-lg btn-success">검색</button>
+							<!-- 검색분류 -->
+							<select id="rangeType" name="rangeType" class="select select-lg select-bordered">
+								<c:if test="${ rangeTypeName == '미선택' }">
+									<option selected disabled class="text-lg bg-green-100">분류타입</option>
+								</c:if>
+								<c:if test="${ rangeTypeName != '미선택' }">
+									<option selected disabled value="${ param.rangeType }" class="text-lg bg-yellow-100">${ rangeTypeName }</option>
+								</c:if>
+								<option value="total" class="text-lg">전체</option>
+								<option value="sort" class="text-lg">레시피종류</option>
+								<option value="method" class="text-lg">요리방법</option>
+								<option value="ingredient" class="text-lg">재료, 양념</option>
+								<option value="free" class="text-lg">상황</option>
+							</select>
+							<input type="text" name="searchRange" value="${ param.searchRange }" class="input input-lg input-bordered"
+								placeholder="검색조건을 설정해보세요.">
+
+							<button type="submit" class="btn btn-lg btn-success">검색</button>
+						</div>
+						<!-- 검색영역 끝 -->
+
+						<!-- 포함여부 -->
+						<div class="form-control w-60 flex border border-gray-200 rounded-xl p-2">
+							<label class="label cursor-pointer">
+								<span class="text-lg mr-3">전부포함</span>
+								<input type="radio" name="includeOption" value="selectAll" class="radio radio-primary"
+									${ (includeOption == 'selectAll') ? 'checked' : '' } />
+							</label>
+							<label class="label cursor-pointer">
+								<span class="text-lg mr-3">하나라도 포함</span>
+								<input type="radio" name="includeOption" value="atLeastOne" class="radio radio-primary"
+									${ (includeOption == 'atLeastOne') ? 'checked' : '' } />
+							</label>
+						</div>
 					</form>
 				</div>
 				<!-- 추가 선택영역 끝-->
@@ -119,7 +137,6 @@
 			<c:if test="${ searchRecipes.size() == 0 || searchRecipes == null }">
 				<div class="text-yellow-500 text-2xl ml-8 mb-10">검색결과를 찾을 수 없습니다.</div>
 			</c:if>
-			<!-- 안내영역 끝-->
 
 			<!-- 검색한 레시피 영역 시작 -->
 			<div class="grid grid-cols-4">

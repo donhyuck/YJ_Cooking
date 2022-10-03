@@ -298,9 +298,9 @@ public class RecipeService {
 
 	// 키워드로 레시피 검색
 	public List<Recipe> getSearchRecipes(String searchKeyword, String keywordType, String searchRange,
-			String rangeType) {
+			String rangeType, String includeOption) {
 
-		return recipeRepository.getSearchRecipes(searchKeyword, keywordType, searchRange, rangeType);
+		return recipeRepository.getSearchRecipes(searchKeyword, keywordType, searchRange, rangeType, includeOption);
 	}
 
 	// 조회수 증가

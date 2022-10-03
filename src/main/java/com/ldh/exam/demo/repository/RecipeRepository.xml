@@ -20,9 +20,9 @@
 	</select>
 
 	<select id="getIngredientByRecipeId" resultType="Ingredient">
-		SELECT *
-		FROM ingredient AS IG
-		WHERE recipeId = #{recipeId}
+		SELECT I.*
+		FROM ingredient AS I
+		WHERE I.recipeId = #{recipeId}
 	</select>
 
 	<select id="getForPrintRecipes" resultType="Recipe">
@@ -331,51 +331,66 @@
 				ON R.id = I.recipeId
 			</if>
 		</if>
-		WHERE 1
-		<if test="searchKeyword == '' and searchRange == ''">
-			AND R.id IS NULL
-		</if>
-		<if test="searchKeyword != ''">
-			<choose>
-				<when test="keywordType == 'keywordTotal'">
-					AND (
-					R.title LIKE CONCAT('%', #{searchKeyword}, '%')
-					OR R.body LIKE CONCAT('%', #{searchKeyword}, '%')
-					OR R.id LIKE #{searchKeyword}
-					OR M.nickname LIKE CONCAT('%', #{searchKeyword},'%')
-					)
-				</when>
-				<when test="keywordType == 'recipeTitle'">
-					AND R.title LIKE CONCAT('%', #{searchKeyword}, '%')
-				</when>
-				<when test="keywordType == 'titleAndBody'">
-					AND (
-					R.title LIKE CONCAT('%', #{searchKeyword}, '%')
-					OR R.body LIKE CONCAT('%', #{searchKeyword}, '%')
-					)
-				</when>
-				<when test="keywordType == 'recipeId'">
-					AND R.id LIKE #{searchKeyword}
-				</when>
-				<when test="keywordType == 'recipeWriter'">
-					AND M.nickname LIKE CONCAT('%', #{searchKeyword}, '%')
-				</when>
-				<otherwise>
-					AND R.id IS NULL
-				</otherwise>
-			</choose>
-		</if>
-		<if test="searchRange != ''">
-			AND G.categoryNameArr LIKE CONCAT('%', #{searchRange}, '%')
-			<if test="rangeType == 'ingredient' or rangeType == 'total'">
-				OR (
-			    I.rowArr LIKE CONCAT('%', #{searchRange}, '%')
-			    OR I.rowValueArr LIKE CONCAT('%', #{searchRange}, '%')
-			    OR I.sauceArr LIKE CONCAT('%', #{searchRange}, '%')
-			    OR I.sauceValueArr LIKE CONCAT('%', #{searchRange}, '%')
-				)
+		<where>
+			<if test="searchKeyword == '' and searchRange == ''">
+				AND R.id IS NULL
 			</if>
-		</if>
+			<if test="searchKeyword != ''">
+				<choose>
+					<when test="keywordType == 'keywordTotal'">
+						<if test="includeOption == 'selectAll'" >AND</if>
+						<if test="includeOption == 'atLeastOne'" >OR</if>
+						(
+						R.title LIKE CONCAT('%', #{searchKeyword}, '%')
+						OR R.body LIKE CONCAT('%', #{searchKeyword}, '%')
+						OR R.id LIKE #{searchKeyword}
+						OR M.nickname LIKE CONCAT('%', #{searchKeyword},'%')
+						)
+					</when>
+					<when test="keywordType == 'recipeTitle'">
+						<if test="includeOption == 'selectAll'" >AND</if>
+						<if test="includeOption == 'atLeastOne'" >OR</if>
+						R.title LIKE CONCAT('%', #{searchKeyword}, '%')
+					</when>
+					<when test="keywordType == 'titleAndBody'">
+						<if test="includeOption == 'selectAll'" >AND</if>
+						<if test="includeOption == 'atLeastOne'" >OR</if>
+						(
+						R.title LIKE CONCAT('%', #{searchKeyword}, '%')
+						OR R.body LIKE CONCAT('%', #{searchKeyword}, '%')
+						)
+					</when>
+					<when test="keywordType == 'recipeId'">
+						<if test="includeOption == 'selectAll'" >AND</if>
+						<if test="includeOption == 'atLeastOne'" >OR</if>
+						R.id LIKE #{searchKeyword}
+					</when>
+					<when test="keywordType == 'recipeWriter'">
+						<if test="includeOption == 'selectAll'" >AND</if>
+						<if test="includeOption == 'atLeastOne'" >OR</if>
+						M.nickname LIKE CONCAT('%', #{searchKeyword}, '%')
+					</when>
+					<otherwise>
+						<if test="includeOption == 'selectAll'" >AND</if>
+						<if test="includeOption == 'atLeastOne'" >OR</if>
+						R.id IS NULL
+					</otherwise>
+				</choose>
+			</if>
+			<if test="searchRange != ''">
+				<if test="includeOption == 'selectAll'" >AND</if>
+				<if test="includeOption == 'atLeastOne'" >OR</if>
+				G.categoryNameArr LIKE CONCAT('%', #{searchRange}, '%')
+				<if test="rangeType == 'ingredient' or rangeType == 'total'">
+					OR (
+				    I.rowArr LIKE CONCAT('%', #{searchRange}, '%')
+				    OR I.rowValueArr LIKE CONCAT('%', #{searchRange}, '%')
+				    OR I.sauceArr LIKE CONCAT('%', #{searchRange}, '%')
+				    OR I.sauceValueArr LIKE CONCAT('%', #{searchRange}, '%')
+					)
+				</if>
+			</if>
+		</where>
 		ORDER BY R.id DESC
 	</select>
 

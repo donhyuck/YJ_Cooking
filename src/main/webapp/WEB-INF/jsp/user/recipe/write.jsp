@@ -327,11 +327,13 @@
 			<div class="text-3xl font-bold">조리순서</div>
 
 			<!-- 안내문구 -->
-			<div class="indicator w-full px-8 mt-6">
-				<div class="indicator-item indicator-top indicator-start badge badge-lg badge-warning ml-20">
-					<span class="p-4 text-xl text-white">작성예시</span>
+			<div class="indicator w-full px-8 mt-8">
+				<div
+					class="toggleRecipeOrderBox indicator-item indicator-top indicator-start bg-white ml-16 px-4 py-2 border rounded-xl hover:bg-yellow-400">
+					<span class="text-xl">작성예시</span>
 				</div>
-				<div class="w-full border border-yellow-500 rounded-xl py-5">
+				<div class="recipeOrder text-lg mt-8 text-gray-500">조리순서를 자유롭게 작성해주시고, 작성예시를 참고해보세요</div>
+				<div class="recipeOrder w-full border border-yellow-500 rounded-xl py-7 hidden">
 					<ul class="flex flex-col space-y-1 list-disc text-lg text-gray-500 mx-10 mb-5">
 						<li>불조절, 시간 등 조리과정을 자세히 적어주세요.</li>
 						<span>
@@ -349,8 +351,8 @@
 						<li>조리과정 중 대체 가능한 재료가 있다면 알려주세요,</li>
 						<span>예) 꿀을 조금 넣어주세요 ▷ 꿀이 없는 경우, 설탕 1스푼으로 대체 가능합니다.</span>
 					</ul>
-					<div class="flex mx-10 mt-5">
-						<div class="w-1/3 mr-5">
+					<div class="mx-10 mt-5 border-t-2 border-gray-300 pt-5">
+						<div class="w-1/5 mr-5">
 							<img class="rounded-md"
 								src="https://recipe1.ezmember.co.kr/cache/recipe/2022/05/21/47b48d0be053ddc35afc03b87e98ac3b1.jpg" alt="" />
 						</div>

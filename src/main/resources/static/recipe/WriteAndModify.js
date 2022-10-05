@@ -68,6 +68,10 @@ $(document).ready(function() {
 		$(".changePhoto").toggleClass("hidden");
 	});
 
+	$(".toggleRecipeOrderBox").click(function() {
+		$(".recipeOrder").toggleClass("hidden");
+	});
+
 	// 프로필 미리보기 스크립트 시작
 	function readImage(input) {
 		// 인풋 태그에 파일이 있는 경우

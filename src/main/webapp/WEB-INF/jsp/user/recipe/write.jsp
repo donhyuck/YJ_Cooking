@@ -332,7 +332,7 @@
 					class="toggleRecipeOrderBox indicator-item indicator-top indicator-start bg-white ml-16 px-4 py-2 border rounded-xl hover:bg-yellow-400">
 					<span class="text-xl">작성예시</span>
 				</div>
-				<div class="recipeOrder text-lg mt-8 text-gray-500">조리순서를 자유롭게 작성해주시고, 작성예시를 참고해보세요</div>
+				<div class="recipeOrder text-lg mt-10 text-gray-500">조리순서를 자유롭게 작성해주시고, 작성예시를 참고해보세요</div>
 				<div class="recipeOrder w-full border border-yellow-500 rounded-xl py-7 hidden">
 					<ul class="flex flex-col space-y-1 list-disc text-lg text-gray-500 mx-10 mb-5">
 						<li>불조절, 시간 등 조리과정을 자세히 적어주세요.</li>
@@ -351,8 +351,8 @@
 						<li>조리과정 중 대체 가능한 재료가 있다면 알려주세요,</li>
 						<span>예) 꿀을 조금 넣어주세요 ▷ 꿀이 없는 경우, 설탕 1스푼으로 대체 가능합니다.</span>
 					</ul>
-					<div class="mx-10 mt-5 border-t-2 border-gray-300 pt-5">
-						<div class="w-1/5 mr-5">
+					<div class="flex mx-10 mt-5 border-t-2 border-gray-300 pt-5">
+						<div class="w-2/6 mr-5">
 							<img class="rounded-md"
 								src="https://recipe1.ezmember.co.kr/cache/recipe/2022/05/21/47b48d0be053ddc35afc03b87e98ac3b1.jpg" alt="" />
 						</div>
@@ -369,8 +369,35 @@
 				</div>
 			</div>
 
+			<!-- 요리순서 등록 영역 시작 -->
+			<div class="w-full mx-auto">
+				<c:forEach var="i" begin="1" end="3" step="1">
+					<div class="flex my-5 mx-8">
+						<!-- 사진등록 -->
+						<div class="w-5/12 mr-5 rounded-md">
+							<div class="w-full h-52">
+								<img id="preview-recipeOrder" class="object-contain recipeOrder rounded-md" />
+								<label for="input-recipeOrder" id="replyButtonForEmpty"
+									class="flex justify-center items-center rounded-md w-full h-full bg-gray-200 hover:bg-yellow-100 p-3">
+									<i class="fa-solid fa-plus mr-3 font-bold"></i>
+								</label>
+							</div>
+							<input type="file" id="input-recipeOrder" accept="image/gif, image/jpeg, image/png"
+								oninput="readImage(this); return false;" name="file__order__0__extra__recipeOrderImg__1"
+								class="hidden recipeOrderBox" />
+						</div>
+
+						<!-- 내용작성 -->
+						<div class="flex justify-center items-center w-full bg-gray-100 rounded-md p-4">
+							<textarea class="w-full h-full text-lg p-3 border border-gray-300 rounded-lg" rows="5" placeholder="요리순서를 입력해주세요."></textarea>
+						</div>
+					</div>
+				</c:forEach>
+			</div>
+			<!-- 요리순서 등록 영역 끝 -->
+
 			<!-- 토스트 에디터 적용 -->
-			<div class="toast-ui-editor mt-8">
+			<div class="toast-ui-editor mt-8 hidden">
 				<script type="text/x-template"></script>
 			</div>
 

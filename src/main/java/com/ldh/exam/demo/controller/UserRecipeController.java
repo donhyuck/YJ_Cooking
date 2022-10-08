@@ -111,6 +111,11 @@ public class UserRecipeController {
 
 		return "user/recipe/write";
 	}
+	
+	@RequestMapping("/test")
+	public String showtest() {
+		return "user/recipe/test";
+	}
 
 	// 레시피 등록하기 메서드
 	@RequestMapping("/doWrite")

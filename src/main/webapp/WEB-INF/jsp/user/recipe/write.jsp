@@ -369,32 +369,52 @@
 				</div>
 			</div>
 
-			<!-- 요리순서 등록 영역 시작 -->
+			<!-- 조리순서 등록 영역 시작 -->
 			<div class="w-full mx-auto">
-				<c:forEach var="i" begin="1" end="3" step="1">
-					<div class="flex my-5 mx-8">
-						<!-- 사진등록 -->
-						<div class="w-5/12 mr-5 rounded-md">
-							<div class="w-full h-52">
-								<img id="preview-recipeOrder" class="object-contain recipeOrder rounded-md" />
-								<label for="input-recipeOrder" id="replyButtonForEmpty"
-									class="flex justify-center items-center rounded-md w-full h-full bg-gray-200 hover:bg-yellow-100 p-3">
-									<i class="fa-solid fa-plus mr-3 font-bold"></i>
-								</label>
-							</div>
-							<input type="file" id="input-recipeOrder" accept="image/gif, image/jpeg, image/png"
-								oninput="readImage(this); return false;" name="file__order__0__extra__recipeOrderImg__1"
-								class="hidden recipeOrderBox" />
+				<!-- 첫번째 -->
+				<div class="flex my-5 mx-8">
+					<!-- 사진등록 -->
+					<div class="w-5/12 mr-5 rounded-md">
+						<div class="w-full h-52">
+							<img id="preview-recipeOrder" class="object-contain recipeOrder rounded-md" />
+							<label for="input-recipeOrder" id="replyButtonForEmpty"
+								class="flex justify-center items-center rounded-md w-full h-full bg-gray-200 hover:bg-yellow-100 p-3">
+								<i class="fa-solid fa-plus text-4xl"></i>
+							</label>
 						</div>
-
-						<!-- 내용작성 -->
-						<div class="flex justify-center items-center w-full bg-gray-100 rounded-md p-4">
-							<textarea class="w-full h-full text-lg p-3 border border-gray-300 rounded-lg" rows="5" placeholder="요리순서를 입력해주세요."></textarea>
-						</div>
+						<input type="file" id="input-recipeOrder" accept="image/gif, image/jpeg, image/png"
+							oninput="readImage(this); return false;" name="file__order__0__extra__recipeOrderImg__1"
+							class="hidden recipeOrderBox" />
 					</div>
-				</c:forEach>
+
+					<!-- 내용작성 -->
+					<div class="flex justify-center items-center w-full bg-gray-100 rounded-md p-4">
+						<textarea class="w-full h-full text-lg p-3 border border-gray-300 rounded-lg" rows="5" placeholder="조리순서를 입력해주세요."></textarea>
+					</div>
+				</div>
+				<!-- 두번째 -->
+				<div class="flex my-5 mx-8">
+					<!-- 사진등록 -->
+					<div class="w-5/12 mr-5 rounded-md">
+						<div class="w-full h-52">
+							<img id="preview-recipeOrder" class="object-contain recipeOrder rounded-md" />
+							<label for="input-recipeOrder" id="replyButtonForEmpty"
+								class="flex justify-center items-center rounded-md w-full h-full bg-gray-200 hover:bg-yellow-100 p-3">
+								<i class="fa-solid fa-plus text-4xl"></i>
+							</label>
+						</div>
+						<input type="file" id="input-recipeOrder" accept="image/gif, image/jpeg, image/png"
+							oninput="readImage(this); return false;" name="file__order__0__extra__recipeOrderImg__1"
+							class="hidden recipeOrderBox" />
+					</div>
+
+					<!-- 내용작성 -->
+					<div class="flex justify-center items-center w-full bg-gray-100 rounded-md p-4">
+						<textarea class="w-full h-full text-lg p-3 border border-gray-300 rounded-lg" rows="5" placeholder="조리순서를 입력해주세요."></textarea>
+					</div>
+				</div>
 			</div>
-			<!-- 요리순서 등록 영역 끝 -->
+			<!-- 조리순서 등록 영역 끝 -->
 
 			<!-- 토스트 에디터 적용 -->
 			<div class="toast-ui-editor mt-8 hidden">

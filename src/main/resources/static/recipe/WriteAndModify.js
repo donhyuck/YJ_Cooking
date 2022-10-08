@@ -54,8 +54,9 @@ const removeSauce = (obj) => {
 }
 // 재료양념 입력칸 추가/삭제 스크립트 끝
 
-// 페이지 시작시 스크롤 상단에 위치
 $(document).ready(function() {
+
+	// 페이지 시작시 스크롤 상단에 위치
 	$(function() {
 		window.scrollTo({
 			top: 0,
@@ -72,8 +73,8 @@ $(document).ready(function() {
 		$(".recipeOrder").toggleClass("hidden");
 	});
 
-	// 프로필 미리보기 스크립트 시작
-	function readImage(input) {
+	// 대표사진 미리보기 스크립트 시작
+	function readMainRecipeImage(input) {
 		// 인풋 태그에 파일이 있는 경우
 		if (input.files && input.files[0]) {
 
@@ -93,7 +94,8 @@ $(document).ready(function() {
 	const inputImage = document.getElementById("input-mainRecipe");
 
 	inputImage.addEventListener("change", e => {
-		readImage(e.target);
+		readMainRecipeImage(e.target);
 	});
-	// 프로필 미리보기 스크립트 끝
+	// 대표사진 미리보기 스크립트 끝
+
 });

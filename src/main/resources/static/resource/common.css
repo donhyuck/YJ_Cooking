@@ -24,7 +24,7 @@ body {
 .image {
 	display: block;
 	width: 340px;
-	height: 195px;
+	height: 190px;
 	object-fit: contain;
 	margin-top: 10px;
 }

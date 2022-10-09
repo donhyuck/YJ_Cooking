@@ -32,7 +32,7 @@ const add_rowBox = () => {
 	const newRowP = document.createElement('p');
 	newRowP.innerHTML = "<input name='row' type='text' class='input input-lg input-bordered w-60 text-center mb-5' placeholder='당근'/>"
 		+ "<input name='rowValue' type='text' class='input input-lg input-bordered w-48 text-center ml-12 mr-0 mb-5' placeholder='1/2개'/>"
-		+ "<div type='button' onclick='removeRow(this)' class='btn btn-circle ml-3 hover:text-red-400'>삭제</div>";
+		+ "<div type='button' onclick='removeRow(this);' class='btn btn-circle ml-3 hover:text-red-400'>삭제</div>";
 	rowBox.appendChild(newRowP);
 }
 
@@ -45,7 +45,7 @@ const add_sauceBox = () => {
 	const newSauceP = document.createElement('p');
 	newSauceP.innerHTML = "<input name='sauce' type='text' class='input input-lg input-bordered w-60 text-center mb-5' placeholder='소금'/>"
 		+ "<input name='sauceValue' type='text' class='input input-lg input-bordered w-48 text-center ml-12 mr-0 mb-5' placeholder='1t'/>"
-		+ "<div type='button' onclick='removeSauce(this)' class='btn btn-circle ml-3 hover:text-red-400'>삭제</div>";
+		+ "<div type='button' onclick='removeSauce(this);' class='btn btn-circle ml-3 hover:text-red-400'>삭제</div>";
 	sauceBox.appendChild(newSauceP);
 }
 
@@ -53,6 +53,23 @@ const removeSauce = (obj) => {
 	document.getElementById('sauceBox').removeChild(obj.parentNode);
 }
 // 재료양념 입력칸 추가/삭제 스크립트 끝
+
+// 조리순서 내용작성 박스 추가/삭제 스크립트 시작
+const add_orderBox = () => {
+	const orderBox = document.getElementById("order");
+	const newOrderP = document.createElement('p');
+	newOrderP.innerHTML = "<div class='flex justify-center items-center w-full bg-gray-100 rounded-md p-4 mt-7'>"
+		+ "<textarea class='w-full h-full text-lg p-3 border border-gray-300 rounded-lg' rows='5' placeholder='조리순서를 입력해주세요.'></textarea>"
+		+ "<div onclick='remove_orderBox(this);' class='btn btn-circle ml-3 hover:text-red-400'>"
+		+ "<span>삭제</span></div></div>";
+
+	orderBox.appendChild(newOrderP);
+}
+
+const remove_orderBox = (obj) => {
+	document.getElementById("order").removeChild(obj.parentNode.parentNode);
+}
+// 조리순서 내용작성 박스 추가/삭제 스크립트 끝
 
 $(document).ready(function() {
 

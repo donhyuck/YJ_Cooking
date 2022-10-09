@@ -1,36 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-	<div>이미지 테스트</div>
-	<input style="display: block;" type="file" id="input-multiple-image" multiple />
-	<div id="multiple-container"></div>
+<%@include file="../common/head.jspf"%>
 
-	<style>
-	#multiple-container {
-		display: grid;
-		grid-template-columns: 1fr 1fr 1fr;
-	}
-	
-	.image {
-		display: block;
-		width: 100%;
-	}
-	
-	.image-label {
-		position: relative;
-		bottom: 22px;
-		left: 5px;
-		color: white;
-		text-shadow: 2px 2px 2px black;
-	}
-	</style>
+<div>이미지 테스트</div>
+<input type="file" id="input-multiple-image" multiple="multiple" />
+<div id="multiple-container" class="w-96 grid"></div>
 
-	<script type="text/javascript">
+<style>
+.image {
+	display: block;
+	width: 200px;
+}
+</style>
+
+<script>
 	function readMultipleImage(input) {
 		const multipleContainer = document.getElementById("multiple-container");
 	
@@ -38,6 +20,7 @@
 		if (input.files) {
 			// 이미지 파일 검사 (생략)
 			console.log(input.files);
+			
 			// 유사배열을 배열로 변환 (forEach문으로 처리하기 위해)
 			const fileArr = Array.from(input.files);
 			const $colDiv1 = document.createElement("div");
@@ -57,14 +40,13 @@
 				$imgDiv.appendChild($label);
 				
 				reader.onload = e => {
-					$img.src = e.target.result
-	
-					$imgDiv.style.width = ($img.naturalWidth) * 0.2 + "px";
-					$imgDiv.style.height = ($img.naturalHeight) * 0.2 + "px";
+					$img.src = e.target.result;
 				};
 	
-				// 파일확인 콘솔
-				console.log(file.name)
+				// 파일 확인 콘솔
+				console.log(file.name);
+				
+				// 업록드 파일 이름 불러오기
 				if (index % 2 == 0) {
 					$colDiv1.appendChild($imgDiv);
 				} else {
@@ -79,11 +61,10 @@
 		};
 	};
 	
-	const inputMultipleImage = document.getElementById("input-multiple-image")
+	const inputMultipleImage = document.getElementById("input-multiple-image");
 	inputMultipleImage.addEventListener("change", e => {
 		readMultipleImage(e.target);
 	});
 	</script>
 
-</body>
-</html>
+<%@include file="../common/foot.jspf"%>

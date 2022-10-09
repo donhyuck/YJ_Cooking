@@ -20,3 +20,8 @@ html>body, html>body .toastui-editor-contents, html>body .ProseMirror,
 body {
 	min-width: 1040px;
 }
+
+.image {
+	display: block;
+	width: 200px;
+}

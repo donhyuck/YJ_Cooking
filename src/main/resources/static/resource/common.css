@@ -23,5 +23,8 @@ body {
 
 .image {
 	display: block;
-	width: 200px;
+	width: 340px;
+	height: 195px;
+	object-fit: contain;
+	margin-top: 10px;
 }

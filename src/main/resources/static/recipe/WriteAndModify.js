@@ -100,9 +100,9 @@ $(document).ready(function() {
 
 	// 조리순서 다중 미리보기 스크립트 시작
 	function readMultipleImage(input) {
-		
+
 		const multipleContainer = document.getElementById("multiple-container");
-		
+
 		// 인풋 태그에 파일들이 있는 경우
 		if (input.files) {
 			// 이미지 파일 검사 (생략)
@@ -133,7 +133,7 @@ $(document).ready(function() {
 				// 파일 확인 콘솔
 				console.log(file.name);
 
-				// 업록드 파일 이름 불러오기
+				// 업로드 파일 이름 불러오기
 				if (index % 2 == 0) {
 					$colDiv1.appendChild($imgDiv);
 				} else {

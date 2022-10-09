@@ -370,42 +370,47 @@
 			</div>
 
 			<!-- 조리순서 등록 영역 시작 -->
-			<div class="w-full mx-auto">
+			<div class="w-full mx-auto mt-5">
 
 				<!-- 사진등록 -->
-				<div>
-					<div class="w-5/12 mr-5 rounded-md">
-						<div class="w-full h-52">
-							<img id="preview-recipeOrder" class="object-contain recipeOrder rounded-md" />
-							<label for="input-recipeOrder" id="replyButtonForEmpty"
-								class="flex justify-center items-center rounded-md w-full h-full bg-gray-200 hover:bg-yellow-100 p-3">
-								<i class="fa-solid fa-plus text-4xl"></i>
-							</label>
-						</div>
-						<input type="file" id="input-recipeOrder" multiple="multiple" accept="image/gif, image/jpeg, image/png"
-							oninput="readImage(this); return false;" name="file__order__0__extra__recipeOrderImg__1"
-							class="hidden recipeOrderBox" />
-						<div id="multiple-container" class="w-96 grid"></div>
-					</div>
+				<div class="flex items-center">
+					<label class="flex justify-center items-center rounded-md w-80 h-12 bg-gray-200 hover:bg-yellow-100 ml-3 p-3"
+						for="input-recipeOrder">
+						<i class="fa-solid fa-plus text-2xl"></i>
+						<span class="text-lg font-bold ml-2">사진등록</span>
+					</label>
+					<div class="text-lg ml-6">사진등록버튼으로 조리순서 사진을 추가할 수 있어요.</div>
+
+					<input type="file" id="input-recipeOrder" multiple="multiple" accept="image/gif, image/jpeg, image/png"
+						oninput="readImage(this); return false;" name="file__order__0__extra__recipeOrderImg__1"
+						class="hidden recipeOrderBox" />
 				</div>
 
-				<!-- 조리순서 내용작성 영역 -->
-				<div class="recipeOrder-textarea">
-					<!-- 첫번째 -->
-					<div class="flex my-5 mx-8">
-						<div class="flex justify-center items-center w-full bg-gray-100 rounded-md p-4">
-							<textarea class="w-full h-full text-lg p-3 border border-gray-300 rounded-lg" rows="5"
-								placeholder="조리순서를 입력해주세요."></textarea>
-						</div>
+				<!-- 조리순서 내용작성 시작 -->
+				<div class="flex">
+					<!-- 사진등록 미리보기 -->
+					<div class="bg-gray-100 w-5/12 mt-5">
+						<div id="multiple-container" class="w-full text-right"></div>
 					</div>
-					<!-- 두번째 -->
-					<div class="flex my-5 mx-8">
-						<div class="flex justify-center items-center w-full bg-gray-100 rounded-md p-4">
-							<textarea class="w-full h-full text-lg p-3 border border-gray-300 rounded-lg" rows="5"
-								placeholder="조리순서를 입력해주세요."></textarea>
+
+					<div class="recipeOrder-textarea w-full">
+						<!-- 첫번째 -->
+						<div class="flex mt-8 mx-8">
+							<div class="flex justify-center items-center w-full bg-gray-100 rounded-md p-4">
+								<textarea class="w-full h-full text-lg p-3 border border-gray-300 rounded-lg" rows="5"
+									placeholder="조리순서를 입력해주세요."></textarea>
+							</div>
+						</div>
+						<!-- 두번째 -->
+						<div class="flex mt-8 mx-8">
+							<div class="flex justify-center items-center w-full bg-gray-100 rounded-md p-4">
+								<textarea class="w-full h-full text-lg p-3 border border-gray-300 rounded-lg" rows="5"
+									placeholder="조리순서를 입력해주세요."></textarea>
+							</div>
 						</div>
 					</div>
 				</div>
+				<!-- 조리순서 내용작성 끝 -->
 			</div>
 			<!-- 조리순서 등록 영역 끝 -->
 

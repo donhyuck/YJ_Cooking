@@ -6,7 +6,7 @@
 <script src="/recipe/WriteAndModify.js" defer="defer"></script>
 <script src="/recipe/Write.js" defer="defer"></script>
 
-<form class="bg-gray-200 py-4" action="../recipe/doWrite" method="POST" enctype="multipart/form-data"
+<form class="bg-gray-200 py-4 relative" action="../recipe/doWrite" method="POST" enctype="multipart/form-data"
 	name="do-write-recipe-form" onsubmit="RecipeWrite_submitForm(this); return false;">
 	<!-- 조리순서 데이터 -->
 	<input type="hidden" name="orderBody" />
@@ -379,6 +379,13 @@
 						<i class="fa-solid fa-plus text-2xl"></i>
 						<span class="text-lg font-bold ml-2">사진등록</span>
 					</label>
+
+					<!-- 일정 스크롤 아래로 가면 나타나는 사진등록 버튼 -->
+					<label for="input-recipeOrder"
+						class="ScrollBtn absolute hidden flex justify-center items-center w-24 h-10 left-4 bottom-80 bg-black hover:bg-yellow-100 hover:text-black rounded-lg text-white">
+						<i class="fa-solid fa-plus text-lg"></i>
+						<span class="text-md font-bold ml-1">사진</span>
+					</label>
 					<div class="text-lg ml-6">사진등록버튼으로 조리순서 사진을 추가할 수 있어요.</div>
 
 					<input type="file" id="input-recipeOrder" multiple="multiple" accept="image/gif, image/jpeg, image/png"
@@ -387,7 +394,7 @@
 				</div>
 
 				<!-- 조리순서 내용작성 시작 -->
-				<div class="flex">
+				<div class="ScrollMarkForOrderPhoto flex">
 					<!-- 사진등록 미리보기 -->
 					<div class="bg-gray-100 w-5/12 mt-5">
 						<div id="multiple-container" class="w-full text-right"></div>
@@ -427,16 +434,28 @@
 			<!-- 레시피 조작 영역 끝 -->
 
 			<!-- 스크롤 버튼 -->
-			<div class="fixed right-10 bottom-28 text-4xl text-center hover:text-yellow-400">
+			<div class="fixed right-12 bottom-52 text-4xl text-center hover:text-purple-500 hover:underline">
+				<button type="submit">
+					<i class="fa-solid fa-square-pen"></i>
+					<div class="text-xl font-black">등록</div>
+				</button>
+			</div>
+			<div class="fixed right-12 bottom-28 text-4xl text-center hover:text-red-500">
+				<button type="button" onclick="history.back();">
+					<i class="fa-solid fa-xmark"></i>
+					<div class="text-xl font-black">취소</div>
+				</button>
+			</div>
+			<div class="fixed right-20 bottom-6 text-4xl text-center hover:text-yellow-400">
 				<a href="#topTarget" class="scroll">
 					<i class="fa-solid fa-circle-arrow-up"></i>
-					<div class="text-xl font-black">TOP</div>
+					<div class="text-sm font-black">UP</div>
 				</a>
 			</div>
-			<div class="fixed right-7 bottom-6 text-4xl text-center hover:text-yellow-400">
+			<div class="fixed right-2 bottom-6 text-4xl text-center hover:text-yellow-400">
 				<a href="#downTarget" class="scroll">
 					<i class="fa-solid fa-circle-arrow-down"></i>
-					<div class="text-xl font-black">DOWN</div>
+					<div class="text-sm font-black">DOWN</div>
 				</a>
 			</div>
 		</section>

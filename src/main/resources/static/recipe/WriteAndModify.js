@@ -172,3 +172,18 @@ $(document).ready(function() {
 	// 조리순서 다중 미리보기 스크립트 끝
 
 });
+
+// 조리순서가 길어지면 좌측 사진등록 버튼이 나타나는 스크립트
+$(window).scroll(
+	function() {
+		//스크롤의 위치가 상단에서 450보다 크면  
+		// if($(window).scrollTop() > 2000){  
+
+		if (window.pageYOffset >= $('div.ScrollMarkForOrderPhoto').offset().top + 50) {
+			$('.ScrollBtn').removeClass("hidden");
+
+		} else {
+			$('.ScrollBtn').addClass("hidden");
+		};
+	}
+);

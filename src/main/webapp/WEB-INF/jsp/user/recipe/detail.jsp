@@ -323,12 +323,17 @@
 		<!-- 조리순서 영역 시작 -->
 		<section class="bg-white rounded-md p-12 mb-5">
 			<div class="text-3xl font-bold mb-8">조리순서</div>
-
-			<div class="text-lg">${orderBody}</div>
-
-			<!-- 토스트 에디터 적용 -->
-			<div class="toast-ui-viewer hidden">
-				<script type="text/x-template">${orderBody}</script>
+			<div class="flex flex-col space-y-5 w-full form-control">
+				<c:forEach var="cookingOrder" varStatus="status" items="${ cookingOrderList }">
+					<div class="text-lg flex items-center">
+						<div class="w-10 h-10 bg-green-500 rounded-full">
+							<div class="font-bold text-center text-white pt-2">${ status.count }</div>
+						</div>
+						<div class="text-xl ml-3 w-5/6">
+							<div>${ cookingOrder }</div>
+						</div>
+					</div>
+				</c:forEach>
 			</div>
 		</section>
 		<!-- 조리순서 영역 끝 -->

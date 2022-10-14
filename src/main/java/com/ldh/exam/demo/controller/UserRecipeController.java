@@ -80,12 +80,7 @@ public class UserRecipeController {
 		List<List<String>> IngredientList = recipeService.getIngredientById(recipe.getIngredientId());
 
 		// 조리순서
-		String orderBody = "";
-		CookingOrder cookingOrder = recipeService.getCookingOrderByRecipeId(id);
-
-		if (cookingOrder != null) {
-			orderBody = cookingOrder.getOrderBody();
-		}
+		List<String> cookingOrderList = recipeService.getCookingOrderListByRecipeId(id);
 
 		model.addAttribute("recipe", recipe);
 		model.addAttribute("replies", replies);
@@ -94,7 +89,7 @@ public class UserRecipeController {
 		model.addAttribute("rowValues", IngredientList.get(1));
 		model.addAttribute("sauces", IngredientList.get(2));
 		model.addAttribute("sauceValues", IngredientList.get(3));
-		model.addAttribute("orderBody", orderBody);
+		model.addAttribute("cookingOrderList", cookingOrderList);
 		model.addAttribute("actorCanMakeRP", actorCanLikeRd.isSuccess());
 		model.addAttribute("actorCanMakeScrap", actorCanScrapRd.isSuccess());
 
@@ -194,12 +189,7 @@ public class UserRecipeController {
 		List<Category> categories = boardService.getCategories();
 
 		// 조리순서
-		String orderBody = "";
-		CookingOrder cookingOrder = recipeService.getCookingOrderByRecipeId(id);
-
-		if (cookingOrder != null) {
-			orderBody = cookingOrder.getOrderBody();
-		}
+		List<String> cookingOrderList = recipeService.getCookingOrderListByRecipeId(id);
 
 		model.addAttribute("recipe", recipe);
 		model.addAttribute("levelName", levelName);
@@ -207,7 +197,7 @@ public class UserRecipeController {
 		model.addAttribute("rowValues", IngredientList.get(1));
 		model.addAttribute("sauces", IngredientList.get(2));
 		model.addAttribute("sauceValues", IngredientList.get(3));
-		model.addAttribute("orderBody", orderBody);
+		model.addAttribute("cookingOrderList", cookingOrderList);
 		model.addAttribute("categoriesAboutRecipe", categoriesAboutRecipe);
 		model.addAttribute("categories", categories);
 

@@ -324,7 +324,7 @@
 		<section class="bg-white rounded-md p-12 pr-3 mb-5">
 			<div class="text-3xl font-bold">조리순서</div>
 
-			<!-- 안내문구 -->
+			<!-- 안내문구 박스 시작 -->
 			<div class="indicator w-full px-8 mt-8">
 				<div
 					class="toggleRecipeOrderBox indicator-item indicator-top indicator-start bg-white ml-16 px-4 py-2 border rounded-xl hover:bg-yellow-400">
@@ -366,6 +366,7 @@
 					</div>
 				</div>
 			</div>
+			<!-- 안내문구 박스 끝 -->
 
 			<!-- 조리순서 등록 영역 시작 -->
 			<div class="w-full mx-auto mt-5">

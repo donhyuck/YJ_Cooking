@@ -317,9 +317,18 @@ public class RecipeService {
 	}
 
 	// 조리순서 가져오기
-	public CookingOrder getCookingOrderByRecipeId(int recipeId) {
+	public List<String> getCookingOrderListByRecipeId(int recipeId) {
 
-		return recipeRepository.getCookingOrderByRecipeId(recipeId);
+		List<String> cookingOrderList = new ArrayList<>();
+
+		// 조리순서 전체 데이터
+		CookingOrder cookingOrder = recipeRepository.getCookingOrderByRecipeId(recipeId);
+
+		for (String cookingOrderEach : cookingOrder.getOrderBody().split("@")) {
+			cookingOrderList.add(cookingOrderEach);
+		}
+
+		return cookingOrderList;
 	}
 
 	// 조회수 증가

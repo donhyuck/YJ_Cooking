@@ -54,12 +54,12 @@ function RecipeWrite_submitForm(form) {
 	var orderStr = '';
 	param.map(function(item) {
 		if (item != '' && item.length - 1) {
-			orderStr += item + '$';
+			orderStr += item + '@';
 		}
 	});
 	
-	// 마지막 구분자(^)제거
-	orderStr= orderStr.substr(0, orderStr.lastIndexOf('$'));
+	// 마지막 구분자(@)제거
+	orderStr= orderStr.substr(0, orderStr.lastIndexOf('@'));
 	
 	// 구성된 문자열을 input테그 값으로
 	document['do-write-recipe-form'].orderBody.value = orderStr;

@@ -59,7 +59,7 @@ const add_orderBox = () => {
 	const orderBox = document.getElementById("order");
 	const newOrderP = document.createElement('p');
 	newOrderP.innerHTML = "<div class='flex justify-center items-center w-full bg-gray-100 rounded-md p-4 mt-7'>"
-		+ "<textarea class='w-full h-full text-lg p-3 border border-gray-300 rounded-lg' rows='5' placeholder='조리순서를 입력해주세요.'></textarea>"
+		+ "<textarea name='orderText' class='w-full h-full text-lg p-3 border border-gray-300 rounded-lg' rows='5' placeholder='조리순서를 입력해주세요.'></textarea>"
 		+ "<div onclick='remove_orderBox(this);' class='btn btn-circle ml-3 hover:text-red-400'>"
 		+ "<span>삭제</span></div></div>";
 

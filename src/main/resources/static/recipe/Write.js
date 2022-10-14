@@ -42,7 +42,33 @@ function RecipeWrite_submitForm(form) {
 		return;
 	}
 
-	// 조리순서 데이터 처리
+	// 조리순서 데이터 처리 스크립트 시작
+	var orderTextArr = $('[name="orderText"]');
+	
+	var param = [];
+	for (var i = 0; i < orderTextArr.length; i++) {
+		orderTextArr[i].value = orderTextArr[i].value.trim();
+		param.push(orderTextArr[i].value);
+	}
+	
+	var orderStr = '';
+	param.map(function(item) {
+		if (item != '' && item.length - 1) {
+			orderStr += item + '$';
+		}
+	});
+	
+	// 마지막 구분자(^)제거
+	orderStr= orderStr.substr(0, orderStr.lastIndexOf('$'));
+	
+	// 구성된 문자열을 input테그 값으로
+	document['do-write-recipe-form'].orderBody.value = orderStr;
+
+	// 연결된 조리순서 텍스트를 폼데이터로
+	form.orderBody.value = form.orderBody.value.trim();
+	
+	// 조리순서 데이터 처리(토스트 에디터 버전)
+	/* 
 	const editor = $(form).find('.toast-ui-editor').data(
 		'data-toast-editor');
 	const markdown = editor.getMarkdown().trim();
@@ -52,6 +78,8 @@ function RecipeWrite_submitForm(form) {
 		return;
 	}
 	form.orderBody.value = markdown;
+	*/
+	// 조리순서 데이터 처리 스크립트 끝
 
 	// 재료양념 데이터 배열처리 스크립트 시작
 	var rowArrCnt = 0;
@@ -64,7 +92,7 @@ function RecipeWrite_submitForm(form) {
 	var sauceValueArr = $('[name="sauceValue"]');
 
 	// 재료 항목
-	var param = [];
+	param = [];
 	for (var i = 0; i < rowArr.length; i++) {
 		rowArr[i].value = rowArr[i].value.trim();
 		param.push(rowArr[i].value);

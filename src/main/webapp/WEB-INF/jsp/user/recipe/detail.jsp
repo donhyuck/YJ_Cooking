@@ -324,8 +324,10 @@
 		<section class="bg-white rounded-md p-12 mb-5">
 			<div class="text-3xl font-bold mb-8">조리순서</div>
 
+			<div class="text-lg">${orderBody}</div>
+
 			<!-- 토스트 에디터 적용 -->
-			<div class="toast-ui-viewer">
+			<div class="toast-ui-viewer hidden">
 				<script type="text/x-template">${orderBody}</script>
 			</div>
 		</section>

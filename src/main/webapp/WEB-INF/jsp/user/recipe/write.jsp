@@ -8,8 +8,6 @@
 
 <form class="bg-gray-200 py-4 relative" action="../recipe/doWrite" method="POST" enctype="multipart/form-data"
 	name="do-write-recipe-form" onsubmit="RecipeWrite_submitForm(this); return false;">
-	<!-- 조리순서 데이터 -->
-	<input type="hidden" name="orderBody" />
 
 	<div class="write-box w-10/12 mx-auto">
 
@@ -404,7 +402,7 @@
 						<div class="mt-8 ml-8">
 							<div id="order">
 								<div class="flex justify-center items-center w-full bg-gray-100 rounded-md p-4 mt-7">
-									<textarea class="w-full h-full text-lg p-3 border border-gray-300 rounded-lg" rows="5"
+									<textarea name="orderText" class="w-full h-full text-lg p-3 border border-gray-300 rounded-lg" rows="5"
 										placeholder="조리순서를 입력해주세요."></textarea>
 									<div class='w-16'></div>
 								</div>
@@ -416,6 +414,9 @@
 							</div>
 						</div>
 					</div>
+
+					<!-- 조리순서 데이터 -->
+					<input type="hidden" name="orderBody" />
 				</div>
 				<!-- 조리순서 내용작성 끝 -->
 			</div>

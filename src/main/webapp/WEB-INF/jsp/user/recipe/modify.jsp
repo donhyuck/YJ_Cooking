@@ -465,11 +465,17 @@
 					<div class="recipeOrder-textarea w-full">
 						<div class="mt-8 ml-8">
 							<div id="order">
-								<div class="flex justify-center items-center w-full bg-gray-100 rounded-md p-4 mt-7">
-									<textarea name="orderText" class="w-full h-full text-lg p-3 border border-gray-300 rounded-lg" rows="5"
-										placeholder="조리순서를 입력해주세요."></textarea>
-									<div class='w-16'></div>
-								</div>
+								<c:forEach var="cookingOrder" varStatus="status" items="${ cookingOrderList }">
+									<div class="flex justify-center items-center w-full bg-gray-100 rounded-md p-4 mt-7">
+										<textarea name="orderText" class="w-full h-full text-lg p-3 border border-gray-300 rounded-lg" rows="5"
+											placeholder="조리순서를 입력해주세요.">${ cookingOrder }</textarea>
+										<div>
+											<div onclick='remove_orderBox(this);' class='btn btn-circle ml-3 hover:text-red-400'>
+												<span>삭제</span>
+											</div>
+										</div>
+									</div>
+								</c:forEach>
 							</div>
 							<div class="ml-5 mt-4 font-bold">
 								<div onclick="add_orderBox();" class="flex justify-center items-center w-36 h-10 bg-yellow-200 rounded-lg">
@@ -482,18 +488,6 @@
 					<input type="hidden" name="orderBody" />
 				</div>
 				<!-- 조리순서 수정 영역 끝 -->
-
-				<!-- 기존 조리순서 데이터 -->
-				<div class="flex flex-col space-y-5 w-full form-control mt-8">
-					<c:forEach var="cookingOrder" varStatus="status" items="${ cookingOrderList }">
-						<div class="text-lg flex items-center">
-							<div class="w-10 h-10 bg-green-500 rounded-full">
-								<div class="font-bold text-center text-white pt-2">${ status.count }</div>
-							</div>
-							<textarea name="orderText" class="w-5/6 text-lg p-3 ml-3 border border-gray-300 rounded-lg" rows="3">${ cookingOrder }</textarea>
-						</div>
-					</c:forEach>
-				</div>
 
 				<!-- 레시피 조작 영역 시작 -->
 				<div class="btns flex justify-end space-x-5" id="downTarget">

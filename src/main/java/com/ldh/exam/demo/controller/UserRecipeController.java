@@ -188,7 +188,7 @@ public class UserRecipeController {
 		// 분류 선택시 카테고리 목록(새로 선택할 수 있도록 넘기는 분류정보)
 		List<Category> categories = boardService.getCategories();
 
-		// 조리순서
+		// 조리순서 가져오기
 		List<String> cookingOrderList = recipeService.getCookingOrderListByRecipeId(id);
 
 		model.addAttribute("recipe", recipe);

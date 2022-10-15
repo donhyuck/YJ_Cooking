@@ -334,6 +334,7 @@
 				<div class="recipeOrder w-full border border-yellow-500 rounded-xl py-7 hidden">
 					<ul class="flex flex-col space-y-1 list-disc text-lg text-gray-500 mx-10 mb-5">
 						<li>불조절, 시간 등 조리과정을 자세히 적어주세요.</li>
+						<li>사진만 등록하고 내용작성이 안되면, 누락될 수 있습니다.</li>
 						<span>
 							예 1) 10분간 익혀주세요 ▷ 10분간
 							<span class="text-red-500">약한불</span>

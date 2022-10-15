@@ -304,6 +304,7 @@ public class Rq {
 		return false;
 	}
 
+	// 프로필이미지 가져오기
 	public String getProfileImgUri(int membeId) {
 		return "/common/genFile/file/member/" + membeId + "/extra/profileImg/1";
 	}
@@ -313,6 +314,7 @@ public class Rq {
 		return "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png";
 	}
 
+	// 프로필이미지 미등록시
 	public String getProfileFallbackImgOnErrorHtml() {
 		return "this.src = '" + getProfileFallbackImgUri() + "'";
 	}
@@ -321,6 +323,7 @@ public class Rq {
 		return "$(this).remove();";
 	}
 
+	// 레시피 대표이미지 가져오기
 	public String getMainRecipeImgUri(int recipeId) {
 		return "/common/genFile/file/recipe/" + recipeId + "/extra/mainRecipeImg/1";
 	}
@@ -329,10 +332,12 @@ public class Rq {
 		return "https://cdn.pixabay.com/photo/2018/05/21/12/37/restaurant-3418134_960_720.png";
 	}
 
+	// 레시피 대표이미지 미등록시
 	public String getMainRecipeFallbackImgOnErrorHtml() {
 		return "this.src = '" + getMainRecipeFallbackImgUri() + "'";
 	}
 
+	// 댓글 요리후기이미지 가져오기
 	public String getReviewImgUri(int replyId) {
 		return "/common/genFile/file/reply/" + replyId + "/extra/reviewImg/1";
 	}
@@ -341,7 +346,22 @@ public class Rq {
 		return "https://via.placeholder.com/300/?text=*^_^*";
 	}
 
+	// 댓글 요리후기이미지 미등록시
 	public String getReviewFallbackImgOnErrorHtml() {
 		return "this.src = '" + getReviewFallbackImgUri() + "'";
+	}
+
+	// 레시피 조리순서이미지 가져오기
+	public String getRecipeOrderImgUri(int recipeId, int fileNoCount) {
+		return "/common/genFile/file/order/" + recipeId + "/extra/recipeOrderImg/"+ fileNoCount;
+	}
+
+	public String getOrderFallbackImgUri() {
+		return "https://via.placeholder.com/300/?text=*^_^*";
+	}
+
+	// 레시피 조리순서이미지 미등록시
+	public String getOrderFallbackImgOnErrorHtml() {
+		return "this.src = '" + getOrderFallbackImgUri() + "'";
 	}
 }

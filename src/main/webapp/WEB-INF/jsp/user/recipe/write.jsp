@@ -371,28 +371,25 @@
 
 			<!-- 조리순서 등록 영역 시작 -->
 			<div class="ScrollMarkForOrderPhoto w-full mt-5">
-
-				<div class="flex w-full">
-					<!-- 조리순서 사진등록 -->
-					<div class="flex w-6/12 h-full bg-gray-100 rounded-lg px-3">
-
-						<div class="flex justify-center items-center w-16 h-10 hover:bg-white rounded-xl my-auto mr-2">
-							<label for="input-recipeOrder">
-								<i class="fa-solid fa-camera text-3xl text-yellow-500"></i>
-							</label>
-							<input type="file" id="input-recipeOrder" accept="image/gif, image/jpeg, image/png"
-								oninput="readImage(this); return false;" name="file__order__0__extra__recipeOrderImg__1"
-								class="hidden recipeOrderBox" />
+				<div id="order" class="w-full">
+					<div class="flex">
+						<!-- 조리순서 사진등록 -->
+						<div class="flex w-6/12 h-full bg-gray-100 rounded-lg p-3">
+							<div class="flex justify-center items-center w-16 h-10 hover:bg-white rounded-xl my-auto mr-2">
+								<label for="input-recipeOrder">
+									<i class="fa-solid fa-camera text-3xl text-yellow-500"></i>
+								</label>
+								<input type="file" id="input-recipeOrder" accept="image/gif, image/jpeg, image/png"
+									oninput="readImage(this); return false;" name="file__order__0__extra__recipeOrderImg__1"
+									class="hidden recipeOrderBox" />
+							</div>
+							<!-- 미리보기 -->
+							<img class="object-contain w-full max-h-56 rounded-md" id="preview-recipeOrder"
+								src="https://via.placeholder.com/600/FFFFFF?text=..." />
 						</div>
-						<!-- 미리보기 -->
-						<div id="multiple-container" class="w-full h-60 text-right object-contain"></div>
-					</div>
-
-					<!-- 조리순서 내용작성 -->
-					<div class="recipeOrder-textarea w-full ml-6 my-auto">
-
-						<div id="order" class="">
-							<div class="flex justify-center items-center w-full bg-gray-100 rounded-md p-4">
+						<!-- 조리순서 내용작성 -->
+						<div class="recipeOrder-textarea w-full ml-6 my-auto">
+							<div class="flex justify-center items-center w-full bg-gray-100 rounded-md p-4 py-6">
 								<textarea name="orderText" class="w-full h-full text-lg p-3 border border-gray-300 rounded-lg" rows="5"
 									placeholder="조리순서를 입력해주세요."></textarea>
 								<div class='w-16'></div>

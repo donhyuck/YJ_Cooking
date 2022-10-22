@@ -58,16 +58,23 @@ const removeSauce = (obj) => {
 const add_orderBox = () => {
 	const orderBox = document.getElementById("order");
 	const newOrderP = document.createElement('p');
-	newOrderP.innerHTML = "<div class='flex justify-center items-center w-full bg-gray-100 rounded-md p-4 mt-7'>"
+	
+	newOrderP.innerHTML = "<div class='flex mt-5'><div class='flex w-6/12 h-full bg-gray-100 rounded-lg p-3'>"
+		+ "<div class='flex justify-center items-center w-16 h-10 hover:bg-white rounded-xl my-auto mr-2'>"
+		+ "<label for='input-recipeOrder'><i class='fa-solid fa-camera text-3xl text-yellow-500'></i></label>"
+		+ "<input type='file' id='input-recipeOrder' accept='image/gif, image/jpeg, image/png' oninput='readImage(this); return false;' name='file__order__0__extra__recipeOrderImg__1' class='hidden recipeOrderBox'/></div>"
+		+ "<img class='object-contain w-full max-h-56 rounded-md' id='preview-recipeOrder' src='https://via.placeholder.com/600/FFFFFF?text=...' /></div>"
+		+ "<div class='recipeOrder-textarea w-full ml-6 my-auto'>"
+		+ "<div class='flex justify-center items-center w-full bg-gray-100 rounded-md p-4 py-6'>"
 		+ "<textarea name='orderText' class='w-full h-full text-lg p-3 border border-gray-300 rounded-lg' rows='5' placeholder='조리순서를 입력해주세요.'></textarea>"
 		+ "<div onclick='remove_orderBox(this);' class='btn btn-circle ml-3 hover:text-red-400'>"
-		+ "<span>삭제</span></div></div>";
+		+ "<span>삭제</span></div></div></div></div></div>";
 
 	orderBox.appendChild(newOrderP);
 }
 
 const remove_orderBox = (obj) => {
-	document.getElementById("order").removeChild(obj.parentNode.parentNode);
+	document.getElementById("order").removeChild(obj.parentNode.parentNode.parentNode.parentNode);
 }
 // 조리순서 내용작성 박스 추가/삭제 스크립트 끝
 
@@ -108,12 +115,37 @@ $(document).ready(function() {
 	};
 
 	// input file에 change 이벤트 부여
-	const inputImage = document.getElementById("input-mainRecipe");
+	const inputMainRecipeImage = document.getElementById("input-mainRecipe");
 
-	inputImage.addEventListener("change", e => {
+	inputMainRecipeImage.addEventListener("change", e => {
 		readMainRecipeImage(e.target);
 	});
 	// 대표사진 미리보기 스크립트 끝
+
+	// 조리순서 미리보기 스크립트 시작
+	function readRecipeOrderImage(input) {
+		// 인풋 태그에 파일이 있는 경우
+		if (input.files && input.files[0]) {
+
+			// FileReader 인스턴스 생성
+			const reader = new FileReader();
+			// 이미지가 로드가 된 경우
+			reader.onload = e => {
+				const previewImage = document.getElementById("preview-recipeOrder");
+				previewImage.src = e.target.result;
+			}
+			// reader가 이미지 읽도록 하기
+			reader.readAsDataURL(input.files[0]);
+		}
+	};
+
+	// input file에 change 이벤트 부여
+	const inputRecipeOrderImage = document.getElementById("input-recipeOrder");
+
+	inputRecipeOrderImage.addEventListener("change", e => {
+		readRecipeOrderImage(e.target);
+	});
+	// 조리순서 미리보기 스크립트 끝
 
 	// 조리순서 다중 미리보기 스크립트 시작
 	function readMultipleImage(input) {
@@ -165,9 +197,10 @@ $(document).ready(function() {
 		};
 	};
 
-	const inputMultipleImage = document.getElementById("input-recipeOrder");
+	// 다중 이미지 등록 비활성화
+	// const inputMultipleImage = document.getElementById("input-recipeOrder");
 	inputMultipleImage.addEventListener("change", e => {
-		readMultipleImage(e.target);
+		// readMultipleImage(e.target);
 	});
 	// 조리순서 다중 미리보기 스크립트 끝
 

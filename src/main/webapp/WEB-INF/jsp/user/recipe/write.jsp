@@ -321,13 +321,13 @@
 		<!-- 레시피 분류 영역 끝 -->
 
 		<!-- 조리순서 영역 시작 -->
-		<section class="bg-white rounded-md p-12 pr-3 mb-5">
-			<div class="text-3xl font-bold">조리순서</div>
+		<section class="bg-white rounded-md py-12 px-5 mb-5">
+			<div class="text-3xl font-bold px-8">조리순서</div>
 
 			<!-- 안내문구 박스 시작 -->
 			<div class="indicator w-full px-8 mt-8">
 				<div
-					class="toggleRecipeOrderBox indicator-item indicator-top indicator-start bg-white ml-16 px-4 py-2 border rounded-xl hover:bg-yellow-400">
+					class="toggleRecipeOrderBox indicator-item indicator-top indicator-start bg-white ml-20 px-4 py-2 border rounded-xl hover:bg-yellow-400">
 					<span class="text-xl">작성예시</span>
 				</div>
 				<div class="recipeOrder text-lg mt-10 text-gray-500">조리순서를 자유롭게 작성해주시고, 작성예시를 참고해보세요</div>
@@ -370,58 +370,46 @@
 			<!-- 안내문구 박스 끝 -->
 
 			<!-- 조리순서 등록 영역 시작 -->
-			<div class="w-full mx-auto mt-5">
+			<div class="ScrollMarkForOrderPhoto w-full mt-5">
 
-				<!-- 사진등록 -->
-				<div class="flex items-center">
-					<label class="flex justify-center items-center rounded-md w-80 h-12 bg-gray-200 hover:bg-yellow-100 ml-3 p-3"
-						for="input-recipeOrder">
-						<i class="fa-solid fa-plus text-2xl"></i>
-						<span class="text-lg font-bold ml-2">사진등록</span>
-					</label>
+				<div class="flex w-full">
+					<!-- 조리순서 사진등록 -->
+					<div class="flex w-6/12 h-full bg-gray-100 rounded-lg px-3">
 
-					<!-- 일정 스크롤 아래로 가면 나타나는 사진등록 버튼 -->
-					<label for="input-recipeOrder"
-						class="ScrollBtn absolute hidden flex justify-center items-center w-24 h-10 left-4 bottom-80 bg-black hover:bg-yellow-100 hover:text-black rounded-lg text-white">
-						<i class="fa-solid fa-plus text-lg"></i>
-						<span class="text-md font-bold ml-1">사진</span>
-					</label>
-					<div class="text-lg ml-6">사진등록버튼으로 조리순서 사진을 추가할 수 있어요.</div>
-
-					<input type="file" id="input-recipeOrder" multiple="multiple" accept="image/gif, image/jpeg, image/png"
-						oninput="readImage(this); return false;" name="file__order__0__extra__recipeOrderImg__1"
-						class="hidden recipeOrderBox" />
-				</div>
-
-				<!-- 조리순서 내용작성 시작 -->
-				<div class="ScrollMarkForOrderPhoto flex">
-					<!-- 사진등록 미리보기 -->
-					<div class="bg-gray-100 w-5/12 mt-5">
-						<div id="multiple-container" class="w-full text-right"></div>
+						<div class="flex justify-center items-center w-16 h-10 hover:bg-white rounded-xl my-auto mr-2">
+							<label for="input-recipeOrder">
+								<i class="fa-solid fa-camera text-3xl text-yellow-500"></i>
+							</label>
+							<input type="file" id="input-recipeOrder" accept="image/gif, image/jpeg, image/png"
+								oninput="readImage(this); return false;" name="file__order__0__extra__recipeOrderImg__1"
+								class="hidden recipeOrderBox" />
+						</div>
+						<!-- 미리보기 -->
+						<div id="multiple-container" class="w-full h-60 text-right object-contain"></div>
 					</div>
 
-					<div class="recipeOrder-textarea w-full">
-						<div class="mt-8 ml-8">
-							<div id="order">
-								<div class="flex justify-center items-center w-full bg-gray-100 rounded-md p-4 mt-7">
-									<textarea name="orderText" class="w-full h-full text-lg p-3 border border-gray-300 rounded-lg" rows="5"
-										placeholder="조리순서를 입력해주세요."></textarea>
-									<div class='w-16'></div>
-								</div>
-							</div>
-							<div class="ml-5 mt-4 font-bold">
-								<div onclick="add_orderBox();" class="flex justify-center items-center w-36 h-10 bg-yellow-200 rounded-lg">
-									<span>추가</span>
-								</div>
+					<!-- 조리순서 내용작성 -->
+					<div class="recipeOrder-textarea w-full ml-6 my-auto">
+
+						<div id="order" class="">
+							<div class="flex justify-center items-center w-full bg-gray-100 rounded-md p-4">
+								<textarea name="orderText" class="w-full h-full text-lg p-3 border border-gray-300 rounded-lg" rows="5"
+									placeholder="조리순서를 입력해주세요."></textarea>
+								<div class='w-16'></div>
 							</div>
 						</div>
 					</div>
-
-					<!-- 조리순서 데이터 -->
-					<input type="hidden" name="orderBody" />
 				</div>
-				<!-- 조리순서 내용작성 끝 -->
+
+				<div class="font-bold flex justify-center pr-48 mt-3">
+					<div onclick="add_orderBox();"
+						class="flex justify-center items-center w-36 h-10 border-2 border-yellow-200 bg-white hover:bg-yellow-200 rounded-lg">
+						<span>추가</span>
+					</div>
+				</div>
 			</div>
+
+			<input type="hidden" name="orderBody" />
 			<!-- 조리순서 등록 영역 끝 -->
 
 			<!-- 토스트 에디터 적용 -->

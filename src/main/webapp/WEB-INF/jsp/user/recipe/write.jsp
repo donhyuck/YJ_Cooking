@@ -22,8 +22,7 @@
 				<div class="p-2">
 					<!-- 사진등록 -->
 					<input type="file" id="input-mainRecipe" accept="image/gif, image/jpeg, image/png"
-						oninput="readImage(this); return false;" name="file__recipe__0__extra__mainRecipeImg__1"
-						class="hover:bg-gray-300 w-full mainRecipeBox" />
+						name="file__recipe__0__extra__mainRecipeImg__1" class="hover:bg-gray-300 w-full mainRecipeBox" />
 				</div>
 			</div>
 
@@ -376,15 +375,14 @@
 						<!-- 조리순서 사진등록 -->
 						<div class="flex w-6/12 h-full bg-gray-100 rounded-lg p-3">
 							<div class="flex justify-center items-center w-16 h-10 hover:bg-white rounded-xl my-auto mr-2">
-								<label for="input-recipeOrder">
+								<label for="input-recipeOrder__1">
 									<i class="fa-solid fa-camera text-3xl text-yellow-500"></i>
 								</label>
-								<input type="file" id="input-recipeOrder" accept="image/gif, image/jpeg, image/png"
-									oninput="readImage(this); return false;" name="file__order__0__extra__recipeOrderImg__1"
-									class="hidden recipeOrderBox" />
+								<input type="file" id="input-recipeOrder__1" accept="image/gif, image/jpeg, image/png"
+									name="file__order__0__extra__recipeOrderImg__1" class="hidden recipeOrderBox" />
 							</div>
 							<!-- 미리보기 -->
-							<img class="object-contain w-full max-h-56 rounded-md" id="preview-recipeOrder"
+							<img class="object-contain w-full max-h-56 rounded-md" id="preview-recipeOrder__1"
 								src="https://via.placeholder.com/600/FFFFFF?text=..." />
 						</div>
 						<!-- 조리순서 내용작성 -->

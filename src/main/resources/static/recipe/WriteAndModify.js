@@ -127,14 +127,12 @@ $(document).ready(function() {
 	// 대표사진 미리보기 스크립트 끝
 
 	// 조리순서 미리보기 스크립트 시작
-	var inputNameStr = "";
-
 	function readRecipeOrderImage(order) {
 
 		// 조리순서 번호 가져오기
-		inputNameStr = order.name;
+		var inputNameStr = order.name;
 		var inputNum = inputNameStr.charAt(inputNameStr.length - 1);
-		alert(inputNum);
+		alert(inputNum); // 생략
 
 		// 인풋 태그에 파일이 있는 경우
 		if (order.files && order.files[0]) {
@@ -147,13 +145,12 @@ $(document).ready(function() {
 			}
 			// reader가 이미지 읽도록 하기
 			reader.readAsDataURL(order.files[0]);
-		}
+		};
 	};
 
 	// input file에 change 이벤트 부여
 	$(function() {
-		var imgButton = document.getElementsByClassName("recipeOrderBox");
-		$(imgButton).on('change', function() {
+		$(document).on("change", ".recipeOrderBox", function() {
 			readRecipeOrderImage(this);
 		});
 	});

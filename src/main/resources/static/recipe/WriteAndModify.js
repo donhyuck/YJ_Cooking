@@ -56,8 +56,19 @@ const removeSauce = (obj) => {
 
 // 조리순서 내용작성 박스 추가/삭제 스크립트 시작
 var orderNum = 1;
+var lastOrderNum = 1;
 
 const add_orderBox = () => {
+
+	// 수정페이지에서 마지막 번호 가져오기
+	if (document.getElementById("lastOrderNum")) {
+		lastOrderNum = document.getElementById("lastOrderNum").value;
+		// 처음 한번만 orderNum를 lastOrderNum로 설정하기
+		if (lastOrderNum > orderNum) {
+			orderNum = lastOrderNum;
+		}
+	}
+	
 	++orderNum;
 	const orderBox = document.getElementById("order");
 	const newOrderP = document.createElement('p');
@@ -76,7 +87,7 @@ const add_orderBox = () => {
 		+ "<span>삭제</span></div></div></div></div></div>";
 
 	orderBox.appendChild(newOrderP);
-}
+};
 
 const remove_orderBox = (obj) => {
 	document.getElementById("order").removeChild(obj.parentNode.parentNode.parentNode.parentNode);

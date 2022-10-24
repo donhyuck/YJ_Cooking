@@ -461,6 +461,8 @@
 						</div>
 					</c:forEach>
 				</div>
+				<!-- 마지막 순서번호 넘기기 -->
+				<input type="hidden" id="lastOrderNum" value="${ lastOrderNum }">
 
 				<div class="font-bold flex justify-center pr-48 mt-3">
 					<div onclick="add_orderBox();"

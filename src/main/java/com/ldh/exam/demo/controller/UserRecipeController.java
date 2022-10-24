@@ -106,7 +106,7 @@ public class UserRecipeController {
 
 		return "user/recipe/write";
 	}
-	
+
 	@RequestMapping("/test")
 	public String showtest() {
 		return "user/recipe/test";
@@ -198,6 +198,7 @@ public class UserRecipeController {
 		model.addAttribute("sauces", IngredientList.get(2));
 		model.addAttribute("sauceValues", IngredientList.get(3));
 		model.addAttribute("cookingOrderList", cookingOrderList);
+		model.addAttribute("lastOrderNum", cookingOrderList.size());
 		model.addAttribute("categoriesAboutRecipe", categoriesAboutRecipe);
 		model.addAttribute("categories", categories);
 

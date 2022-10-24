@@ -70,7 +70,8 @@ const add_orderBox = () => {
 		+ "<img class='object-contain w-full max-h-56 rounded-md' id='preview-recipeOrder__" + orderNum + "' src='https://via.placeholder.com/600/FFFFFF?text=...' /></div>"
 		+ "<div class='recipeOrder-textarea w-full ml-6 my-auto'>"
 		+ "<div class='flex justify-center items-center w-full bg-gray-100 rounded-md p-4 py-6'>"
-		+ "<textarea name='orderText' class='w-full h-full text-lg p-3 border border-gray-300 rounded-lg' rows='5' placeholder='조리순서를 입력해주세요.'></textarea>"
+		+ "<textarea name='orderText' class='w-full h-full text-lg p-3 border border-gray-300 rounded-lg' rows='5' "
+		+ "onkeyup='characterCheck(this);' onkeydown='characterCheck(this);' required placeholder='조리순서를 입력해주세요.'></textarea>"
 		+ "<div onclick='remove_orderBox(this);' class='btn btn-circle ml-3 hover:text-red-400'>"
 		+ "<span>삭제</span></div></div></div></div></div>";
 
@@ -80,6 +81,16 @@ const add_orderBox = () => {
 const remove_orderBox = (obj) => {
 	document.getElementById("order").removeChild(obj.parentNode.parentNode.parentNode.parentNode);
 }
+
+// 특수문자 입력 방지 스크립트
+function characterCheck(obj) {
+	// 방지할 특수문자 구분자로 사용되는 문자 '@' 제외
+	var regExp = /@/gi;
+	if (regExp.test(obj.value)) {
+		alert("해당 특수문자는 입력하실수 없습니다.");
+		obj.value = obj.value.substring(0, obj.value.length - 1); // 입력한 특수문자 한자리 지움
+	};
+};
 // 조리순서 내용작성 박스 추가/삭제 스크립트 끝
 
 $(document).ready(function() {
@@ -131,8 +142,7 @@ $(document).ready(function() {
 
 		// 조리순서 번호 가져오기
 		var inputNameStr = order.name;
-		var inputNum = inputNameStr.charAt(inputNameStr.length - 1);
-		alert(inputNum); // 생략
+		var inputNum = inputNameStr.substr(39);
 
 		// 인풋 태그에 파일이 있는 경우
 		if (order.files && order.files[0]) {

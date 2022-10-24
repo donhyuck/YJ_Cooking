@@ -44,29 +44,43 @@ function RecipeWrite_submitForm(form) {
 
 	// 조리순서 데이터 처리 스크립트 시작
 	var orderTextArr = $('[name="orderText"]');
-	
+
 	var param = [];
 	for (var i = 0; i < orderTextArr.length; i++) {
 		orderTextArr[i].value = orderTextArr[i].value.trim();
 		param.push(orderTextArr[i].value);
 	}
-	
+
 	var orderStr = '';
 	param.map(function(item) {
 		if (item != '' && item.length - 1) {
 			orderStr += item + '@';
 		}
 	});
-	
+
 	// 마지막 구분자(@)제거
-	orderStr= orderStr.substr(0, orderStr.lastIndexOf('@'));
-	
+	orderStr = orderStr.substr(0, orderStr.lastIndexOf('@'));
+
 	// 구성된 문자열을 input테그 값으로
 	document['do-write-recipe-form'].orderBody.value = orderStr;
 
 	// 연결된 조리순서 텍스트를 폼데이터로
 	form.orderBody.value = form.orderBody.value.trim();
-	
+
+	// 조리순서 이미지 번호 순서대로 처리
+	var orderImgArr = $(".recipeOrderBox");
+	// 작성내용 갯수만큼 검사
+	for (var i = 0; i < orderTextArr.length; i++) {
+		// 조리순서 이미지 번호 가져오기
+		var inputNameStr = orderImgArr[i].name;
+		// 내용작성에 해당하는 순서
+		var tempStrForNaming = "file__order__0__extra__recipeOrderImg__" + (i + 1);
+		// 순서가 일치하지 않을 경우, 작성순서에 따른 번호로 name값 변경
+		if (tempStrForNaming !== inputNameStr) {
+			orderImgArr[i].name = tempStrForNaming;
+		};
+	};
+
 	// 조리순서 데이터 처리(토스트 에디터 버전)
 	/* 
 	const editor = $(form).find('.toast-ui-editor').data(

@@ -343,7 +343,7 @@ public class Rq {
 	}
 
 	public String getReviewFallbackImgUri() {
-		return "https://via.placeholder.com/300/?text=*^_^*";
+		return "https://via.placeholder.com/300/?text=...";
 	}
 
 	// 댓글 요리후기이미지 미등록시
@@ -357,7 +357,7 @@ public class Rq {
 	}
 
 	public String getOrderFallbackImgUri() {
-		return "https://via.placeholder.com/300/?text=*^_^*";
+		return "https://via.placeholder.com/300/?text=...";
 	}
 
 	// 레시피 조리순서이미지 미등록시

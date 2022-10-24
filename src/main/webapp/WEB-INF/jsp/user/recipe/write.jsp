@@ -389,7 +389,7 @@
 						<div class="recipeOrder-textarea w-full ml-6 my-auto">
 							<div class="flex justify-center items-center w-full bg-gray-100 rounded-md p-4 py-6">
 								<textarea name="orderText" class="w-full h-full text-lg p-3 border border-gray-300 rounded-lg" rows="5"
-									placeholder="조리순서를 입력해주세요."></textarea>
+									onkeyup="characterCheck(this);" onkeydown="characterCheck(this);" required placeholder="조리순서를 입력해주세요."></textarea>
 								<div class='w-16'></div>
 							</div>
 						</div>

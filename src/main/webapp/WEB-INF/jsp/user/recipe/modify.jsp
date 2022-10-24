@@ -6,7 +6,7 @@
 <script src="/recipe/WriteAndModify.js" defer="defer"></script>
 <script src="/recipe/Modify.js" defer="defer"></script>
 
-<form class="bg-gray-200 py-4" action="../recipe/doModify" method="POST" enctype="multipart/form-data"
+<form class="bg-gray-200 py-4 relative" action="../recipe/doModify" method="POST" enctype="multipart/form-data"
 	name="do-modify-recipe-form" onsubmit="RecipeModify_submitForm(this); return false;">
 
 	<input type="hidden" name="id" value="${ recipe.id }" />
@@ -301,7 +301,7 @@
 					<i class="fa-solid fa-hand-pointer"></i>
 				</span>
 				<c:forEach var="category" items="${ categoriesAboutRecipe }">
-					<div class="mr-3">#${ category.name }</div>
+					<div class="mr-3 font-bold text-blue-500">#${ category.name }</div>
 				</c:forEach>
 			</div>
 			<!-- 레시피 분류 이름표시 영역 끝 -->
@@ -376,28 +376,25 @@
 						를 해주세요.
 					</li>
 				</ul>
-				<!-- <div>
-					<i class="fa-regular fa-circle-question"></i>
-					<span>어울리는 키워드가 없다면? 자유 카테고리에서 입력해보세요.</span>
-				</div> -->
 			</div>
 		</section>
 		<!-- 레시피 분류 영역 끝 -->
 
 		<!-- 조리순서 영역 시작 -->
-		<section class="bg-white rounded-md p-12 mb-5">
-			<div class="text-3xl font-bold">조리순서</div>
+		<section class="bg-white rounded-md py-12 px-5 mb-5">
+			<div class="text-3xl font-bold px-8">조리순서</div>
 
 			<!-- 안내문구 박스 시작 -->
 			<div class="indicator w-full px-8 mt-8">
 				<div
-					class="toggleRecipeOrderBox indicator-item indicator-top indicator-start bg-white ml-16 px-4 py-2 border rounded-xl hover:bg-yellow-400">
+					class="toggleRecipeOrderBox indicator-item indicator-top indicator-start bg-white ml-20 px-4 py-2 border rounded-xl hover:bg-yellow-400">
 					<span class="text-xl">작성예시</span>
 				</div>
 				<div class="recipeOrder text-lg mt-10 text-gray-500">조리순서를 자유롭게 작성해주시고, 작성예시를 참고해보세요</div>
 				<div class="recipeOrder w-full border border-yellow-500 rounded-xl py-7 hidden">
 					<ul class="flex flex-col space-y-1 list-disc text-lg text-gray-500 mx-10 mb-5">
 						<li>불조절, 시간 등 조리과정을 자세히 적어주세요.</li>
+						<li>사진만 등록하고 내용작성이 안되면, 누락될 수 있습니다.</li>
 						<span>
 							예 1) 10분간 익혀주세요 ▷ 10분간
 							<span class="text-red-500">약한불</span>
@@ -433,94 +430,82 @@
 			<!-- 안내문구 박스 끝 -->
 
 			<!-- 조리순서 수정 영역 시작 -->
-			<div class="w-full mx-auto mt-5">
-				<!-- 사진등록 -->
-				<div class="flex items-center">
-					<label class="flex justify-center items-center rounded-md w-80 h-12 bg-gray-200 hover:bg-yellow-100 ml-3 p-3"
-						for="input-recipeOrder">
-						<i class="fa-solid fa-plus text-2xl"></i>
-						<span class="text-lg font-bold ml-2">사진등록</span>
-					</label>
-
-					<!-- 일정 스크롤 아래로 가면 나타나는 사진등록 버튼 -->
-					<label for="input-recipeOrder"
-						class="ScrollBtn absolute hidden flex justify-center items-center w-24 h-10 left-4 bottom-80 bg-black hover:bg-yellow-100 hover:text-black rounded-lg text-white">
-						<i class="fa-solid fa-plus text-lg"></i>
-						<span class="text-md font-bold ml-1">사진</span>
-					</label>
-					<div class="text-lg ml-6">사진등록버튼으로 조리순서 사진을 추가할 수 있어요.</div>
-
-					<input type="file" id="input-recipeOrder" multiple="multiple" accept="image/gif, image/jpeg, image/png"
-						oninput="readImage(this); return false;" name="file__order__0__extra__recipeOrderImg__1"
-						class="hidden recipeOrderBox" />
-				</div>
-
-				<!-- 조리순서 내용작성 시작 -->
-				<div class="ScrollMarkForOrderPhoto flex">
-					<!-- 사진등록 미리보기 -->
-					<div class="bg-gray-100 w-5/12 mt-5">
-						<div id="multiple-container" class="w-full text-right"></div>
-					</div>
-
-					<div class="recipeOrder-textarea w-full">
-						<div class="mt-8 ml-8">
-							<div id="order">
-								<c:forEach var="cookingOrder" varStatus="status" items="${ cookingOrderList }">
-									<div class="flex justify-center items-center w-full bg-gray-100 rounded-md p-4 mt-7">
-										<textarea name="orderText" class="w-full h-full text-lg p-3 border border-gray-300 rounded-lg" rows="5"
-											placeholder="조리순서를 입력해주세요.">${ cookingOrder }</textarea>
-										<div>
-											<div onclick='remove_orderBox(this);' class='btn btn-circle ml-3 hover:text-red-400'>
-												<span>삭제</span>
-											</div>
-										</div>
-									</div>
-								</c:forEach>
+			<div class="ScrollMarkForOrderPhoto w-full mt-5">
+				<div id="order" class="w-full">
+					<c:forEach var="cookingOrder" varStatus="status" items="${ cookingOrderList }">
+						<div class="flex mt-5">
+							<!-- 조리순서 사진등록 -->
+							<div class="relative flex w-6/12 h-full bg-gray-100 rounded-lg p-3">
+								<div class="absolute top-5 left-4 w-10 h-10 bg-green-500 rounded-full">
+									<div class="font-bold text-center text-white pt-2">${ status.count }</div>
+								</div>
+								<div class="flex justify-center items-center w-16 h-10 hover:bg-white rounded-xl my-auto mr-2">
+									<label for="input-recipeOrder__${ status.count }">
+										<i class="fa-solid fa-camera text-3xl text-yellow-500"></i>
+									</label>
+									<input type="file" id="input-recipeOrder__${ status.count }" accept="image/gif, image/jpeg, image/png"
+										name="file__order__0__extra__recipeOrderImg__${ status.count }" class="hidden recipeOrderBox" />
+								</div>
+								<!-- 미리보기 -->
+								<img class="object-cover rounded-lg w-full h-60" id="preview-recipeOrder__${ status.count }"
+									src="${rq.getRecipeOrderImgUri(recipe.id, status.count)}" onerror="${rq.orderFallbackImgOnErrorHtml}" alt="" />
 							</div>
-							<div class="ml-5 mt-4 font-bold">
-								<div onclick="add_orderBox();" class="flex justify-center items-center w-36 h-10 bg-yellow-200 rounded-lg">
-									<span>추가</span>
+							<!-- 조리순서 내용작성 -->
+							<div class="recipeOrder-textarea w-full ml-6 my-auto">
+								<div class="flex justify-center items-center w-full bg-gray-100 rounded-md p-4 py-6">
+									<textarea name="orderText" class="w-full h-full text-lg p-3 border border-gray-300 rounded-lg" rows="5"
+										onkeyup="characterCheck(this);" onkeydown="characterCheck(this);" required placeholder="조리순서를 입력해주세요.">${ cookingOrder }</textarea>
+									<div class='w-16'></div>
 								</div>
 							</div>
 						</div>
+					</c:forEach>
+				</div>
+
+				<div class="font-bold flex justify-center pr-48 mt-3">
+					<div onclick="add_orderBox();"
+						class="flex justify-center items-center w-36 h-10 border-2 border-yellow-200 bg-white hover:bg-yellow-200 rounded-lg">
+						<span>추가</span>
 					</div>
-					<!-- 조리순서 데이터 -->
-					<input type="hidden" name="orderBody" />
 				</div>
-				<!-- 조리순서 수정 영역 끝 -->
+			</div>
 
-				<!-- 레시피 조작 영역 시작 -->
-				<div class="btns flex justify-end space-x-5" id="downTarget">
-					<button type="button" class="btn btn-lg btn-outline" onclick="history.back();">뒤로가기</button>
-					<button type="submit" class="btn btn-lg btn-primary btn-outline">수정하기</button>
-				</div>
-				<!-- 레시피 조작 영역 끝 -->
+			<!-- 조리순서 데이터 -->
+			<input type="hidden" name="orderBody" />
+			<!-- 조리순서 수정 영역 끝 -->
 
-				<!-- 스크롤 버튼 -->
-				<div class="fixed right-12 bottom-52 text-4xl text-center hover:text-purple-500 hover:underline">
-					<button type="submit">
-						<i class="fa-solid fa-bookmark"></i>
-						<div class="text-xl font-black">수정</div>
-					</button>
-				</div>
-				<div class="fixed right-12 bottom-28 text-4xl text-center hover:text-red-500">
-					<button type="button" onclick="history.back();">
-						<i class="fa-solid fa-xmark"></i>
-						<div class="text-xl font-black">취소</div>
-					</button>
-				</div>
-				<div class="fixed right-20 bottom-6 text-4xl text-center hover:text-yellow-400">
-					<a href="#topTarget" class="scroll">
-						<i class="fa-solid fa-circle-arrow-up"></i>
-						<div class="text-sm font-black">UP</div>
-					</a>
-				</div>
-				<div class="fixed right-2 bottom-6 text-4xl text-center hover:text-yellow-400">
-					<a href="#downTarget" class="scroll">
-						<i class="fa-solid fa-circle-arrow-down"></i>
-						<div class="text-sm font-black">DOWN</div>
-					</a>
-				</div>
+			<!-- 레시피 조작 영역 시작 -->
+			<div class="btns flex justify-end space-x-5 mt-5" id="downTarget">
+				<button type="button" class="btn btn-lg btn-outline" onclick="history.back();">뒤로가기</button>
+				<button type="submit" class="btn btn-lg btn-primary btn-outline">수정하기</button>
+			</div>
+			<!-- 레시피 조작 영역 끝 -->
+
+			<!-- 스크롤 버튼 -->
+			<div class="fixed right-12 bottom-52 text-4xl text-center hover:text-purple-500 hover:underline">
+				<button type="submit">
+					<i class="fa-solid fa-bookmark"></i>
+					<div class="text-xl font-black">수정</div>
+				</button>
+			</div>
+			<div class="fixed right-12 bottom-28 text-4xl text-center hover:text-red-500">
+				<button type="button" onclick="history.back();">
+					<i class="fa-solid fa-xmark"></i>
+					<div class="text-xl font-black">취소</div>
+				</button>
+			</div>
+			<div class="fixed right-20 bottom-6 text-4xl text-center hover:text-yellow-400">
+				<a href="#topTarget" class="scroll">
+					<i class="fa-solid fa-circle-arrow-up"></i>
+					<div class="text-sm font-black">UP</div>
+				</a>
+			</div>
+			<div class="fixed right-2 bottom-6 text-4xl text-center hover:text-yellow-400">
+				<a href="#downTarget" class="scroll">
+					<i class="fa-solid fa-circle-arrow-down"></i>
+					<div class="text-sm font-black">DOWN</div>
+				</a>
+			</div>
 		</section>
 		<!-- 조리순서 영역 끝 -->
 	</div>

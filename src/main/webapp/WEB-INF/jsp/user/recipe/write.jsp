@@ -404,6 +404,7 @@
 				</div>
 			</div>
 
+			<!-- 조리순서 데이터 -->
 			<input type="hidden" name="orderBody" />
 			<!-- 조리순서 등록 영역 끝 -->
 

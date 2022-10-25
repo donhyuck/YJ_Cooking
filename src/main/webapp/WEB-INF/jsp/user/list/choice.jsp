@@ -116,15 +116,16 @@
 
 				<!-- 추가 선택영역 시작-->
 				<div class="ml-auto mr-20 w-5/12">
-					<div class="text-gray-400 ml-2 mb-2">다른 레시피를 찾아보세요.</div>
+					<div class="text-gray-400 ml-2 mb-2">각 분류를 선택하시어 다른 레시피를 찾아보세요.(좌측부터 선택)</div>
 					<form class="flex w-full max-w-xs space-x-4">
 
 						<!-- 대분류 선택 -->
-						<select id="selectBoard" name="boardId" class="select select-lg select-bordered w-3/5" onChange="choiceCategory(this.value)">
+						<select id="selectBoard" name="boardId" class="select select-lg select-bordered w-3/5 hover:bg-green-100"
+							onChange="choiceCategory(this.value)">
 							<option selected disabled value="-1" class="text-lg bg-green-100">${ nowBoardName }</option>
-							<option value="0" class="text-lg">전체</option>
+							<option value="0" class="text-lg bg-white">전체</option>
 							<c:forEach var="board" items="${ boards }">
-								<option value="${ board.id }" class="text-lg">${ board.boardName }</option>
+								<option value="${ board.id }" class="text-lg bg-white">${ board.boardName }</option>
 							</c:forEach>
 						</select>
 						<!-- 소분류 선택 -->

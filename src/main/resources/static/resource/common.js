@@ -6,5 +6,18 @@ jQuery(document).ready(function($) {
 			scrollTop: $(this.hash).offset().top
 		}, 400);
 	});
+	
+	$(".toggleSearchBox").click(function() {
+		$(".searchBox").toggleClass("hidden");
+	});
+	
+	$(".toggleChangePhotoBox").click(function() {
+		$(".changePhoto").toggleClass("hidden");
+	});
+
+	$(".toggleRecipeOrderBox").click(function() {
+		$(".recipeOrder").toggleClass("hidden");
+	});
+
 });
 // 버튼 클릭시 이동 효과 스크립트 끝

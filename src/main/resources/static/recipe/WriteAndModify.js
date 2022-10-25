@@ -115,14 +115,6 @@ $(document).ready(function() {
 		});
 	});
 
-	$(".toggleChangePhotoBox").click(function() {
-		$(".changePhoto").toggleClass("hidden");
-	});
-
-	$(".toggleRecipeOrderBox").click(function() {
-		$(".recipeOrder").toggleClass("hidden");
-	});
-
 	// 대표사진 미리보기 스크립트 시작
 	function readMainRecipeImage(input) {
 		// 인풋 태그에 파일이 있는 경우

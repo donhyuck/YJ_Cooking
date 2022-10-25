@@ -324,8 +324,14 @@ public class RecipeService {
 		// 조리순서 전체 데이터
 		CookingOrder cookingOrder = recipeRepository.getCookingOrderByRecipeId(recipeId);
 
-		for (String cookingOrderEach : cookingOrder.getOrderBody().split("@")) {
-			cookingOrderList.add(cookingOrderEach);
+		if (cookingOrder != null) {
+			String orderStr = cookingOrder.getOrderBody();
+
+			if (orderStr != null) {
+				for (String cookingOrderEach : orderStr.split("@")) {
+					cookingOrderList.add(cookingOrderEach);
+				}
+			}
 		}
 
 		return cookingOrderList;

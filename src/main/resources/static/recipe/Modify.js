@@ -71,10 +71,6 @@ function RecipeModify_submitForm(form) {
 	// 조리순서 데이터 처리 스크립트 끝
 
 	// 재료양념 데이터 배열처리 스크립트 시작
-	var rowArrCnt = 0;
-	var rowValueArrCnt = 0;
-	var sauceArrCnt = 0;
-	var sauceValueArrCnt = 0;
 	var rowArr = $('[name="row"]');
 	var rowValueArr = $('[name="rowValue"]');
 	var sauceArr = $('[name="sauce"]');
@@ -91,7 +87,6 @@ function RecipeModify_submitForm(form) {
 	param.map(function(item) {
 		if (item != '' && item.length - 1) {
 			rowStr += item + ',';
-			rowArrCnt++;
 		}
 	});
 
@@ -106,7 +101,6 @@ function RecipeModify_submitForm(form) {
 	param.map(function(item) {
 		if (item != '' && item.length - 1) {
 			rowValueStr += item + ',';
-			rowValueArrCnt++;
 		}
 	});
 
@@ -121,7 +115,6 @@ function RecipeModify_submitForm(form) {
 	param.map(function(item) {
 		if (item != '' && item.length - 1) {
 			sauceStr += item + ',';
-			sauceArrCnt++;
 		}
 	});
 
@@ -136,22 +129,8 @@ function RecipeModify_submitForm(form) {
 	param.map(function(item) {
 		if (item != '' && item.length - 1) {
 			sauceValueStr += item + ',';
-			sauceValueArrCnt++;
 		}
 	});
-
-	// 항목과 값 미입력 확인
-	if (rowArrCnt != rowValueArrCnt) {
-		alert('[재료]의 항목 또는 수량을 확인하시고, 빈칸을 채워주세요.');
-		$("#rowBox").attr("tabindex", -1).focus();
-		return;
-	}
-
-	if (sauceArrCnt != sauceValueArrCnt) {
-		alert('[양념]의 항목 또는 수량을 확인하시고, 빈칸을 채워주세요.');
-		$("#rowBox").attr("tabindex", -1).focus();
-		return;
-	}
 
 	// 마지막 구분자(,)제거
 	rowStr = rowStr.substr(0, rowStr.lastIndexOf(','));

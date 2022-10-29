@@ -228,14 +228,14 @@
 					<div class="flex">
 						<div class="flex flex-col space-y-5 w-full">
 							<c:forEach var="row" items="${ rows }">
-								<input name="row" type="text" value="${ row }" class="input input-lg input-bordered w-60 text-center"
+								<input name="row" type="text" value="${ row }" class="input input-lg input-bordered w-60 text-center" required
 									placeholder="재료 이름" />
 							</c:forEach>
 						</div>
 						<div class="flex flex-col space-y-5 w-full text-center">
 							<c:forEach var="rowValue" items="${ rowValues }">
 								<input name="rowValue" type="text" value="${ rowValue }"
-									class="input input-lg input-bordered w-48 text-center ml-3" placeholder="재료 수량" />
+									class="input input-lg input-bordered w-48 text-center ml-3" required placeholder="재료 수량" />
 							</c:forEach>
 						</div>
 					</div>

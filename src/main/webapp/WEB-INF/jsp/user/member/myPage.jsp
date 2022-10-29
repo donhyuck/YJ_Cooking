@@ -6,33 +6,34 @@
 
 <!-- 프로필 박스 스크립트 시작-->
 <script type="text/javascript">
-	$(document).ready(function() {
-		// 변경버튼으로 박스토글
-		$(".toggleChangePhotoBox").click(function() {
-			$(".changePhoto").toggleClass("hidden");
-		});
-		
-		// 프로필 미리보기 스크립트 시작
-		function readImage(input) {
-			if (input.files && input.files[0]) {
+//변경버튼으로 박스토글
+$(".toggleChangePhotoBox").click(function() {
+	$(".changePhoto").toggleClass("hidden");
+});
 
-				const reader = new FileReader();
-				reader.onload = e => {
-					const previewImage = document.getElementById("preview-profile");
-					previewImage.src = e.target.result;
-				}
-				reader.readAsDataURL(input.files[0]);
+$(document).ready(function() {
+	
+	// 프로필 미리보기 스크립트 시작
+	function readImage(input) {
+		if (input.files && input.files[0]) {
+
+			const reader = new FileReader();
+			reader.onload = e => {
+				const previewImage = document.getElementById("preview-profile");
+				previewImage.src = e.target.result;
 			}
-		};
-		
-		// input file에 change 이벤트 부여
-		const inputImage = document.getElementById("input-profile");
+			reader.readAsDataURL(input.files[0]);
+		}
+	};
+	
+	// input file에 change 이벤트 부여
+	const inputImage = document.getElementById("input-profile");
 
-		inputImage.addEventListener("change", e => {
-			readImage(e.target);
-		});
-		// 프로필 미리보기 스크립트 끝
+	inputImage.addEventListener("change", e => {
+		readImage(e.target);
 	});
+	// 프로필 미리보기 스크립트 끝
+});
 </script>
 <!-- 프로필 박스 스크립트 끝-->
 

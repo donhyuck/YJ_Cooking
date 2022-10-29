@@ -399,13 +399,13 @@
 		SET regDate = NOW(),
 		updateDate = NOW(),
 		recipeId = #{recipeId},
-		`orderBody` = #{orderBody}
+		`body` = #{orderBody}
 	</insert>
 	
 	<update id="updateOrderAboutRecipe">
 		UPDATE cookingOrder
 		SET updateDate = NOW(),
-		`orderBody` = #{orderBody}
+		`body` = #{orderBody}
 		WHERE recipeId = #{recipeId}
 	</update>
 	

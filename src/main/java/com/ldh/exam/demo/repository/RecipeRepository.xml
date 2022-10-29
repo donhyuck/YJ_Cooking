@@ -410,9 +410,9 @@
 	</update>
 	
 	<select id="getCookingOrderByRecipeId" resultType="CookingOrder">
-		SELECT CO.*
-		FROM cookingOrder AS CO
-		WHERE CO.recipeId = #{recipeId}
+		SELECT *
+		FROM cookingOrder
+		WHERE recipeId = #{recipeId}
 	</select>
 
 	<select id="getLastInsertId" resultType="int">

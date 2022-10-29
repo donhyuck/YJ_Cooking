@@ -144,7 +144,7 @@ public class UserRecipeController {
 		boardService.updateRecipeId(guideId, id);
 		recipeService.updateRecipeIdForIngredient(ingredientId, id);
 
-		// 조리순서 등록
+		// 조리순서 내용등록
 		recipeService.insertOrderAboutRecipe(id, orderBody);
 
 		// 레시피 등록시 대표 이미지 등록

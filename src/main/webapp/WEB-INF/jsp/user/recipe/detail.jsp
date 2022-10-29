@@ -248,7 +248,9 @@
 					<li>
 						<span class="text-yellow-400">스크랩</span>
 						하여
-						<span class="link link-neutral">레시피 노트</span>
+						<a href="/user/list/note">
+							<span class="link link-neutral">레시피 노트</span>
+						</a>
 						에서 모아볼 수 있어요.
 					</li>
 					<li>

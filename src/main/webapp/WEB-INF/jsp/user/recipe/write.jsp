@@ -218,10 +218,9 @@
 				<div class="w-1/2">
 					<div class="font-bold mb-5">[ 양념 ]</div>
 					<div id="sauceBox">
-						<input name="sauce" type="text" class="input input-lg input-bordered w-60 text-center mb-5" required
-							placeholder="간장" />
+						<input name="sauce" type="text" class="input input-lg input-bordered w-60 text-center mb-5" placeholder="간장" />
 						<input name="sauceValue" type="text" class="input input-lg input-bordered w-48 text-center ml-10 mr-0 mb-5"
-							required placeholder="2T" />
+							placeholder="2T" />
 						<input name="sauce" type="text" class="input input-lg input-bordered w-60 text-center mb-5" placeholder="고추장" />
 						<input name="sauceValue" type="text" class="input input-lg input-bordered w-48 text-center ml-10 mr-0 mb-5"
 							placeholder="3T" />

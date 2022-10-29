@@ -325,7 +325,7 @@ public class RecipeService {
 		CookingOrder cookingOrder = recipeRepository.getCookingOrderByRecipeId(recipeId);
 
 		if (cookingOrder != null) {
-			String orderStr = cookingOrder.getOrderBody();
+			String orderStr = cookingOrder.getBody();
 
 			if (orderStr != null) {
 				for (String cookingOrderEach : orderStr.split("@")) {

@@ -41,7 +41,7 @@
 				<div class="toggleSearchBox inline py-3 px-5 border rounded-xl bg-white hover:bg-yellow-400">
 					<span class="text-xl text-center">검색안내</span>
 				</div>
-				<div class="searchBox w-11/12 py-4 mx-auto border border-yellow-500 rounded-xl">
+				<div class="searchBox w-11/12 py-4 mx-auto border border-yellow-500 rounded-xl hidden">
 					<ul class="flex flex-col space-y-1 list-disc text-lg text-gray-600 mx-10">
 						<span class="text-xl font-bold text-purple-400">검색조건 1</span>
 						<li>

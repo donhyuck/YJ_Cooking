@@ -113,8 +113,8 @@ function checkNicknameAndEmailDup(el) {
 	}, 'json');
 };
 const checkNicknameAndEmailDupAsDebounce = _.debounce(checkNicknameAndEmailDup, 300);
-
 // 닉네임, 이메일 확인 스크립트 끝
+
 var autoHypenPhone = function(str) {
 	str = str.replace(/[^0-9]/g, '');
 	var tmp = '';

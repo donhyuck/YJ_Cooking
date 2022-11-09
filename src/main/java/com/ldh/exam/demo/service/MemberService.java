@@ -61,12 +61,18 @@ public class MemberService {
 		if (loginPw != null) {
 			attrService.remove("member", id, "extra", "useTempPassword");
 		}
+		
+		// 인증코드 회수
+		attrService.remove("member", id, "extra", "memberAuthKey");
 
 		memberRepository.doModify(id, loginPw, nickname, cellphoneNo, email);
 	}
 
 	// 회원 탈퇴하기
 	public void doLeave(int memberId) {
+		
+		// 인증코드 회수
+		attrService.remove("member", memberId, "extra", "memberAuthKey");
 
 		memberRepository.doLeave(memberId);
 	}
@@ -95,7 +101,7 @@ public class MemberService {
 		String authKey = Ut.getTempPassword(10);
 
 		// 생성된 배열을 인증코드로 설정
-		attrService.setValue("member", memberId, "extra", "memberModifyAuthKey", authKey, Ut.getDateStrLater(60 * 5));
+		attrService.setValue("member", memberId, "extra", "memberAuthKey", authKey, Ut.getDateStrLater(60 * 5));
 
 		return authKey;
 	}
@@ -104,7 +110,7 @@ public class MemberService {
 	public ResultData checkAuthKey(int memberId, String authKey) {
 
 		// 설정된 인증코드와 url접근과 비교
-		String saved = attrService.getValue("member", memberId, "extra", "memberModifyAuthKey");
+		String saved = attrService.getValue("member", memberId, "extra", "memberAuthKey");
 
 		if (saved.equals(authKey) == false) {
 			return ResultData.from("F-1", "일치하지 않거나 만료되었습니다.");

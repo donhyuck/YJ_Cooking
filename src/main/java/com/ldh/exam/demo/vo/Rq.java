@@ -330,6 +330,7 @@ public class Rq {
 
 	public String getMainRecipeFallbackImgUri() {
 		return "https://cdn.pixabay.com/photo/2018/05/21/12/37/restaurant-3418134_960_720.png";
+		// return "/common/genFile/file/etc/1/extra/defaultImg/1";
 	}
 
 	// 레시피 대표이미지 미등록시

@@ -60,6 +60,8 @@ public class MyWebMvcConfigurer implements WebMvcConfigurer {
 		ir.addPathPatterns("/user/member/myPage");
 		ir.addPathPatterns("/user/member/modify");
 		ir.addPathPatterns("/user/member/doModify");
+		ir.addPathPatterns("/user/member/leave");
+		ir.addPathPatterns("/user/member/doLeave");
 		ir.addPathPatterns("/user/reaction/doMakeLike");
 		ir.addPathPatterns("/user/reaction/doCancelLike");
 		ir.addPathPatterns("/user/reaction/doMakeScrap");
@@ -75,5 +77,6 @@ public class MyWebMvcConfigurer implements WebMvcConfigurer {
 		ir.addPathPatterns("/user/member/findLoginPw");
 		ir.addPathPatterns("/user/member/doFindLoginPw");
 		ir.addPathPatterns("/user/member/getLoginIdDup");
+		ir.addPathPatterns("/user/member/getNicknameAndEmailDup");
 	}
 }

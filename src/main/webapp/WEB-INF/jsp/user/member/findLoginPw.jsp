@@ -42,7 +42,7 @@
 
 			<!-- 안내영역 -->
 			<div class="text-3xl font-bold mb-2">비밀번호 찾기</div>
-			<div class="text-lg text-gray-500">회원가입시 입력한 닉네임, 이메일과 아이디를 입력해주세요.</div>
+			<div class="text-lg text-gray-500">회원가입시 입력한 아이디와 이메일을 입력해주세요.</div>
 
 			<!-- 아이디, 이메일 입력 -->
 			<div>

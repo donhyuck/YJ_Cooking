@@ -291,6 +291,16 @@
 		DELETE FROM recipe
 		WHERE id = #{id}
 	</delete>
+	
+	<delete id="deleteIngredient">
+		DELETE FROM ingredient
+		WHERE recipeId = #{recipeId}
+	</delete>
+	
+	<delete id="deleteOrderAboutRecipe">
+		DELETE FROM cookingOrder
+		WHERE recipeId = #{recipeId}
+	</delete>
 
 	<select id="getSearchRecipes" resultType="Recipe">
 		SELECT R.*,

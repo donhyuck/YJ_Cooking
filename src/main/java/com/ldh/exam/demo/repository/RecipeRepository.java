@@ -51,6 +51,10 @@ public interface RecipeRepository {
 
 	public void deleteRecipe(int id);
 
+	public void deleteIngredient(int recipeId);
+
+	public void deleteOrderAboutRecipe(int recipeId);
+
 	public List<Recipe> getSearchRecipes(String searchKeyword, String keywordType, String searchRange, String rangeType,
 			String includeOption);
 

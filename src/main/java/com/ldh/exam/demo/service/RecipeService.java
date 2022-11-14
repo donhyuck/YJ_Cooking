@@ -242,7 +242,13 @@ public class RecipeService {
 
 	// 레시피 삭제하기
 	public void deleteRecipe(int id) {
-
+		
+		// 해당 재료,양념 정보 삭제
+		recipeRepository.deleteIngredient(id);
+		
+		// 해당 조리정보 정보 삭제
+		recipeRepository.deleteOrderAboutRecipe(id);
+		
 		recipeRepository.deleteRecipe(id);
 	}
 

@@ -114,4 +114,10 @@ public class BoardService {
 		return boardRepository.getCategoriesAboutRecipe(recipeId);
 	}
 
+	// 레시피 삭제시 해당 가이드 삭제
+	public void deleteGuide(int recipeId) {
+		
+		boardRepository.deleteGuide(recipeId);
+	}
+
 }

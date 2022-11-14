@@ -269,6 +269,9 @@ public class UserRecipeController {
 			return rq.jsHistoryBack(actorCanDeleteRd.getMsg());
 		}
 
+		// 부가정보 삭제
+		boardService.deleteGuide(id);
+
 		// 삭제처리
 		recipeService.deleteRecipe(id);
 

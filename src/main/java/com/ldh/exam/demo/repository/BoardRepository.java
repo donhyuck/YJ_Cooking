@@ -29,4 +29,6 @@ public interface BoardRepository {
 
 	public List<Category> getCategoriesAboutRecipe(int recipeId);
 
+	public void deleteGuide(int recipeId);
+
 }

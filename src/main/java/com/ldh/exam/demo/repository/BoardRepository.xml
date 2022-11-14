@@ -69,5 +69,10 @@
 		`freeId` = #{freeId}
 		WHERE id = #{id}
 	</update>
+	
+	<delete id="deleteGuide">
+		DELETE FROM guide
+		WHERE recipeId = #{recipeId}
+	</delete>
 
 </mapper> 

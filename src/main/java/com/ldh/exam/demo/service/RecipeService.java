@@ -166,32 +166,31 @@ public class RecipeService {
 	}
 
 	// 레시피 등록하기
-	public int writeRecipe(int memberId, String title, String body, int amount, int time, int level, int guideId,
-			int ingredientId, String tip) {
+	public int writeRecipe(int memberId, String title, String body, int amount, int time, int level, String tip) {
 
-		recipeRepository.writeRecipe(memberId, title, body, amount, time, level, guideId, ingredientId, tip);
+		recipeRepository.writeRecipe(memberId, title, body, amount, time, level, tip);
 
 		return recipeRepository.getLastInsertId();
 	}
 
 	// 재료, 양념 데이터 추가
-	public int insertIngredient(String rowArr, String rowValueArr, String sauceArr, String sauceValueArr) {
+	public int makeIngredient(int recipeId, String rowArr, String rowValueArr, String sauceArr, String sauceValueArr) {
 
-		recipeRepository.insertIngredient(rowArr, rowValueArr, sauceArr, sauceValueArr);
+		recipeRepository.makeIngredient(recipeId, rowArr, rowValueArr, sauceArr, sauceValueArr);
 
 		return recipeRepository.getLastInsertId();
-	}
-
-	// 재료, 양념 데이터를 레시피 번호 갱신
-	public void updateRecipeIdForIngredient(int ingredientId, int recipeId) {
-
-		recipeRepository.updateRecipeIdForIngredient(ingredientId, recipeId);
 	}
 
 	// 재료, 양념 갱신
 	public void updateIngredient(int id, String rowArr, String rowValueArr, String sauceArr, String sauceValueArr) {
 
 		recipeRepository.updateIngredient(id, rowArr, rowValueArr, sauceArr, sauceValueArr);
+	}
+
+	// 생성된 가이드, 재료양념 적용
+	public void updateRecipeAboutGuideIdAndIngredientId(int id, int guideId, int ingredientId) {
+
+		recipeRepository.updateRecipeAboutGuideIdAndIngredientId(id, guideId, ingredientId);
 	}
 
 	// 해당 레시피 페이지의 재료, 양념 목록 가져오기

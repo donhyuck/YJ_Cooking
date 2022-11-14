@@ -21,15 +21,28 @@
 		AND C.relId = #{relId}
 	</select>
 
+	<select id="getCategoriesAboutRecipe" resultType="Category">
+		SELECT C.*
+		FROM guide AS G
+		INNER JOIN category AS C
+		WHERE G.recipeId = #{recipeId}
+		AND (
+		C.boardId = 1 AND G.sortId = C.relId
+		OR C.boardId = 2 AND G.methodId = C.relId
+		OR C.boardId = 3 AND G.contentId = C.relId
+		OR C.boardId = 4 AND G.freeId = C.relId)
+	</select>
+
 	<select id="getCategories" resultType="Category">
 		SELECT C.*
 		FROM category AS C
 	</select>
 
-	<insert id="makeGuideForWriteRecipe">
+	<insert id="makeGuide">
 		INSERT INTO guide
 		SET regDate = NOW(),
 		updateDate = NOW(),
+		recipeId = #{recipeId},
 		sortId = #{sortId},
 		methodId = #{methodId},
 		contentId = #{contentId},
@@ -56,17 +69,5 @@
 		`freeId` = #{freeId}
 		WHERE id = #{id}
 	</update>
-
-	<select id="getCategoriesAboutRecipe" resultType="Category">
-		SELECT C.*
-		FROM guide AS G
-		INNER JOIN category AS C
-		WHERE G.recipeId = #{recipeId}
-		AND (
-		C.boardId = 1 AND G.sortId = C.relId
-		OR C.boardId = 2 AND G.methodId = C.relId
-		OR C.boardId = 3 AND G.contentId = C.relId
-		OR C.boardId = 4 AND G.freeId = C.relId)
-	</select>
 
 </mapper> 

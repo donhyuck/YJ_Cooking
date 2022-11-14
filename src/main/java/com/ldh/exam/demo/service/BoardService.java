@@ -95,17 +95,11 @@ public class BoardService {
 	}
 
 	// 레시피 등록을 위한 가이드 생성
-	public int makeGuideForWriteRecipe(int sortId, int methodId, int contentId, int freeId) {
+	public int makeGuide(int recipeId, int sortId, int methodId, int contentId, int freeId) {
 
-		boardRepository.makeGuideForWriteRecipe(sortId, methodId, contentId, freeId);
+		boardRepository.makeGuide(recipeId, sortId, methodId, contentId, freeId);
 
 		return boardRepository.getLastInsertId();
-	}
-
-	// 가이드의 레시피 번호를 등록된 레시피로 갱신
-	public void updateRecipeId(int guideId, int recipeId) {
-
-		boardRepository.updateRecipeId(guideId, recipeId);
 	}
 
 	// 등록된 가이드 정보를 갱신

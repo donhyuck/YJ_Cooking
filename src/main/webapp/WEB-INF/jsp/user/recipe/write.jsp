@@ -297,7 +297,7 @@
 						<option disabled selected>(미선택)</option>
 						<c:forEach var="category" items="${ categories }">
 							<c:if test="${ category.boardId == 4 }">
-								<option class="text-2xl" value="${ category.name }">${ category.name }</option>
+								<option class="text-2xl" value="${ category.relId }">${ category.name }</option>
 							</c:if>
 						</c:forEach>
 						<option class="text-xl text-red-600" value="0">(선택취소)</option>

@@ -59,7 +59,6 @@ var orderNum = 1;
 var lastOrderNum = 1;
 
 const add_orderBox = () => {
-
 	// 수정페이지에서 마지막 번호 가져오기
 	if (document.getElementById("lastOrderNum")) {
 		lastOrderNum = document.getElementById("lastOrderNum").value;
@@ -145,7 +144,7 @@ $(document).ready(function() {
 
 		// 조리순서 번호 가져오기
 		var inputNameStr = order.name;
-		var inputNum = inputNameStr.substr(39);
+		var inputNum = inputNameStr.substring(39);
 
 		// 인풋 태그에 파일이 있는 경우
 		if (order.files && order.files[0]) {

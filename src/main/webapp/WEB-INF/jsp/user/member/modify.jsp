@@ -151,7 +151,7 @@
 					name="file__member__0__extra__profileImg__1" class="input input-lg input-bordered w-96" />
 			</div>
 
-			<div class="btns mt-2">
+			<div class="btns mt-2 pb-4">
 				<button type="button" class="btn btn-outilne" onclick="history.back();">뒤로가기</button>
 				<button type="submit" class="btn btn-primary btn-outline">정보수정</button>
 			</div>

@@ -63,7 +63,7 @@ public class UserListController {
 	public String showMoreSuggest(Model model, @RequestParam(defaultValue = "1") int tabCode) {
 
 		// 램덤 레시피 전체목록 가져오기
-		int suggestCount = 52;
+		int suggestCount = 50;
 
 		List<Recipe> moreSuggestRecipes = recipeService.getMoreSuggestRecipeByTabCode(rq.getLoginedMemberId(),
 				suggestCount, tabCode);
@@ -249,7 +249,8 @@ public class UserListController {
 		}
 
 		// 제목,내용으로 레시피 검색
-		List<Recipe> searchRecipes = recipeService.getSearchRecipes(searchKeyword, keywordType, searchRange, rangeType, includeOption);
+		List<Recipe> searchRecipes = recipeService.getSearchRecipes(searchKeyword, keywordType, searchRange, rangeType,
+				includeOption);
 
 		if (searchRecipes.size() == 0) {
 			searchRecipes = null;

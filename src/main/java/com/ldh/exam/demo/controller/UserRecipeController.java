@@ -130,19 +130,17 @@ public class UserRecipeController {
 			return rq.jsHistoryBack("내용(을)를 입력해주세요.");
 		}
 
-		// 레시피 가이드 구성
-		int guideId = boardService.makeGuideForWriteRecipe(sortId, methodId, contentId, freeId);
-
-		// 재료, 양념 데이터 추가
-		int ingredientId = recipeService.insertIngredient(rowArr, rowValueArr, sauceArr, sauceValueArr);
-
 		// 레시피 등록하기
-		int id = recipeService.writeRecipe(rq.getLoginedMemberId(), title, body, amount, time, level, guideId,
-				ingredientId, tip);
+		int id = recipeService.writeRecipe(rq.getLoginedMemberId(), title, body, amount, time, level, tip);
 
-		// 등록된 레시피 번호를 가이드, 재료양념으로 갱신
-		boardService.updateRecipeId(guideId, id);
-		recipeService.updateRecipeIdForIngredient(ingredientId, id);
+		// 레시피 가이드 구성
+		int guideId = boardService.makeGuide(id, sortId, methodId, contentId, freeId);
+
+		// 재료, 양념 구성
+		int ingredientId = recipeService.makeIngredient(id, rowArr, rowValueArr, sauceArr, sauceValueArr);
+
+		// 가이드, 재료양념 번호 적용
+		recipeService.updateRecipeAboutGuideIdAndIngredientId(id, guideId, ingredientId);
 
 		// 조리순서 내용등록
 		recipeService.insertOrderAboutRecipe(id, orderBody);

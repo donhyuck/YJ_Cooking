@@ -39,12 +39,11 @@ public interface RecipeRepository {
 
 	public List<Recipe> getHaveReplyRecipes(int memberId);
 
-	public void writeRecipe(int memberId, String title, String body, int amount, int time, int level, int guideId,
-			int ingredientId, String tip);
+	public void writeRecipe(int memberId, String title, String body, int amount, int time, int level, String tip);
 
-	public int insertIngredient(String rowArr, String rowValueArr, String sauceArr, String sauceValueArr);
+	public void makeIngredient(int recipeId, String rowArr, String rowValueArr, String sauceArr, String sauceValueArr);
 
-	public void updateRecipeIdForIngredient(int ingredientId, int recipeId);
+	public void updateRecipeAboutGuideIdAndIngredientId(int id, int guideId, int ingredientId);
 
 	public void updateIngredient(int id, String rowArr, String rowValueArr, String sauceArr, String sauceValueArr);
 

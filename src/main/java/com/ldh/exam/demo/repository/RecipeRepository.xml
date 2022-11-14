@@ -230,26 +230,19 @@
 		`amount` = #{amount},
 		`time` = #{time},
 		`level` = #{level},
-		`guideId` = #{guideId},
-		`ingredientId` = #{ingredientId},
 		`tip` = #{tip}
 	</insert>
 
-	<insert id="insertIngredient">
+	<insert id="makeIngredient">
 		INSERT INTO ingredient
 		SET regDate = NOW(),
 		updateDate = NOW(),
+		recipeId = #{recipeId},
 		rowArr = #{rowArr},
 		rowValueArr = #{rowValueArr},
 		sauceArr = #{sauceArr},
 		sauceValueArr = #{sauceValueArr}
 	</insert>
-
-	<update id="updateRecipeIdForIngredient">
-		UPDATE ingredient
-		SET recipeId = #{recipeId}
-		WHERE id = #{ingredientId}
-	</update>
 
 	<update id="updateIngredient">
 		UPDATE ingredient
@@ -258,6 +251,13 @@
 		rowValueArr = #{rowValueArr},
 		sauceArr = #{sauceArr},
 		sauceValueArr = #{sauceValueArr}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="updateRecipeAboutGuideIdAndIngredientId">
+		UPDATE recipe
+		SET guideId = #{guideId},
+		ingredientId = #{ingredientId}
 		WHERE id = #{id}
 	</update>
 

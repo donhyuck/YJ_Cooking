@@ -438,7 +438,7 @@
 										</c:if>
 									</div>
 								</div>
-								<div class="ml-1 text-xl font-extralight h-20">${ reply.forPrintBody }</div>
+								<div class="ml-1 text-xl font-extralight h-20">${ reply.body }</div>
 							</div>
 
 							<!-- 요리후기 사진 -->

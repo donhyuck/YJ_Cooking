@@ -248,7 +248,7 @@ public class UserListController {
 			rangeTypeName = "미선택";
 		}
 
-		// 제목,내용으로 레시피 검색
+		// 레시피 검색
 		List<Recipe> searchRecipes = recipeService.getSearchRecipes(searchKeyword, keywordType, searchRange, rangeType,
 				includeOption);
 

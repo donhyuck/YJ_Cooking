@@ -1,6 +1,6 @@
-server:
-  port: 8021
 spring:
+  profiles:
+    active: local # 기본적으로 local이 선택된다는 뜻
   servlet:
     multipart:
       max-file-size: 50MB
@@ -29,7 +29,7 @@ spring:
 mybatis:
   type-aliases-package: com.ldh.exam.demo.vo
 custom:
-  genFileDirPath: C:\work\sts-4.13.0.RELEASE-work\YoriJori\demo\YoriJori_file
+  genFileDirPath: C:\work\sts-4.13.0.RELEASE-work\YoriJori\YoriJori_file
   siteName: 요리조리
   siteMainUri: http://localhost:8021
   emailFromName: 요리조리 운영팀
@@ -37,3 +37,32 @@ custom:
   logging:
     dir: log
     level: debug
+
+---
+
+spring:
+  config:
+    activate:
+      on-profile: local
+server:
+  port: 8021
+
+---
+
+spring:
+  config:
+    activate:
+      on-profile: production
+  servlet:
+    multipart:
+      location: /tmp
+  datasource:
+    # driver-class-name: com.mysql.cj.jdbc.Driver
+    driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+    url: jdbc:log4jdbc:mysql://49.50.163.195:3306/YoriJori_production?useUnicode=true&characterEncoding=utf8&autoReconnect=true&serverTimezone=Asia/Seoul&useOldAliasMetadataBehavior=true&zeroDateTimeNehavior=convertToNull
+    username: userLocal
+    password: ldh1234
+custom:
+  logging:
+    dir: /tmp/YoriJori-log
+    level: info

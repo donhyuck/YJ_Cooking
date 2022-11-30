@@ -1,0 +1,37 @@
+{"properties": [
+  {
+    "name": "custom.logging.dir",
+    "type": "java.lang.String",
+    "description": "A description for 'custom.logging.dir'"
+  },
+  {
+    "name": "custom.genFileDirPath",
+    "type": "java.lang.String",
+    "description": "A description for 'custom.genFileDirPath'"
+  },
+  {
+    "name": "custom.siteName",
+    "type": "java.lang.String",
+    "description": "A description for 'custom.siteName'"
+  },
+  {
+    "name": "custom.siteMainUri",
+    "type": "java.lang.String",
+    "description": "A description for 'custom.siteMainUri'"
+  },
+  {
+    "name": "custom.emailFromName",
+    "type": "java.lang.String",
+    "description": "A description for 'custom.emailFromName'"
+  },
+  {
+    "name": "custom.emailFrom",
+    "type": "java.lang.String",
+    "description": "A description for 'custom.emailFrom'"
+  },
+  {
+    "name": "custom.logging.level",
+    "type": "java.lang.String",
+    "description": "A description for 'custom.logging.level'"
+  }
+]}

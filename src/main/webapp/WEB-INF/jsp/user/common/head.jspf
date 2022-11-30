@@ -16,6 +16,7 @@
 
 <script>
 	const param = ${rq.paramJsonStr};
+	const activeProfile = ${activeProfile};
 </script>
 
 <!-- 테일윈드 불러오기 -->

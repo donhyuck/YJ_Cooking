@@ -6,13 +6,12 @@
 	<delete id="remove">
 		DELETE FROM attr
 		WHERE relId = #{relId}
-		AND relTypeCode
-		= #{relTypeCode}
+		AND relTypeCode = #{relTypeCode}
 		AND typeCode = #{typeCode}
 		AND type2Code = #{type2Code}
 	</delete>
 
-	<select id="setValue" resultType="int">
+	<insert id="setValue">
 		INSERT INTO attr (
 			regDate,
 			updateDate,
@@ -35,11 +34,10 @@
 		updateDate = NOW(),
 		`value` = #{value},
 		expireDate = #{expireDate}
-	</select>
+	</insert>
 	
 	<select id="get" resultType="Attr">
-		SELECT *
-		FROM attr
+		SELECT * FROM attr
 		WHERE relId = #{relId}
 		AND relTypeCode = #{relTypeCode}
 		AND typeCode = #{typeCode}
@@ -48,8 +46,7 @@
 	</select>
 	
 	<select id="getValue" resultType="String">
-		SELECT value
-		FROM attr
+		SELECT value FROM attr
 		WHERE relId = #{relId}
 		AND relTypeCode = #{relTypeCode}
 		AND typeCode = #{typeCode}

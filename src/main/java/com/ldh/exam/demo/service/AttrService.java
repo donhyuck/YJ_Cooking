@@ -63,7 +63,7 @@ public class AttrService {
 		return value;
 	}
 
-	public int remove(String name) {
+	public void remove(String name) {
 
 		String[] nameBits = name.split("__");
 		String relTypeCode = nameBits[0];
@@ -71,12 +71,12 @@ public class AttrService {
 		String typeCode = nameBits[2];
 		String type2Code = nameBits[3];
 
-		return remove(relTypeCode, relId, typeCode, type2Code);
+		remove(relTypeCode, relId, typeCode, type2Code);
 	}
 
-	public int remove(String relTypeCode, int relId, String typeCode, String type2Code) {
+	public void remove(String relTypeCode, int relId, String typeCode, String type2Code) {
 
-		return attrRepository.remove(relTypeCode, relId, typeCode, type2Code);
+		attrRepository.remove(relTypeCode, relId, typeCode, type2Code);
 	}
 
 	public int setValue(String relTypeCode, int relId, String typeCode, String type2Code, String value,

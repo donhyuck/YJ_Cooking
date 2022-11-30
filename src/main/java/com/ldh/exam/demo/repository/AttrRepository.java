@@ -7,7 +7,7 @@ import com.ldh.exam.demo.vo.Attr;
 @Mapper
 public interface AttrRepository {
 
-	public int remove(String relTypeCode, int relId, String typeCode, String type2Code);
+	public void remove(String relTypeCode, int relId, String typeCode, String type2Code);
 
 	public int setValue(String relTypeCode, int relId, String typeCode, String type2Code, String value,
 			String expireDate);

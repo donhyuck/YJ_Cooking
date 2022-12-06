@@ -57,10 +57,10 @@ spring:
     multipart:
       location: /tmp
   datasource:
-    username: user1
-    password: ldh1234  
+    username: korad
+    password: kor123414  
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://49.50.160.224:3306/YoriJori_production?useUnicode=true&characterEncoding=utf8&autoReconnect=true&serverTimezone=Asia/Seoul&useOldAliasMetadataBehavior=true&zeroDateTimeNehavior=convertToNull
+    url: jdbc:mysql://127.0.0.1:3306/YoriJori?useUnicode=true&characterEncoding=utf8&autoReconnect=true&serverTimezone=Asia/Seoul&useOldAliasMetadataBehavior=true&zeroDateTimeNehavior=convertToNull
 custom:
   logging:
     dir: /tmp/YoriJori-log
